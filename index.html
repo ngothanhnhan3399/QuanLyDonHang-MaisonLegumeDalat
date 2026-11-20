@@ -1,0 +1,3626 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Quản Lý &amp; In Đơn Đặt Hàng Nông Sản Đà Lạt - Maison Légume Dalat</title>
+    <!-- Favicon SVG nhúng trực tiếp dạng Data URI (chạy độc lập trên GitHub Pages) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2315803d'/%3E%3Cpath d='M32 50c-10-6.5-18-13.5-18-22.5 0-5.8 4.4-10.2 9.8-10.2 3.5 0 6.5 1.8 8.2 4.6 1.7-2.8 4.7-4.6 8.2-4.6 5.4 0 9.8 4.4 9.8 10.2C50 36.5 42 43.5 32 50z' fill='%23dcfce7'/%3E%3Cpath d='M32 16c0-4.5 3.8-8.2 8.5-8.5-.4 4.7-4 8.5-8.5 8.5z' fill='%23facc15'/%3E%3Cpath d='M32 18c-3.8 0-6.8-3-7.2-6.8 3.8.3 7.2 3.3 7.2 6.8z' fill='%2386efac'/%3E%3C/svg%3E">
+    <!-- Google Fonts: Be Vietnam Pro & Montserrat (tự fallback font hệ thống khi offline) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           1. BIẾN MÀU & THIẾT LẬP CHUNG (XANH NÔNG SẢN ĐÀ LẠT)
+           ========================================================= */
+        :root {
+            --bg-app: #f3f7f4;
+            --bg-card: #ffffff;
+            --bg-soft: #f8faf9;
+            --border-color: #dce5df;
+            --border-strong: #c2d1c7;
+            --text-main: #18271f;
+            --text-muted: #5a6d62;
+            --green-900: #14532d;
+            --green-700: #15803d;
+            --green-600: #16a34a;
+            --green-100: #dcfce7;
+            --green-50: #f0fdf4;
+            --blue-700: #1d4ed8;
+            --blue-50: #eff6ff;
+            --amber-700: #b45309;
+            --amber-100: #fef3c7;
+            --rose-700: #be123c;
+            --rose-50: #fff1f2;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 2px 8px rgba(15, 45, 25, 0.05);
+            --shadow-md: 0 10px 28px rgba(15, 45, 25, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =========================================================
+           2. HEADER & ĐIỀU HƯỚNG 4 TAB
+           ========================================================= */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-inner {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 10px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo-wrap {
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            overflow: hidden;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--green-50);
+            border: 1px solid var(--green-100);
+        }
+
+        .brand-title {
+            margin: 0;
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--green-900);
+            line-height: 1.2;
+        }
+
+        .brand-sub {
+            margin: 2px 0 0;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .tab-nav {
+            display: flex;
+            background: #ebf1ed;
+            padding: 4px;
+            border-radius: 12px;
+            gap: 4px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 13px;
+            border-radius: 9px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.16s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: var(--green-900);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* =========================================================
+           3. NÚT BẤM & INPUT CHUNG
+           ========================================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 9px 14px;
+            cursor: pointer;
+            transition: all 0.16s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--green-700);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(21, 128, 61, 0.22);
+        }
+
+        .btn-primary:hover {
+            background: var(--green-900);
+        }
+
+        .btn-blue {
+            background: var(--blue-700);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+        }
+
+        .btn-blue:hover {
+            background: #1e40af;
+        }
+
+        .btn-soft {
+            background: var(--green-50);
+            color: var(--green-900);
+            border-color: #bbf7d0;
+        }
+
+        .btn-soft:hover {
+            background: var(--green-100);
+        }
+
+        .btn-amber {
+            background: #fffbeb;
+            color: var(--amber-700);
+            border-color: #fde68a;
+        }
+
+        .btn-amber:hover {
+            background: var(--amber-100);
+        }
+
+        .btn-danger-soft {
+            background: var(--rose-50);
+            color: var(--rose-700);
+            border-color: #fecdd3;
+        }
+
+        .btn-danger-soft:hover {
+            background: #ffe4e6;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            color: var(--text-main);
+            border-color: var(--border-strong);
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-soft);
+        }
+
+        .btn-sm {
+            padding: 6px 10px;
+            font-size: 12px;
+            border-radius: 8px;
+        }
+
+        .btn-icon {
+            padding: 6px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: #7c8f84;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-icon:hover {
+            background: var(--rose-50);
+            color: var(--rose-700);
+        }
+
+        .field-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .input-control {
+            width: 100%;
+            padding: 9px 12px;
+            font-size: 14px;
+            color: var(--text-main);
+            background: #ffffff;
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+
+        .input-control:focus {
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
+        }
+
+        textarea.input-control {
+            resize: vertical;
+            min-height: 110px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 12.5px;
+            line-height: 1.45;
+        }
+
+        .date-preview {
+            margin: 5px 0 0;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--green-700);
+        }
+
+        /* =========================================================
+           4. BỐ CỤC CHÍNH & THẺ NỘI DUNG
+           ========================================================= */
+        .app-main {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 16px 16px 115px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: 18px;
+            margin-bottom: 16px;
+        }
+
+        .card-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #edf2ef;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--green-900);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            border-radius: 4px;
+            background: var(--green-600);
+        }
+
+        .badge-saved {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--green-700);
+            background: var(--green-50);
+            border: 1px solid #bbf7d0;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .grid-sheet {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 12px;
+        }
+
+        /* Bộ lọc nhóm cột Desktop */
+        .filter-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .filter-pill {
+            border: 1px solid var(--border-strong);
+            background: #ffffff;
+            color: var(--text-muted);
+            font-size: 12.5px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .filter-pill:hover {
+            border-color: var(--green-600);
+            color: var(--green-900);
+        }
+
+        .filter-pill.active {
+            background: var(--green-700);
+            border-color: var(--green-700);
+            color: #ffffff;
+        }
+
+        /* Trạng thái đồng bộ Google Sheet */
+        .sync-banner {
+            margin-top: 12px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            background: var(--green-50);
+            border: 1px solid #bbf7d0;
+            font-size: 12.5px;
+            color: var(--green-900);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .sync-banner.error {
+            background: var(--rose-50);
+            border-color: #fecdd3;
+            color: var(--rose-700);
+        }
+
+        .sync-guide {
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            font-size: 12px;
+            color: #475569;
+            line-height: 1.55;
+        }
+
+        details.paste-fallback {
+            margin-top: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--bg-soft);
+            padding: 10px 14px;
+        }
+
+        details.paste-fallback summary {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--green-900);
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        details.paste-fallback summary::-webkit-details-marker {
+            display: none;
+        }
+
+        /* Quản lý chi nhánh con Cleverfood */
+        .branch-tags-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .branch-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-50);
+            border: 1px solid #86efac;
+            color: var(--green-900);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 6px 10px 6px 12px;
+            border-radius: 999px;
+        }
+
+        .branch-tag button {
+            border: none;
+            background: rgba(21, 128, 61, 0.12);
+            color: var(--green-900);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 14px;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .branch-tag button:hover {
+            background: var(--rose-700);
+            color: #ffffff;
+        }
+
+        .add-branch-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            max-width: 440px;
+        }
+
+        /* Thẻ quản lý Logo 3 nhóm khách hàng */
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 12px;
+        }
+
+        .logo-card {
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            background: var(--bg-soft);
+            padding: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .logo-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-card-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--green-900);
+        }
+
+        .logo-card-sub {
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }
+
+        .store-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #ffffff;
+            border: 1px solid #e6eee9;
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        .store-logo-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            border: 1px dashed var(--border-strong);
+            background: #fafcfb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .store-logo-thumb img,
+        .store-logo-thumb svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 3px;
+        }
+
+        .store-logo-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            flex: 1;
+        }
+
+        /* =========================================================
+           5. BẢNG NHẬP LIỆU & BẢNG GIÁ DESKTOP
+           ========================================================= */
+        .desktop-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 780px;
+            font-size: 13.5px;
+        }
+
+        .data-table thead th {
+            background: #eef6f0;
+            color: var(--green-900);
+            font-size: 12px;
+            font-weight: 700;
+            padding: 9px 6px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .data-table thead th.col-left {
+            text-align: left;
+            padding-left: 12px;
+        }
+
+        .data-table thead th.th-cle-group {
+            background: #dcfce7;
+            color: var(--green-900);
+            font-size: 12.5px;
+            letter-spacing: 0.3px;
+        }
+
+        .data-table thead th.th-cle-sub {
+            background: #f0fdf4;
+            color: var(--green-700);
+            font-size: 12px;
+        }
+
+        .data-table tbody td {
+            padding: 5px 6px;
+            border-bottom: 1px solid #edf2ef;
+            border-right: 1px solid #f1f5f2;
+            vertical-align: middle;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f6fbf7;
+        }
+
+        .cell-input {
+            width: 100%;
+            padding: 7px 6px;
+            font-size: 13.5px;
+            color: var(--text-main);
+            background: #ffffff;
+            border: 1px solid #d5e0d9;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.12s, box-shadow 0.12s;
+        }
+
+        .cell-input:focus {
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.16);
+            background: #ffffff;
+        }
+
+        .cell-input.qty-input {
+            text-align: center;
+            font-weight: 700;
+            max-width: 82px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .cell-input.price-input {
+            text-align: right;
+            font-weight: 600;
+            max-width: 112px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .cell-input.name-input {
+            background: transparent;
+            border-color: transparent;
+            font-weight: 500;
+        }
+
+        .cell-input.name-input:hover,
+        .cell-input.name-input:focus {
+            background: #ffffff;
+            border-color: #d5e0d9;
+        }
+
+        .data-table tfoot td {
+            background: #f4f8f5;
+            font-weight: 700;
+            padding: 9px 6px;
+            border-top: 2px solid var(--border-strong);
+            border-right: 1px solid #e3ece6;
+        }
+
+        .meta-row-tr td {
+            background: #f8faf9 !important;
+            border-top: 1px solid var(--border-color) !important;
+            font-size: 12.5px;
+            color: var(--text-muted);
+        }
+
+        .box-row-tr td {
+            background: #fffbeb !important;
+            border-top: 1px solid #fde68a !important;
+        }
+
+        .hint-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .kbd {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--green-900);
+            background: #e6efe9;
+            border: 1px solid #c5d6cb;
+            border-radius: 5px;
+        }
+
+        /* =========================================================
+           6. GIAO DIỆN NHẬP LIỆU TỐI ƯU ĐIỆN THOẠI (< 768px)
+           ========================================================= */
+        .mobile-entry-section {
+            display: none;
+        }
+
+        .mobile-group-pills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .group-pill {
+            border: 1.5px solid var(--border-strong);
+            background: #ffffff;
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 10px 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+
+        .group-pill.active {
+            background: var(--green-700);
+            border-color: var(--green-700);
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(21, 128, 61, 0.25);
+        }
+
+        .mobile-sub-pills {
+            display: flex;
+            gap: 7px;
+            overflow-x: auto;
+            padding: 2px 0 8px;
+            margin-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .sub-pill {
+            border: 1.5px solid #86efac;
+            background: var(--green-50);
+            color: var(--green-900);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .sub-pill.active {
+            background: var(--green-900);
+            border-color: var(--green-900);
+            color: #ffffff;
+        }
+
+        .mobile-search-wrap {
+            margin-bottom: 10px;
+        }
+
+        .mobile-product-list {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .mobile-prod-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 11px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .mobile-prod-card.has-qty {
+            border-color: #86efac;
+            background: #f7fef9;
+        }
+
+        .mobile-prod-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mobile-prod-name {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3px;
+            word-break: break-word;
+        }
+
+        .mobile-prod-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .mobile-qty-wrap {
+            width: 104px;
+            flex-shrink: 0;
+        }
+
+        /* Chống auto-zoom iOS Safari: font-size >= 16px, min-height >= 44px */
+        .mobile-qty-input {
+            width: 100%;
+            min-height: 44px;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--green-900);
+            background: #ffffff;
+            border: 1.5px solid var(--border-strong);
+            border-radius: 10px;
+            outline: none;
+            padding: 8px;
+        }
+
+        .mobile-qty-input:focus {
+            border-color: var(--green-600);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.16);
+        }
+
+        .mobile-sticky-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 45;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid var(--border-color);
+            padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+            box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .mobile-sticky-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .mobile-sticky-stat {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .mobile-sticky-store {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mobile-sticky-qty {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--green-900);
+        }
+
+        .mobile-sticky-box-wrap {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: 10px;
+            padding: 4px 8px;
+        }
+
+        .mobile-sticky-box-input {
+            width: 52px;
+            min-height: 36px;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: center;
+            color: var(--amber-700);
+            background: #ffffff;
+            border: 1px solid #f59e0b;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        /* =========================================================
+           7. KHUNG XEM TRƯỚC & IN PDF KHỔ A4 (210mm x 297mm)
+           ========================================================= */
+        .preview-toolbar {
+            max-width: 210mm;
+            margin: 0 auto 14px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .preview-toolbar-left {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preview-toolbar-right {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-main);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-label input {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--green-700);
+        }
+
+        .a4-scroll-wrap {
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 12px;
+        }
+
+        .a4-paper {
+            width: 210mm;
+            min-height: 277mm;
+            margin: 0 auto 18px;
+            background: #ffffff;
+            color: #000000;
+            padding: 12mm 14mm 14mm 14mm;
+            box-shadow: var(--shadow-md);
+            border-radius: 6px;
+            font-family: 'Montserrat', 'Be Vietnam Pro', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .print-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+            font-size: 13.5px;
+            color: #000000;
+        }
+
+        .print-table th,
+        .print-table td {
+            border: 1.25px solid #000000;
+            padding: 6px 7px;
+            vertical-align: middle;
+            line-height: 1.35;
+        }
+
+        .print-table thead th {
+            font-weight: 700;
+            text-align: center;
+            background: #ffffff;
+            font-size: 13.5px;
+            padding: 8px 5px;
+        }
+
+        .print-table .empty-corner-cell {
+            border-left: none;
+            border-bottom: none;
+            border-top: 1.25px solid #000000;
+            border-right: 1.25px solid #000000;
+            background: transparent;
+        }
+
+        /* =========================================================
+           8. MODAL XÁC NHẬN & TOAST THÔNG BÁO
+           ========================================================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-box {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 430px;
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-title {
+            margin: 0 0 8px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .modal-desc {
+            margin: 0 0 18px;
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+        }
+
+        .toast-box {
+            position: fixed;
+            bottom: 24px;
+            right: 20px;
+            z-index: 70;
+            background: var(--green-900);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 11px 16px;
+            border-radius: 12px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none;
+            transition: all 0.25s ease;
+            max-width: 380px;
+        }
+
+        .toast-box.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast-box.error {
+            background: var(--rose-700);
+        }
+
+        /* =========================================================
+           9. RESPONSIVE CHO ĐIỆN THOẠI (< 768px)
+           ========================================================= */
+        @media (max-width: 767px) {
+            .header-inner {
+                padding: 10px 12px;
+            }
+            .tab-nav {
+                width: 100%;
+            }
+            .tab-btn {
+                flex: 1;
+                text-align: center;
+                padding: 8px 6px;
+                font-size: 12px;
+            }
+            .header-actions {
+                display: none;
+            }
+            .grid-3, .grid-2, .grid-sheet {
+                grid-template-columns: 1fr;
+            }
+            .input-control {
+                font-size: 16px;
+                min-height: 44px;
+            }
+            .desktop-entry-section {
+                display: none;
+            }
+            .mobile-entry-section {
+                display: block;
+            }
+            .mobile-sticky-bar {
+                display: block;
+            }
+            .toast-box {
+                bottom: 82px;
+                left: 14px;
+                right: 14px;
+                max-width: none;
+                text-align: center;
+            }
+        }
+
+        /* =========================================================
+           10. QUY TẮC IN ẤN / XUẤT FILE PDF KHỔ A4 CHUẨN
+           ========================================================= */
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        @media print {
+            html, body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            .app-main {
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .a4-scroll-wrap {
+                overflow: visible !important;
+                padding: 0 !important;
+            }
+
+            .a4-paper {
+                width: 100% !important;
+                min-height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                border: none !important;
+            }
+
+            .a4-page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .print-table th,
+            .print-table td {
+                border: 1.25px solid #000000 !important;
+            }
+
+            .print-table .empty-corner-cell {
+                border-left: none !important;
+                border-bottom: none !important;
+                border-top: 1.25px solid #000000 !important;
+                border-right: 1.25px solid #000000 !important;
+            }
+
+            tr {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- =========================================================
+         THANH HEADER CHÍNH (ẨN KHI IN)
+         ========================================================= -->
+    <header class="app-header no-print">
+        <div class="header-inner">
+            <div class="brand-box">
+                <div class="brand-logo-wrap" id="appHeaderLogo"></div>
+                <div>
+                    <h1 class="brand-title">Maison Légume Dalat</h1>
+                    <p class="brand-sub">Đặt hàng Đà Lạt, Chi nhánh Cleverfood &amp; In PDF A4</p>
+                </div>
+            </div>
+
+            <!-- 4 Tab chính -->
+            <nav class="tab-nav" aria-label="Điều hướng chính">
+                <button id="tabBtn-input" class="tab-btn active" onclick="switchTab('input')">1. Nhập số lượng</button>
+                <button id="tabBtn-pricing" class="tab-btn" onclick="switchTab('pricing')">2. Bảng giá &amp; Sheet</button>
+                <button id="tabBtn-order" class="tab-btn" onclick="switchTab('order')">3. Đơn Đặt Hàng</button>
+                <button id="tabBtn-summary" class="tab-btn" onclick="switchTab('summary')">4. Bảng Tổng Hợp</button>
+            </nav>
+
+            <!-- Nút thao tác nhanh Desktop -->
+            <div class="header-actions">
+                <button class="btn btn-soft btn-sm" onclick="downloadAppLogoSVG()" title="Tải file SVG logo ứng dụng để up GitHub">
+                    Tải Logo App (.svg)
+                </button>
+                <button class="btn btn-primary" onclick="handleHeaderPrintClick()">
+                    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                    </svg>
+                    <span>In / Lưu PDF (A4)</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========================================================
+         NỘI DUNG CHÍNH
+         ========================================================= -->
+    <main class="app-main">
+
+        <!-- =====================================================
+             TAB 1: NHẬP SỐ LƯỢNG (ẨN KHI IN)
+             ===================================================== -->
+        <section id="view-input" class="no-print">
+
+            <!-- Thanh trên gọn: Ngày đặt/lấy/nhận, Nhà cung cấp, Ghi chú & Nút nhanh -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Thông tin đơn hàng &amp; Lịch giao nhận</h2>
+                    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+                        <span id="saveStatus" class="badge-saved">Đã lưu localStorage</span>
+                        <button class="btn btn-amber btn-sm" onclick="fillSampleData()">Điền số liệu mẫu</button>
+                        <button class="btn btn-danger-soft btn-sm" onclick="openClearQtyModal()">Xóa số lượng ngày mới</button>
+                        <button class="btn btn-outline btn-sm" onclick="addProduct()">+ Thêm sản phẩm</button>
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 12px;">
+                    <div>
+                        <label class="field-label" for="inputOrderDate">Ngày đặt hàng (tự tính +1 lấy, +3 nhận)</label>
+                        <input type="date" id="inputOrderDate" class="input-control" onchange="handleOrderDateChange(this.value)">
+                        <p id="previewOrderDate" class="date-preview"></p>
+                    </div>
+                    <div>
+                        <label class="field-label" for="inputPickupDate">Ngày lấy hàng (mặc định +1 ngày)</label>
+                        <input type="date" id="inputPickupDate" class="input-control" onchange="updateField('pickupDate', this.value)">
+                        <p id="previewPickupDate" class="date-preview"></p>
+                    </div>
+                    <div>
+                        <label class="field-label" for="inputDeliveryDate">Ngày nhận hàng (mặc định +3 ngày)</label>
+                        <input type="date" id="inputDeliveryDate" class="input-control" onchange="updateField('deliveryDate', this.value)">
+                        <p id="previewDeliveryDate" class="date-preview"></p>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div>
+                        <label class="field-label" for="inputSupplier">Nhà cung cấp</label>
+                        <input type="text" id="inputSupplier" class="input-control" oninput="updateField('supplier', this.value)" placeholder="VD: Thuỷ (Rau Đà Lạt)">
+                    </div>
+                    <div>
+                        <label class="field-label" for="inputFooterNote">Ghi chú chân đơn (Mẫu 1)</label>
+                        <input type="text" id="inputFooterNote" class="input-control" oninput="updateField('footerNote', this.value)" placeholder="VD: Đơn giá đã bao gồm phí vận chuyển...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Khối nhập số lượng -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Nhập số lượng sản phẩm (Kg)</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Các chi nhánh con Cleverfood dùng chung <strong>Đơn giá Cle</strong> và tự động cộng vào cột <strong>Tổng Cle</strong>.
+                        </p>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:6px;">
+                        <button class="btn btn-soft btn-sm" onclick="switchTab('order')">Xem Mẫu 1 &rarr;</button>
+                        <button class="btn btn-soft btn-sm" onclick="switchTab('summary')">Xem Mẫu 2 &rarr;</button>
+                    </div>
+                </div>
+
+                <!-- 1A. GIAO DIỆN MÁY TÍNH (DESKTOP TABLE + LỌC NHÓM + ENTER CÙNG CỘT) -->
+                <div class="desktop-entry-section">
+                    <div class="filter-pills" id="desktopFilterPills"></div>
+
+                    <div class="desktop-table-wrap">
+                        <table class="data-table">
+                            <thead id="desktopQtyHead"></thead>
+                            <tbody id="desktopQtyBody"></tbody>
+                            <tfoot id="desktopQtyFoot"></tfoot>
+                        </table>
+                    </div>
+
+                    <div class="hint-bar">
+                        <div>
+                            Phím tắt: <span class="kbd">Enter</span> / <span class="kbd">&darr;</span> nhảy xuống dòng tiếp theo cùng cột cửa hàng (tới tận ô <strong>Số thùng</strong>) &bull; <span class="kbd">Shift + Enter</span> / <span class="kbd">&uarr;</span> đi lên &bull; Hỗ trợ dấu <code>.</code> và <code>,</code>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1B. GIAO DIỆN ĐIỆN THOẠI (< 768px) -->
+                <div class="mobile-entry-section">
+                    <div id="mobileGroupPills" class="mobile-group-pills"></div>
+                    <div id="mobileSubPills" class="mobile-sub-pills hidden"></div>
+
+                    <div class="mobile-search-wrap">
+                        <input type="search" id="mobileSearchInput" class="input-control"
+                            placeholder="Tìm nhanh tên rau củ (VD: cải, bí, ớt...)"
+                            oninput="handleMobileSearch(this.value)">
+                    </div>
+
+                    <div id="mobileProductList" class="mobile-product-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TAB 2: BẢNG GIÁ & GOOGLE SHEET (ẨN KHI IN)
+             ===================================================== -->
+        <section id="view-pricing" class="no-print hidden">
+
+            <!-- Khối 2.1: Đồng bộ Google Sheet -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Cập nhật bảng giá từ Google Sheet</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Tự đọc các cột <code>Tên sản phẩm</code>, <code>Đơn giá Trâu vàng</code>, <code>Đơn giá Tâm vàng</code>, <code>Đơn giá Cle</code> và <code>Tên sản phẩm Cleverfood</code>.
+                        </p>
+                    </div>
+                    <button id="btnSyncSheet" class="btn btn-blue" onclick="syncFromGoogleSheet()">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                        <span>Cập nhật giá từ Google Sheet</span>
+                    </button>
+                </div>
+
+                <div class="grid-sheet" style="margin-bottom: 12px;">
+                    <div>
+                        <label class="field-label" for="inputSheetUrl">Link Google Sheet (hoặc Sheet ID / link CSV)</label>
+                        <input type="text" id="inputSheetUrl" class="input-control"
+                            oninput="updateSheetConfig('url', this.value)"
+                            placeholder="https://docs.google.com/spreadsheets/d/1ABC.../edit#gid=0">
+                    </div>
+                    <div>
+                        <label class="field-label" for="inputSheetTab">Tên Tab đơn giá (VD: Đơn giá tháng 11)</label>
+                        <input type="text" id="inputSheetTab" class="input-control"
+                            oninput="updateSheetConfig('tabName', this.value)"
+                            placeholder="Để trống = lấy tab đầu / theo gid">
+                    </div>
+                </div>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" id="chkUpdateExistingOnly" onchange="updateSheetConfig('updateExistingOnly', this.checked)">
+                    <span>Chỉ cập nhật giá cho các sản phẩm đang có (giữ nguyên danh sách 15 mặt hàng hiện tại)</span>
+                </label>
+
+                <div id="sheetSyncBanner" class="sync-banner hidden"></div>
+
+                <div class="sync-guide">
+                    <strong>Mẹo chia sẻ Google Sheet:</strong> Mở file báo giá &rarr; bấm <strong>Chia sẻ (Share)</strong> &rarr; chọn <strong>Bất kỳ ai có đường liên kết</strong> &rarr; quyền <strong>Người xem</strong>, sau đó dán link vào ô trên.
+                </div>
+
+                <details class="paste-fallback">
+                    <summary>
+                        <span>Dán nhanh từ Google Sheet (Copy &amp; Paste dự phòng khi file riêng tư)</span>
+                        <span style="font-size: 12px; color: var(--green-700);">Bấm để mở &darr;</span>
+                    </summary>
+                    <div style="margin-top: 10px;">
+                        <p style="margin: 0 0 8px; font-size: 12px; color: var(--text-muted);">
+                            Bôi đen từ dòng tiêu đề đến hết bảng trong Google Sheet &rarr; <strong>Ctrl+C</strong> &rarr; dán vào khung dưới rồi bấm cập nhật:
+                        </p>
+                        <textarea id="pasteSheetArea" class="input-control" placeholder="Dán dữ liệu bảng đã copy từ Google Sheet vào đây..."></textarea>
+                        <div style="margin-top: 8px; display: flex; gap: 8px; justify-content: flex-end;">
+                            <button class="btn btn-outline btn-sm" onclick="document.getElementById('pasteSheetArea').value = ''">Xóa khung</button>
+                            <button class="btn btn-primary btn-sm" onclick="importFromPastedTable()">Cập nhật giá từ dữ liệu dán</button>
+                        </div>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Khối 2.2: Quản lý cửa hàng con Cleverfood -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Quản lý cửa hàng con Cleverfood</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Các chi nhánh con đều dùng chung <strong>Đơn giá Cle</strong>, logo <strong>Cleverfood</strong> và tên sản phẩm Cleverfood.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="cleBranchesWrap" class="branch-tags-wrap"></div>
+
+                <div class="add-branch-row">
+                    <input type="text" id="inputNewCleBranch" class="input-control" style="flex:1; min-width:180px;"
+                        placeholder="Nhập mã/tên chi nhánh (VD: CG, TDH...)"
+                        onkeydown="if(event.key==='Enter'){ event.preventDefault(); addCleBranch(); }">
+                    <button class="btn btn-primary" onclick="addCleBranch()">+ Thêm chi nhánh Cle</button>
+                </div>
+            </div>
+
+            <!-- Khối 2.3: Quản lý Logo từng khách hàng -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Quản lý Logo từng khách hàng (GitHub Ready)</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Chọn mẫu SVG có sẵn, tải ảnh riêng (tự nén tối đa 300px) hoặc tải file <code>.svg</code> để up GitHub.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="customerLogosGrid" class="logos-grid"></div>
+            </div>
+
+            <!-- Khối 2.4: Bảng giá hiện tại (15 mặt hàng mặc định) -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Bảng giá hiện tại (<span id="productCountBadge">15</span> mặt hàng)</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Chỉnh trực tiếp đơn giá từng nhóm khách hàng hoặc thêm mặt hàng mới khi cần.
+                        </p>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+                        <button class="btn btn-primary btn-sm" onclick="addProduct()">+ Thêm mặt hàng mới</button>
+                        <button class="btn btn-danger-soft btn-sm" onclick="openReset15Modal()">Khôi phục 15 mặt hàng gốc</button>
+                    </div>
+                </div>
+
+                <div class="desktop-table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width:46px;">STT</th>
+                                <th class="col-left" style="min-width:190px;">Tên sản phẩm</th>
+                                <th style="min-width:118px;">Đơn giá Trâu vàng</th>
+                                <th style="min-width:118px;">Đơn giá Tâm vàng</th>
+                                <th style="min-width:118px;">Đơn giá Cle</th>
+                                <th class="col-left" style="min-width:230px;">Tên sản phẩm Cleverfood</th>
+                                <th style="width:48px;">Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="priceTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1 — IN KHỔ A4)
+             ===================================================== -->
+        <section id="view-order" class="hidden">
+            <div class="preview-toolbar no-print">
+                <div class="preview-toolbar-left">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <label for="orderTargetSelect" style="font-size:13px; font-weight:700; color:var(--green-900);">Đơn cần xem:</label>
+                        <select id="orderTargetSelect" class="input-control" style="width:auto; min-width:195px; padding:7px 12px; font-weight:700;"
+                            onchange="changeOrderTarget(this.value)"></select>
+                    </div>
+                    <label id="wrapCleAltNameOpt" class="checkbox-label hidden">
+                        <input type="checkbox" id="chkUseCleAltName" onchange="toggleOption('useCleAltName', this.checked)">
+                        <span>Dùng mã &amp; tên sản phẩm Cleverfood</span>
+                    </label>
+                </div>
+
+                <div class="preview-toolbar-right">
+                    <button class="btn btn-soft btn-sm" onclick="printAllCleBranches()">
+                        In tất cả chi nhánh Cleverfood có đơn
+                    </button>
+                    <button class="btn btn-primary" onclick="printCurrentOrder()">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
+                        <span>In / Lưu PDF đơn đang xem (A4)</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="a4-scroll-wrap">
+                <div id="a4OrderContainer"></div>
+            </div>
+        </section>
+
+        <!-- =====================================================
+             TAB 4: BẢNG TỔNG HỢP (MẪU 2 — IN KHỔ A4)
+             ===================================================== -->
+        <section id="view-summary" class="hidden">
+            <div class="preview-toolbar no-print">
+                <div class="preview-toolbar-left">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <label for="summaryModeSelect" style="font-size:13px; font-weight:700; color:var(--green-900);">Chế độ cột:</label>
+                        <select id="summaryModeSelect" class="input-control" style="width:auto; min-width:260px; padding:7px 12px; font-weight:600;"
+                            onchange="changeSummaryMode(this.value)">
+                            <option value="all_detail">Tất cả chi tiết (Trâu vàng, Tâm vàng &amp; từng chi nhánh Cle)</option>
+                            <option value="grouped">Gộp chuỗi (Trâu vàng, Tâm vàng, Cleverfood)</option>
+                            <option value="cle_only">Riêng chuỗi Cleverfood (MĐ, LĐT, HTM, HQV...)</option>
+                        </select>
+                    </div>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="chkHideZeroStoreCols" onchange="toggleOption('hideZeroStoreCols', this.checked)">
+                        <span>Ẩn cột cửa hàng không có đơn (SL = 0)</span>
+                    </label>
+                </div>
+
+                <div class="preview-toolbar-right">
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                        </svg>
+                        <span>In / Lưu PDF Bảng Tổng Hợp (A4)</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="a4-scroll-wrap">
+                <div id="a4SummarySheet" class="a4-paper"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- =========================================================
+         THANH DÍNH ĐÁY CHO ĐIỆN THOẠI (HIỆN TỔNG SL, SỐ THÙNG & IN)
+         ========================================================= -->
+    <div id="mobileStickyBar" class="mobile-sticky-bar no-print">
+        <div class="mobile-sticky-inner">
+            <div class="mobile-sticky-stat">
+                <span id="mobileStickyStoreName" class="mobile-sticky-store">Trâu vàng</span>
+                <span id="mobileStickyTotalQty" class="mobile-sticky-qty">Tổng: 0 kg</span>
+            </div>
+
+            <div class="mobile-sticky-box-wrap">
+                <span style="font-size:12px; font-weight:700; color:var(--amber-700);">Thùng:</span>
+                <input type="text" inputmode="decimal" id="mobileStickyBoxInput" class="mobile-sticky-box-input"
+                    placeholder="0" oninput="handleMobileBoxChange(this.value)">
+            </div>
+
+            <button class="btn btn-primary btn-sm" onclick="jumpToPrintFromMobile()">
+                Xem &amp; In A4
+            </button>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL XÁC NHẬN TÙY CHỈNH (KHÔNG DÙNG alert/confirm)
+         ========================================================= -->
+    <div id="confirmModal" class="modal-overlay no-print hidden">
+        <div class="modal-box">
+            <h3 id="modalTitle" class="modal-title">Xác nhận</h3>
+            <p id="modalMessage" class="modal-desc"></p>
+            <div class="modal-actions">
+                <button class="btn btn-outline btn-sm" onclick="closeConfirmModal()">Hủy bỏ</button>
+                <button id="modalConfirmBtn" class="btn btn-primary btn-sm" style="background: var(--rose-700);">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST THÔNG BÁO -->
+    <div id="toastBox" class="toast-box no-print"></div>
+
+    <!-- =========================================================
+         JAVASCRIPT THUẦN HOÀN CHỈNH
+         ========================================================= -->
+    <script>
+        const STORAGE_KEY = 'ml_dalat_orders_v3';
+
+        /* =========================================================
+           1. LOGO SVG TỐI GIẢN (APP + 3 NHÓM KHÁCH HÀNG)
+           ========================================================= */
+        function getAppLogoSVG() {
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+                <rect width="120" height="120" rx="26" fill="#15803d"/>
+                <path d="M60 94C41 81 26 68 26 50.5 26 39 34.8 30.5 45.5 30.5c6.5 0 11.8 3.2 14.5 8.2 2.7-5 8-8.2 14.5-8.2 10.7 0 19.5 8.5 19.5 20C94 68 79 81 60 94z" fill="#dcfce7"/>
+                <path d="M60 32c0-9 7.5-16.5 17-17-.8 9.5-8 17-17 17z" fill="#facc15"/>
+                <path d="M60 35c-7.5 0-13.5-6-14.2-13.5 7.5.6 14.2 6.5 14.2 13.5z" fill="#86efac"/>
+                <path d="M60 44v34" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M60 58l10-8M60 66l-10-8" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+            </svg>`;
+        }
+
+        function getCustomerPresetSVG(presetKey, label) {
+            if (presetKey === 'tam_vang') {
+                return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <path d="M100 44C97 24 80 12 63 14c2 18 16 32 37 30z" fill="#22c55e"/>
+                    <path d="M100 46c4-22 22-36 42-34-2 20-18 35-42 34z" fill="#15803d"/>
+                    <path d="M100 184C60 156 26 125 26 84c0-25 19-44 43-44 14 0 25 7 31 18 6-11 17-18 31-18 24 0 43 19 43 44 0 41-34 72-74 100z" fill="#16a34a"/>
+                    <path d="M100 170C67 146 39 119 39 85c0-18 13-32 31-32 13 0 23 7 30 19 7-12 17-19 30-19 18 0 31 14 31 32 0 34-28 61-61 85z" fill="#ffffff"/>
+                    <text x="100" y="94" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#ca8a04">TÂM</text>
+                    <text x="100" y="124" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="30" fill="#b45309">VÀNG</text>
+                    <text x="100" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10.5" fill="#15803d" letter-spacing="0.6">THỰC PHẨM SẠCH</text>
+                    <text x="100" y="154" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#eab308">★★★★★</text>
+                </svg>`;
+            }
+            if (presetKey === 'trau_vang') {
+                return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="90" fill="#14532d"/>
+                    <circle cx="100" cy="100" r="82" fill="#ffffff" stroke="#eab308" stroke-width="5"/>
+                    <path d="M100 54c-14 0-24-10-26-22 14 1 25 10 26 22z" fill="#16a34a"/>
+                    <path d="M100 54c14 0 24-10 26-22-14 1-25 10-26 22z" fill="#eab308"/>
+                    <text x="100" y="96" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="27" fill="#14532d">TRÂU</text>
+                    <text x="100" y="128" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="27" fill="#ca8a04">VÀNG</text>
+                    <line x1="56" y1="140" x2="144" y2="140" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round"/>
+                    <text x="100" y="156" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#15803d" letter-spacing="1">NÔNG SẢN SẠCH</text>
+                </svg>`;
+            }
+            if (presetKey === 'cleverfood') {
+                return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <rect x="10" y="10" width="180" height="180" rx="40" fill="#15803d"/>
+                    <rect x="19" y="19" width="162" height="162" rx="32" fill="#ffffff"/>
+                    <path d="M100 44c16 0 28 11 30 26-15 1-28-10-30-26z" fill="#22c55e"/>
+                    <path d="M100 48c-14 0-24 9-26 22 13 1 24-8 26-22z" fill="#15803d"/>
+                    <text x="100" y="106" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="24" fill="#14532d">CLEVER</text>
+                    <text x="100" y="134" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="24" fill="#16a34a">FOOD</text>
+                    <text x="100" y="156" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="9.5" fill="#ca8a04" letter-spacing="1">THỰC PHẨM SẠCH</text>
+                </svg>`;
+            }
+            const safeTxt = escapeXML((label || 'ĐÀ LẠT').toUpperCase().slice(0, 14));
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                <rect x="10" y="10" width="180" height="180" rx="34" fill="#f0fdf4" stroke="#15803d" stroke-width="6"/>
+                <path d="M100 105C82 93 69 81 69 65c0-11 8-19 18-19 6 0 11 3 13 8 2-5 7-8 13-8 10 0 18 8 18 19 0 16-13 28-31 40z" fill="#16a34a"/>
+                <path d="M100 47c0-9 7-16 16-17-.8 9-7 17-16 17z" fill="#eab308"/>
+                <text x="100" y="140" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="18" fill="#14532d">${safeTxt}</text>
+                <text x="100" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-weight="600" font-size="10.5" fill="#15803d" letter-spacing="0.8">RAU CỦ ĐÀ LẠT</text>
+            </svg>`;
+        }
+
+        function escapeXML(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+        }
+
+        /* =========================================================
+           2. DỮ LIỆU MẶC ĐỊNH: ĐÚNG 15 MẶT HÀNG + CHI NHÁNH CLEVERFOOD
+           ========================================================= */
+        const DEFAULT_PRODUCTS_15 = [
+            { id: 'p1',  name: 'Bắp cải tím (sú tím)',     prices: { trau_vang: 50000,  tam_vang: 50000,  cle: 50000  }, cleName: '13109900237 - Bắp cải tím Đà Lạt' },
+            { id: 'p2',  name: 'Bắp cải trái tim (sú tim)', prices: { trau_vang: 45000,  tam_vang: 45000,  cle: 42000  }, cleName: '14101000728 - Bắp cải trái tim Đà Lạt' },
+            { id: 'p3',  name: 'Bí ngòi xanh',             prices: { trau_vang: 45000,  tam_vang: 45000,  cle: 50000  }, cleName: '13109900250 - Bí ngòi xanh Đà Lạt' },
+            { id: 'p4',  name: 'Bông cải xanh baby',       prices: { trau_vang: 80000,  tam_vang: 80000,  cle: 83000  }, cleName: '13109900238 - Bông cải xanh baby ( súp lơ xanh baby) Đà Lạt' },
+            { id: 'p5',  name: 'Cà cherry cam sữa',        prices: { trau_vang: 80000,  tam_vang: 80000,  cle: 80000  }, cleName: '13109900010 - Cà chua cherry cam Đà Lạt' },
+            { id: 'p6',  name: 'Cải thảo hỏa tiễn',        prices: { trau_vang: 45000,  tam_vang: 45000,  cle: 45000  }, cleName: '13101000003 - Bắp cải thảo hỏa tiễn Đà Lạt' },
+            { id: 'p7',  name: 'Cần tây',                  prices: { trau_vang: 55000,  tam_vang: 55000,  cle: 45000  }, cleName: '13109900240 - Cần tây Đà Lạt' },
+            { id: 'p8',  name: 'Củ cải đỏ',                prices: { trau_vang: 70000,  tam_vang: 70000,  cle: 65000  }, cleName: '13109900247 - Củ cải đỏ Đà Lạt' },
+            { id: 'p9',  name: 'Củ dền',                   prices: { trau_vang: 45000,  tam_vang: 45000,  cle: 45000  }, cleName: '13109900246 - Củ dền Đà Lạt' },
+            { id: 'p10', name: 'Dưa leo baby',             prices: { trau_vang: 40000,  tam_vang: 40000,  cle: 40000  }, cleName: '13109900248 - Dưa chuột bao tử (dưa leo baby) Đà Lạt' },
+            { id: 'p11', name: 'Đậu cove Nhật',            prices: { trau_vang: 60000,  tam_vang: 60000,  cle: 60000  }, cleName: 'Đậu cove Nhật Đà Lạt' },
+            { id: 'p12', name: 'Đậu Hà Lan',               prices: { trau_vang: 145000, tam_vang: 145000, cle: 145000 }, cleName: 'Đậu Hà Lan Đà Lạt' },
+            { id: 'p13', name: 'Ớt chuông đỏ',             prices: { trau_vang: 68000,  tam_vang: 68000,  cle: 68000  }, cleName: 'Ớt chuông đỏ Đà Lạt' },
+            { id: 'p14', name: 'Ớt chuông vàng',           prices: { trau_vang: 68000,  tam_vang: 68000,  cle: 68000  }, cleName: 'Ớt chuông vàng Đà Lạt' },
+            { id: 'p15', name: 'Xà lách thủy tinh',        prices: { trau_vang: 65000,  tam_vang: 65000,  cle: 63000  }, cleName: '13109900310 - Xà lách thủy tinh Đà Lạt' }
+        ];
+
+        const DEFAULT_CLE_BRANCHES = ['MĐ', 'LĐT', 'HTM', 'HQV'];
+
+        let state = createDefaultState();
+        let activeTab = 'input';
+        let desktopFilter = 'all';         // 'all' | 'standalone' | 'cleverfood'
+        let mobileGroup = 'trau_vang';     // 'trau_vang' | 'tam_vang' | 'cleverfood'
+        let mobileCleBranch = 'MĐ';
+        let mobileSearchQuery = '';
+        let printMultiCleMode = false;
+        let pendingConfirmAction = null;
+        let toastTimer = null;
+
+        function getCleLeafKey(branchCode) {
+            return `cle_${branchCode}`;
+        }
+
+        function getAllLeafKeys() {
+            return ['trau_vang', 'tam_vang', ...state.cleBranches.map(getCleLeafKey)];
+        }
+
+        function getActiveMobileLeafKey() {
+            if (mobileGroup === 'cleverfood') {
+                const branch = state.cleBranches.includes(mobileCleBranch)
+                    ? mobileCleBranch
+                    : (state.cleBranches[0] || '');
+                return branch ? getCleLeafKey(branch) : 'trau_vang';
+            }
+            return mobileGroup;
+        }
+
+        function createDefaultState() {
+            const todayISO = toISODate(new Date());
+            const branches = [...DEFAULT_CLE_BRANCHES];
+            const boxes = { trau_vang: '', tam_vang: '' };
+            branches.forEach(b => boxes[getCleLeafKey(b)] = '');
+
+            return {
+                orderDate: todayISO,
+                pickupDate: addDaysISO(todayISO, 1),
+                deliveryDate: addDaysISO(todayISO, 3),
+                supplier: 'Thuỷ (Rau Đà Lạt)',
+                footerNote: 'Đơn giá đã bao gồm phí vận chuyển Đà Lạt - chợ Quảng Bá',
+                cleBranches: branches,
+                boxes,
+                logos: {
+                    trau_vang:  { mode: 'preset', preset: 'trau_vang',  custom: '' },
+                    tam_vang:   { mode: 'preset', preset: 'tam_vang',   custom: '' },
+                    cleverfood: { mode: 'preset', preset: 'cleverfood', custom: '' }
+                },
+                sheetConfig: {
+                    url: '',
+                    tabName: '',
+                    updateExistingOnly: true,
+                    lastSyncAt: '',
+                    lastSyncInfo: ''
+                },
+                orderTarget: 'tam_vang',      // 'trau_vang' | 'tam_vang' | 'cle_MĐ' ... | 'cle_all'
+                summaryMode: 'all_detail',    // 'all_detail' | 'grouped' | 'cle_only'
+                options: {
+                    useCleAltName: false,
+                    hideZeroStoreCols: true
+                },
+                products: DEFAULT_PRODUCTS_15.map(p => ({
+                    id: p.id,
+                    name: p.name,
+                    prices: { ...p.prices },
+                    cleName: p.cleName,
+                    quantities: {}
+                }))
+            };
+        }
+
+        /* =========================================================
+           3. TIỆN ÍCH NGÀY THÁNG, CHUẨN HÓA CHỮ & ĐỊNH DẠNG SỐ
+           ========================================================= */
+        function toISODate(dateObj) {
+            const y = dateObj.getFullYear();
+            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(dateObj.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function addDaysISO(isoStr, daysToAdd) {
+            if (!isoStr) return '';
+            const parts = isoStr.split('-');
+            if (parts.length !== 3) return '';
+            const dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            if (isNaN(dt.getTime())) return '';
+            dt.setDate(dt.getDate() + daysToAdd);
+            return toISODate(dt);
+        }
+
+        function formatVietnameseDate(isoStr) {
+            if (!isoStr) return '...........................';
+            const parts = isoStr.split('-');
+            if (parts.length !== 3) return isoStr;
+            const y = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10);
+            const d = parseInt(parts[2], 10);
+            const dt = new Date(y, m - 1, d);
+            if (isNaN(dt.getTime())) return isoStr;
+            const weekdays = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+            return `${weekdays[dt.getDay()]}, ${d} tháng ${m}, ${y}`;
+        }
+
+        function normalizeText(str) {
+            return String(str || '')
+                .normalize('NFD')
+                .replace(/[\u0300-\u036f]/g, '')
+                .replace(/đ/g, 'd')
+                .replace(/Đ/g, 'D')
+                .toLowerCase()
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function parseNumber(val) {
+            if (val === null || val === undefined || val === '') return 0;
+            if (typeof val === 'number') return isNaN(val) ? 0 : val;
+            const cleaned = String(val).trim().replace(/\s+/g, '').replace(',', '.');
+            const n = parseFloat(cleaned);
+            return isNaN(n) ? 0 : n;
+        }
+
+        function parsePriceValue(raw) {
+            if (raw === null || raw === undefined || raw === '') return NaN;
+            if (typeof raw === 'number') return isNaN(raw) ? NaN : Math.round(raw);
+            let s = String(raw).trim().replace(/[đ₫vnd\s]/gi, '');
+            if (!s) return NaN;
+
+            if (s.includes('.') && s.includes(',')) {
+                if (s.lastIndexOf(',') > s.lastIndexOf('.')) {
+                    s = s.replace(/\./g, '').replace(',', '.');
+                } else {
+                    s = s.replace(/,/g, '');
+                }
+            } else if (/^\d{1,3}(\.\d{3})+$/.test(s)) {
+                s = s.replace(/\./g, '');
+            } else if (/^\d{1,3}(,\d{3})+$/.test(s)) {
+                s = s.replace(/,/g, '');
+            } else {
+                s = s.replace(',', '.');
+            }
+            const n = parseFloat(s);
+            return isNaN(n) ? NaN : Math.round(n);
+        }
+
+        function roundQty(num) {
+            return Math.round((num + Number.EPSILON) * 1000) / 1000;
+        }
+
+        function formatQty(num) {
+            const r = roundQty(num);
+            if (r === 0) return '0';
+            const parts = String(r).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return parts.join(',');
+        }
+
+        function formatMoney(num) {
+            return Math.round(num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function formatVND(num) {
+            return `${formatMoney(num)} đ`;
+        }
+
+        function escapeHTML(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        /* =========================================================
+           4. LƯU & TẢI DỮ LIỆU LOCALSTORAGE
+           ========================================================= */
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                const el = document.getElementById('saveStatus');
+                if (el) el.textContent = 'Đã lưu localStorage';
+            } catch (err) {
+                console.error('Lỗi lưu localStorage:', err);
+                showToast('Bộ nhớ trình duyệt đầy, hãy chọn ảnh logo nhỏ hơn.', true);
+            }
+        }
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) return;
+                const parsed = JSON.parse(raw);
+                if (parsed && Array.isArray(parsed.products)) {
+                    const def = createDefaultState();
+                    state = {
+                        ...def,
+                        ...parsed,
+                        cleBranches: Array.isArray(parsed.cleBranches) && parsed.cleBranches.length > 0
+                            ? parsed.cleBranches
+                            : def.cleBranches,
+                        boxes: { ...def.boxes, ...(parsed.boxes || {}) },
+                        logos: {
+                            trau_vang:  { ...def.logos.trau_vang,  ...((parsed.logos && parsed.logos.trau_vang) || {}) },
+                            tam_vang:   { ...def.logos.tam_vang,   ...((parsed.logos && parsed.logos.tam_vang) || {}) },
+                            cleverfood: { ...def.logos.cleverfood, ...((parsed.logos && parsed.logos.cleverfood) || {}) }
+                        },
+                        sheetConfig: { ...def.sheetConfig, ...(parsed.sheetConfig || {}) },
+                        options: { ...def.options, ...(parsed.options || {}) }
+                    };
+                    state.products = state.products.map(p => ({
+                        id: p.id || ('p' + Date.now() + Math.random()),
+                        name: p.name || '',
+                        prices: {
+                            trau_vang: Number((p.prices && p.prices.trau_vang) || 0),
+                            tam_vang:  Number((p.prices && p.prices.tam_vang) || 0),
+                            cle:       Number((p.prices && p.prices.cle) || 0)
+                        },
+                        cleName: p.cleName || '',
+                        quantities: p.quantities || {}
+                    }));
+                    if (!state.cleBranches.includes(mobileCleBranch)) {
+                        mobileCleBranch = state.cleBranches[0] || '';
+                    }
+                }
+            } catch (err) {
+                console.error('Lỗi đọc localStorage:', err);
+            }
+        }
+
+        /* =========================================================
+           5. ĐỒNG BỘ GOOGLE SHEET (CSV & COPY-PASTE DỰ PHÒNG)
+           ========================================================= */
+        function updateSheetConfig(key, value) {
+            state.sheetConfig[key] = value;
+            saveState();
+        }
+
+        function buildGoogleSheetCsvUrl(inputUrl, tabName) {
+            const raw = String(inputUrl || '').trim();
+            if (!raw) return null;
+
+            if (/^https?:\/\//i.test(raw) && (raw.includes('output=csv') || raw.includes('format=csv') || raw.includes('tqx=out:csv'))) {
+                return raw;
+            }
+
+            let sheetId = '';
+            const idMatch = raw.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+            if (idMatch) {
+                sheetId = idMatch[1];
+            } else if (/^[a-zA-Z0-9-_]{20,}$/.test(raw)) {
+                sheetId = raw;
+            } else {
+                return null;
+            }
+
+            const cleanTab = String(tabName || '').trim();
+            if (cleanTab) {
+                return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(cleanTab)}`;
+            }
+            const gidMatch = raw.match(/[?&#]gid=([0-9]+)/);
+            if (gidMatch) {
+                return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=${gidMatch[1]}`;
+            }
+            return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+        }
+
+        function parseDelimitedText(text, delimiter = ',') {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+            const normalized = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+            for (let i = 0; i < normalized.length; i++) {
+                const ch = normalized[i];
+                const next = normalized[i + 1];
+
+                if (inQuotes) {
+                    if (ch === '"' && next === '"') {
+                        currentField += '"';
+                        i++;
+                    } else if (ch === '"') {
+                        inQuotes = false;
+                    } else {
+                        currentField += ch;
+                    }
+                } else {
+                    if (ch === '"') {
+                        inQuotes = true;
+                    } else if (ch === delimiter) {
+                        currentRow.push(currentField.trim());
+                        currentField = '';
+                    } else if (ch === '\n') {
+                        currentRow.push(currentField.trim());
+                        if (currentRow.some(c => c !== '')) rows.push(currentRow);
+                        currentRow = [];
+                        currentField = '';
+                    } else {
+                        currentField += ch;
+                    }
+                }
+            }
+
+            if (currentField !== '' || currentRow.length > 0) {
+                currentRow.push(currentField.trim());
+                if (currentRow.some(c => c !== '')) rows.push(currentRow);
+            }
+            return rows;
+        }
+
+        function applyParsedPriceTable(rows, sourceLabel) {
+            if (!rows || rows.length < 2) {
+                throw new Error('Không tìm thấy đủ dữ liệu (cần ít nhất 1 dòng tiêu đề và 1 dòng sản phẩm).');
+            }
+
+            let headerIdx = 0;
+            for (let i = 0; i < Math.min(rows.length, 6); i++) {
+                const normRow = rows[i].map(normalizeText);
+                if (normRow.some(c => c.includes('ten san pham') || c.includes('don gia'))) {
+                    headerIdx = i;
+                    break;
+                }
+            }
+
+            const normHeaders = rows[headerIdx].map(normalizeText);
+
+            let nameIdx = normHeaders.findIndex(h => h === 'ten san pham' || (h.includes('ten san pham') && !h.includes('cleverfood') && !h.includes('cle')));
+            if (nameIdx === -1) nameIdx = 0;
+
+            const idxTrauVang = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('trau vang'));
+            const idxTamVang  = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('tam vang'));
+            const idxClePrice = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('don gia') && (h.includes('cle') || h.includes('cleverfood')));
+            const idxCleName  = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('ten san pham') && (h.includes('cle') || h.includes('cleverfood')));
+
+            if (idxTrauVang === -1 && idxTamVang === -1 && idxClePrice === -1) {
+                throw new Error('Không tìm thấy cột đơn giá nào khớp (Đơn giá Trâu vàng, Đơn giá Tâm vàng, Đơn giá Cle).');
+            }
+
+            let updatedCount = 0;
+            let addedCount = 0;
+            const onlyExisting = !!state.sheetConfig.updateExistingOnly;
+
+            for (let r = headerIdx + 1; r < rows.length; r++) {
+                const row = rows[r];
+                const prodName = (row[nameIdx] || '').trim();
+                if (!prodName) continue;
+
+                const normName = normalizeText(prodName);
+                if (normName === 'tong' || normName.startsWith('tong ')) continue;
+
+                const pTV  = idxTrauVang !== -1 ? parsePriceValue(row[idxTrauVang]) : NaN;
+                const pTam = idxTamVang  !== -1 ? parsePriceValue(row[idxTamVang])  : NaN;
+                const pCle = idxClePrice !== -1 ? parsePriceValue(row[idxClePrice]) : NaN;
+                const cName = idxCleName !== -1 ? (row[idxCleName] || '').trim() : '';
+
+                const hasValidPrice = (!isNaN(pTV) && pTV > 0) || (!isNaN(pTam) && pTam > 0) || (!isNaN(pCle) && pCle > 0);
+                if (!hasValidPrice) continue;
+
+                const existing = state.products.find(p => normalizeText(p.name) === normName);
+                if (existing) {
+                    if (!isNaN(pTV) && pTV > 0)   existing.prices.trau_vang = pTV;
+                    if (!isNaN(pTam) && pTam > 0) existing.prices.tam_vang = pTam;
+                    if (!isNaN(pCle) && pCle > 0) existing.prices.cle = pCle;
+                    if (cName) existing.cleName = cName;
+                    updatedCount++;
+                } else if (!onlyExisting) {
+                    state.products.push({
+                        id: 'p' + Date.now() + '_' + r,
+                        name: prodName,
+                        prices: {
+                            trau_vang: !isNaN(pTV) && pTV > 0 ? pTV : 0,
+                            tam_vang:  !isNaN(pTam) && pTam > 0 ? pTam : 0,
+                            cle:       !isNaN(pCle) && pCle > 0 ? pCle : 0
+                        },
+                        cleName: cName,
+                        quantities: {}
+                    });
+                    addedCount++;
+                }
+            }
+
+            const now = new Date();
+            const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ngày ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+            const summaryMsg = `Đã cập nhật giá ${updatedCount} sản phẩm`
+                + (addedCount > 0 ? `, thêm mới ${addedCount} sản phẩm` : '')
+                + ` (${sourceLabel}).`;
+
+            state.sheetConfig.lastSyncAt = timeStr;
+            state.sheetConfig.lastSyncInfo = summaryMsg;
+            saveState();
+
+            renderPriceTable();
+            renderAllInputViews();
+            renderSyncBanner(false);
+            showToast(summaryMsg);
+        }
+
+        async function syncFromGoogleSheet() {
+            const csvUrl = buildGoogleSheetCsvUrl(state.sheetConfig.url, state.sheetConfig.tabName);
+            if (!csvUrl) {
+                renderSyncBanner(true, 'Vui lòng nhập Link Google Sheet (hoặc Sheet ID) hợp lệ trước khi cập nhật.');
+                showToast('Link Google Sheet chưa hợp lệ.', true);
+                return;
+            }
+
+            const btn = document.getElementById('btnSyncSheet');
+            const origHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span>Đang tải bảng giá...</span>';
+
+            try {
+                const res = await fetch(csvUrl, { cache: 'no-store' });
+                if (!res.ok) {
+                    throw new Error(`Không tải được dữ liệu (HTTP ${res.status}). Hãy kiểm tra quyền chia sẻ công khai và tên Tab.`);
+                }
+                const csvText = await res.text();
+                if (/^\s*<!doctype html/i.test(csvText) || /^\s*<html/i.test(csvText)) {
+                    throw new Error('File Google Sheet đang ở chế độ riêng tư. Hãy bật Chia sẻ -> "Bất kỳ ai có đường liên kết -> Người xem" hoặc dùng khung Dán nhanh bên dưới.');
+                }
+
+                const rows = parseDelimitedText(csvText, ',');
+                const label = state.sheetConfig.tabName ? `Tab "${state.sheetConfig.tabName}"` : 'Google Sheet';
+                applyParsedPriceTable(rows, label);
+            } catch (err) {
+                console.error('Lỗi đồng bộ Google Sheet:', err);
+                renderSyncBanner(true, err.message || 'Lỗi kết nối tới Google Sheet.');
+                showToast('Không thể tải Google Sheet.', true);
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = origHTML;
+            }
+        }
+
+        function importFromPastedTable() {
+            const raw = document.getElementById('pasteSheetArea').value.trim();
+            if (!raw) {
+                showToast('Vui lòng dán bảng copy từ Google Sheet vào khung.', true);
+                return;
+            }
+            try {
+                const delimiter = raw.includes('\t') ? '\t' : ',';
+                const rows = parseDelimitedText(raw, delimiter);
+                applyParsedPriceTable(rows, 'Dán trực tiếp');
+                document.getElementById('pasteSheetArea').value = '';
+            } catch (err) {
+                renderSyncBanner(true, err.message || 'Dữ liệu dán không đúng định dạng bảng.');
+                showToast('Lỗi đọc dữ liệu dán.', true);
+            }
+        }
+
+        function renderSyncBanner(isError, customErrorMsg = '') {
+            const banner = document.getElementById('sheetSyncBanner');
+            if (!banner) return;
+            if (isError) {
+                banner.className = 'sync-banner error';
+                banner.innerHTML = `<div><strong>Lỗi đồng bộ:</strong> ${escapeHTML(customErrorMsg)}</div>`;
+                return;
+            }
+            if (state.sheetConfig.lastSyncAt) {
+                banner.className = 'sync-banner';
+                banner.innerHTML = `<div><strong>Cập nhật gần nhất (${escapeHTML(state.sheetConfig.lastSyncAt)}):</strong> ${escapeHTML(state.sheetConfig.lastSyncInfo)}</div>`;
+            } else {
+                banner.className = 'sync-banner hidden';
+            }
+        }
+
+        /* =========================================================
+           6. XỬ LÝ TỰ ĐỘNG TÍNH NGÀY (+1 LẤY, +3 NHẬN)
+           ========================================================= */
+        function handleOrderDateChange(newOrderDate) {
+            state.orderDate = newOrderDate;
+            if (newOrderDate) {
+                state.pickupDate = addDaysISO(newOrderDate, 1);
+                state.deliveryDate = addDaysISO(newOrderDate, 3);
+                document.getElementById('inputPickupDate').value = state.pickupDate;
+                document.getElementById('inputDeliveryDate').value = state.deliveryDate;
+            }
+            saveState();
+            updateDatePreviews();
+            if (activeTab === 'order') renderOrderPreview();
+            if (activeTab === 'summary') renderSummaryPreview();
+            showToast('Đã tự động tính Ngày lấy (+1) và Ngày nhận (+3).');
+        }
+
+        function updateField(field, value) {
+            state[field] = value;
+            saveState();
+            updateDatePreviews();
+            if (activeTab === 'order') renderOrderPreview();
+            if (activeTab === 'summary') renderSummaryPreview();
+        }
+
+        function updateDatePreviews() {
+            document.getElementById('previewOrderDate').textContent = formatVietnameseDate(state.orderDate);
+            document.getElementById('previewPickupDate').textContent = formatVietnameseDate(state.pickupDate);
+            document.getElementById('previewDeliveryDate').textContent = formatVietnameseDate(state.deliveryDate);
+        }
+
+        function toggleOption(key, checked) {
+            state.options[key] = checked;
+            saveState();
+            if (activeTab === 'order') renderOrderPreview();
+            if (activeTab === 'summary') renderSummaryPreview();
+        }
+
+        /* =========================================================
+           7. QUẢN LÝ CHI NHÁNH CON CLEVERFOOD & LOGO 3 KHÁCH HÀNG
+           ========================================================= */
+        function renderCleBranchesManager() {
+            const wrap = document.getElementById('cleBranchesWrap');
+            if (!wrap) return;
+            if (state.cleBranches.length === 0) {
+                wrap.innerHTML = `<span style="font-size:12.5px; color:var(--text-muted);">Chưa có chi nhánh con nào. Hãy thêm bên dưới.</span>`;
+                return;
+            }
+            wrap.innerHTML = state.cleBranches.map(code => `
+                <span class="branch-tag">
+                    <span>Cleverfood - ${escapeHTML(code)}</span>
+                    <button type="button" onclick="confirmDeleteCleBranch('${escapeHTML(code)}')" title="Xóa chi nhánh ${escapeHTML(code)}">&times;</button>
+                </span>
+            `).join('');
+        }
+
+        function addCleBranch() {
+            const input = document.getElementById('inputNewCleBranch');
+            const raw = (input.value || '').trim();
+            if (!raw) {
+                showToast('Vui lòng nhập mã hoặc tên chi nhánh Cleverfood.', true);
+                return;
+            }
+            if (state.cleBranches.some(b => normalizeText(b) === normalizeText(raw))) {
+                showToast(`Chi nhánh "${raw}" đã tồn tại.`, true);
+                return;
+            }
+            state.cleBranches.push(raw);
+            state.boxes[getCleLeafKey(raw)] = '';
+            input.value = '';
+            saveState();
+            renderCleBranchesManager();
+            renderAllInputViews();
+            renderOrderTargetDropdown();
+            showToast(`Đã thêm chi nhánh Cleverfood - ${raw}.`);
+        }
+
+        function confirmDeleteCleBranch(branchCode) {
+            if (state.cleBranches.length <= 1) {
+                showToast('Cần giữ lại ít nhất 1 chi nhánh con Cleverfood.', true);
+                return;
+            }
+            openConfirmModal(
+                'Xóa chi nhánh Cleverfood?',
+                `Bạn có chắc muốn xóa chi nhánh "${branchCode}" cùng số lượng đã nhập của chi nhánh này không?`,
+                () => {
+                    const leafKey = getCleLeafKey(branchCode);
+                    state.cleBranches = state.cleBranches.filter(b => b !== branchCode);
+                    delete state.boxes[leafKey];
+                    state.products.forEach(p => {
+                        if (p.quantities) delete p.quantities[leafKey];
+                    });
+                    if (mobileCleBranch === branchCode) mobileCleBranch = state.cleBranches[0] || '';
+                    if (state.orderTarget === leafKey) state.orderTarget = 'cle_all';
+                    saveState();
+                    renderCleBranchesManager();
+                    renderAllInputViews();
+                    renderOrderTargetDropdown();
+                    showToast(`Đã xóa chi nhánh Cleverfood - ${branchCode}.`);
+                }
+            );
+        }
+
+        function getLogoMarkupByGroup(groupKey) {
+            const cfg = state.logos[groupKey];
+            if (!cfg || cfg.mode === 'none') return '';
+            if (cfg.mode === 'custom' && cfg.custom) {
+                return `<img src="${cfg.custom}" alt="Logo ${groupKey}">`;
+            }
+            const labelMap = { trau_vang: 'Trâu vàng', tam_vang: 'Tâm vàng', cleverfood: 'Cleverfood' };
+            return getCustomerPresetSVG(cfg.preset || groupKey, labelMap[groupKey] || groupKey);
+        }
+
+        function renderCustomerLogosGrid() {
+            const grid = document.getElementById('customerLogosGrid');
+            if (!grid) return;
+
+            const groups = [
+                { key: 'trau_vang',  title: 'Trâu vàng',  sub: 'Khách hàng độc lập' },
+                { key: 'tam_vang',   title: 'Tâm vàng',   sub: 'Khách hàng độc lập' },
+                { key: 'cleverfood', title: 'Cleverfood', sub: 'Dùng chung cho tất cả chi nhánh con' }
+            ];
+
+            grid.innerHTML = groups.map(g => {
+                const cfg = state.logos[g.key];
+                const hasLogo = cfg && cfg.mode !== 'none';
+                const markup = getLogoMarkupByGroup(g.key);
+                return `
+                    <div class="logo-card">
+                        <div class="logo-card-top">
+                            <span class="logo-card-title">${g.title}</span>
+                            <span class="logo-card-sub">${g.sub}</span>
+                        </div>
+                        <div class="store-logo-row">
+                            <div class="store-logo-thumb">
+                                ${hasLogo ? markup : '<span style="font-size:10px;color:#94a3b8;text-align:center;">Đang ẩn</span>'}
+                            </div>
+                            <div class="store-logo-actions">
+                                <label class="btn btn-soft btn-sm" style="cursor:pointer;">
+                                    <span>Tải ảnh</span>
+                                    <input type="file" accept="image/*" class="hidden" onchange="handleCustomerLogoUpload('${g.key}', event)">
+                                </label>
+                                <button class="btn btn-outline btn-sm" onclick="cycleCustomerLogo('${g.key}')">Đổi mẫu SVG</button>
+                                <button class="btn btn-outline btn-sm" onclick="downloadCustomerLogoSVG('${g.key}')">Tải .svg</button>
+                                <button class="btn ${hasLogo ? 'btn-danger-soft' : 'btn-soft'} btn-sm" onclick="toggleCustomerLogo('${g.key}')">
+                                    ${hasLogo ? 'Ẩn' : 'Hiện'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleCustomerLogoUpload(groupKey, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const cfg = state.logos[groupKey];
+            if (!cfg) return;
+
+            if (file.type === 'image/svg+xml') {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    cfg.mode = 'custom';
+                    cfg.custom = e.target.result;
+                    saveState();
+                    renderCustomerLogosGrid();
+                    if (activeTab === 'order') renderOrderPreview();
+                    showToast('Đã cập nhật logo SVG thành công.');
+                };
+                reader.readAsDataURL(file);
+                event.target.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                const img = new Image();
+                img.onload = () => {
+                    const maxDim = 300;
+                    let w = img.width, h = img.height;
+                    if (w > maxDim || h > maxDim) {
+                        const ratio = Math.min(maxDim / w, maxDim / h);
+                        w = Math.round(w * ratio);
+                        h = Math.round(h * ratio);
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w;
+                    canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.drawImage(img, 0, 0, w, h);
+
+                    cfg.mode = 'custom';
+                    cfg.custom = canvas.toDataURL('image/png');
+                    saveState();
+                    renderCustomerLogosGrid();
+                    if (activeTab === 'order') renderOrderPreview();
+                    showToast('Đã tải & nén nhẹ logo (tối đa 300px).');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function cycleCustomerLogo(groupKey) {
+            const cfg = state.logos[groupKey];
+            const presets = ['tam_vang', 'trau_vang', 'cleverfood', 'default'];
+            const nextIdx = cfg.mode === 'preset' ? (presets.indexOf(cfg.preset) + 1) % presets.length : 0;
+            cfg.mode = 'preset';
+            cfg.preset = presets[nextIdx];
+            saveState();
+            renderCustomerLogosGrid();
+            if (activeTab === 'order') renderOrderPreview();
+        }
+
+        function toggleCustomerLogo(groupKey) {
+            const cfg = state.logos[groupKey];
+            cfg.mode = cfg.mode === 'none' ? (cfg.custom ? 'custom' : 'preset') : 'none';
+            saveState();
+            renderCustomerLogosGrid();
+            if (activeTab === 'order') renderOrderPreview();
+        }
+
+        function triggerSVGDownload(svgString, filename) {
+            const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 500);
+        }
+
+        function downloadAppLogoSVG() {
+            triggerSVGDownload(getAppLogoSVG(), 'maison-legume-dalat-logo.svg');
+            showToast('Đã tải maison-legume-dalat-logo.svg!');
+        }
+
+        function downloadCustomerLogoSVG(groupKey) {
+            const cfg = state.logos[groupKey];
+            const labelMap = { trau_vang: 'Trâu vàng', tam_vang: 'Tâm vàng', cleverfood: 'Cleverfood' };
+            const svg = getCustomerPresetSVG((cfg && cfg.preset) || groupKey, labelMap[groupKey]);
+            triggerSVGDownload(svg, `logo-${groupKey}.svg`);
+            showToast(`Đã tải file logo-${groupKey}.svg!`);
+        }
+
+        /* =========================================================
+           8. TAB 1: NHẬP SỐ LƯỢNG DESKTOP & MOBILE
+           ========================================================= */
+        function renderAllInputViews() {
+            renderDesktopFilterPills();
+            renderDesktopQtyTable();
+            renderMobileView();
+        }
+
+        function setDesktopFilter(mode) {
+            desktopFilter = mode;
+            renderDesktopFilterPills();
+            renderDesktopQtyTable();
+        }
+
+        function renderDesktopFilterPills() {
+            const wrap = document.getElementById('desktopFilterPills');
+            if (!wrap) return;
+            const cleLabel = `Cleverfood (${state.cleBranches.join(', ')})`;
+            const pills = [
+                { key: 'all',        label: 'Tất cả' },
+                { key: 'standalone', label: 'Trâu vàng & Tâm vàng' },
+                { key: 'cleverfood', label: cleLabel }
+            ];
+            wrap.innerHTML = pills.map(p => `
+                <button class="filter-pill ${desktopFilter === p.key ? 'active' : ''}"
+                    onclick="setDesktopFilter('${p.key}')">${escapeHTML(p.label)}</button>
+            `).join('');
+        }
+
+        function renderDesktopQtyTable() {
+            const thead = document.getElementById('desktopQtyHead');
+            const tbody = document.getElementById('desktopQtyBody');
+            if (!thead || !tbody) return;
+
+            const showStandalone = desktopFilter === 'all' || desktopFilter === 'standalone';
+            const showCle        = desktopFilter === 'all' || desktopFilter === 'cleverfood';
+            const cleCount       = state.cleBranches.length;
+
+            // Tiêu đề 2 tầng khi có hiển thị nhóm Cleverfood
+            if (showCle) {
+                thead.innerHTML = `
+                    <tr>
+                        <th rowspan="2" style="width:44px;">STT</th>
+                        <th rowspan="2" class="col-left" style="min-width:205px;">Tên sản phẩm</th>
+                        ${showStandalone ? `
+                            <th rowspan="2" style="min-width:94px;">Trâu vàng</th>
+                            <th rowspan="2" style="min-width:94px;">Tâm vàng</th>
+                        ` : ''}
+                        <th colspan="${cleCount + 1}" class="th-cle-group">Cleverfood (Đơn giá Cle)</th>
+                        ${desktopFilter === 'all' ? `<th rowspan="2" style="width:84px; background:#dcfce7;">Tổng</th>` : ''}
+                    </tr>
+                    <tr>
+                        ${state.cleBranches.map(b => `<th class="th-cle-sub" style="min-width:80px;">${escapeHTML(b)}</th>`).join('')}
+                        <th class="th-cle-sub" style="width:82px; background:#bbf7d0; color:var(--green-900);">Tổng Cle</th>
+                    </tr>
+                `;
+            } else {
+                thead.innerHTML = `
+                    <tr>
+                        <th style="width:44px;">STT</th>
+                        <th class="col-left" style="min-width:220px;">Tên sản phẩm</th>
+                        <th style="min-width:110px;">Trâu vàng</th>
+                        <th style="min-width:110px;">Tâm vàng</th>
+                        <th style="width:92px; background:#dcfce7;">Tổng</th>
+                    </tr>
+                `;
+            }
+
+            tbody.innerHTML = state.products.map((p, rowIdx) => {
+                const qTV  = p.quantities.trau_vang || '';
+                const qTam = p.quantities.tam_vang  || '';
+                let cleSum = 0;
+                state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities[getCleLeafKey(b)]));
+                const rowGrand = parseNumber(qTV) + parseNumber(qTam) + cleSum;
+                const standaloneSum = parseNumber(qTV) + parseNumber(qTam);
+
+                return `
+                    <tr>
+                        <td style="text-align:center; font-weight:600; color:var(--text-muted); font-size:12.5px;">${rowIdx + 1}</td>
+                        <td>
+                            <input type="text" class="cell-input name-input"
+                                data-col="qty-name" data-row="${rowIdx}"
+                                value="${escapeHTML(p.name)}"
+                                placeholder="Tên sản phẩm..."
+                                oninput="updateProductName('${p.id}', this.value)"
+                                onkeydown="handleVerticalKeyNav(event)">
+                        </td>
+                        ${showStandalone ? `
+                            <td style="text-align:center;">
+                                <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                    data-col="qty-trau_vang" data-row="${rowIdx}"
+                                    value="${escapeHTML(qTV)}" placeholder="0"
+                                    oninput="updateLeafQty('${p.id}', 'trau_vang', this.value)"
+                                    onkeydown="handleVerticalKeyNav(event)">
+                            </td>
+                            <td style="text-align:center;">
+                                <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                    data-col="qty-tam_vang" data-row="${rowIdx}"
+                                    value="${escapeHTML(qTam)}" placeholder="0"
+                                    oninput="updateLeafQty('${p.id}', 'tam_vang', this.value)"
+                                    onkeydown="handleVerticalKeyNav(event)">
+                            </td>
+                        ` : ''}
+                        ${showCle ? `
+                            ${state.cleBranches.map(b => {
+                                const leafKey = getCleLeafKey(b);
+                                const qVal = p.quantities[leafKey] || '';
+                                return `
+                                    <td style="text-align:center;">
+                                        <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                            data-col="qty-${leafKey}" data-row="${rowIdx}"
+                                            value="${escapeHTML(qVal)}" placeholder="0"
+                                            oninput="updateLeafQty('${p.id}', '${leafKey}', this.value)"
+                                            onkeydown="handleVerticalKeyNav(event)">
+                                    </td>
+                                `;
+                            }).join('')}
+                            <td id="row-cle-total-${p.id}" style="text-align:center; font-weight:700; color:var(--green-900); background:#f0fdf4;">
+                                ${cleSum > 0 ? formatQty(cleSum) : '0'}
+                            </td>
+                        ` : ''}
+                        ${desktopFilter !== 'cleverfood' ? `
+                            <td id="row-grand-total-${p.id}" style="text-align:center; font-weight:800; color:var(--green-900); background:#e8f8ed;">
+                                ${formatQty(desktopFilter === 'standalone' ? standaloneSum : rowGrand)}
+                            </td>
+                        ` : ''}
+                    </tr>
+                `;
+            }).join('');
+
+            renderDesktopQtyFooter();
+        }
+
+        function calcLeafTotals() {
+            const qtySums = {};
+            const itemCounts = {};
+            const keys = getAllLeafKeys();
+            keys.forEach(k => { qtySums[k] = 0; itemCounts[k] = 0; });
+
+            let cleQtyTotal = 0;
+            let cleItemCount = 0;
+            let grandQty = 0;
+            let grandItemCount = 0;
+            let standaloneQty = 0;
+            let standaloneItemCount = 0;
+
+            state.products.forEach(p => {
+                let prodCle = 0;
+                let prodGrand = 0;
+                const qTV  = parseNumber(p.quantities.trau_vang);
+                const qTam = parseNumber(p.quantities.tam_vang);
+
+                qtySums.trau_vang += qTV;
+                if (qTV > 0) itemCounts.trau_vang++;
+
+                qtySums.tam_vang += qTam;
+                if (qTam > 0) itemCounts.tam_vang++;
+
+                standaloneQty += qTV + qTam;
+                if (qTV + qTam > 0) standaloneItemCount++;
+
+                state.cleBranches.forEach(b => {
+                    const k = getCleLeafKey(b);
+                    const q = parseNumber(p.quantities[k]);
+                    qtySums[k] += q;
+                    if (q > 0) itemCounts[k]++;
+                    prodCle += q;
+                });
+
+                cleQtyTotal += prodCle;
+                if (prodCle > 0) cleItemCount++;
+
+                prodGrand = qTV + qTam + prodCle;
+                grandQty += prodGrand;
+                if (prodGrand > 0) grandItemCount++;
+            });
+
+            let cleBoxesTotal = 0;
+            state.cleBranches.forEach(b => cleBoxesTotal += parseNumber(state.boxes[getCleLeafKey(b)]));
+            const standaloneBoxes = parseNumber(state.boxes.trau_vang) + parseNumber(state.boxes.tam_vang);
+            const grandBoxes = standaloneBoxes + cleBoxesTotal;
+
+            return {
+                qtySums, itemCounts,
+                cleQtyTotal, cleItemCount, cleBoxesTotal,
+                standaloneQty, standaloneItemCount, standaloneBoxes,
+                grandQty, grandItemCount, grandBoxes
+            };
+        }
+
+        function renderDesktopQtyFooter() {
+            const tfoot = document.getElementById('desktopQtyFoot');
+            if (!tfoot) return;
+
+            const showStandalone = desktopFilter === 'all' || desktopFilter === 'standalone';
+            const showCle        = desktopFilter === 'all' || desktopFilter === 'cleverfood';
+            const boxRowIdx      = state.products.length;
+            const t              = calcLeafTotals();
+
+            tfoot.innerHTML = `
+                <tr>
+                    <td colspan="2" style="text-align:right; padding-right:12px;">Tổng số lượng (Kg):</td>
+                    ${showStandalone ? `
+                        <td id="foot-qty-trau_vang" style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.trau_vang)}</td>
+                        <td id="foot-qty-tam_vang"  style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.tam_vang)}</td>
+                    ` : ''}
+                    ${showCle ? `
+                        ${state.cleBranches.map(b => {
+                            const k = getCleLeafKey(b);
+                            return `<td id="foot-qty-${k}" style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums[k])}</td>`;
+                        }).join('')}
+                        <td id="foot-qty-cle_total" style="text-align:center; color:var(--green-900); background:#dcfce7;">${formatQty(t.cleQtyTotal)}</td>
+                    ` : ''}
+                    ${desktopFilter !== 'cleverfood' ? `
+                        <td id="foot-qty-grand" style="text-align:center; color:var(--green-900); background:#bbf7d0;">
+                            ${formatQty(desktopFilter === 'standalone' ? t.standaloneQty : t.grandQty)}
+                        </td>
+                    ` : ''}
+                </tr>
+
+                <tr class="meta-row-tr">
+                    <td colspan="2" style="text-align:right; padding-right:12px;">Số mặt hàng:</td>
+                    ${showStandalone ? `
+                        <td id="foot-cnt-trau_vang" style="text-align:center;">${t.itemCounts.trau_vang}</td>
+                        <td id="foot-cnt-tam_vang"  style="text-align:center;">${t.itemCounts.tam_vang}</td>
+                    ` : ''}
+                    ${showCle ? `
+                        ${state.cleBranches.map(b => {
+                            const k = getCleLeafKey(b);
+                            return `<td id="foot-cnt-${k}" style="text-align:center;">${t.itemCounts[k]}</td>`;
+                        }).join('')}
+                        <td id="foot-cnt-cle_total" style="text-align:center;">${t.cleItemCount}</td>
+                    ` : ''}
+                    ${desktopFilter !== 'cleverfood' ? `
+                        <td id="foot-cnt-grand" style="text-align:center;">
+                            ${desktopFilter === 'standalone' ? t.standaloneItemCount : t.grandItemCount}
+                        </td>
+                    ` : ''}
+                </tr>
+
+                <tr class="box-row-tr">
+                    <td colspan="2" style="text-align:right; padding-right:12px; color:var(--amber-700);">Số thùng đóng gói:</td>
+                    ${showStandalone ? `
+                        <td style="text-align:center;">
+                            <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                style="border-color:#f59e0b;"
+                                data-col="qty-trau_vang" data-row="${boxRowIdx}"
+                                value="${escapeHTML(state.boxes.trau_vang || '')}" placeholder="0"
+                                oninput="updateLeafBoxes('trau_vang', this.value)"
+                                onkeydown="handleVerticalKeyNav(event)">
+                        </td>
+                        <td style="text-align:center;">
+                            <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                style="border-color:#f59e0b;"
+                                data-col="qty-tam_vang" data-row="${boxRowIdx}"
+                                value="${escapeHTML(state.boxes.tam_vang || '')}" placeholder="0"
+                                oninput="updateLeafBoxes('tam_vang', this.value)"
+                                onkeydown="handleVerticalKeyNav(event)">
+                        </td>
+                    ` : ''}
+                    ${showCle ? `
+                        ${state.cleBranches.map(b => {
+                            const k = getCleLeafKey(b);
+                            return `
+                                <td style="text-align:center;">
+                                    <input type="text" inputmode="decimal" class="cell-input qty-input"
+                                        style="border-color:#f59e0b;"
+                                        data-col="qty-${k}" data-row="${boxRowIdx}"
+                                        value="${escapeHTML(state.boxes[k] || '')}" placeholder="0"
+                                        oninput="updateLeafBoxes('${k}', this.value)"
+                                        onkeydown="handleVerticalKeyNav(event)">
+                                </td>
+                            `;
+                        }).join('')}
+                        <td id="foot-box-cle_total" style="text-align:center; color:var(--amber-700); font-size:15px;">${formatQty(t.cleBoxesTotal)}</td>
+                    ` : ''}
+                    ${desktopFilter !== 'cleverfood' ? `
+                        <td id="foot-box-grand" style="text-align:center; color:var(--amber-700); font-size:15px;">
+                            ${formatQty(desktopFilter === 'standalone' ? t.standaloneBoxes : t.grandBoxes)}
+                        </td>
+                    ` : ''}
+                </tr>
+            `;
+        }
+
+        function updateLeafQty(prodId, leafKey, val) {
+            const p = state.products.find(item => item.id === prodId);
+            if (!p) return;
+            if (!p.quantities) p.quantities = {};
+            p.quantities[leafKey] = val;
+            saveState();
+
+            // Cập nhật nhanh tổng hàng
+            let cleSum = 0;
+            state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities[getCleLeafKey(b)]));
+            const standaloneSum = parseNumber(p.quantities.trau_vang) + parseNumber(p.quantities.tam_vang);
+            const cleCell = document.getElementById(`row-cle-total-${prodId}`);
+            if (cleCell) cleCell.textContent = cleSum > 0 ? formatQty(cleSum) : '0';
+            const grandCell = document.getElementById(`row-grand-total-${prodId}`);
+            if (grandCell) grandCell.textContent = formatQty(desktopFilter === 'standalone' ? standaloneSum : standaloneSum + cleSum);
+
+            // Cập nhật nhanh chân bảng
+            refreshDesktopFooterNumbers();
+        }
+
+        function updateLeafBoxes(leafKey, val) {
+            state.boxes[leafKey] = val;
+            saveState();
+            refreshDesktopFooterNumbers();
+        }
+
+        function refreshDesktopFooterNumbers() {
+            const t = calcLeafTotals();
+            const setTxt = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
+
+            setTxt('foot-qty-trau_vang', formatQty(t.qtySums.trau_vang));
+            setTxt('foot-qty-tam_vang',  formatQty(t.qtySums.tam_vang));
+            setTxt('foot-cnt-trau_vang', t.itemCounts.trau_vang);
+            setTxt('foot-cnt-tam_vang',  t.itemCounts.tam_vang);
+
+            state.cleBranches.forEach(b => {
+                const k = getCleLeafKey(b);
+                setTxt(`foot-qty-${k}`, formatQty(t.qtySums[k]));
+                setTxt(`foot-cnt-${k}`, t.itemCounts[k]);
+            });
+
+            setTxt('foot-qty-cle_total', formatQty(t.cleQtyTotal));
+            setTxt('foot-cnt-cle_total', t.cleItemCount);
+            setTxt('foot-box-cle_total', formatQty(t.cleBoxesTotal));
+
+            setTxt('foot-qty-grand', formatQty(desktopFilter === 'standalone' ? t.standaloneQty : t.grandQty));
+            setTxt('foot-cnt-grand', desktopFilter === 'standalone' ? t.standaloneItemCount : t.grandItemCount);
+            setTxt('foot-box-grand', formatQty(desktopFilter === 'standalone' ? t.standaloneBoxes : t.grandBoxes));
+        }
+
+        /**
+         * Nhấn Enter / ArrowDown nhảy thẳng xuống dòng tiếp theo cùng cột (tới tận ô Số thùng)
+         */
+        function handleVerticalKeyNav(event) {
+            const isDown = (event.key === 'Enter' && !event.shiftKey) || event.key === 'ArrowDown';
+            const isUp   = (event.key === 'Enter' && event.shiftKey)  || event.key === 'ArrowUp';
+            if (!isDown && !isUp) return;
+
+            event.preventDefault();
+            const current = event.target;
+            const col = current.dataset.col;
+            const row = parseInt(current.dataset.row, 10);
+            const targetRow = isDown ? row + 1 : row - 1;
+            const nextInput = document.querySelector(`[data-col="${col}"][data-row="${targetRow}"]`);
+            if (nextInput) {
+                nextInput.focus();
+                if (typeof nextInput.select === 'function') nextInput.select();
+            }
+        }
+
+        /* --- Giao diện Điện thoại (< 768px) --- */
+        function selectMobileGroup(grp) {
+            mobileGroup = grp;
+            if (grp === 'cleverfood' && !state.cleBranches.includes(mobileCleBranch)) {
+                mobileCleBranch = state.cleBranches[0] || '';
+            }
+            renderMobileView();
+        }
+
+        function selectMobileCleBranch(branchCode) {
+            mobileCleBranch = branchCode;
+            renderMobileView();
+        }
+
+        function handleMobileSearch(val) {
+            mobileSearchQuery = val;
+            renderMobileProductListOnly();
+        }
+
+        function renderMobileView() {
+            const grpWrap = document.getElementById('mobileGroupPills');
+            const subWrap = document.getElementById('mobileSubPills');
+            if (!grpWrap || !subWrap) return;
+
+            const t = calcLeafTotals();
+            const groups = [
+                { key: 'trau_vang',  label: `Trâu vàng`,  qty: t.qtySums.trau_vang },
+                { key: 'tam_vang',   label: `Tâm vàng`,   qty: t.qtySums.tam_vang },
+                { key: 'cleverfood', label: `Cleverfood`, qty: t.cleQtyTotal }
+            ];
+
+            grpWrap.innerHTML = groups.map(g => `
+                <button class="group-pill ${mobileGroup === g.key ? 'active' : ''}" onclick="selectMobileGroup('${g.key}')">
+                    <div>${g.label}</div>
+                    <div style="font-size:11px; opacity:0.88; margin-top:2px;">${formatQty(g.qty)} kg</div>
+                </button>
+            `).join('');
+
+            if (mobileGroup === 'cleverfood') {
+                subWrap.classList.remove('hidden');
+                if (!state.cleBranches.includes(mobileCleBranch)) mobileCleBranch = state.cleBranches[0] || '';
+                subWrap.innerHTML = state.cleBranches.map(b => {
+                    const k = getCleLeafKey(b);
+                    return `
+                        <button class="sub-pill ${mobileCleBranch === b ? 'active' : ''}" onclick="selectMobileCleBranch('${escapeHTML(b)}')">
+                            ${escapeHTML(b)} (${formatQty(t.qtySums[k])} kg &bull; ${t.itemCounts[k]})
+                        </button>
+                    `;
+                }).join('');
+            } else {
+                subWrap.classList.add('hidden');
+            }
+
+            renderMobileProductListOnly();
+            updateMobileStickyBar();
+        }
+
+        function renderMobileProductListOnly() {
+            const list = document.getElementById('mobileProductList');
+            if (!list) return;
+
+            const leafKey = getActiveMobileLeafKey();
+            const priceGroup = leafKey.startsWith('cle_') ? 'cle' : leafKey;
+            const qNorm = normalizeText(mobileSearchQuery);
+            const filtered = state.products.filter(p => !qNorm || normalizeText(p.name).includes(qNorm));
+
+            if (filtered.length === 0) {
+                list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:13px;">Không tìm thấy sản phẩm phù hợp.</div>`;
+                return;
+            }
+
+            list.innerHTML = filtered.map((p, idx) => {
+                const qVal = (p.quantities && p.quantities[leafKey]) || '';
+                const qNum = parseNumber(qVal);
+                const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
+                return `
+                    <div class="mobile-prod-card ${qNum > 0 ? 'has-qty' : ''}" id="mobile-card-${p.id}">
+                        <div class="mobile-prod-info">
+                            <div class="mobile-prod-name">${idx + 1}. ${escapeHTML(p.name || 'Chưa đặt tên')}</div>
+                            <div class="mobile-prod-meta">
+                                <span>Giá: <strong>${formatMoney(unitPrice)} đ</strong></span>
+                                <span id="mobile-amt-${p.id}" style="color:var(--green-700); font-weight:600;">
+                                    ${qNum > 0 ? '&bull; ' + formatVND(unitPrice * qNum) : ''}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mobile-qty-wrap">
+                            <input type="text" inputmode="decimal"
+                                class="mobile-qty-input"
+                                value="${escapeHTML(qVal)}"
+                                placeholder="0 kg"
+                                oninput="updateMobileLeafQty('${p.id}', this.value)">
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateMobileLeafQty(prodId, val) {
+            const leafKey = getActiveMobileLeafKey();
+            const priceGroup = leafKey.startsWith('cle_') ? 'cle' : leafKey;
+            const p = state.products.find(item => item.id === prodId);
+            if (!p) return;
+            if (!p.quantities) p.quantities = {};
+            p.quantities[leafKey] = val;
+            saveState();
+
+            const qNum = parseNumber(val);
+            const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
+            const card = document.getElementById(`mobile-card-${prodId}`);
+            if (card) card.classList.toggle('has-qty', qNum > 0);
+            const amtEl = document.getElementById(`mobile-amt-${prodId}`);
+            if (amtEl) amtEl.innerHTML = qNum > 0 ? `&bull; ${formatVND(unitPrice * qNum)}` : '';
+
+            updateMobileStickyBar();
+            // Cập nhật lại badge số lượng trên các nút chọn
+            const t = calcLeafTotals();
+            const grpWrap = document.getElementById('mobileGroupPills');
+            if (grpWrap) {
+                const pills = grpWrap.querySelectorAll('.group-pill');
+                if (pills[0]) pills[0].children[1].textContent = `${formatQty(t.qtySums.trau_vang)} kg`;
+                if (pills[1]) pills[1].children[1].textContent = `${formatQty(t.qtySums.tam_vang)} kg`;
+                if (pills[2]) pills[2].children[1].textContent = `${formatQty(t.cleQtyTotal)} kg`;
+            }
+            if (mobileGroup === 'cleverfood') {
+                const subWrap = document.getElementById('mobileSubPills');
+                if (subWrap) {
+                    subWrap.innerHTML = state.cleBranches.map(b => {
+                        const k = getCleLeafKey(b);
+                        return `
+                            <button class="sub-pill ${mobileCleBranch === b ? 'active' : ''}" onclick="selectMobileCleBranch('${escapeHTML(b)}')">
+                                ${escapeHTML(b)} (${formatQty(t.qtySums[k])} kg &bull; ${t.itemCounts[k]})
+                            </button>
+                        `;
+                    }).join('');
+                }
+            }
+        }
+
+        function handleMobileBoxChange(val) {
+            const leafKey = getActiveMobileLeafKey();
+            state.boxes[leafKey] = val;
+            saveState();
+        }
+
+        function updateMobileStickyBar() {
+            const leafKey = getActiveMobileLeafKey();
+            const t = calcLeafTotals();
+            let storeLabel = 'Trâu vàng';
+            if (leafKey === 'tam_vang') storeLabel = 'Tâm vàng';
+            else if (leafKey.startsWith('cle_')) storeLabel = `Cleverfood - ${leafKey.slice(4)}`;
+
+            const nameEl = document.getElementById('mobileStickyStoreName');
+            const qtyEl  = document.getElementById('mobileStickyTotalQty');
+            const boxEl  = document.getElementById('mobileStickyBoxInput');
+
+            if (nameEl) nameEl.textContent = storeLabel;
+            if (qtyEl)  qtyEl.textContent  = `Tổng: ${formatQty(t.qtySums[leafKey] || 0)} kg`;
+            if (boxEl)  boxEl.value        = state.boxes[leafKey] || '';
+        }
+
+        function jumpToPrintFromMobile() {
+            state.orderTarget = getActiveMobileLeafKey();
+            saveState();
+            switchTab('order');
+        }
+
+        /* =========================================================
+           9. TAB 2: BẢNG GIÁ CHI TIẾT (15 MẶT HÀNG MẶC ĐỊNH)
+           ========================================================= */
+        function renderPriceTable() {
+            const tbody = document.getElementById('priceTableBody');
+            const countBadge = document.getElementById('productCountBadge');
+            if (countBadge) countBadge.textContent = state.products.length;
+            if (!tbody) return;
+
+            tbody.innerHTML = state.products.map((p, rowIdx) => `
+                <tr>
+                    <td style="text-align:center; font-weight:600; color:var(--text-muted); font-size:12.5px;">${rowIdx + 1}</td>
+                    <td>
+                        <input type="text" class="cell-input name-input"
+                            data-col="pr-name" data-row="${rowIdx}"
+                            value="${escapeHTML(p.name)}" placeholder="Tên sản phẩm..."
+                            oninput="updateProductName('${p.id}', this.value)"
+                            onkeydown="handleVerticalKeyNav(event)">
+                    </td>
+                    <td style="text-align:center;">
+                        <input type="number" step="1000" min="0" class="cell-input price-input"
+                            data-col="pr-tv" data-row="${rowIdx}"
+                            value="${p.prices.trau_vang || 0}"
+                            oninput="updateGroupPrice('${p.id}', 'trau_vang', this.value)"
+                            onkeydown="handleVerticalKeyNav(event)">
+                    </td>
+                    <td style="text-align:center;">
+                        <input type="number" step="1000" min="0" class="cell-input price-input"
+                            data-col="pr-tam" data-row="${rowIdx}"
+                            value="${p.prices.tam_vang || 0}"
+                            oninput="updateGroupPrice('${p.id}', 'tam_vang', this.value)"
+                            onkeydown="handleVerticalKeyNav(event)">
+                    </td>
+                    <td style="text-align:center;">
+                        <input type="number" step="1000" min="0" class="cell-input price-input"
+                            data-col="pr-cle" data-row="${rowIdx}"
+                            value="${p.prices.cle || 0}"
+                            oninput="updateGroupPrice('${p.id}', 'cle', this.value)"
+                            onkeydown="handleVerticalKeyNav(event)">
+                    </td>
+                    <td>
+                        <input type="text" class="cell-input name-input" style="font-size:12.5px; color:var(--text-muted);"
+                            data-col="pr-clename" data-row="${rowIdx}"
+                            value="${escapeHTML(p.cleName || '')}" placeholder="Mã - Tên sản phẩm Cleverfood..."
+                            oninput="updateProductCleName('${p.id}', this.value)"
+                            onkeydown="handleVerticalKeyNav(event)">
+                    </td>
+                    <td style="text-align:center;">
+                        <button class="btn-icon" onclick="deleteProduct('${p.id}')" title="Xóa mặt hàng">
+                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateProductName(prodId, val) {
+            const p = state.products.find(x => x.id === prodId);
+            if (!p) return;
+            p.name = val;
+            saveState();
+        }
+
+        function updateGroupPrice(prodId, groupKey, val) {
+            const p = state.products.find(x => x.id === prodId);
+            if (!p) return;
+            p.prices[groupKey] = Math.round(parseNumber(val));
+            saveState();
+        }
+
+        function updateProductCleName(prodId, val) {
+            const p = state.products.find(x => x.id === prodId);
+            if (!p) return;
+            p.cleName = val;
+            saveState();
+        }
+
+        function addProduct() {
+            state.products.push({
+                id: 'p' + Date.now(),
+                name: '',
+                prices: { trau_vang: 0, tam_vang: 0, cle: 0 },
+                cleName: '',
+                quantities: {}
+            });
+            saveState();
+            renderAllInputViews();
+            renderPriceTable();
+            showToast('Đã thêm 1 mặt hàng mới vào cuối danh sách.');
+        }
+
+        function deleteProduct(prodId) {
+            state.products = state.products.filter(p => p.id !== prodId);
+            saveState();
+            renderAllInputViews();
+            renderPriceTable();
+            showToast('Đã xóa mặt hàng.');
+        }
+
+        function fillSampleData() {
+            state.orderDate = '2026-11-18';
+            state.pickupDate = '2026-11-19';
+            state.deliveryDate = '2026-11-21';
+            state.supplier = 'Thuỷ (Rau Đà Lạt)';
+            state.footerNote = 'Đơn giá đã bao gồm phí vận chuyển Đà Lạt - chợ Quảng Bá';
+
+            state.boxes = { trau_vang: '6', tam_vang: '5' };
+            state.cleBranches.forEach((b, i) => {
+                state.boxes[getCleLeafKey(b)] = i < 4 ? ['2', '2', '1', '2'][i] : '';
+            });
+
+            const sampleMap = {
+                'bap cai tim (su tim)':      { tv: '5',    tam: '',    md: '3',   ldt: '2',   htm: '',    hqv: '2'   },
+                'bap cai trai tim (su tim)': { tv: '10',   tam: '10',  md: '4',   ldt: '5',   htm: '3',   hqv: '4'   },
+                'bi ngoi xanh':              { tv: '8',    tam: '6',   md: '3',   ldt: '2,5', htm: '2',   hqv: '3'   },
+                'bong cai xanh baby':        { tv: '13,3', tam: '10',  md: '5',   ldt: '4',   htm: '3',   hqv: '4'   },
+                'ca cherry cam sua':         { tv: '3,6',  tam: '3',   md: '2',   ldt: '2',   htm: '1,5', hqv: '2'   },
+                'cai thao hoa tien':         { tv: '8,4',  tam: '',    md: '3',   ldt: '3',   htm: '2',   hqv: ''    },
+                'can tay':                   { tv: '6',    tam: '5,5', md: '2',   ldt: '2',   htm: '1',   hqv: '2'   },
+                'cu cai do':                 { tv: '2,5',  tam: '3',   md: '1,5', ldt: '1',   htm: '1',   hqv: '1,5' },
+                'cu den':                    { tv: '2',    tam: '2,5', md: '2',   ldt: '1,5', htm: '',    hqv: '2'   },
+                'dua leo baby':              { tv: '10',   tam: '',    md: '4',   ldt: '3',   htm: '2',   hqv: '3'   },
+                'dau cove nhat':             { tv: '6,5',  tam: '10',  md: '3',   ldt: '2',   htm: '2',   hqv: '2'   },
+                'dau ha lan':                { tv: '',     tam: '2',   md: '1',   ldt: '',    htm: '1',   hqv: '1'   },
+                'ot chuong do':              { tv: '9,4',  tam: '7',   md: '3',   ldt: '2',   htm: '2',   hqv: '3'   },
+                'ot chuong vang':            { tv: '8',    tam: '4,7', md: '2',   ldt: '2',   htm: '1,5', hqv: '2'   },
+                'xa lach thuy tinh':         { tv: '15',   tam: '15',  md: '6',   ldt: '5',   htm: '4',   hqv: '5'   }
+            };
+
+            state.products.forEach(p => {
+                p.quantities = {};
+                const found = sampleMap[normalizeText(p.name)];
+                if (found) {
+                    p.quantities.trau_vang = found.tv;
+                    p.quantities.tam_vang  = found.tam;
+                    if (state.cleBranches.includes('MĐ'))  p.quantities[getCleLeafKey('MĐ')]  = found.md;
+                    if (state.cleBranches.includes('LĐT')) p.quantities[getCleLeafKey('LĐT')] = found.ldt;
+                    if (state.cleBranches.includes('HTM')) p.quantities[getCleLeafKey('HTM')] = found.htm;
+                    if (state.cleBranches.includes('HQV')) p.quantities[getCleLeafKey('HQV')] = found.hqv;
+                }
+            });
+
+            saveState();
+            syncFormControls();
+            renderAllInputViews();
+            if (activeTab === 'order') renderOrderPreview();
+            if (activeTab === 'summary') renderSummaryPreview();
+            showToast('Đã điền số liệu mẫu cho Trâu vàng, Tâm vàng & 4 chi nhánh Cleverfood!');
+        }
+
+        function openClearQtyModal() {
+            openConfirmModal(
+                'Xóa số lượng cho ngày mới?',
+                'Toàn bộ ô Số lượng và Số thùng sẽ được xóa sạch. Danh sách mặt hàng, bảng giá, chi nhánh Cleverfood và link Google Sheet vẫn được giữ nguyên.',
+                () => {
+                    Object.keys(state.boxes).forEach(k => state.boxes[k] = '');
+                    state.products.forEach(p => { p.quantities = {}; });
+                    saveState();
+                    renderAllInputViews();
+                    if (activeTab === 'order') renderOrderPreview();
+                    if (activeTab === 'summary') renderSummaryPreview();
+                    showToast('Đã xóa sạch số lượng cho ngày mới.');
+                }
+            );
+        }
+
+        function openReset15Modal() {
+            openConfirmModal(
+                'Khôi phục 15 mặt hàng gốc?',
+                'Danh sách sẽ quay lại đúng 15 mặt hàng nông sản Đà Lạt mặc định cùng đơn giá gốc. Link Google Sheet và logo của bạn vẫn được giữ.',
+                () => {
+                    state.products = DEFAULT_PRODUCTS_15.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        prices: { ...p.prices },
+                        cleName: p.cleName,
+                        quantities: {}
+                    }));
+                    saveState();
+                    renderAllInputViews();
+                    renderPriceTable();
+                    showToast('Đã khôi phục đúng 15 mặt hàng gốc.');
+                }
+            );
+        }
+
+        /* =========================================================
+           10. TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1 — IN KHỔ A4)
+           ========================================================= */
+        function renderOrderTargetDropdown() {
+            const select = document.getElementById('orderTargetSelect');
+            if (!select) return;
+
+            const opts = [
+                { val: 'trau_vang', label: 'Trâu vàng' },
+                { val: 'tam_vang',  label: 'Tâm vàng' },
+                ...state.cleBranches.map(b => ({ val: getCleLeafKey(b), label: `Cleverfood - ${b}` })),
+                { val: 'cle_all',   label: 'Cleverfood (Tổng toàn chuỗi)' }
+            ];
+
+            if (!opts.some(o => o.val === state.orderTarget)) {
+                state.orderTarget = 'tam_vang';
+            }
+
+            select.innerHTML = opts.map(o => `
+                <option value="${escapeHTML(o.val)}" ${state.orderTarget === o.val ? 'selected' : ''}>
+                    ${escapeHTML(o.label)}
+                </option>
+            `).join('');
+
+            const isCle = state.orderTarget.startsWith('cle_');
+            document.getElementById('wrapCleAltNameOpt').classList.toggle('hidden', !isCle);
+        }
+
+        function changeOrderTarget(val) {
+            state.orderTarget = val;
+            printMultiCleMode = false;
+            saveState();
+            const isCle = val.startsWith('cle_');
+            document.getElementById('wrapCleAltNameOpt').classList.toggle('hidden', !isCle);
+            renderOrderPreview();
+        }
+
+        function buildOrderSheetHTML(targetKey, isPageBreak = false) {
+            let storeDisplayName = '';
+            let priceGroup = 'tam_vang';
+            let logoGroup = 'tam_vang';
+            let boxesVal = '';
+            let isCle = false;
+
+            if (targetKey === 'trau_vang') {
+                storeDisplayName = 'Trâu vàng';
+                priceGroup = 'trau_vang';
+                logoGroup = 'trau_vang';
+                boxesVal = state.boxes.trau_vang || '';
+            } else if (targetKey === 'tam_vang') {
+                storeDisplayName = 'Tâm vàng';
+                priceGroup = 'tam_vang';
+                logoGroup = 'tam_vang';
+                boxesVal = state.boxes.tam_vang || '';
+            } else if (targetKey === 'cle_all') {
+                storeDisplayName = 'Cleverfood (Tổng toàn chuỗi)';
+                priceGroup = 'cle';
+                logoGroup = 'cleverfood';
+                isCle = true;
+                let totalCleBoxes = 0;
+                state.cleBranches.forEach(b => totalCleBoxes += parseNumber(state.boxes[getCleLeafKey(b)]));
+                boxesVal = totalCleBoxes > 0 ? formatQty(totalCleBoxes) : '0';
+            } else if (targetKey.startsWith('cle_')) {
+                const branch = targetKey.slice(4);
+                storeDisplayName = `Cleverfood - ${branch}`;
+                priceGroup = 'cle';
+                logoGroup = 'cleverfood';
+                isCle = true;
+                boxesVal = state.boxes[targetKey] || '';
+            }
+
+            const getQtyForProd = p => {
+                if (targetKey === 'cle_all') {
+                    let s = 0;
+                    state.cleBranches.forEach(b => s += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
+                    return s;
+                }
+                return parseNumber(p.quantities && p.quantities[targetKey]);
+            };
+
+            const filtered = state.products.filter(p => getQtyForProd(p) > 0);
+
+            let totalQty = 0;
+            let totalAmount = 0;
+
+            const rowsHTML = filtered.length > 0
+                ? filtered.map((p, idx) => {
+                    const qty = getQtyForProd(p);
+                    const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
+                    const lineAmt = Math.round(unitPrice * qty);
+                    totalQty += qty;
+                    totalAmount += lineAmt;
+
+                    const displayName = (isCle && state.options.useCleAltName && p.cleName)
+                        ? p.cleName
+                        : p.name;
+
+                    return `
+                        <tr>
+                            <td style="text-align:center; width:7%;">${idx + 1}</td>
+                            <td style="text-align:left; width:36%;">${escapeHTML(displayName)}</td>
+                            <td style="text-align:center; width:14%;">${formatMoney(unitPrice)}</td>
+                            <td style="text-align:center; width:13%;">${formatQty(qty)}</td>
+                            <td style="text-align:center; width:12%;"></td>
+                            <td style="text-align:right; width:18%;">${formatVND(lineAmt)}</td>
+                        </tr>
+                    `;
+                }).join('')
+                : `
+                    <tr>
+                        <td colspan="6" style="text-align:center; padding:24px; font-style:italic; color:#555;">
+                            Chưa có sản phẩm nào có số lượng &gt; 0 cho "${escapeHTML(storeDisplayName)}".
+                        </td>
+                    </tr>
+                `;
+
+            const logoHTML = getLogoMarkupByGroup(logoGroup);
+            const hasLogo = logoHTML !== '';
+            const boxesDisplay = String(boxesVal || '').trim() !== '' ? escapeHTML(boxesVal) : '0';
+
+            return `
+                <div class="a4-paper ${isPageBreak ? 'a4-page-break' : ''}">
+                    <div style="text-align:center; margin-bottom:14px;">
+                        <h1 style="font-size:26px; font-weight:800; letter-spacing:0.6px; margin:0; color:#000;">
+                            ĐƠN ĐẶT HÀNG
+                        </h1>
+                    </div>
+
+                    <div style="position:relative; margin-bottom:14px; min-height:${hasLogo ? '104px' : 'auto'};">
+                        <div style="text-align:center; font-style:italic; font-weight:700; font-size:14px; line-height:1.8; ${hasLogo ? 'padding:0 112px;' : ''}">
+                            <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
+                            <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
+                        </div>
+
+                        <div style="margin-top:14px; font-weight:700; font-size:14.5px; line-height:1.8;">
+                            <div>Nhà cung cấp: ${escapeHTML(state.supplier)}</div>
+                            <div>Cửa hàng: ${escapeHTML(storeDisplayName)}</div>
+                        </div>
+
+                        ${hasLogo ? `
+                            <div class="order-logo-slot" style="position:absolute; top:-8px; right:0; width:108px; height:108px; display:flex; align-items:center; justify-content:center;">
+                                ${logoHTML}
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <table class="print-table">
+                        <thead>
+                            <tr>
+                                <th style="width:7%;">STT</th>
+                                <th style="width:36%;">Tên sản phẩm</th>
+                                <th style="width:14%;">Đơn giá</th>
+                                <th style="width:13%;">Số lượng</th>
+                                <th style="width:12%;">Thực nhận</th>
+                                <th style="width:18%;">Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rowsHTML}
+                            <tr style="font-weight:700; font-size:14.5px;">
+                                <td colspan="3" style="text-align:center; padding:8px;">Tổng số lượng</td>
+                                <td style="text-align:center; padding:8px;">${formatQty(totalQty)}</td>
+                                <td style="text-align:center; padding:8px;">0</td>
+                                <td style="text-align:right; padding:8px;">${formatVND(totalAmount)}</td>
+                            </tr>
+                            <tr style="font-weight:700; font-size:14.5px;">
+                                <td colspan="3" style="text-align:center; padding:8px;">Số thùng</td>
+                                <td colspan="3" style="text-align:center; padding:8px;">${boxesDisplay}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    ${state.footerNote && state.footerNote.trim() !== '' ? `
+                        <div style="margin-top:18px; font-style:italic; font-size:13.5px; color:#000;">
+                            ${escapeHTML(state.footerNote)}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function normalizeOrderLogoSizes(container) {
+            container.querySelectorAll('.order-logo-slot svg, .order-logo-slot img').forEach(el => {
+                el.style.maxWidth = '100%';
+                el.style.maxHeight = '100%';
+                el.style.width = 'auto';
+                el.style.height = 'auto';
+                el.style.objectFit = 'contain';
+            });
+        }
+
+        function renderOrderPreview() {
+            const container = document.getElementById('a4OrderContainer');
+            if (!container) return;
+
+            if (printMultiCleMode) {
+                const activeBranches = state.cleBranches.filter(b => {
+                    const k = getCleLeafKey(b);
+                    return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
+                });
+                if (activeBranches.length === 0) {
+                    printMultiCleMode = false;
+                    container.innerHTML = buildOrderSheetHTML(state.orderTarget, false);
+                } else {
+                    container.innerHTML = activeBranches
+                        .map((b, idx) => buildOrderSheetHTML(getCleLeafKey(b), idx < activeBranches.length - 1))
+                        .join('');
+                }
+            } else {
+                container.innerHTML = buildOrderSheetHTML(state.orderTarget, false);
+            }
+
+            normalizeOrderLogoSizes(container);
+        }
+
+        function printCurrentOrder() {
+            printMultiCleMode = false;
+            renderOrderPreview();
+            setTimeout(() => window.print(), 120);
+        }
+
+        function printAllCleBranches() {
+            const activeBranches = state.cleBranches.filter(b => {
+                const k = getCleLeafKey(b);
+                return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
+            });
+            if (activeBranches.length === 0) {
+                showToast('Chưa có chi nhánh Cleverfood nào có số lượng > 0.', true);
+                return;
+            }
+            printMultiCleMode = true;
+            renderOrderPreview();
+            showToast(`Đang chuẩn bị in ${activeBranches.length} trang A4 cho các chi nhánh Cleverfood...`);
+            setTimeout(() => {
+                window.print();
+                printMultiCleMode = false;
+                renderOrderPreview();
+            }, 250);
+        }
+
+        /* =========================================================
+           11. TAB 4: BẢNG TỔNG HỢP (MẪU 2 — IN KHỔ A4)
+           ========================================================= */
+        function changeSummaryMode(mode) {
+            state.summaryMode = mode;
+            saveState();
+            renderSummaryPreview();
+        }
+
+        function renderSummaryPreview() {
+            const sheet = document.getElementById('a4SummarySheet');
+            if (!sheet) return;
+
+            const mode = state.summaryMode || 'all_detail';
+            let cols = [];
+
+            if (mode === 'grouped') {
+                cols = [
+                    { key: 'trau_vang', label: 'Trâu vàng',  type: 'leaf' },
+                    { key: 'tam_vang',  label: 'Tâm vàng',   type: 'leaf' },
+                    { key: 'cle_all',   label: 'Cleverfood', type: 'cle_sum' }
+                ];
+            } else if (mode === 'cle_only') {
+                cols = state.cleBranches.map(b => ({ key: getCleLeafKey(b), label: b, type: 'leaf' }));
+            } else {
+                cols = [
+                    { key: 'trau_vang', label: 'Trâu vàng', type: 'leaf' },
+                    { key: 'tam_vang',  label: 'Tâm vàng',  type: 'leaf' },
+                    ...state.cleBranches.map(b => ({ key: getCleLeafKey(b), label: `Cle-${b}`, type: 'leaf' }))
+                ];
+            }
+
+            const getColProdQty = (col, p) => {
+                if (col.type === 'cle_sum') {
+                    let s = 0;
+                    state.cleBranches.forEach(b => s += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
+                    return s;
+                }
+                return parseNumber(p.quantities && p.quantities[col.key]);
+            };
+
+            const getColBoxes = col => {
+                if (col.type === 'cle_sum') {
+                    let s = 0;
+                    state.cleBranches.forEach(b => s += parseNumber(state.boxes[getCleLeafKey(b)]));
+                    return s;
+                }
+                return parseNumber(state.boxes[col.key]);
+            };
+
+            // Ẩn cột không có đơn nếu người dùng bật tùy chọn
+            if (state.options.hideZeroStoreCols) {
+                const nonEmpty = cols.filter(c => {
+                    const hasQty = state.products.some(p => getColProdQty(c, p) > 0);
+                    return hasQty || getColBoxes(c) > 0;
+                });
+                if (nonEmpty.length > 0) cols = nonEmpty;
+            }
+
+            const filteredProducts = state.products.filter(p => {
+                let sum = 0;
+                cols.forEach(c => sum += getColProdQty(c, p));
+                return sum > 0;
+            });
+
+            const colQtyTotals = {};
+            const colItemCounts = {};
+            cols.forEach(c => { colQtyTotals[c.key] = 0; colItemCounts[c.key] = 0; });
+
+            let grandTotalQty = 0;
+            let grandTotalItems = 0;
+
+            const rowsHTML = filteredProducts.length > 0
+                ? filteredProducts.map((p, idx) => {
+                    let rowSum = 0;
+                    const cells = cols.map(c => {
+                        const q = getColProdQty(c, p);
+                        rowSum += q;
+                        colQtyTotals[c.key] += q;
+                        if (q > 0) colItemCounts[c.key] += 1;
+                        return `<td style="text-align:center;">${q > 0 ? formatQty(q) : ''}</td>`;
+                    }).join('');
+
+                    grandTotalQty += rowSum;
+                    if (rowSum > 0) grandTotalItems += 1;
+
+                    return `
+                        <tr>
+                            <td style="text-align:center; width:6%;">${idx + 1}</td>
+                            <td style="text-align:left;">${escapeHTML(p.name)}</td>
+                            ${cells}
+                            <td style="text-align:center; font-weight:700; font-size:14px;">${formatQty(rowSum)}</td>
+                        </tr>
+                    `;
+                }).join('')
+                : `
+                    <tr>
+                        <td colspan="${cols.length + 3}" style="text-align:center; padding:24px; font-style:italic; color:#555;">
+                            Chưa có sản phẩm nào có số lượng &gt; 0.
+                        </td>
+                    </tr>
+                `;
+
+            let totalBoxes = 0;
+            const boxFontSize = cols.length > 5 ? '17px' : '20px';
+            const boxCells = cols.map(c => {
+                const b = getColBoxes(c);
+                totalBoxes += b;
+                return `<td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">${formatQty(b)}</td>`;
+            }).join('');
+
+            const tableFontSize = cols.length > 5 ? '12.5px' : '13.5px';
+
+            sheet.innerHTML = `
+                <div style="text-align:center; font-weight:700; font-size:15.5px; line-height:1.85; margin-bottom:12px; color:#000;">
+                    <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
+                    <div>Ngày lấy hàng: ${escapeHTML(formatVietnameseDate(state.pickupDate))}</div>
+                    <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
+                </div>
+
+                <table class="print-table" style="font-size:${tableFontSize};">
+                    <thead>
+                        <tr>
+                            <th style="width:6%;">STT</th>
+                            <th style="min-width:170px;">Tên sản phẩm</th>
+                            ${cols.map(c => `<th>${escapeHTML(c.label)}</th>`).join('')}
+                            <th style="min-width:68px;">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rowsHTML}
+
+                        <tr>
+                            <td rowspan="3" class="empty-corner-cell"></td>
+                            <td style="text-align:center; font-weight:700; font-size:14.5px; padding:7px;">Tổng số lượng</td>
+                            ${cols.map(c => `<td style="text-align:center; font-weight:700; font-size:14.5px;">${formatQty(colQtyTotals[c.key])}</td>`).join('')}
+                            <td style="text-align:center; font-weight:700; font-size:14.5px;">${formatQty(grandTotalQty)}</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center; font-weight:700; font-size:14.5px; padding:7px;">Số lượng sản phẩm</td>
+                            ${cols.map(c => `<td style="text-align:center; font-weight:700; font-size:14.5px;">${colItemCounts[c.key]}</td>`).join('')}
+                            <td style="text-align:center; font-weight:700; font-size:14.5px;">${grandTotalItems}</td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">Số thùng</td>
+                            ${boxCells}
+                            <td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">${formatQty(totalBoxes)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+        /* =========================================================
+           12. CHUYỂN TAB, IN PDF, MODAL & TOAST
+           ========================================================= */
+        function switchTab(tabName) {
+            activeTab = tabName;
+            printMultiCleMode = false;
+
+            ['input', 'pricing', 'order', 'summary'].forEach(t => {
+                document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tabName);
+                document.getElementById(`tabBtn-${t}`).classList.toggle('active', t === tabName);
+            });
+
+            // Thanh dính đáy trên điện thoại chỉ hiện ở Tab 1 để nhập liệu nhanh
+            const mobileBar = document.getElementById('mobileStickyBar');
+            if (mobileBar) mobileBar.classList.toggle('hidden', tabName !== 'input');
+
+            if (tabName === 'order') {
+                renderOrderTargetDropdown();
+                renderOrderPreview();
+            } else if (tabName === 'summary') {
+                renderSummaryPreview();
+            } else if (tabName === 'pricing') {
+                renderCleBranchesManager();
+                renderCustomerLogosGrid();
+                renderPriceTable();
+                renderSyncBanner(false);
+            } else {
+                renderAllInputViews();
+            }
+        }
+
+        function handleHeaderPrintClick() {
+            if (activeTab === 'input' || activeTab === 'pricing') {
+                switchTab('order');
+                showToast('Đang mở chế độ in Đơn Đặt Hàng (Mẫu 1 — A4)...');
+                setTimeout(() => window.print(), 220);
+            } else {
+                window.print();
+            }
+        }
+
+        function openConfirmModal(title, message, onConfirm) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            pendingConfirmAction = onConfirm;
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            pendingConfirmAction = null;
+        }
+
+        document.getElementById('modalConfirmBtn').addEventListener('click', () => {
+            if (typeof pendingConfirmAction === 'function') pendingConfirmAction();
+            closeConfirmModal();
+        });
+
+        function showToast(msg, isError = false) {
+            const box = document.getElementById('toastBox');
+            box.textContent = msg;
+            box.className = `toast-box no-print show${isError ? ' error' : ''}`;
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                box.classList.remove('show');
+            }, 3000);
+        }
+
+        /* =========================================================
+           13. KHỞI CHẠY ỨNG DỤNG
+           ========================================================= */
+        function syncFormControls() {
+            document.getElementById('inputOrderDate').value = state.orderDate || '';
+            document.getElementById('inputPickupDate').value = state.pickupDate || '';
+            document.getElementById('inputDeliveryDate').value = state.deliveryDate || '';
+            document.getElementById('inputSupplier').value = state.supplier || '';
+            document.getElementById('inputFooterNote').value = state.footerNote || '';
+
+            document.getElementById('inputSheetUrl').value = state.sheetConfig.url || '';
+            document.getElementById('inputSheetTab').value = state.sheetConfig.tabName || '';
+            document.getElementById('chkUpdateExistingOnly').checked = !!state.sheetConfig.updateExistingOnly;
+
+            document.getElementById('chkUseCleAltName').checked = !!state.options.useCleAltName;
+            document.getElementById('summaryModeSelect').value = state.summaryMode || 'all_detail';
+            document.getElementById('chkHideZeroStoreCols').checked = !!state.options.hideZeroStoreCols;
+
+            updateDatePreviews();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('appHeaderLogo').innerHTML = getAppLogoSVG();
+            loadState();
+            syncFormControls();
+            renderCleBranchesManager();
+            renderCustomerLogosGrid();
+            renderAllInputViews();
+            renderPriceTable();
+            renderOrderTargetDropdown();
+            renderSyncBanner(false);
+            switchTab('input');
+        });
+    </script>
+</body>
+</html>
