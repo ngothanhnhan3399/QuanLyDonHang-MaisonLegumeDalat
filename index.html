@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Maison Légume">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Maison%20L%C3%A9gume%20Dalat%22%2C%22short_name%22%3A%22Maison%20L%C3%A9gume%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23166534%22%7D">
+    <meta name="theme-color" content="#146c38">
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Maison%20L%C3%A9gume%20Dalat%22%2C%22short_name%22%3A%22Maison%20L%C3%A9gume%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23146c38%22%7D">
 
     <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=4) -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico?v=4">
@@ -38,7 +38,7 @@
             --text-main: #18271f;
             --text-muted: #5a6d62;
             --green-900: #14532d;
-            --green-800: #166534;
+            --green-800: #146c38;
             --green-700: #15803d;
             --green-600: #16a34a;
             --green-100: #dcfce7;
@@ -94,9 +94,10 @@
         }
 
         .header-inner {
-            max-width: 1320px;
+            max-width: 1520px;
+            width: 96%;
             margin: 0 auto;
-            padding: 0 16px 10px;
+            padding: 0 12px 10px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -111,8 +112,8 @@
         }
 
         .brand-logo-wrap {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
@@ -121,11 +122,12 @@
             justify-content: center;
             background: #ffffff;
             border: 1px solid var(--green-100);
+            box-shadow: 0 2px 6px rgba(20, 108, 56, 0.08);
         }
 
         .brand-logo-wrap img {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
             object-fit: contain;
             display: block;
             border-radius: 50%;
@@ -134,7 +136,7 @@
 
         .brand-title {
             margin: 0;
-            font-size: 15.5px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--green-900);
             line-height: 1.2;
@@ -162,7 +164,7 @@
             color: var(--text-muted);
             font-size: 13px;
             font-weight: 600;
-            padding: 8px 13px;
+            padding: 8px 14px;
             border-radius: 9px;
             cursor: pointer;
             white-space: nowrap;
@@ -214,9 +216,9 @@
         }
 
         .btn-primary {
-            background: var(--green-700);
+            background: var(--green-800);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(21, 128, 61, 0.22);
+            box-shadow: 0 4px 12px rgba(20, 108, 56, 0.22);
         }
 
         .btn-primary:hover {
@@ -337,12 +339,13 @@
         }
 
         /* =========================================================
-           4. BỐ CỤC CHÍNH & THẺ NỘI DUNG
+           4. BỐ CỤC CHÍNH & THẺ NỘI DUNG (RỘNG RÃI TRÊN MÁY TÍNH)
            ========================================================= */
         .app-main {
-            max-width: 1320px;
+            max-width: 1520px;
+            width: 96%;
             margin: 0 auto;
-            padding: 16px 16px 120px;
+            padding: 16px 12px 120px;
         }
 
         .card {
@@ -438,8 +441,8 @@
         }
 
         .filter-pill.active {
-            background: var(--green-700);
-            border-color: var(--green-700);
+            background: var(--green-800);
+            border-color: var(--green-800);
             color: #ffffff;
         }
 
@@ -545,7 +548,15 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            max-width: 440px;
+            max-width: 460px;
+        }
+
+        /* Sao lưu & khôi phục dữ liệu */
+        .backup-actions-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
         }
 
         /* Thẻ quản lý Logo 3 nhóm khách hàng */
@@ -632,16 +643,16 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 780px;
+            min-width: 820px;
             font-size: 13.5px;
         }
 
         .data-table thead th {
             background: #eef6f0;
             color: var(--green-900);
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 700;
-            padding: 9px 6px;
+            padding: 10px 8px;
             border: 1px solid var(--border-color);
             text-align: center;
         }
@@ -665,7 +676,7 @@
         }
 
         .data-table tbody td {
-            padding: 5px 6px;
+            padding: 7px 8px;
             border-bottom: 1px solid #edf2ef;
             border-right: 1px solid #f1f5f2;
             vertical-align: middle;
@@ -677,8 +688,8 @@
 
         .cell-input {
             width: 100%;
-            padding: 7px 6px;
-            font-size: 13.5px;
+            padding: 8px 10px;
+            font-size: 14px;
             color: var(--text-main);
             background: #ffffff;
             border: 1px solid #d5e0d9;
@@ -696,7 +707,7 @@
         .cell-input.qty-input {
             text-align: center;
             font-weight: 700;
-            max-width: 82px;
+            max-width: 96px;
             margin: 0 auto;
             display: block;
         }
@@ -704,7 +715,7 @@
         .cell-input.price-input {
             text-align: right;
             font-weight: 600;
-            max-width: 112px;
+            max-width: 132px;
             margin: 0 auto;
             display: block;
         }
@@ -791,10 +802,10 @@
         }
 
         .group-pill.active {
-            background: var(--green-700);
-            border-color: var(--green-700);
+            background: var(--green-800);
+            border-color: var(--green-800);
             color: #ffffff;
-            box-shadow: 0 3px 10px rgba(21, 128, 61, 0.25);
+            box-shadow: 0 3px 10px rgba(20, 108, 56, 0.25);
         }
 
         .mobile-sub-pills {
@@ -987,6 +998,7 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 10px;
+            flex: 1;
         }
 
         .preview-toolbar-right {
@@ -996,15 +1008,22 @@
             gap: 8px;
         }
 
+        .toolbar-inline-field {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
         .btn-print-hero {
-            background: var(--green-700);
+            background: var(--green-800);
             color: #ffffff;
             font-size: 14.5px;
             font-weight: 800;
-            padding: 11px 18px;
+            padding: 10px 18px;
             min-height: 44px;
             border-radius: 12px;
-            box-shadow: 0 5px 14px rgba(21, 128, 61, 0.28);
+            box-shadow: 0 5px 14px rgba(20, 108, 56, 0.28);
         }
 
         .btn-print-hero:hover {
@@ -1034,7 +1053,7 @@
         .checkbox-label input {
             width: 16px;
             height: 16px;
-            accent-color: var(--green-700);
+            accent-color: var(--green-800);
         }
 
         .a4-scroll-wrap {
@@ -1043,10 +1062,15 @@
             padding-bottom: 12px;
         }
 
+        .a4-scale-wrap {
+            width: fit-content;
+            margin: 0 auto 18px;
+        }
+
         .a4-paper {
             width: 210mm;
             min-height: 277mm;
-            margin: 0 auto 18px;
+            margin: 0 auto;
             background: #ffffff;
             color: #000000;
             padding: 12mm 14mm 14mm 14mm;
@@ -1054,6 +1078,7 @@
             border-radius: 6px;
             font-family: 'Montserrat', 'Be Vietnam Pro', Arial, sans-serif;
             box-sizing: border-box;
+            transform-origin: top left;
         }
 
         .print-table {
@@ -1165,7 +1190,12 @@
            ========================================================= */
         @media (max-width: 767px) {
             .header-inner {
+                width: 100%;
                 padding: 0 12px 10px;
+            }
+            .app-main {
+                width: 100%;
+                padding: 12px 12px 120px;
             }
             .tab-nav {
                 width: 100%;
@@ -1195,6 +1225,25 @@
             .mobile-sticky-bar {
                 display: block;
             }
+            .a4-scroll-wrap {
+                overflow-x: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .a4-scale-wrap {
+                position: relative;
+                overflow: hidden;
+                margin: 0 auto 14px;
+                border-radius: 6px;
+                box-shadow: var(--shadow-md);
+                background: #ffffff;
+            }
+            .a4-scale-wrap .a4-paper {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
             .toast-box {
                 bottom: calc(82px + env(safe-area-inset-bottom));
                 left: 14px;
@@ -1204,6 +1253,12 @@
             }
             .btn-print-hero {
                 width: 100%;
+            }
+            .toolbar-inline-field {
+                width: 100%;
+            }
+            .toolbar-inline-field .input-control {
+                width: 100% !important;
             }
         }
 
@@ -1244,15 +1299,34 @@
             #view-order,
             #view-summary,
             #a4OrderContainer {
+                width: auto !important;
                 max-width: none !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 min-height: 0 !important;
                 height: auto !important;
                 overflow: visible !important;
+                display: block !important;
+            }
+
+            .a4-scale-wrap {
+                width: auto !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+
+            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không sinh trang trắng cuối */
+            .a4-scale-wrap + .a4-scale-wrap {
+                page-break-before: always !important;
+                break-before: page !important;
             }
 
             .a4-paper {
+                transform: none !important;
                 width: 210mm !important;
                 max-width: 100% !important;
                 min-height: 0 !important;
@@ -1267,7 +1341,6 @@
                 break-after: auto !important;
             }
 
-            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không sinh trang trắng cuối */
             .a4-paper + .a4-paper {
                 page-break-before: always !important;
                 break-before: page !important;
@@ -1319,7 +1392,7 @@
                 <button id="tabBtn-summary" class="tab-btn" onclick="switchTab('summary')">4. Bảng Tổng Hợp</button>
             </nav>
 
-            <!-- Nút thao tác nhanh Desktop -->
+            <!-- Nút in nhanh Desktop -->
             <div class="header-actions">
                 <button class="btn btn-primary" onclick="handleHeaderPrintClick()">
                     <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -1355,30 +1428,40 @@
 
                 <div class="grid-3" style="margin-bottom: 12px;">
                     <div>
-                        <label class="field-label" for="inputOrderDate">Ngày đặt hàng (tự tính +1 lấy, +3 nhận)</label>
+                        <label class="field-label" for="inputOrderDate">Ngày đặt hàng</label>
                         <input type="date" id="inputOrderDate" class="input-control" onchange="handleOrderDateChange(this.value)">
                         <p id="previewOrderDate" class="date-preview"></p>
                     </div>
                     <div>
-                        <label class="field-label" for="inputPickupDate">Ngày lấy hàng (mặc định +1 ngày)</label>
+                        <label class="field-label" for="inputPickupDate">Ngày lấy hàng</label>
                         <input type="date" id="inputPickupDate" class="input-control" onchange="updateField('pickupDate', this.value)">
                         <p id="previewPickupDate" class="date-preview"></p>
                     </div>
                     <div>
-                        <label class="field-label" for="inputDeliveryDate">Ngày nhận hàng (mặc định +3 ngày)</label>
+                        <label class="field-label" for="inputDeliveryDate">Ngày nhận hàng</label>
                         <input type="date" id="inputDeliveryDate" class="input-control" onchange="updateField('deliveryDate', this.value)">
                         <p id="previewDeliveryDate" class="date-preview"></p>
                     </div>
                 </div>
 
-                <div class="grid-2">
+                <div class="grid-3">
                     <div>
-                        <label class="field-label" for="inputSupplier">Nhà cung cấp</label>
-                        <input type="text" id="inputSupplier" class="input-control" oninput="updateField('supplier', this.value)" placeholder="VD: Thuỷ (Rau Đà Lạt)">
+                        <label class="field-label" for="inputOrderTitle">Tiêu đề đơn in</label>
+                        <input type="text" id="inputOrderTitle" class="input-control"
+                            oninput="updateOrderTitle(this.value, 'inputOrderTitle')"
+                            placeholder="ĐƠN ĐẶT HÀNG">
                     </div>
                     <div>
-                        <label class="field-label" for="inputFooterNote">Ghi chú chân đơn (Mẫu 1)</label>
-                        <input type="text" id="inputFooterNote" class="input-control" oninput="updateField('footerNote', this.value)" placeholder="VD: Đơn giá đã bao gồm phí vận chuyển...">
+                        <label class="field-label" for="inputSupplier">Nhà cung cấp</label>
+                        <input type="text" id="inputSupplier" class="input-control"
+                            oninput="updateField('supplier', this.value)"
+                            placeholder="Thuỷ (Rau Đà Lạt)">
+                    </div>
+                    <div>
+                        <label class="field-label" for="inputFooterNote">Ghi chú cuối đơn</label>
+                        <input type="text" id="inputFooterNote" class="input-control"
+                            oninput="updateField('footerNote', this.value)"
+                            placeholder="Đơn giá đã bao gồm phí vận chuyển...">
                     </div>
                 </div>
             </div>
@@ -1386,19 +1469,14 @@
             <!-- Khối nhập số lượng -->
             <div class="card">
                 <div class="card-header">
-                    <div>
-                        <h2 class="card-title">Nhập số lượng sản phẩm (Kg)</h2>
-                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
-                            Các chi nhánh con Cleverfood dùng chung <strong>Đơn giá Cle</strong> và tự động cộng vào cột <strong>Tổng Cle</strong>.
-                        </p>
-                    </div>
+                    <h2 class="card-title">Nhập số lượng sản phẩm</h2>
                     <div style="display:flex; flex-wrap:wrap; gap:6px;">
                         <button class="btn btn-soft btn-sm" onclick="switchTab('order')">Xem Mẫu 1 &rarr;</button>
                         <button class="btn btn-soft btn-sm" onclick="switchTab('summary')">Xem Mẫu 2 &rarr;</button>
                     </div>
                 </div>
 
-                <!-- 1A. GIAO DIỆN MÁY TÍNH (DESKTOP TABLE + LỌC NHÓM + ENTER CÙNG CỘT) -->
+                <!-- 1A. GIAO DIỆN MÁY TÍNH -->
                 <div class="desktop-entry-section">
                     <div class="filter-pills" id="desktopFilterPills"></div>
 
@@ -1412,7 +1490,7 @@
 
                     <div class="hint-bar">
                         <div>
-                            Phím tắt: <span class="kbd">Enter</span> / <span class="kbd">&darr;</span> nhảy xuống dòng tiếp theo cùng cột cửa hàng (tới tận ô <strong>Số thùng</strong>) &bull; <span class="kbd">Shift + Enter</span> / <span class="kbd">&uarr;</span> đi lên &bull; Hỗ trợ dấu <code>.</code> và <code>,</code>.
+                            Phím tắt: <span class="kbd">Enter</span> / <span class="kbd">&darr;</span> xuống dòng cùng cột &bull; <span class="kbd">Shift + Enter</span> / <span class="kbd">&uarr;</span> lên dòng.
                         </div>
                     </div>
                 </div>
@@ -1424,7 +1502,7 @@
 
                     <div class="mobile-search-wrap">
                         <input type="search" id="mobileSearchInput" class="input-control"
-                            placeholder="Tìm nhanh tên rau củ (VD: cải, bí, ớt...)"
+                            placeholder="Tìm nhanh tên rau củ..."
                             oninput="handleMobileSearch(this.value)">
                     </div>
 
@@ -1472,7 +1550,7 @@
 
                 <label class="checkbox-label">
                     <input type="checkbox" id="chkUpdateExistingOnly" onchange="updateSheetConfig('updateExistingOnly', this.checked)">
-                    <span>Chỉ cập nhật giá cho các sản phẩm đang có (giữ nguyên danh sách 15 mặt hàng hiện tại)</span>
+                    <span>Chỉ cập nhật giá cho các sản phẩm đang có (giữ nguyên danh sách hiện tại)</span>
                 </label>
 
                 <div id="sheetSyncBanner" class="sync-banner hidden"></div>
@@ -1524,9 +1602,9 @@
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h2 class="card-title">Quản lý Logo từng khách hàng (GitHub Ready)</h2>
+                        <h2 class="card-title">Quản lý Logo từng khách hàng</h2>
                         <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
-                            Chọn mẫu SVG có sẵn, tải ảnh riêng (tự nén tối đa 300px) hoặc tải file <code>.svg</code> để up GitHub.
+                            Chọn mẫu SVG có sẵn, tải ảnh riêng (tự nén tối đa 300px) hoặc ẩn logo khi không cần in.
                         </p>
                     </div>
                 </div>
@@ -1534,7 +1612,38 @@
                 <div id="customerLogosGrid" class="logos-grid"></div>
             </div>
 
-            <!-- Khối 2.4: Bảng giá hiện tại (15 mặt hàng mặc định) -->
+            <!-- Khối 2.4: Sao lưu & Khôi phục dữ liệu (chống mất dữ liệu giữa Safari / App / Máy tính) -->
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h2 class="card-title">Sao lưu &amp; Khôi phục dữ liệu (JSON)</h2>
+                        <p style="margin: 4px 0 0; font-size: 12px; color: var(--text-muted);">
+                            Dùng để lưu dự phòng hoặc chuyển toàn bộ đơn hàng, bảng giá, chi nhánh và logo giữa Safari, App màn hình chính iPhone và máy tính.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="backup-actions-row">
+                    <button class="btn btn-primary btn-sm" onclick="downloadBackupJSON()">Tải file sao lưu (.json)</button>
+                    <label class="btn btn-soft btn-sm" style="cursor:pointer;">
+                        <span>Khôi phục từ file (.json)</span>
+                        <input type="file" accept=".json,application/json" class="hidden" onchange="restoreBackupFromFile(event)">
+                    </label>
+                    <button class="btn btn-outline btn-sm" onclick="copyBackupCode()">Sao chép mã sao lưu nhanh</button>
+                    <button class="btn btn-amber btn-sm" onclick="toggleQuickRestoreBox()">Dán mã khôi phục nhanh</button>
+                </div>
+
+                <div id="quickRestoreBox" class="hidden" style="margin-top: 10px; padding: 12px; border-radius: 12px; background: var(--bg-soft); border: 1px solid var(--border-color);">
+                    <label class="field-label" for="quickRestoreTextarea">Dán mã JSON sao lưu vào ô dưới rồi bấm Khôi phục:</label>
+                    <textarea id="quickRestoreTextarea" class="input-control" placeholder='{"orderDate": "...", "products": [...]}'></textarea>
+                    <div style="margin-top: 8px; display: flex; gap: 8px; justify-content: flex-end;">
+                        <button class="btn btn-outline btn-sm" onclick="toggleQuickRestoreBox(false)">Đóng</button>
+                        <button class="btn btn-primary btn-sm" onclick="restoreBackupFromText()">Khôi phục ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Khối 2.5: Bảng giá hiện tại (15 mặt hàng mặc định) -->
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -1555,9 +1664,9 @@
                             <tr>
                                 <th style="width:46px;">STT</th>
                                 <th class="col-left" style="min-width:190px;">Tên sản phẩm</th>
-                                <th style="min-width:118px;">Đơn giá Trâu vàng</th>
-                                <th style="min-width:118px;">Đơn giá Tâm vàng</th>
-                                <th style="min-width:118px;">Đơn giá Cle</th>
+                                <th style="min-width:128px;">Đơn giá Trâu vàng</th>
+                                <th style="min-width:128px;">Đơn giá Tâm vàng</th>
+                                <th style="min-width:128px;">Đơn giá Cle</th>
                                 <th class="col-left" style="min-width:230px;">Tên sản phẩm Cleverfood</th>
                                 <th style="width:48px;">Xóa</th>
                             </tr>
@@ -1574,14 +1683,24 @@
         <section id="view-order" class="hidden">
             <div class="preview-toolbar no-print">
                 <div class="preview-toolbar-left">
-                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <div class="toolbar-inline-field">
                         <label for="orderTargetSelect" style="font-size:13px; font-weight:700; color:var(--green-900);">Đơn cần xem:</label>
-                        <select id="orderTargetSelect" class="input-control" style="width:auto; min-width:195px; padding:9px 12px; font-weight:700;"
+                        <select id="orderTargetSelect" class="input-control" style="width:auto; min-width:190px; padding:9px 12px; font-weight:700;"
                             onchange="changeOrderTarget(this.value)"></select>
-                        <button class="btn btn-print-hero" onclick="printCurrentOrder()" title="In hoặc lưu thành file PDF khổ A4 không dính link và ngày giờ trình duyệt">
-                            🖨️ In / Lưu PDF (A4) ngay
-                        </button>
                     </div>
+
+                    <div class="toolbar-inline-field">
+                        <label for="quickOrderTitleInput" style="font-size:13px; font-weight:700; color:var(--green-900);">Tiêu đề đơn:</label>
+                        <input type="text" id="quickOrderTitleInput" class="input-control"
+                            style="width:auto; min-width:195px; padding:9px 12px; font-weight:700;"
+                            oninput="updateOrderTitle(this.value, 'quickOrderTitleInput')"
+                            placeholder="ĐƠN ĐẶT HÀNG">
+                    </div>
+
+                    <button class="btn btn-print-hero" onclick="printCurrentOrder()" title="In hoặc lưu thành file PDF khổ A4">
+                        🖨️ In / Lưu PDF (A4) ngay
+                    </button>
+
                     <label id="wrapCleAltNameOpt" class="checkbox-label hidden">
                         <input type="checkbox" id="chkUseCleAltName" onchange="toggleOption('useCleAltName', this.checked)">
                         <span>Dùng mã &amp; tên sản phẩm Cleverfood</span>
@@ -1610,7 +1729,7 @@
         <section id="view-summary" class="hidden">
             <div class="preview-toolbar no-print">
                 <div class="preview-toolbar-left">
-                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                    <div class="toolbar-inline-field">
                         <label for="summaryModeSelect" style="font-size:13px; font-weight:700; color:var(--green-900);">Chế độ cột:</label>
                         <select id="summaryModeSelect" class="input-control" style="width:auto; min-width:240px; padding:9px 12px; font-weight:600;"
                             onchange="changeSummaryMode(this.value)">
@@ -1618,10 +1737,12 @@
                             <option value="grouped">Gộp chuỗi (Trâu vàng, Tâm vàng, Cleverfood)</option>
                             <option value="cle_only">Riêng chuỗi Cleverfood (MĐ, LĐT, HTM, HQV...)</option>
                         </select>
-                        <button class="btn btn-print-hero" onclick="triggerPrint()" title="In hoặc lưu Bảng Tổng Hợp khổ A4">
-                            🖨️ In / Lưu PDF (A4) ngay
-                        </button>
                     </div>
+
+                    <button class="btn btn-print-hero" onclick="triggerPrint()" title="In hoặc lưu Bảng Tổng Hợp khổ A4">
+                        🖨️ In / Lưu PDF (A4) ngay
+                    </button>
+
                     <label class="checkbox-label">
                         <input type="checkbox" id="chkHideZeroStoreCols" onchange="toggleOption('hideZeroStoreCols', this.checked)">
                         <span>Ẩn cột cửa hàng không có đơn (SL = 0)</span>
@@ -1634,7 +1755,9 @@
             </div>
 
             <div class="a4-scroll-wrap">
-                <div id="a4SummarySheet" class="a4-paper"></div>
+                <div class="a4-scale-wrap">
+                    <div id="a4SummarySheet" class="a4-paper"></div>
+                </div>
             </div>
         </section>
 
@@ -1683,7 +1806,14 @@
          JAVASCRIPT THUẦN HOÀN CHỈNH
          ========================================================= -->
     <script>
-        const STORAGE_KEY = 'ml_dalat_orders_v3';
+        const STORAGE_KEY = 'maison_legume_dalat_state_v1';
+        const LEGACY_STORAGE_KEYS = [
+            'ml_dalat_orders_v3',
+            'ml_dalat_orders_v2',
+            'ml_dalat_orders_v1',
+            'dalat_orders_v1',
+            'maison_legume_orders'
+        ];
         const DEFAULT_DOC_TITLE = 'Maison Légume Dalat - Quản lý & In Đơn Đặt Hàng';
 
         /* =========================================================
@@ -1691,12 +1821,12 @@
            ========================================================= */
         function getAppLogoSVG() {
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-                <rect width="120" height="120" rx="26" fill="#15803d"/>
+                <rect width="120" height="120" rx="26" fill="#146c38"/>
                 <path d="M60 94C41 81 26 68 26 50.5 26 39 34.8 30.5 45.5 30.5c6.5 0 11.8 3.2 14.5 8.2 2.7-5 8-8.2 14.5-8.2 10.7 0 19.5 8.5 19.5 20C94 68 79 81 60 94z" fill="#dcfce7"/>
                 <path d="M60 32c0-9 7.5-16.5 17-17-.8 9.5-8 17-17 17z" fill="#facc15"/>
                 <path d="M60 35c-7.5 0-13.5-6-14.2-13.5 7.5.6 14.2 6.5 14.2 13.5z" fill="#86efac"/>
-                <path d="M60 44v34" stroke="#15803d" stroke-width="3.5" stroke-linecap="round"/>
-                <path d="M60 58l10-8M60 66l-10-8" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+                <path d="M60 44v34" stroke="#146c38" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M60 58l10-8M60 66l-10-8" stroke="#146c38" stroke-width="3" stroke-linecap="round"/>
             </svg>`;
         }
 
@@ -1814,6 +1944,7 @@
             branches.forEach(b => boxes[getCleLeafKey(b)] = '');
 
             return {
+                orderTitle: 'ĐƠN ĐẶT HÀNG',
                 orderDate: todayISO,
                 pickupDate: addDaysISO(todayISO, 1),
                 deliveryDate: addDaysISO(todayISO, 3),
@@ -1951,8 +2082,43 @@
         }
 
         /* =========================================================
-           4. LƯU & TẢI DỮ LIỆU LOCALSTORAGE
+           4. LƯU, TỰ ĐỘNG DI CHUYỂN KHÓA CŨ & SAO LƯU / KHÔI PHỤC JSON
            ========================================================= */
+        function mergeIntoValidState(parsed) {
+            const def = createDefaultState();
+            const merged = {
+                ...def,
+                ...parsed,
+                orderTitle: typeof parsed.orderTitle === 'string' ? parsed.orderTitle : def.orderTitle,
+                cleBranches: Array.isArray(parsed.cleBranches) && parsed.cleBranches.length > 0
+                    ? parsed.cleBranches
+                    : def.cleBranches,
+                boxes: { ...def.boxes, ...(parsed.boxes || {}) },
+                logos: {
+                    trau_vang:  { ...def.logos.trau_vang,  ...((parsed.logos && parsed.logos.trau_vang) || {}) },
+                    tam_vang:   { ...def.logos.tam_vang,   ...((parsed.logos && parsed.logos.tam_vang) || {}) },
+                    cleverfood: { ...def.logos.cleverfood, ...((parsed.logos && parsed.logos.cleverfood) || {}) }
+                },
+                sheetConfig: { ...def.sheetConfig, ...(parsed.sheetConfig || {}) },
+                options: { ...def.options, ...(parsed.options || {}) }
+            };
+
+            if (Array.isArray(parsed.products) && parsed.products.length > 0) {
+                merged.products = parsed.products.map((p, i) => ({
+                    id: p.id || ('p' + Date.now() + '_' + i),
+                    name: p.name || '',
+                    prices: {
+                        trau_vang: Number((p.prices && p.prices.trau_vang) ?? p.price ?? 0),
+                        tam_vang:  Number((p.prices && p.prices.tam_vang)  ?? p.price ?? 0),
+                        cle:       Number((p.prices && p.prices.cle)       ?? p.price ?? 0)
+                    },
+                    cleName: p.cleName || '',
+                    quantities: p.quantities || {}
+                }));
+            }
+            return merged;
+        }
+
         function saveState() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1966,43 +2132,146 @@
 
         function loadState() {
             try {
-                const raw = localStorage.getItem(STORAGE_KEY);
+                let raw = localStorage.getItem(STORAGE_KEY);
+                let migratedFrom = '';
+
+                // Tự động dò tìm dữ liệu từ các khóa cũ nếu khóa chính chưa có
+                if (!raw) {
+                    for (const legacyKey of LEGACY_STORAGE_KEYS) {
+                        const found = localStorage.getItem(legacyKey);
+                        if (found) {
+                            raw = found;
+                            migratedFrom = legacyKey;
+                            break;
+                        }
+                    }
+                }
+
                 if (!raw) return;
                 const parsed = JSON.parse(raw);
-                if (parsed && Array.isArray(parsed.products)) {
-                    const def = createDefaultState();
-                    state = {
-                        ...def,
-                        ...parsed,
-                        cleBranches: Array.isArray(parsed.cleBranches) && parsed.cleBranches.length > 0
-                            ? parsed.cleBranches
-                            : def.cleBranches,
-                        boxes: { ...def.boxes, ...(parsed.boxes || {}) },
-                        logos: {
-                            trau_vang:  { ...def.logos.trau_vang,  ...((parsed.logos && parsed.logos.trau_vang) || {}) },
-                            tam_vang:   { ...def.logos.tam_vang,   ...((parsed.logos && parsed.logos.tam_vang) || {}) },
-                            cleverfood: { ...def.logos.cleverfood, ...((parsed.logos && parsed.logos.cleverfood) || {}) }
-                        },
-                        sheetConfig: { ...def.sheetConfig, ...(parsed.sheetConfig || {}) },
-                        options: { ...def.options, ...(parsed.options || {}) }
-                    };
-                    state.products = state.products.map(p => ({
-                        id: p.id || ('p' + Date.now() + Math.random()),
-                        name: p.name || '',
-                        prices: {
-                            trau_vang: Number((p.prices && p.prices.trau_vang) || 0),
-                            tam_vang:  Number((p.prices && p.prices.tam_vang) || 0),
-                            cle:       Number((p.prices && p.prices.cle) || 0)
-                        },
-                        cleName: p.cleName || '',
-                        quantities: p.quantities || {}
-                    }));
+                if (parsed && typeof parsed === 'object') {
+                    state = mergeIntoValidState(parsed);
                     if (!state.cleBranches.includes(mobileCleBranch)) {
                         mobileCleBranch = state.cleBranches[0] || '';
+                    }
+                    if (migratedFrom) {
+                        saveState();
+                        setTimeout(() => showToast('Đã tự động khôi phục dữ liệu từ phiên bản trước!'), 400);
                     }
                 }
             } catch (err) {
                 console.error('Lỗi đọc localStorage:', err);
+            }
+        }
+
+        function downloadBackupJSON() {
+            try {
+                const payload = JSON.stringify(state, null, 2);
+                const blob = new Blob([payload], { type: 'application/json;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `maison-legume-backup-${toISODate(new Date())}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                setTimeout(() => URL.revokeObjectURL(url), 500);
+                showToast('Đã tải file sao lưu (.json) thành công!');
+            } catch (err) {
+                console.error('Lỗi tải sao lưu:', err);
+                showToast('Không thể tạo file sao lưu.', true);
+            }
+        }
+
+        function restoreBackupFromFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                applyBackupJSONString(e.target.result);
+                event.target.value = '';
+            };
+            reader.readAsText(file);
+        }
+
+        function copyBackupCode() {
+            try {
+                const jsonStr = JSON.stringify(state);
+                const tempTa = document.createElement('textarea');
+                tempTa.value = jsonStr;
+                tempTa.setAttribute('readonly', '');
+                tempTa.style.position = 'fixed';
+                tempTa.style.opacity = '0';
+                document.body.appendChild(tempTa);
+                tempTa.select();
+                tempTa.setSelectionRange(0, jsonStr.length);
+                const ok = document.execCommand('copy');
+                document.body.removeChild(tempTa);
+                if (ok) {
+                    showToast('Đã sao chép mã sao lưu! Bạn có thể dán sang Safari / App / máy khác.');
+                } else {
+                    toggleQuickRestoreBox(true);
+                    const ta = document.getElementById('quickRestoreTextarea');
+                    ta.value = jsonStr;
+                    ta.focus();
+                    ta.select();
+                    showToast('Hãy bấm Sao chép đoạn mã trong khung bên dưới.');
+                }
+            } catch (err) {
+                console.error('Lỗi sao chép:', err);
+                showToast('Không thể sao chép tự động, hãy dùng nút Tải file (.json).', true);
+            }
+        }
+
+        function toggleQuickRestoreBox(forceState) {
+            const box = document.getElementById('quickRestoreBox');
+            if (!box) return;
+            if (typeof forceState === 'boolean') {
+                box.classList.toggle('hidden', !forceState);
+            } else {
+                box.classList.toggle('hidden');
+            }
+        }
+
+        function restoreBackupFromText() {
+            const ta = document.getElementById('quickRestoreTextarea');
+            const raw = (ta && ta.value || '').trim();
+            if (!raw) {
+                showToast('Vui lòng dán mã JSON sao lưu vào khung trước.', true);
+                return;
+            }
+            if (applyBackupJSONString(raw)) {
+                ta.value = '';
+                toggleQuickRestoreBox(false);
+            }
+        }
+
+        function applyBackupJSONString(rawText) {
+            try {
+                const parsed = JSON.parse(rawText);
+                if (!parsed || typeof parsed !== 'object' || !Array.isArray(parsed.products)) {
+                    throw new Error('File/mã sao lưu không đúng cấu trúc của Maison Légume Dalat.');
+                }
+                state = mergeIntoValidState(parsed);
+                if (!state.cleBranches.includes(mobileCleBranch)) {
+                    mobileCleBranch = state.cleBranches[0] || '';
+                }
+                saveState();
+                syncFormControls();
+                renderCleBranchesManager();
+                renderCustomerLogosGrid();
+                renderPriceTable();
+                renderAllInputViews();
+                renderOrderTargetDropdown();
+                renderSyncBanner(false);
+                if (activeTab === 'order') renderOrderPreview();
+                if (activeTab === 'summary') renderSummaryPreview();
+                showToast('Đã khôi phục toàn bộ dữ liệu thành công!');
+                return true;
+            } catch (err) {
+                console.error('Lỗi khôi phục:', err);
+                showToast(err.message || 'Dữ liệu sao lưu không hợp lệ.', true);
+                return false;
             }
         }
 
@@ -2244,7 +2513,7 @@
         }
 
         /* =========================================================
-           6. XỬ LÝ TỰ ĐỘNG TÍNH NGÀY (+1 LẤY, +3 NHẬN)
+           6. XỬ LÝ TỰ ĐỘNG TÍNH NGÀY (+1 LẤY, +3 NHẬN) & TIÊU ĐỀ ĐƠN
            ========================================================= */
         function handleOrderDateChange(newOrderDate) {
             state.orderDate = newOrderDate;
@@ -2259,6 +2528,16 @@
             if (activeTab === 'order') renderOrderPreview();
             if (activeTab === 'summary') renderSummaryPreview();
             showToast('Đã tự động tính Ngày lấy (+1) và Ngày nhận (+3).');
+        }
+
+        function updateOrderTitle(value, sourceInputId) {
+            state.orderTitle = value;
+            const input1 = document.getElementById('inputOrderTitle');
+            const input3 = document.getElementById('quickOrderTitleInput');
+            if (input1 && sourceInputId !== 'inputOrderTitle') input1.value = value;
+            if (input3 && sourceInputId !== 'quickOrderTitleInput') input3.value = value;
+            saveState();
+            if (activeTab === 'order') renderOrderPreview();
         }
 
         function updateField(field, value) {
@@ -2387,7 +2666,6 @@
                                     <input type="file" accept="image/*" class="hidden" onchange="handleCustomerLogoUpload('${g.key}', event)">
                                 </label>
                                 <button class="btn btn-outline btn-sm" onclick="cycleCustomerLogo('${g.key}')">Đổi mẫu SVG</button>
-                                <button class="btn btn-outline btn-sm" onclick="downloadCustomerLogoSVG('${g.key}')">Tải .svg</button>
                                 <button class="btn ${hasLogo ? 'btn-danger-soft' : 'btn-soft'} btn-sm" onclick="toggleCustomerLogo('${g.key}')">
                                     ${hasLogo ? 'Ẩn' : 'Hiện'}
                                 </button>
@@ -2469,26 +2747,6 @@
             if (activeTab === 'order') renderOrderPreview();
         }
 
-        function triggerSVGDownload(svgString, filename) {
-            const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(() => URL.revokeObjectURL(url), 500);
-        }
-
-        function downloadCustomerLogoSVG(groupKey) {
-            const cfg = state.logos[groupKey];
-            const labelMap = { trau_vang: 'Trâu vàng', tam_vang: 'Tâm vàng', cleverfood: 'Cleverfood' };
-            const svg = getCustomerPresetSVG((cfg && cfg.preset) || groupKey, labelMap[groupKey]);
-            triggerSVGDownload(svg, `logo-${groupKey}.svg`);
-            showToast(`Đã tải file logo-${groupKey}.svg!`);
-        }
-
         /* =========================================================
            8. TAB 1: NHẬP SỐ LƯỢNG DESKTOP & MOBILE
            ========================================================= */
@@ -2531,37 +2789,37 @@
             if (showCle) {
                 thead.innerHTML = `
                     <tr>
-                        <th rowspan="2" style="width:44px;">STT</th>
-                        <th rowspan="2" class="col-left" style="min-width:205px;">Tên sản phẩm</th>
+                        <th rowspan="2" style="width:48px;">STT</th>
+                        <th rowspan="2" class="col-left" style="min-width:230px;">Tên sản phẩm</th>
                         ${showStandalone ? `
-                            <th rowspan="2" style="min-width:94px;">Trâu vàng</th>
-                            <th rowspan="2" style="min-width:94px;">Tâm vàng</th>
+                            <th rowspan="2" style="min-width:108px;">Trâu vàng</th>
+                            <th rowspan="2" style="min-width:108px;">Tâm vàng</th>
                         ` : ''}
-                        <th colspan="${cleCount + 1}" class="th-cle-group">Cleverfood (Đơn giá Cle)</th>
-                        ${desktopFilter === 'all' ? `<th rowspan="2" style="width:84px; background:#dcfce7;">Tổng</th>` : ''}
+                        <th colspan="${cleCount + 1}" class="th-cle-group">Cleverfood</th>
+                        ${desktopFilter === 'all' ? `<th rowspan="2" style="width:94px; background:#dcfce7;">Tổng</th>` : ''}
                     </tr>
                     <tr>
-                        ${state.cleBranches.map(b => `<th class="th-cle-sub" style="min-width:80px;">${escapeHTML(b)}</th>`).join('')}
-                        <th class="th-cle-sub" style="width:82px; background:#bbf7d0; color:var(--green-900);">Tổng Cle</th>
+                        ${state.cleBranches.map(b => `<th class="th-cle-sub" style="min-width:92px;">${escapeHTML(b)}</th>`).join('')}
+                        <th class="th-cle-sub" style="width:92px; background:#bbf7d0; color:var(--green-900);">Tổng Cle</th>
                     </tr>
                 `;
             } else {
                 thead.innerHTML = `
                     <tr>
-                        <th style="width:44px;">STT</th>
-                        <th class="col-left" style="min-width:220px;">Tên sản phẩm</th>
-                        <th style="min-width:110px;">Trâu vàng</th>
-                        <th style="min-width:110px;">Tâm vàng</th>
-                        <th style="width:92px; background:#dcfce7;">Tổng</th>
+                        <th style="width:48px;">STT</th>
+                        <th class="col-left" style="min-width:240px;">Tên sản phẩm</th>
+                        <th style="min-width:120px;">Trâu vàng</th>
+                        <th style="min-width:120px;">Tâm vàng</th>
+                        <th style="width:100px; background:#dcfce7;">Tổng</th>
                     </tr>
                 `;
             }
 
             tbody.innerHTML = state.products.map((p, rowIdx) => {
-                const qTV  = p.quantities.trau_vang || '';
-                const qTam = p.quantities.tam_vang  || '';
+                const qTV  = (p.quantities && p.quantities.trau_vang) || '';
+                const qTam = (p.quantities && p.quantities.tam_vang)  || '';
                 let cleSum = 0;
-                state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities[getCleLeafKey(b)]));
+                state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
                 const rowGrand = parseNumber(qTV) + parseNumber(qTam) + cleSum;
                 const standaloneSum = parseNumber(qTV) + parseNumber(qTam);
 
@@ -2595,7 +2853,7 @@
                         ${showCle ? `
                             ${state.cleBranches.map(b => {
                                 const leafKey = getCleLeafKey(b);
-                                const qVal = p.quantities[leafKey] || '';
+                                const qVal = (p.quantities && p.quantities[leafKey]) || '';
                                 return `
                                     <td style="text-align:center;">
                                         <input type="text" inputmode="decimal" class="cell-input qty-input"
@@ -2637,8 +2895,8 @@
 
             state.products.forEach(p => {
                 let prodCle = 0;
-                const qTV  = parseNumber(p.quantities.trau_vang);
-                const qTam = parseNumber(p.quantities.tam_vang);
+                const qTV  = parseNumber(p.quantities && p.quantities.trau_vang);
+                const qTam = parseNumber(p.quantities && p.quantities.tam_vang);
 
                 qtySums.trau_vang += qTV;
                 if (qTV > 0) itemCounts.trau_vang++;
@@ -2651,7 +2909,7 @@
 
                 state.cleBranches.forEach(b => {
                     const k = getCleLeafKey(b);
-                    const q = parseNumber(p.quantities[k]);
+                    const q = parseNumber(p.quantities && p.quantities[k]);
                     qtySums[k] += q;
                     if (q > 0) itemCounts[k]++;
                     prodCle += q;
@@ -2689,7 +2947,7 @@
 
             tfoot.innerHTML = `
                 <tr>
-                    <td colspan="2" style="text-align:right; padding-right:12px;">Tổng số lượng (Kg):</td>
+                    <td colspan="2" style="text-align:right; padding-right:12px;">Tổng số lượng:</td>
                     ${showStandalone ? `
                         <td id="foot-qty-trau_vang" style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.trau_vang)}</td>
                         <td id="foot-qty-tam_vang"  style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.tam_vang)}</td>
@@ -2867,9 +3125,9 @@
 
             const t = calcLeafTotals();
             const groups = [
-                { key: 'trau_vang',  label: `Trâu vàng`,  qty: t.qtySums.trau_vang },
-                { key: 'tam_vang',   label: `Tâm vàng`,   qty: t.qtySums.tam_vang },
-                { key: 'cleverfood', label: `Cleverfood`, qty: t.cleQtyTotal }
+                { key: 'trau_vang',  label: 'Trâu vàng',  qty: t.qtySums.trau_vang },
+                { key: 'tam_vang',   label: 'Tâm vàng',   qty: t.qtySums.tam_vang },
+                { key: 'cleverfood', label: 'Cleverfood', qty: t.cleQtyTotal }
             ];
 
             grpWrap.innerHTML = groups.map(g => `
@@ -3322,66 +3580,107 @@
             const logoHTML = getLogoMarkupByGroup(logoGroup);
             const hasLogo = logoHTML !== '';
             const boxesDisplay = String(boxesVal || '').trim() !== '' ? escapeHTML(boxesVal) : '0';
+            const headingText = String(state.orderTitle || '').trim() || 'ĐƠN ĐẶT HÀNG';
 
             return `
-                <div class="a4-paper">
-                    <div style="text-align:center; margin-bottom:14px;">
-                        <h1 style="font-size:26px; font-weight:800; letter-spacing:0.6px; margin:0; color:#000;">
-                            ĐƠN ĐẶT HÀNG
-                        </h1>
-                    </div>
-
-                    <div style="position:relative; margin-bottom:14px; min-height:${hasLogo ? '104px' : 'auto'};">
-                        <div style="text-align:center; font-style:italic; font-weight:700; font-size:14px; line-height:1.8; ${hasLogo ? 'padding:0 112px;' : ''}">
-                            <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
-                            <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
+                <div class="a4-scale-wrap">
+                    <div class="a4-paper">
+                        <div style="text-align:center; margin-bottom:14px;">
+                            <h1 style="font-size:26px; font-weight:800; letter-spacing:0.6px; margin:0; color:#000;">
+                                ${escapeHTML(headingText)}
+                            </h1>
                         </div>
 
-                        <div style="margin-top:14px; font-weight:700; font-size:14.5px; line-height:1.8;">
-                            <div>Nhà cung cấp: ${escapeHTML(state.supplier)}</div>
-                            <div>Cửa hàng: ${escapeHTML(storeDisplayName)}</div>
+                        <div style="position:relative; margin-bottom:14px; min-height:${hasLogo ? '104px' : 'auto'};">
+                            <div style="text-align:center; font-style:italic; font-weight:700; font-size:14px; line-height:1.8; ${hasLogo ? 'padding:0 112px;' : ''}">
+                                <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
+                                <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
+                            </div>
+
+                            <div style="margin-top:14px; font-weight:700; font-size:14.5px; line-height:1.8;">
+                                <div>Nhà cung cấp: ${escapeHTML(state.supplier)}</div>
+                                <div>Cửa hàng: ${escapeHTML(storeDisplayName)}</div>
+                            </div>
+
+                            ${hasLogo ? `
+                                <div class="order-logo-slot" style="position:absolute; top:-8px; right:0; width:108px; height:108px; display:flex; align-items:center; justify-content:center;">
+                                    ${logoHTML}
+                                </div>
+                            ` : ''}
                         </div>
 
-                        ${hasLogo ? `
-                            <div class="order-logo-slot" style="position:absolute; top:-8px; right:0; width:108px; height:108px; display:flex; align-items:center; justify-content:center;">
-                                ${logoHTML}
+                        <table class="print-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:7%;">STT</th>
+                                    <th style="width:36%;">Tên sản phẩm</th>
+                                    <th style="width:14%;">Đơn giá</th>
+                                    <th style="width:13%;">Số lượng</th>
+                                    <th style="width:12%;">Thực nhận</th>
+                                    <th style="width:18%;">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHTML}
+                                <tr style="font-weight:700; font-size:14.5px;">
+                                    <td colspan="3" style="text-align:center; padding:8px;">Tổng số lượng</td>
+                                    <td style="text-align:center; padding:8px;">${formatQty(totalQty)}</td>
+                                    <td style="text-align:center; padding:8px;">0</td>
+                                    <td style="text-align:right; padding:8px;">${formatVND(totalAmount)}</td>
+                                </tr>
+                                <tr style="font-weight:700; font-size:14.5px;">
+                                    <td colspan="3" style="text-align:center; padding:8px;">Số thùng</td>
+                                    <td colspan="3" style="text-align:center; padding:8px;">${boxesDisplay}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        ${state.footerNote && state.footerNote.trim() !== '' ? `
+                            <div style="margin-top:18px; font-style:italic; font-size:13.5px; color:#000;">
+                                ${escapeHTML(state.footerNote)}
                             </div>
                         ` : ''}
                     </div>
-
-                    <table class="print-table">
-                        <thead>
-                            <tr>
-                                <th style="width:7%;">STT</th>
-                                <th style="width:36%;">Tên sản phẩm</th>
-                                <th style="width:14%;">Đơn giá</th>
-                                <th style="width:13%;">Số lượng</th>
-                                <th style="width:12%;">Thực nhận</th>
-                                <th style="width:18%;">Thành tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rowsHTML}
-                            <tr style="font-weight:700; font-size:14.5px;">
-                                <td colspan="3" style="text-align:center; padding:8px;">Tổng số lượng</td>
-                                <td style="text-align:center; padding:8px;">${formatQty(totalQty)}</td>
-                                <td style="text-align:center; padding:8px;">0</td>
-                                <td style="text-align:right; padding:8px;">${formatVND(totalAmount)}</td>
-                            </tr>
-                            <tr style="font-weight:700; font-size:14.5px;">
-                                <td colspan="3" style="text-align:center; padding:8px;">Số thùng</td>
-                                <td colspan="3" style="text-align:center; padding:8px;">${boxesDisplay}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    ${state.footerNote && state.footerNote.trim() !== '' ? `
-                        <div style="margin-top:18px; font-style:italic; font-size:13.5px; color:#000;">
-                            ${escapeHTML(state.footerNote)}
-                        </div>
-                    ` : ''}
                 </div>
             `;
+        }
+
+        /**
+         * Tự động co gọn tờ A4 vừa khít chiều ngang điện thoại (< 768px), máy tính giữ nguyên 100%
+         */
+        function fitA4PapersToViewport() {
+            const isMobile = window.innerWidth < 768;
+            const wraps = document.querySelectorAll('.a4-scale-wrap');
+            const availableWidth = Math.max(260, window.innerWidth - 24);
+
+            wraps.forEach(wrap => {
+                const paper = wrap.querySelector('.a4-paper');
+                if (!paper) return;
+
+                const parentSection = wrap.closest('section');
+                if (parentSection && parentSection.classList.contains('hidden')) return;
+
+                if (!isMobile) {
+                    paper.style.transform = '';
+                    wrap.style.width = '';
+                    wrap.style.height = '';
+                    return;
+                }
+
+                // Tạm reset để đo chính xác kích thước gốc của tờ A4 (~794px)
+                paper.style.transform = 'none';
+                wrap.style.width = 'auto';
+                wrap.style.height = 'auto';
+
+                const baseWidth = paper.offsetWidth || 794;
+                const baseHeight = paper.offsetHeight || 1050;
+                const scale = Math.min(1, availableWidth / baseWidth);
+
+                paper.style.transformOrigin = 'top left';
+                paper.style.transform = `scale(${scale})`;
+                wrap.style.width = `${Math.floor(baseWidth * scale)}px`;
+                wrap.style.height = `${Math.ceil(baseHeight * scale)}px`;
+            });
         }
 
         function normalizeOrderLogoSizes(container) {
@@ -3416,6 +3715,7 @@
             }
 
             normalizeOrderLogoSizes(container);
+            requestAnimationFrame(fitA4PapersToViewport);
         }
 
         function triggerPrint(onAfterPrint) {
@@ -3426,6 +3726,7 @@
                 document.title = DEFAULT_DOC_TITLE;
                 window.removeEventListener('afterprint', restore);
                 if (typeof onAfterPrint === 'function') onAfterPrint();
+                requestAnimationFrame(fitA4PapersToViewport);
             };
 
             document.title = '\u200B';
@@ -3612,6 +3913,8 @@
                     </tbody>
                 </table>
             `;
+
+            requestAnimationFrame(fitA4PapersToViewport);
         }
 
         /* =========================================================
@@ -3645,7 +3948,10 @@
 
             if (tabName === 'order' || tabName === 'summary') {
                 scrollToTopInstant();
-                requestAnimationFrame(scrollToTopInstant);
+                requestAnimationFrame(() => {
+                    scrollToTopInstant();
+                    fitA4PapersToViewport();
+                });
             }
         }
 
@@ -3690,6 +3996,8 @@
            13. KHỞI CHẠY ỨNG DỤNG
            ========================================================= */
         function syncFormControls() {
+            document.getElementById('inputOrderTitle').value = state.orderTitle ?? 'ĐƠN ĐẶT HÀNG';
+            document.getElementById('quickOrderTitleInput').value = state.orderTitle ?? 'ĐƠN ĐẶT HÀNG';
             document.getElementById('inputOrderDate').value = state.orderDate || '';
             document.getElementById('inputPickupDate').value = state.pickupDate || '';
             document.getElementById('inputDeliveryDate').value = state.deliveryDate || '';
@@ -3712,11 +4020,25 @@
             syncFormControls();
             renderCleBranchesManager();
             renderCustomerLogosGrid();
-            renderAllInputViews();
             renderPriceTable();
+            renderAllInputViews();
             renderOrderTargetDropdown();
             renderSyncBanner(false);
-            switchTab('input');
+        });
+
+        // Tự động căn lại tỷ lệ đơn A4 khi xoay màn hình / thay đổi kích thước cửa sổ
+        window.addEventListener('resize', () => {
+            if (activeTab === 'order' || activeTab === 'summary') {
+                fitA4PapersToViewport();
+            }
+        });
+
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                if (activeTab === 'order' || activeTab === 'summary') {
+                    fitA4PapersToViewport();
+                }
+            }, 150);
         });
 
         // Bảo vệ dữ liệu tuyệt đối: tự lưu lại khi nhập, đổi giá trị, ẩn tab hoặc chuẩn bị tải lại
