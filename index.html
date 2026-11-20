@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Quản Lý &amp; In Đơn Đặt Hàng Nông Sản Đà Lạt - Maison Légume Dalat</title>
-    <!-- Bộ Favicon & Apple Touch Icon mới cho Safari / GitHub Pages (?v=2 chống cache) -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=2">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=2">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=2">
+    <title>Maison Légume Dalat - Quản lý &amp; In Đơn Đặt Hàng</title>
+    <!-- Bộ Favicon & Apple Touch Icon mới cho Safari / GitHub Pages (?v=3 chống cache, không dùng web-app-capable để mở thẳng bằng Safari) -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=3">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=3">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=3">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=3">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=3">
     <!-- Google Fonts: Be Vietnam Pro & Montserrat (tự fallback font hệ thống khi offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1202,43 +1202,54 @@
 
         @media print {
             html, body {
+                width: 210mm !important;
+                height: auto !important;
+                min-height: 0 !important;
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                width: 100% !important;
+                overflow: visible !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
 
-            .no-print {
+            .no-print,
+            .hidden {
                 display: none !important;
             }
 
-            .app-main {
+            .app-main,
+            .a4-scroll-wrap,
+            #view-order,
+            #view-summary,
+            #a4OrderContainer {
                 max-width: none !important;
                 margin: 0 !important;
                 padding: 0 !important;
-            }
-
-            .a4-scroll-wrap {
+                min-height: 0 !important;
+                height: auto !important;
                 overflow: visible !important;
-                padding: 0 !important;
             }
 
             .a4-paper {
                 width: 210mm !important;
-                min-height: 297mm !important;
+                max-width: 100% !important;
+                min-height: 0 !important;
+                height: auto !important;
                 margin: 0 !important;
-                padding: 12mm 12mm !important;
+                padding: 10mm 12mm !important;
                 box-sizing: border-box !important;
                 box-shadow: none !important;
                 border-radius: 0 !important;
                 border: none !important;
+                page-break-after: auto !important;
+                break-after: auto !important;
             }
 
-            .a4-page-break {
-                page-break-after: always;
-                break-after: page;
+            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không tạo trang trắng cuối */
+            .a4-paper + .a4-paper {
+                page-break-before: always !important;
+                break-before: page !important;
             }
 
             .print-table th,
@@ -1269,7 +1280,7 @@
         <div class="header-inner">
             <div class="brand-box">
                 <div class="brand-logo-wrap" id="appHeaderLogo">
-                    <img src="./maison-legume-dalat-logo.png?v=2"
+                    <img src="./maison-legume-dalat-logo.png?v=3"
                          alt="Maison Légume Dalat"
                          onerror="handleBrandLogoError(this)">
                 </div>
@@ -1563,7 +1574,7 @@
                 </div>
 
                 <div class="safari-print-tip">
-                    💡 <strong>Mẹo in sạch không dính link &amp; ngày giờ:</strong> Mẫu in đã tự bỏ lề trình duyệt (<code>margin: 0</code>). Nếu dùng Safari phiên bản cũ vẫn thấy dòng chữ ở mép trang, hãy bỏ tích mục <strong>"In tiêu đề và chân trang"</strong> (Print headers and footers) trong hộp thoại in.
+                    Mẹo Safari: nếu hộp thoại in vẫn hiện link web ở đáy trang, chỉ cần bỏ tích 'Tiêu đề và chân trang' (Headers &amp; Footers) 1 lần.
                 </div>
             </div>
 
@@ -1586,7 +1597,7 @@
                             <option value="grouped">Gộp chuỗi (Trâu vàng, Tâm vàng, Cleverfood)</option>
                             <option value="cle_only">Riêng chuỗi Cleverfood (MĐ, LĐT, HTM, HQV...)</option>
                         </select>
-                        <button class="btn btn-print-hero" onclick="window.print()" title="In hoặc lưu Bảng Tổng Hợp khổ A4 không dính link và ngày giờ trình duyệt">
+                        <button class="btn btn-print-hero" onclick="triggerPrint()" title="In hoặc lưu Bảng Tổng Hợp khổ A4">
                             🖨️ In / Lưu PDF (A4) ngay
                         </button>
                     </div>
@@ -1597,7 +1608,7 @@
                 </div>
 
                 <div class="safari-print-tip">
-                    💡 <strong>Mẹo in sạch không dính link &amp; ngày giờ:</strong> Mẫu in đã tự bỏ lề trình duyệt (<code>margin: 0</code>). Nếu dùng Safari phiên bản cũ vẫn thấy dòng chữ ở mép trang, hãy bỏ tích mục <strong>"In tiêu đề và chân trang"</strong> trong hộp thoại in.
+                    Mẹo Safari: nếu hộp thoại in vẫn hiện link web ở đáy trang, chỉ cần bỏ tích 'Tiêu đề và chân trang' (Headers &amp; Footers) 1 lần.
                 </div>
             </div>
 
@@ -1652,6 +1663,7 @@
          ========================================================= -->
     <script>
         const STORAGE_KEY = 'ml_dalat_orders_v3';
+        const DEFAULT_DOC_TITLE = 'Maison Légume Dalat - Quản lý & In Đơn Đặt Hàng';
 
         /* =========================================================
            1. LOGO SVG TỐI GIẢN (APP + 3 NHÓM KHÁCH HÀNG)
@@ -3216,7 +3228,7 @@
             renderOrderPreview();
         }
 
-        function buildOrderSheetHTML(targetKey, isPageBreak = false) {
+        function buildOrderSheetHTML(targetKey) {
             let storeDisplayName = '';
             let priceGroup = 'tam_vang';
             let logoGroup = 'tam_vang';
@@ -3300,7 +3312,7 @@
             const boxesDisplay = String(boxesVal || '').trim() !== '' ? escapeHTML(boxesVal) : '0';
 
             return `
-                <div class="a4-paper ${isPageBreak ? 'a4-page-break' : ''}">
+                <div class="a4-paper">
                     <div style="text-align:center; margin-bottom:14px;">
                         <h1 style="font-size:26px; font-weight:800; letter-spacing:0.6px; margin:0; color:#000;">
                             ĐƠN ĐẶT HÀNG
@@ -3381,23 +3393,39 @@
                 });
                 if (activeBranches.length === 0) {
                     printMultiCleMode = false;
-                    container.innerHTML = buildOrderSheetHTML(state.orderTarget, false);
+                    container.innerHTML = buildOrderSheetHTML(state.orderTarget);
                 } else {
                     container.innerHTML = activeBranches
-                        .map((b, idx) => buildOrderSheetHTML(getCleLeafKey(b), idx < activeBranches.length - 1))
+                        .map(b => buildOrderSheetHTML(getCleLeafKey(b)))
                         .join('');
                 }
             } else {
-                container.innerHTML = buildOrderSheetHTML(state.orderTarget, false);
+                container.innerHTML = buildOrderSheetHTML(state.orderTarget);
             }
 
             normalizeOrderLogoSizes(container);
         }
 
+        function triggerPrint(onAfterPrint) {
+            let restored = false;
+            const restore = () => {
+                if (restored) return;
+                restored = true;
+                document.title = DEFAULT_DOC_TITLE;
+                window.removeEventListener('afterprint', restore);
+                if (typeof onAfterPrint === 'function') onAfterPrint();
+            };
+
+            document.title = '\u200B';
+            window.addEventListener('afterprint', restore, { once: true });
+            window.print();
+            setTimeout(restore, 1500);
+        }
+
         function printCurrentOrder() {
             printMultiCleMode = false;
             renderOrderPreview();
-            setTimeout(() => window.print(), 120);
+            setTimeout(() => triggerPrint(), 120);
         }
 
         function printAllCleBranches() {
@@ -3413,9 +3441,10 @@
             renderOrderPreview();
             showToast(`Đang chuẩn bị in ${activeBranches.length} trang A4 cho các chi nhánh Cleverfood...`);
             setTimeout(() => {
-                window.print();
-                printMultiCleMode = false;
-                renderOrderPreview();
+                triggerPrint(() => {
+                    printMultiCleMode = false;
+                    renderOrderPreview();
+                });
             }, 250);
         }
 
@@ -3614,9 +3643,9 @@
             if (activeTab === 'input' || activeTab === 'pricing') {
                 switchTab('order');
                 showToast('Đang mở chế độ in Đơn Đặt Hàng (Mẫu 1 — A4)...');
-                setTimeout(() => window.print(), 220);
+                setTimeout(() => triggerPrint(), 220);
             } else {
-                window.print();
+                triggerPrint();
             }
         }
 
