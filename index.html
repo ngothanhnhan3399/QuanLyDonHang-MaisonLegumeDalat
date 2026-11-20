@@ -2,14 +2,24 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <title>Maison Légume Dalat - Quản lý &amp; In Đơn Đặt Hàng</title>
-    <!-- Bộ Favicon & Apple Touch Icon mới cho Safari / GitHub Pages (?v=3 chống cache, không dùng web-app-capable để mở thẳng bằng Safari) -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=3">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=3">
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=3">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=3">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=3">
+
+    <!-- Cấu hình chế độ Full Màn Hình như App (Standalone PWA) trên iPhone / Safari & Android -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Maison Légume">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Maison%20L%C3%A9gume%20Dalat%22%2C%22short_name%22%3A%22Maison%20L%C3%A9gume%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23166534%22%7D">
+
+    <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=4) -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=4">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=4">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=4">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=4">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=4">
+
     <!-- Google Fonts: Be Vietnam Pro & Montserrat (tự fallback font hệ thống khi offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +38,7 @@
             --text-main: #18271f;
             --text-muted: #5a6d62;
             --green-900: #14532d;
+            --green-800: #166534;
             --green-700: #15803d;
             --green-600: #16a34a;
             --green-100: #dcfce7;
@@ -68,7 +79,7 @@
         }
 
         /* =========================================================
-           2. HEADER & ĐIỀU HƯỚNG 4 TAB
+           2. HEADER & ĐIỀU HƯỚNG 4 TAB (HỖ TRỢ TAI THỎ / DYNAMIC ISLAND)
            ========================================================= */
         .app-header {
             position: sticky;
@@ -76,14 +87,16 @@
             z-index: 40;
             background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
+            padding-top: max(10px, env(safe-area-inset-top));
         }
 
         .header-inner {
             max-width: 1320px;
             margin: 0 auto;
-            padding: 10px 16px;
+            padding: 0 16px 10px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
@@ -98,8 +111,8 @@
         }
 
         .brand-logo-wrap {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             overflow: hidden;
             flex-shrink: 0;
@@ -111,8 +124,8 @@
         }
 
         .brand-logo-wrap img {
-            width: 100%;
-            height: 100%;
+            width: 46px;
+            height: 46px;
             object-fit: contain;
             display: block;
             border-radius: 50%;
@@ -329,7 +342,7 @@
         .app-main {
             max-width: 1320px;
             margin: 0 auto;
-            padding: 16px 16px 115px;
+            padding: 16px 16px 120px;
         }
 
         .card {
@@ -884,6 +897,7 @@
             box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.16);
         }
 
+        /* Thanh dính đáy hỗ trợ thanh điều hướng dưới cùng của iPhone */
         .mobile-sticky-bar {
             display: none;
             position: fixed;
@@ -893,8 +907,9 @@
             z-index: 45;
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-top: 1px solid var(--border-color);
-            padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+            padding: 8px 12px max(10px, env(safe-area-inset-bottom));
             box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
         }
 
@@ -1150,7 +1165,7 @@
            ========================================================= */
         @media (max-width: 767px) {
             .header-inner {
-                padding: 10px 12px;
+                padding: 0 12px 10px;
             }
             .tab-nav {
                 width: 100%;
@@ -1181,7 +1196,7 @@
                 display: block;
             }
             .toast-box {
-                bottom: 82px;
+                bottom: calc(82px + env(safe-area-inset-bottom));
                 left: 14px;
                 right: 14px;
                 max-width: none;
@@ -1193,7 +1208,7 @@
         }
 
         /* =========================================================
-           10. QUY TẮC IN ẤN / XUẤT FILE PDF KHỔ A4 CHUẨN
+           10. QUY TẮC IN ẤN / XUẤT FILE PDF KHỔ A4 CHUẨN (KHÔNG TRANG TRẮNG)
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -1214,7 +1229,13 @@
             }
 
             .no-print,
-            .hidden {
+            .hidden,
+            .app-header,
+            .tab-nav,
+            .preview-toolbar,
+            .mobile-sticky-bar,
+            .modal-overlay,
+            .toast-box {
                 display: none !important;
             }
 
@@ -1246,7 +1267,7 @@
                 break-after: auto !important;
             }
 
-            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không tạo trang trắng cuối */
+            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không sinh trang trắng cuối */
             .a4-paper + .a4-paper {
                 page-break-before: always !important;
                 break-before: page !important;
@@ -1280,7 +1301,7 @@
         <div class="header-inner">
             <div class="brand-box">
                 <div class="brand-logo-wrap" id="appHeaderLogo">
-                    <img src="./maison-legume-dalat-logo.png?v=3"
+                    <img src="./maison-legume-dalat-logo.png?v=4"
                          alt="Maison Légume Dalat"
                          onerror="handleBrandLogoError(this)">
                 </div>
@@ -1320,7 +1341,7 @@
              ===================================================== -->
         <section id="view-input" class="no-print">
 
-            <!-- Thanh trên gọn: Ngày đặt/lấy/nhận, Nhà cung cấp, Ghi chú & Nút nhanh -->
+            <!-- Thông tin đơn hàng & lịch giao nhận -->
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title">Thông tin đơn hàng &amp; Lịch giao nhận</h2>
@@ -1666,7 +1687,7 @@
         const DEFAULT_DOC_TITLE = 'Maison Légume Dalat - Quản lý & In Đơn Đặt Hàng';
 
         /* =========================================================
-           1. LOGO SVG TỐI GIẢN (APP + 3 NHÓM KHÁCH HÀNG)
+           1. LOGO SVG DỰ PHÒNG (APP + 3 NHÓM KHÁCH HÀNG)
            ========================================================= */
         function getAppLogoSVG() {
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
@@ -2460,11 +2481,6 @@
             setTimeout(() => URL.revokeObjectURL(url), 500);
         }
 
-        function downloadAppLogoSVG() {
-            triggerSVGDownload(getAppLogoSVG(), 'maison-legume-dalat-logo.svg');
-            showToast('Đã tải maison-legume-dalat-logo.svg!');
-        }
-
         function downloadCustomerLogoSVG(groupKey) {
             const cfg = state.logos[groupKey];
             const labelMap = { trau_vang: 'Trâu vàng', tam_vang: 'Tâm vàng', cleverfood: 'Cleverfood' };
@@ -2512,7 +2528,6 @@
             const showCle        = desktopFilter === 'all' || desktopFilter === 'cleverfood';
             const cleCount       = state.cleBranches.length;
 
-            // Tiêu đề 2 tầng khi có hiển thị nhóm Cleverfood
             if (showCle) {
                 thead.innerHTML = `
                     <tr>
@@ -2622,7 +2637,6 @@
 
             state.products.forEach(p => {
                 let prodCle = 0;
-                let prodGrand = 0;
                 const qTV  = parseNumber(p.quantities.trau_vang);
                 const qTam = parseNumber(p.quantities.tam_vang);
 
@@ -2646,7 +2660,7 @@
                 cleQtyTotal += prodCle;
                 if (prodCle > 0) cleItemCount++;
 
-                prodGrand = qTV + qTam + prodCle;
+                const prodGrand = qTV + qTam + prodCle;
                 grandQty += prodGrand;
                 if (prodGrand > 0) grandItemCount++;
             });
@@ -2766,7 +2780,6 @@
             p.quantities[leafKey] = val;
             saveState();
 
-            // Cập nhật nhanh tổng hàng
             let cleSum = 0;
             state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities[getCleLeafKey(b)]));
             const standaloneSum = parseNumber(p.quantities.trau_vang) + parseNumber(p.quantities.tam_vang);
@@ -2775,7 +2788,6 @@
             const grandCell = document.getElementById(`row-grand-total-${prodId}`);
             if (grandCell) grandCell.textContent = formatQty(desktopFilter === 'standalone' ? standaloneSum : standaloneSum + cleSum);
 
-            // Cập nhật nhanh chân bảng
             refreshDesktopFooterNumbers();
         }
 
@@ -2944,7 +2956,7 @@
             if (amtEl) amtEl.innerHTML = qNum > 0 ? `&bull; ${formatVND(unitPrice * qNum)}` : '';
 
             updateMobileStickyBar();
-            // Cập nhật lại badge số lượng trên các nút chọn
+
             const t = calcLeafTotals();
             const grpWrap = document.getElementById('mobileGroupPills');
             if (grpWrap) {
@@ -3498,7 +3510,6 @@
                 return parseNumber(state.boxes[col.key]);
             };
 
-            // Ẩn cột không có đơn nếu người dùng bật tùy chọn
             if (state.options.hideZeroStoreCols) {
                 const nonEmpty = cols.filter(c => {
                     const hasQty = state.products.some(p => getColProdQty(c, p) > 0);
@@ -3615,7 +3626,6 @@
                 document.getElementById(`tabBtn-${t}`).classList.toggle('active', t === tabName);
             });
 
-            // Thanh dính đáy trên điện thoại chỉ hiện ở Tab 1 để nhập liệu nhanh
             const mobileBar = document.getElementById('mobileStickyBar');
             if (mobileBar) mobileBar.classList.toggle('hidden', tabName !== 'input');
 
@@ -3709,7 +3719,8 @@
             switchTab('input');
         });
 
-        // Bảo vệ dữ liệu tuyệt đối: tự lưu lại khi đổi giá trị, ẩn tab hoặc trình duyệt chuẩn bị tải lại
+        // Bảo vệ dữ liệu tuyệt đối: tự lưu lại khi nhập, đổi giá trị, ẩn tab hoặc chuẩn bị tải lại
+        document.addEventListener('input', () => saveState());
         document.addEventListener('change', () => saveState());
         window.addEventListener('beforeunload', () => saveState());
         window.addEventListener('pagehide', () => saveState());
