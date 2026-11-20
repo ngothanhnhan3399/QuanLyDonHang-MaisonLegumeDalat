@@ -13,19 +13,19 @@
     <meta name="theme-color" content="#14532d">
     <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Maison%20L%C3%A9gume%20Dalat%22%2C%22short_name%22%3A%22Maison%20L%C3%A9gume%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%2314532d%22%7D">
 
-    <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=5) -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=5">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=5">
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=5">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=5">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=5">
+    <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=6) -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=6">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=6">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=6">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=6">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=6">
 
     <!-- Google Fonts: Be Vietnam Pro & Montserrat (tự fallback font hệ thống khi offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
 
-    <!-- Thư viện nhẹ xuất PDF sạch không dính chân trang trên iPhone & Máy tính -->
+    <!-- Thư viện xuất PDF & chụp ảnh đơn hàng chuẩn A4 (không dính chân trang link web) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -288,6 +288,14 @@
             padding: 6px 10px;
             font-size: 12px;
             border-radius: 8px;
+        }
+
+        .btn-lg {
+            padding: 12px 18px;
+            font-size: 14.5px;
+            font-weight: 700;
+            min-height: 46px;
+            border-radius: 12px;
         }
 
         .btn-icon {
@@ -560,7 +568,6 @@
             max-width: 460px;
         }
 
-        /* Sao lưu & khôi phục dữ liệu */
         .backup-actions-row {
             display: flex;
             flex-wrap: wrap;
@@ -1010,13 +1017,6 @@
             flex: 1;
         }
 
-        .preview-toolbar-right {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
-        }
-
         .toolbar-inline-field {
             display: flex;
             align-items: center;
@@ -1049,14 +1049,6 @@
             background: #0f3f22;
         }
 
-        .btn-print-sub {
-            min-height: 44px;
-            border-radius: 12px;
-            font-size: 13.5px;
-            font-weight: 700;
-            padding: 10px 14px;
-        }
-
         .btn-capture {
             background: var(--blue-700);
             color: #ffffff;
@@ -1072,40 +1064,12 @@
             background: #1e40af;
         }
 
-        .img-preview-modal-box {
-            background: #ffffff;
-            border-radius: 16px;
-            max-width: 560px;
-            width: 100%;
-            max-height: 90vh;
-            padding: 18px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .img-preview-scroll {
-            overflow-y: auto;
-            max-height: 62vh;
-            border: 1px solid var(--border-color);
+        .btn-print-sub {
+            min-height: 44px;
             border-radius: 12px;
-            background: #f1f5f9;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .img-preview-scroll img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 6px;
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            -webkit-touch-callout: default;
-            user-select: auto;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px 14px;
         }
 
         .checkbox-label {
@@ -1182,14 +1146,15 @@
         }
 
         /* =========================================================
-           8. MODAL XÁC NHẬN & TOAST THÔNG BÁO
+           8. MODAL (XÁC NHẬN, PDF SẴN SÀNG, XEM ẢNH CHỤP) & TOAST
            ========================================================= */
         .modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 60;
-            background: rgba(15, 23, 42, 0.5);
-            backdrop-filter: blur(2px);
+            background: rgba(15, 23, 42, 0.55);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1198,38 +1163,97 @@
 
         .modal-box {
             background: #ffffff;
-            border-radius: 16px;
-            max-width: 430px;
+            border-radius: 18px;
+            max-width: 440px;
             width: 100%;
             padding: 20px;
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.24);
         }
 
         .modal-title {
             margin: 0 0 8px;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 16.5px;
+            font-weight: 800;
             color: var(--text-main);
         }
 
         .modal-desc {
-            margin: 0 0 18px;
+            margin: 0 0 16px;
             font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         .modal-actions {
             display: flex;
             justify-content: flex-end;
             gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .modal-stack-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pdf-ready-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--green-50);
+            color: var(--green-900);
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 12.5px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            word-break: break-all;
+        }
+
+        .img-preview-modal-box {
+            background: #ffffff;
+            border-radius: 18px;
+            max-width: 560px;
+            width: 100%;
+            max-height: 92vh;
+            padding: 18px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .img-preview-scroll {
+            overflow-y: auto;
+            max-height: 55vh;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: #f1f5f9;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .img-preview-scroll img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            -webkit-touch-callout: default;
+            user-select: auto;
         }
 
         .toast-box {
             position: fixed;
             bottom: 24px;
             right: 20px;
-            z-index: 70;
+            z-index: 75;
             background: var(--green-900);
             color: #ffffff;
             font-size: 13px;
@@ -1336,7 +1360,7 @@
         }
 
         /* =========================================================
-           10. QUY TẮC IN ẤN TRỰC TIẾP KHỔ A4 CHUẨN (KHÔNG TRANG TRẮNG)
+           10. QUY TẮC IN TRÌNH DUYỆT DỰ PHÒNG KHI MẤT MẠNG
            ========================================================= */
         @page {
             size: A4 portrait;
@@ -1393,7 +1417,6 @@
                 border-radius: 0 !important;
             }
 
-            /* Chỉ ngắt trang GIỮA các tờ khi in nhiều đơn, tuyệt đối không sinh trang trắng cuối */
             .a4-scale-wrap + .a4-scale-wrap {
                 page-break-before: always !important;
                 break-before: page !important;
@@ -1413,11 +1436,6 @@
                 border: none !important;
                 page-break-after: auto !important;
                 break-after: auto !important;
-            }
-
-            .a4-paper + .a4-paper {
-                page-break-before: always !important;
-                break-before: page !important;
             }
 
             .print-table th,
@@ -1449,7 +1467,7 @@
         <div class="header-inner">
             <div class="brand-box">
                 <div class="brand-logo-wrap" id="appHeaderLogo">
-                    <img src="./maison-legume-dalat-logo.png?v=5"
+                    <img src="./maison-legume-dalat-logo.png?v=6"
                          alt="Maison Légume Dalat"
                          onerror="handleBrandLogoError(this)">
                 </div>
@@ -1467,7 +1485,7 @@
                 <button id="tabBtn-summary" class="tab-btn" onclick="switchTab('summary')">4. Bảng Tổng Hợp</button>
             </nav>
 
-            <!-- Nút In / Lưu PDF (A4) gọn gàng trên Header Desktop -->
+            <!-- Nút In / Lưu PDF (A4) trên Header Desktop -->
             <div class="header-actions">
                 <button class="btn btn-primary" style="background: var(--green-900);" onclick="handleHeaderPrintClick(this)">
                     <span>🖨️ In / Lưu PDF (A4)</span>
@@ -1684,7 +1702,7 @@
                 <div id="customerLogosGrid" class="logos-grid"></div>
             </div>
 
-            <!-- Khối 2.4: Sao lưu & Khôi phục dữ liệu (chống mất dữ liệu giữa Safari / App / Máy tính) -->
+            <!-- Khối 2.4: Sao lưu & Khôi phục dữ liệu (JSON) -->
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -1750,7 +1768,7 @@
         </section>
 
         <!-- =====================================================
-             TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1 — XUẤT PDF SẠCH & IN A4)
+             TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1 — IN PDF A4 & CHỤP ĐƠN)
              ===================================================== -->
         <section id="view-order" class="hidden">
             <div class="preview-toolbar no-print">
@@ -1794,7 +1812,7 @@
         </section>
 
         <!-- =====================================================
-             TAB 4: BẢNG TỔNG HỢP (MẪU 2 — IN PDF & CHỤP ĐƠN A4)
+             TAB 4: BẢNG TỔNG HỢP (MẪU 2 — IN PDF A4 & CHỤP ĐƠN)
              ===================================================== -->
         <section id="view-summary" class="hidden">
             <div class="preview-toolbar no-print">
@@ -1821,45 +1839,6 @@
                     </button>
                     <button class="btn btn-capture" onclick="captureOrderImage('view-summary', this)">
                         📸 Chụp đơn
-                    </button>
-                </div>
-            </div>
-
-            <div class="a4-scroll-wrap">
-                <div id="a4OrderContainer"></div>
-            </div>
-        </section>
-
-        <!-- =====================================================
-             TAB 4: BẢNG TỔNG HỢP (MẪU 2 — XUẤT PDF SẠCH & IN A4)
-             ===================================================== -->
-        <section id="view-summary" class="hidden">
-            <div class="preview-toolbar no-print">
-                <div class="preview-toolbar-left">
-                    <div class="toolbar-inline-field">
-                        <label for="summaryModeSelect" style="font-size:13px; font-weight:700; color:var(--green-900);">Chế độ cột:</label>
-                        <select id="summaryModeSelect" class="input-control" style="width:auto; min-width:240px; padding:9px 12px; font-weight:600;"
-                            onchange="changeSummaryMode(this.value)">
-                            <option value="all_detail">Tất cả chi tiết (Trâu vàng, Tâm vàng &amp; từng chi nhánh Cle)</option>
-                            <option value="grouped">Gộp chuỗi (Trâu vàng, Tâm vàng, Cleverfood)</option>
-                            <option value="cle_only">Riêng chuỗi Cleverfood (MĐ, LĐT, HTM, HQV...)</option>
-                        </select>
-                    </div>
-
-                    <label class="checkbox-label">
-                        <input type="checkbox" id="chkHideZeroStoreCols" onchange="toggleOption('hideZeroStoreCols', this.checked)">
-                        <span>Ẩn cột cửa hàng không có đơn (SL = 0)</span>
-                    </label>
-                </div>
-
-                <div class="toolbar-action-group">
-                    <button class="btn btn-pdf-hero" onclick="exportCleanPDF('view-summary', this)"
-                        title="Tạo file PDF sạch khổ A4 không dính link web/chân trang">
-                        📄 Xuất / Gửi PDF sạch (A4)
-                    </button>
-                    <button class="btn btn-outline btn-print-sub" onclick="triggerPrint()"
-                        title="In trực tiếp qua trình duyệt">
-                        🖨️ In trực tiếp
                     </button>
                 </div>
             </div>
@@ -1909,20 +1888,67 @@
         </div>
     </div>
 
-    <!-- MODAL XEM NHANH ẢNH ĐƠN HÀNG VỪA CHỤP (NHẤN GIỮ ĐỂ LƯU VÀO ẢNH TRÊN IPHONE) -->
+    <!-- =========================================================
+         MODAL FILE PDF ĐÃ SẴN SÀNG (CHẠM TRỰC TIẾP GỌI SHARE SHEET IOS — SẠCH 100%)
+         ========================================================= -->
+    <div id="pdfReadyModal" class="modal-overlay no-print hidden" onclick="if(event.target === this) closePdfReadyModal()">
+        <div class="modal-box">
+            <h3 class="modal-title">File PDF đã sẵn sàng</h3>
+            <p class="modal-desc" style="margin-bottom: 10px;">
+                File PDF khổ A4 đã được tạo sạch hoàn toàn (không dính link web hay ngày giờ). Chạm nút xanh bên dưới để mở bảng <strong>In</strong>, <strong>Lưu vào Tệp</strong> hoặc gửi <strong>Zalo</strong>:
+            </p>
+            <div id="pdfReadyFileNameBadge" class="pdf-ready-badge">Don-dat-hang.pdf</div>
+            <div class="modal-stack-actions">
+                <button class="btn btn-primary btn-lg" style="background: var(--green-900); width: 100%;" onclick="shareReadyPdfNow()">
+                    🖨️ Mở bảng In / Lưu PDF
+                </button>
+                <button class="btn btn-soft btn-lg" style="width: 100%;" onclick="downloadReadyPdfNow()">
+                    ⬇️ Tải xuống PDF
+                </button>
+                <button class="btn btn-outline btn-lg" style="width: 100%;" onclick="closePdfReadyModal()">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL NGOẠI TUYẾN (CHỈ HIỆN KHI MẤT MẠNG KHÔNG TẢI ĐƯỢC THƯ VIỆN PDF)
+         ========================================================= -->
+    <div id="offlinePrintModal" class="modal-overlay no-print hidden" onclick="if(event.target === this) closeOfflinePrintModal()">
+        <div class="modal-box">
+            <h3 class="modal-title">Đang không có kết nối mạng</h3>
+            <p class="modal-desc">
+                Thiết bị chưa tải được bộ tạo PDF sạch do đang ngoại tuyến. Bạn có thể kết nối lại mạng rồi bấm lại, hoặc dùng tạm hộp thoại in mặc định của trình duyệt bên dưới.
+            </p>
+            <div class="modal-actions">
+                <button class="btn btn-outline btn-sm" onclick="closeOfflinePrintModal()">Đóng</button>
+                <button class="btn btn-primary btn-sm" onclick="closeOfflinePrintModal(); triggerFallbackBrowserPrint();">In thường qua trình duyệt</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================================
+         MODAL XEM TRƯỚC ẢNH ĐƠN HÀNG ĐÃ CHỤP (LƯU VÀO THƯ VIỆN ẢNH IOS/ANDROID)
+         ========================================================= -->
     <div id="imagePreviewModal" class="modal-overlay no-print hidden" onclick="if(event.target === this) closeImagePreviewModal()">
         <div class="img-preview-modal-box">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:8px;">
                 <h3 id="imgPreviewTitle" class="modal-title" style="margin:0;">Ảnh đơn hàng đã chụp</h3>
-                <button class="btn-icon" onclick="closeImagePreviewModal()" title="Đóng" style="font-size:20px; line-height:1;">&times;</button>
+                <button class="btn-icon" onclick="closeImagePreviewModal()" title="Đóng" style="font-size:22px; line-height:1;">&times;</button>
             </div>
-            <p style="margin:0; font-size:12.5px; color:var(--text-muted);">
-                Trên iPhone: <strong>nhấn giữ trực tiếp vào ảnh bên dưới &rarr; chọn "Lưu vào Ảnh"</strong> (hoặc bấm nút Tải ảnh).
+            <p style="margin:0; font-size:12.5px; color:var(--text-muted); line-height:1.45;">
+                Nhấn nút bên dưới hoặc <strong>nhấn giữ trực tiếp vào ảnh</strong> để <strong>Lưu vào Ảnh</strong>.
             </p>
             <div id="imgPreviewList" class="img-preview-scroll"></div>
-            <div class="modal-actions">
-                <button class="btn btn-outline btn-sm" onclick="closeImagePreviewModal()">Đóng</button>
-                <button class="btn btn-primary btn-sm" onclick="downloadCapturedImages()">Tải ảnh (.png)</button>
+            <div class="modal-stack-actions">
+                <button class="btn btn-blue btn-lg" style="width: 100%;" onclick="shareCapturedImagesNow()">
+                    💾 Lưu vào Ảnh / Chia sẻ
+                </button>
+                <div style="display:flex; gap:8px;">
+                    <button class="btn btn-soft" style="flex:1;" onclick="downloadCapturedImages()">⬇️ Tải ảnh (.png)</button>
+                    <button class="btn btn-outline" style="flex:1;" onclick="closeImagePreviewModal()">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
@@ -1931,15 +1957,16 @@
     <div id="toastBox" class="toast-box no-print"></div>
 
     <!-- =========================================================
-         JAVASCRIPT THUẦN HOÀN CHỈNH
+         JAVASCRIPT THUẦN HOÀN CHỈNH (ĐÃ RÀ SOÁT SẠCH 100%)
          ========================================================= -->
     <script>
         const STORAGE_KEY = 'maison_legume_dalat_state_v1';
         const LEGACY_STORAGE_KEYS = [
             'ml_dalat_orders_v3',
             'ml_dalat_orders_v2',
-            'ml_dalat_orders_v1',
+            'dalat_orders_v2',
             'dalat_orders_v1',
+            'ml_dalat_orders_v1',
             'maison_legume_orders'
         ];
         const DEFAULT_DOC_TITLE = 'Maison Légume Dalat - Quản lý & In Đơn Đặt Hàng';
@@ -2015,7 +2042,7 @@
         }
 
         /* =========================================================
-           2. DỮ LIỆU MẶC ĐỊNH: ĐÚNG 15 MẶT HÀNG + CHI NHÁNH CLEVERFOOD
+           2. DỮ LIỆU MẶC ĐỊNH: 15 MẶT HÀNG + CHI NHÁNH CLEVERFOOD
            ========================================================= */
         const DEFAULT_PRODUCTS_15 = [
             { id: 'p1',  name: 'Bắp cải tím (sú tím)',      prices: { trau_vang: 50000,  tam_vang: 50000,  cle: 50000  }, cleName: '13109900237 - Bắp cải tím Đà Lạt' },
@@ -2046,7 +2073,8 @@
         let printMultiCleMode = false;
         let isExportingPDF = false;
         let isCapturingImg = false;
-        let lastCapturedImages = [];
+        let readyPdfPayload = null;        // { blob, file, fileName, blobUrl }
+        let lastCapturedImages = [];       // [{ fileName, dataUrl, blob, file }]
         let pendingConfirmAction = null;
         let toastTimer = null;
 
@@ -2112,390 +2140,15 @@
         }
 
         /* =========================================================
-           11. XUẤT PDF A4 KHÔNG CHÂN TRANG & CHỤP ĐƠN HÀNG (.PNG)
+           3. HÀM TIỆN ÍCH NGÀY THÁNG, ĐỊNH DẠNG SỐ & NHẬN DIỆN THIẾT BỊ
            ========================================================= */
-        function buildFileBaseName(isSummaryTab, isMultiCle, branchIndex) {
-            const datePart = formatDateForFileName(state.orderDate);
-            if (isSummaryTab) {
-                return `Bang-tong-hop-${datePart}`;
-            }
-            const titleSlug = slugifyTitleCase(state.orderTitle || 'Don dat hang') || 'Don-dat-hang';
-            if (isMultiCle) {
-                if (typeof branchIndex === 'number') {
-                    const activeBranches = state.cleBranches.filter(b => {
-                        const k = getCleLeafKey(b);
-                        return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
-                    });
-                    const bName = activeBranches[branchIndex] ? slugifyTitleCase(activeBranches[branchIndex]) : `Chi-nhanh-${branchIndex + 1}`;
-                    return `${titleSlug}-Cleverfood-${bName}-${datePart}`;
-                }
-                return `${titleSlug}-Cleverfood-Cac-chi-nhanh-${datePart}`;
-            }
-            const storeSlug = getOrderTargetLabel(state.orderTarget);
-            return `${titleSlug}-${storeSlug}-${datePart}`;
+        function isMobileDevice() {
+            const ua = navigator.userAgent || '';
+            const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            const isAndroid = /Android/i.test(ua);
+            return isIOS || isAndroid;
         }
 
-        function buildPdfFileName(isSummaryTab, isMultiCle) {
-            return `${buildFileBaseName(isSummaryTab, isMultiCle)}.pdf`;
-        }
-
-        function isIOSDevice() {
-            return /iPad|iPhone|iPod/.test(navigator.userAgent)
-                || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-        }
-
-        function createOffscreenPaperClone(sourcePaper, paddingCSS) {
-            const clone = sourcePaper.cloneNode(true);
-            clone.style.cssText = [
-                'position: relative',
-                'width: 794px',
-                'min-height: 0',
-                'height: auto',
-                'background: #ffffff',
-                'color: #000000',
-                'transform: none',
-                'margin: 0',
-                `padding: ${paddingCSS}`,
-                'box-shadow: none',
-                'border: none',
-                'border-radius: 0',
-                'box-sizing: border-box',
-                'font-family: Montserrat, "Be Vietnam Pro", Arial, sans-serif'
-            ].join(';');
-
-            clone.querySelectorAll('.order-logo-slot svg').forEach(svg => {
-                svg.setAttribute('width', '104');
-                svg.setAttribute('height', '104');
-                svg.style.width = '104px';
-                svg.style.height = '104px';
-            });
-
-            return clone;
-        }
-
-        async function exportCleanPDF(targetContainerId, triggerBtn) {
-            if (isExportingPDF) return;
-
-            // Nếu đang ở Tab 1 hoặc Tab 2 mà bấm nút In trên Header -> tự chuyển sang Tab 3 & cuộn lên đầu
-            if (activeTab === 'input' || activeTab === 'pricing') {
-                switchTab('order');
-                scrollToTopInstant();
-                targetContainerId = 'a4OrderContainer';
-                await new Promise(r => setTimeout(r, 150));
-            }
-
-            // Dự phòng khi thiết bị hoàn toàn mất mạng không tải được thư viện CDN
-            if (typeof window.html2canvas !== 'function' || !window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
-                showToast('Đang ngoại tuyến, chuyển sang hộp thoại in của trình duyệt...');
-                setTimeout(() => triggerPrint(), 250);
-                return;
-            }
-
-            const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
-            const rootEl = document.getElementById(containerId);
-            if (!rootEl) {
-                showToast('Không tìm thấy vùng nội dung để in.', true);
-                return;
-            }
-
-            const papers = Array.from(rootEl.querySelectorAll('.a4-paper'));
-            if (papers.length === 0) {
-                showToast('Chưa có trang A4 nào để xuất PDF.', true);
-                return;
-            }
-
-            isExportingPDF = true;
-            const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
-            if (triggerBtn) {
-                triggerBtn.disabled = true;
-                triggerBtn.innerHTML = '<span>Đang tạo PDF...</span>';
-            }
-
-            const offscreenHost = document.createElement('div');
-            offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
-            document.body.appendChild(offscreenHost);
-
-            try {
-                if (document.fonts && document.fonts.ready) {
-                    await document.fonts.ready;
-                }
-
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4',
-                    compress: true
-                });
-
-                const pageWidthMM = 210;
-                const pageHeightMM = 297;
-
-                for (let i = 0; i < papers.length; i++) {
-                    const clone = createOffscreenPaperClone(papers[i], '38px 42px');
-                    offscreenHost.innerHTML = '';
-                    offscreenHost.appendChild(clone);
-
-                    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-                    const canvas = await window.html2canvas(clone, {
-                        scale: 2,
-                        useCORS: true,
-                        allowTaint: false,
-                        backgroundColor: '#ffffff',
-                        width: 794,
-                        windowWidth: 794,
-                        logging: false
-                    });
-
-                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                    let renderW = pageWidthMM;
-                    let renderH = (canvas.height * renderW) / canvas.width;
-                    let offsetX = 0;
-
-                    if (renderH > pageHeightMM) {
-                        const shrinkRatio = pageHeightMM / renderH;
-                        renderH = pageHeightMM;
-                        renderW = renderW * shrinkRatio;
-                        offsetX = (pageWidthMM - renderW) / 2;
-                    }
-
-                    if (i > 0) pdf.addPage();
-                    pdf.addImage(imgData, 'JPEG', offsetX, 0, renderW, renderH, undefined, 'FAST');
-                }
-
-                const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
-                const fileName = buildPdfFileName(isSummaryTab, !isSummaryTab && printMultiCleMode);
-
-                const blob = pdf.output('blob');
-                const pdfFile = new File([blob], fileName, { type: 'application/pdf' });
-
-                if (navigator.canShare && navigator.canShare({ files: [pdfFile] })) {
-                    try {
-                        await navigator.share({
-                            files: [pdfFile],
-                            title: fileName
-                        });
-                        showToast(`Đã tạo xong ${fileName}!`);
-                    } catch (shareErr) {
-                        if (shareErr && shareErr.name === 'AbortError') {
-                            // Người dùng tự hủy bảng chia sẻ -> đóng yên lặng
-                        } else {
-                            pdf.save(fileName);
-                            showToast(`Đã tải xuống ${fileName}!`);
-                        }
-                    }
-                } else {
-                    pdf.save(fileName);
-                    showToast(`Đã tải xuống ${fileName}!`);
-                }
-            } catch (err) {
-                console.error('Lỗi xuất PDF:', err);
-                showToast('Không thể tạo PDF, đang chuyển sang hộp thoại in trình duyệt...', true);
-                setTimeout(() => triggerPrint(), 300);
-            } finally {
-                if (offscreenHost.parentNode) {
-                    offscreenHost.parentNode.removeChild(offscreenHost);
-                }
-                isExportingPDF = false;
-                if (triggerBtn) {
-                    triggerBtn.disabled = false;
-                    triggerBtn.innerHTML = origBtnHTML;
-                }
-            }
-        }
-
-        async function captureOrderImage(targetContainerId, triggerBtn) {
-            if (isCapturingImg) return;
-
-            if (typeof window.html2canvas !== 'function') {
-                showToast('Cần có kết nối mạng để tải công cụ chụp đơn hàng.', true);
-                return;
-            }
-
-            const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
-            const rootEl = document.getElementById(containerId);
-            if (!rootEl) return;
-
-            const papers = Array.from(rootEl.querySelectorAll('.a4-paper'));
-            if (papers.length === 0) {
-                showToast('Chưa có đơn hàng nào để chụp.', true);
-                return;
-            }
-
-            isCapturingImg = true;
-            const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
-            if (triggerBtn) {
-                triggerBtn.disabled = true;
-                triggerBtn.innerHTML = '<span>Đang chụp...</span>';
-            }
-
-            const offscreenHost = document.createElement('div');
-            offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
-            document.body.appendChild(offscreenHost);
-
-            try {
-                if (document.fonts && document.fonts.ready) {
-                    await document.fonts.ready;
-                }
-
-                const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
-                const isMulti = !isSummaryTab && printMultiCleMode && papers.length > 1;
-                const capturedItems = [];
-                const pngFiles = [];
-
-                for (let i = 0; i < papers.length; i++) {
-                    const clone = createOffscreenPaperClone(papers[i], '34px 38px');
-                    offscreenHost.innerHTML = '';
-                    offscreenHost.appendChild(clone);
-
-                    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-                    const canvas = await window.html2canvas(clone, {
-                        scale: 2.5,
-                        useCORS: true,
-                        allowTaint: false,
-                        backgroundColor: '#ffffff',
-                        width: 794,
-                        windowWidth: 794,
-                        logging: false
-                    });
-
-                    const fileName = `${buildFileBaseName(isSummaryTab, isMulti, isMulti ? i : undefined)}.png`;
-                    const dataUrl = canvas.toDataURL('image/png');
-                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-                    const file = new File([blob], fileName, { type: 'image/png' });
-
-                    capturedItems.push({ fileName, dataUrl, blob });
-                    pngFiles.push(file);
-                }
-
-                lastCapturedImages = capturedItems;
-
-                if (navigator.canShare && navigator.canShare({ files: pngFiles })) {
-                    try {
-                        await navigator.share({
-                            files: pngFiles,
-                            title: capturedItems[0].fileName
-                        });
-                        showToast('Đã chụp đơn! Chọn "Lưu hình ảnh" để lưu vào Ảnh.');
-                    } catch (shareErr) {
-                        if (shareErr && shareErr.name === 'AbortError') {
-                            // Người dùng tự đóng bảng chia sẻ -> không báo lỗi
-                        } else {
-                            openImagePreviewModal(capturedItems);
-                        }
-                    }
-                } else if (isIOSDevice()) {
-                    openImagePreviewModal(capturedItems);
-                } else {
-                    downloadCapturedImages();
-                    showToast(`Đã tải xuống ${capturedItems.length > 1 ? capturedItems.length + ' ảnh đơn hàng' : capturedItems[0].fileName}!`);
-                }
-            } catch (err) {
-                console.error('Lỗi chụp đơn hàng:', err);
-                showToast('Không thể chụp ảnh đơn hàng, vui lòng thử lại.', true);
-            } finally {
-                if (offscreenHost.parentNode) {
-                    offscreenHost.parentNode.removeChild(offscreenHost);
-                }
-                isCapturingImg = false;
-                if (triggerBtn) {
-                    triggerBtn.disabled = false;
-                    triggerBtn.innerHTML = origBtnHTML;
-                }
-            }
-        }
-
-        function openImagePreviewModal(items) {
-            const modal = document.getElementById('imagePreviewModal');
-            const list = document.getElementById('imgPreviewList');
-            const title = document.getElementById('imgPreviewTitle');
-            if (!modal || !list) return;
-
-            title.textContent = items.length > 1
-                ? `Đã chụp ${items.length} ảnh đơn hàng`
-                : `Ảnh đơn hàng: ${items[0].fileName}`;
-
-            list.innerHTML = items.map(item => `
-                <img src="${item.dataUrl}" alt="${escapeHTML(item.fileName)}">
-            `).join('');
-
-            modal.classList.remove('hidden');
-        }
-
-        function closeImagePreviewModal() {
-            const modal = document.getElementById('imagePreviewModal');
-            if (modal) modal.classList.add('hidden');
-        }
-
-        function downloadCapturedImages() {
-            if (!lastCapturedImages || lastCapturedImages.length === 0) return;
-            lastCapturedImages.forEach((item, idx) => {
-                setTimeout(() => {
-                    const url = URL.createObjectURL(item.blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = item.fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    setTimeout(() => URL.revokeObjectURL(url), 1000);
-                }, idx * 250);
-            });
-        }
-
-        async function printAllCleBranches(triggerBtn) {
-            const activeBranches = state.cleBranches.filter(b => {
-                const k = getCleLeafKey(b);
-                return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
-            });
-            if (activeBranches.length === 0) {
-                showToast('Chưa có chi nhánh Cleverfood nào có số lượng > 0.', true);
-                return;
-            }
-            printMultiCleMode = true;
-            renderOrderPreview();
-            await new Promise(r => setTimeout(r, 150));
-            try {
-                await exportCleanPDF('a4OrderContainer', triggerBtn);
-            } finally {
-                printMultiCleMode = false;
-                renderOrderPreview();
-            }
-        }
-
-        function triggerPrint(onAfterPrint) {
-            let restored = false;
-            const restore = () => {
-                if (restored) return;
-                restored = true;
-                document.title = DEFAULT_DOC_TITLE;
-                window.removeEventListener('afterprint', restore);
-                if (typeof onAfterPrint === 'function') onAfterPrint();
-                requestAnimationFrame(fitA4PapersToViewport);
-            };
-
-            document.title = '\u200B';
-            window.addEventListener('afterprint', restore, { once: true });
-            window.print();
-            setTimeout(restore, 1500);
-        }
-
-        function printCurrentOrder(btn) {
-            printMultiCleMode = false;
-            renderOrderPreview();
-            setTimeout(() => exportCleanPDF('a4OrderContainer', btn), 120);
-        }
-
-        function handleHeaderPrintClick(btn) {
-            const targetId = activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer';
-            exportCleanPDF(targetId, btn);
-        }
-
-        /* =========================================================
-           12. TAB 4: BẢNG TỔNG HỢP (MẪU 2 — IN PDF & CHỤP ĐƠN A4)
-           ========================================================= */
         function toISODate(dateObj) {
             const y = dateObj.getFullYear();
             const m = String(dateObj.getMonth() + 1).padStart(2, '0');
@@ -2520,7 +2173,7 @@
                 .trim()
                 .split(/[\s-]+/)
                 .filter(Boolean)
-                .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
                 .join('-');
         }
 
@@ -2669,7 +2322,6 @@
                 let raw = localStorage.getItem(STORAGE_KEY);
                 let migratedFrom = '';
 
-                // Tự động dò tìm dữ liệu từ các khóa phiên bản cũ nếu khóa chính chưa có
                 if (!raw) {
                     for (const legacyKey of LEGACY_STORAGE_KEYS) {
                         const found = localStorage.getItem(legacyKey);
@@ -3613,9 +3265,6 @@
             setTxt('foot-box-grand', formatQty(desktopFilter === 'standalone' ? t.standaloneBoxes : t.grandBoxes));
         }
 
-        /**
-         * Nhấn Enter / ArrowDown nhảy thẳng xuống dòng tiếp theo cùng cột (tới tận ô Số thùng)
-         */
         function handleVerticalKeyNav(event) {
             const isDown = (event.key === 'Enter' && !event.shiftKey) || event.key === 'ArrowDown';
             const isUp   = (event.key === 'Enter' && event.shiftKey)  || event.key === 'ArrowUp';
@@ -3996,7 +3645,7 @@
         }
 
         /* =========================================================
-           10. TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1 — XUẤT PDF SẠCH & IN A4)
+           10. TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1)
            ========================================================= */
         function renderOrderTargetDropdown() {
             const select = document.getElementById('orderTargetSelect');
@@ -4033,13 +3682,13 @@
         }
 
         function getOrderTargetLabel(targetKey) {
-            if (targetKey === 'trau_vang') return 'Trau-Vang';
-            if (targetKey === 'tam_vang') return 'Tam-Vang';
+            if (targetKey === 'trau_vang') return 'Trau-vang';
+            if (targetKey === 'tam_vang') return 'Tam-vang';
             if (targetKey === 'cle_all') return 'Cleverfood-Tong';
             if (targetKey && targetKey.startsWith('cle_')) {
                 return `Cleverfood-${slugifyTitleCase(targetKey.slice(4))}`;
             }
-            return 'Don-Hang';
+            return 'Don-hang';
         }
 
         function buildOrderSheetHTML(targetKey) {
@@ -4189,9 +3838,6 @@
             `;
         }
 
-        /**
-         * Tự động co gọn tờ A4 vừa khít chiều ngang điện thoại (< 768px), máy tính giữ nguyên 100%
-         */
         function fitA4PapersToViewport() {
             const isMobile = window.innerWidth < 768;
             const wraps = document.querySelectorAll('.a4-scale-wrap');
@@ -4211,7 +3857,6 @@
                     return;
                 }
 
-                // Tạm reset để đo chính xác kích thước gốc của tờ A4 (~794px)
                 paper.style.transform = 'none';
                 wrap.style.width = 'auto';
                 wrap.style.height = 'auto';
@@ -4263,42 +3908,159 @@
         }
 
         /* =========================================================
-           11. XUẤT FILE PDF SẠCH 100% KHÔNG CHÂN TRANG (html2canvas + jsPDF)
+           11. XUẤT PDF A4 KHÔNG CHÂN TRANG (MODAL CHẠM TRỰC TIẾP TRÊN IPHONE)
+               & CHỤP ẢNH ĐƠN HÀNG (.PNG) LƯU VÀO THƯ VIỆN ẢNH
            ========================================================= */
-        function buildPdfFileName(isSummaryTab, isMultiCle) {
+        function buildFileBaseName(isSummaryTab, isMultiCle, branchIndex) {
             const datePart = formatDateForFileName(state.orderDate);
             if (isSummaryTab) {
-                return `Bang-Tong-Hop-${datePart}.pdf`;
+                return `Bang-tong-hop-${datePart}`;
             }
-            const titleSlug = slugifyTitleCase(state.orderTitle || 'Don Dat Hang') || 'Don-Dat-Hang';
+            const titleSlug = slugifyTitleCase(state.orderTitle || 'Don dat hang') || 'Don-dat-hang';
             if (isMultiCle) {
-                return `${titleSlug}-Cleverfood-Cac-Chi-Nhanh-${datePart}.pdf`;
+                if (typeof branchIndex === 'number') {
+                    const activeBranches = state.cleBranches.filter(b => {
+                        const k = getCleLeafKey(b);
+                        return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
+                    });
+                    const bName = activeBranches[branchIndex]
+                        ? slugifyTitleCase(activeBranches[branchIndex])
+                        : `Chi-nhanh-${branchIndex + 1}`;
+                    return `${titleSlug}-Cleverfood-${bName}-${datePart}`;
+                }
+                return `${titleSlug}-Cleverfood-Cac-chi-nhanh-${datePart}`;
             }
             const storeSlug = getOrderTargetLabel(state.orderTarget);
-            return `${titleSlug}-${storeSlug}-${datePart}.pdf`;
+            return `${titleSlug}-${storeSlug}-${datePart}`;
+        }
+
+        function createOffscreenPaperClone(sourcePaper, paddingCSS) {
+            const clone = sourcePaper.cloneNode(true);
+            clone.style.cssText = [
+                'position: relative',
+                'width: 794px',
+                'min-height: 0',
+                'height: auto',
+                'background: #ffffff',
+                'color: #000000',
+                'transform: none',
+                'zoom: 1',
+                'margin: 0',
+                `padding: ${paddingCSS}`,
+                'box-shadow: none',
+                'border: none',
+                'border-radius: 0',
+                'box-sizing: border-box',
+                'font-family: Montserrat, "Be Vietnam Pro", Arial, sans-serif'
+            ].join(';');
+
+            clone.querySelectorAll('.order-logo-slot svg').forEach(svg => {
+                svg.setAttribute('width', '104');
+                svg.setAttribute('height', '104');
+                svg.style.width = '104px';
+                svg.style.height = '104px';
+            });
+
+            return clone;
+        }
+
+        function clearReadyPdfPayload() {
+            if (readyPdfPayload && readyPdfPayload.blobUrl) {
+                try { URL.revokeObjectURL(readyPdfPayload.blobUrl); } catch (e) {}
+            }
+            readyPdfPayload = null;
+        }
+
+        function openPdfReadyModal(payload) {
+            clearReadyPdfPayload();
+            readyPdfPayload = payload;
+            const badge = document.getElementById('pdfReadyFileNameBadge');
+            if (badge) badge.textContent = payload.fileName;
+            document.getElementById('pdfReadyModal').classList.remove('hidden');
+        }
+
+        function closePdfReadyModal() {
+            document.getElementById('pdfReadyModal').classList.add('hidden');
+        }
+
+        async function shareReadyPdfNow() {
+            if (!readyPdfPayload) return;
+            const { file, fileName } = readyPdfPayload;
+            try {
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    await navigator.share({ files: [file], title: fileName });
+                    closePdfReadyModal();
+                    showToast(`Đã mở bảng In / Lưu PDF cho ${fileName}!`);
+                } else if (navigator.share) {
+                    await navigator.share({ files: [file], title: fileName });
+                    closePdfReadyModal();
+                } else {
+                    downloadReadyPdfNow();
+                }
+            } catch (err) {
+                if (err && err.name === 'AbortError') {
+                    // Người dùng tự đóng bảng chia sẻ iOS
+                    return;
+                }
+                console.error('Lỗi gọi Share Sheet PDF:', err);
+                downloadReadyPdfNow();
+            }
+        }
+
+        function downloadReadyPdfNow() {
+            if (!readyPdfPayload) return;
+            const a = document.createElement('a');
+            a.href = readyPdfPayload.blobUrl;
+            a.download = readyPdfPayload.fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            showToast(`Đang tải xuống ${readyPdfPayload.fileName}...`);
+        }
+
+        function openOfflinePrintModal() {
+            document.getElementById('offlinePrintModal').classList.remove('hidden');
+        }
+
+        function closeOfflinePrintModal() {
+            document.getElementById('offlinePrintModal').classList.add('hidden');
+        }
+
+        function triggerFallbackBrowserPrint() {
+            let restored = false;
+            const restore = () => {
+                if (restored) return;
+                restored = true;
+                document.title = DEFAULT_DOC_TITLE;
+                window.removeEventListener('afterprint', restore);
+                requestAnimationFrame(fitA4PapersToViewport);
+            };
+            document.title = '\u200B';
+            window.addEventListener('afterprint', restore, { once: true });
+            window.print();
+            setTimeout(restore, 1500);
         }
 
         async function exportCleanPDF(targetContainerId, triggerBtn) {
             if (isExportingPDF) return;
 
-            // Nếu đang ở Tab 1 hoặc Tab 2 mà bấm nút trên Header, tự chuyển sang Tab 3 trước
             if (activeTab === 'input' || activeTab === 'pricing') {
                 switchTab('order');
+                scrollToTopInstant();
                 targetContainerId = 'a4OrderContainer';
-                await new Promise(r => setTimeout(r, 120));
+                await new Promise(r => setTimeout(r, 140));
             }
 
-            // Kiểm tra thư viện (fallback sang in trực tiếp nếu mất mạng)
+            // Chỉ hiện hộp thoại dự phòng khi hoàn toàn không tải được thư viện (mất mạng)
             if (typeof window.html2canvas !== 'function' || !window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
-                showToast('Không tải được thư viện PDF (có thể đang mất mạng). Đang chuyển sang In trực tiếp...', true);
-                setTimeout(() => triggerPrint(), 350);
+                openOfflinePrintModal();
                 return;
             }
 
             const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
             const rootEl = document.getElementById(containerId);
             if (!rootEl) {
-                showToast('Không tìm thấy vùng nội dung để xuất PDF.', true);
+                showToast('Không tìm thấy vùng nội dung để tạo PDF.', true);
                 return;
             }
 
@@ -4312,16 +4074,14 @@
             const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
             if (triggerBtn) {
                 triggerBtn.disabled = true;
-                triggerBtn.innerHTML = '<span>⏳ Đang tạo PDF...</span>';
+                triggerBtn.innerHTML = '<span>Đang tạo PDF...</span>';
             }
 
-            // Tạo khung ẩn ngoài màn hình chuẩn 794px (~210mm ở 96 DPI)
             const offscreenHost = document.createElement('div');
             offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
             document.body.appendChild(offscreenHost);
 
             try {
-                // Đợi font web tải xong nếu hỗ trợ
                 if (document.fonts && document.fonts.ready) {
                     await document.fonts.ready;
                 }
@@ -4338,45 +4098,15 @@
                 const pageHeightMM = 297;
 
                 for (let i = 0; i < papers.length; i++) {
-                    const sourcePaper = papers[i];
-                    const clone = sourcePaper.cloneNode(true);
-
-                    // Loại bỏ hoàn toàn scale điện thoại & thiết lập đúng khung chuẩn A4 sạch
-                    clone.style.cssText = [
-                        'position: relative',
-                        'width: 794px',
-                        'min-height: 0',
-                        'height: auto',
-                        'background: #ffffff',
-                        'color: #000000',
-                        'transform: none !important',
-                        'margin: 0',
-                        'padding: 10mm 12mm',
-                        'box-shadow: none',
-                        'border: none',
-                        'border-radius: 0',
-                        'box-sizing: border-box',
-                        'font-family: Montserrat, "Be Vietnam Pro", Arial, sans-serif'
-                    ].join(';');
-
-                    // Đảm bảo SVG logo có kích thước rõ ràng để html2canvas render sắc nét trên iOS
-                    clone.querySelectorAll('.order-logo-slot svg').forEach(svg => {
-                        svg.setAttribute('width', '104');
-                        svg.setAttribute('height', '104');
-                        svg.style.width = '104px';
-                        svg.style.height = '104px';
-                    });
-
+                    const clone = createOffscreenPaperClone(papers[i], '36px 42px');
                     offscreenHost.innerHTML = '';
                     offscreenHost.appendChild(clone);
 
-                    // Chờ 1 nhịp layout để trình duyệt tính toán đầy đủ kích thước clone
                     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
                     const canvas = await window.html2canvas(clone, {
-                        scale: 2.2,
+                        scale: 2,
                         useCORS: true,
-                        allowTaint: false,
                         backgroundColor: '#ffffff',
                         width: 794,
                         windowWidth: 794,
@@ -4388,7 +4118,6 @@
                     let renderH = (canvas.height * renderW) / canvas.width;
                     let offsetX = 0;
 
-                    // Nếu chiều cao vượt quá 297mm, tự co tỷ lệ gọn vào đúng 1 trang A4
                     if (renderH > pageHeightMM) {
                         const shrinkRatio = pageHeightMM / renderH;
                         renderH = pageHeightMM;
@@ -4401,36 +4130,24 @@
                 }
 
                 const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
-                const fileName = buildPdfFileName(isSummaryTab, !isSummaryTab && printMultiCleMode);
+                const fileName = `${buildFileBaseName(isSummaryTab, !isSummaryTab && printMultiCleMode)}.pdf`;
 
-                const blob = pdf.output('blob');
-                const file = new File([blob], fileName, { type: 'application/pdf' });
+                const pdfBlob = pdf.output('blob');
+                const pdfFile = new File([pdfBlob], fileName, { type: 'application/pdf' });
+                const blobUrl = URL.createObjectURL(pdfBlob);
 
-                // Tối ưu cho iPhone Safari/PWA: bật thẳng bảng Chia sẻ gốc của iOS
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    try {
-                        await navigator.share({
-                            files: [file],
-                            title: fileName
-                        });
-                        showToast(`Đã tạo xong ${fileName}!`);
-                    } catch (shareErr) {
-                        if (shareErr && shareErr.name === 'AbortError') {
-                            // Người dùng tự đóng bảng chia sẻ -> không báo lỗi
-                        } else {
-                            // Nếu share thất bại vì lý do khác -> tải trực tiếp
-                            pdf.save(fileName);
-                            showToast(`Đã tải xuống ${fileName}!`);
-                        }
-                    }
+                if (isMobileDevice()) {
+                    // Trên iPhone / Android: mở Modal chạm trực tiếp để giữ 100% user-gesture khi gọi navigator.share()
+                    openPdfReadyModal({ blob: pdfBlob, file: pdfFile, fileName, blobUrl });
                 } else {
-                    // Fallback cho máy tính & trình duyệt không hỗ trợ Web Share file
+                    // Trên máy tính: tải thẳng file PDF sạch xuống
                     pdf.save(fileName);
-                    showToast(`Đã tải xuống ${fileName}!`);
+                    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+                    showToast(`Đã xuất file PDF thành công: ${fileName}`);
                 }
             } catch (err) {
                 console.error('Lỗi xuất PDF:', err);
-                showToast('Có lỗi khi tạo PDF, vui lòng thử lại hoặc dùng nút In trực tiếp.', true);
+                showToast('Có lỗi khi tạo file PDF, vui lòng thử lại.', true);
             } finally {
                 if (offscreenHost.parentNode) {
                     offscreenHost.parentNode.removeChild(offscreenHost);
@@ -4443,7 +4160,7 @@
             }
         }
 
-        async function exportAllCleBranchesPDF(triggerBtn) {
+        async function printAllCleBranches(triggerBtn) {
             const activeBranches = state.cleBranches.filter(b => {
                 const k = getCleLeafKey(b);
                 return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
@@ -4463,46 +4180,169 @@
             }
         }
 
-        function triggerPrint(onAfterPrint) {
-            let restored = false;
-            const restore = () => {
-                if (restored) return;
-                restored = true;
-                document.title = DEFAULT_DOC_TITLE;
-                window.removeEventListener('afterprint', restore);
-                if (typeof onAfterPrint === 'function') onAfterPrint();
-                requestAnimationFrame(fitA4PapersToViewport);
-            };
-
-            document.title = '\u200B';
-            window.addEventListener('afterprint', restore, { once: true });
-            window.print();
-            setTimeout(restore, 1500);
-        }
-
-        function printCurrentOrder() {
+        function printCurrentOrder(btn) {
             printMultiCleMode = false;
             renderOrderPreview();
-            setTimeout(() => triggerPrint(), 120);
+            setTimeout(() => exportCleanPDF('a4OrderContainer', btn), 100);
         }
 
-        function handleHeaderPdfClick(btn) {
+        function handleHeaderPrintClick(btn) {
             const targetId = activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer';
             exportCleanPDF(targetId, btn);
         }
 
-        function handleHeaderPrintClick() {
-            if (activeTab === 'input' || activeTab === 'pricing') {
-                switchTab('order');
-                showToast('Đang mở chế độ in Đơn Đặt Hàng (Mẫu 1 — A4)...');
-                setTimeout(() => triggerPrint(), 220);
-            } else {
-                triggerPrint();
+        /* --- CHỤP ĐƠN HÀNG (.PNG) LƯU VÀO THƯ VIỆN ẢNH --- */
+        async function captureOrderImage(targetContainerId, triggerBtn) {
+            if (isCapturingImg) return;
+
+            if (typeof window.html2canvas !== 'function') {
+                showToast('Cần có kết nối mạng để chụp ảnh đơn hàng.', true);
+                return;
+            }
+
+            const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
+            const rootEl = document.getElementById(containerId);
+            if (!rootEl) return;
+
+            const papers = Array.from(rootEl.querySelectorAll('.a4-paper'));
+            if (papers.length === 0) {
+                showToast('Chưa có đơn hàng nào để chụp.', true);
+                return;
+            }
+
+            isCapturingImg = true;
+            const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
+            if (triggerBtn) {
+                triggerBtn.disabled = true;
+                triggerBtn.innerHTML = '<span>Đang chụp...</span>';
+            }
+
+            const offscreenHost = document.createElement('div');
+            offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
+            document.body.appendChild(offscreenHost);
+
+            try {
+                if (document.fonts && document.fonts.ready) {
+                    await document.fonts.ready;
+                }
+
+                const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
+                const isMulti = !isSummaryTab && printMultiCleMode && papers.length > 1;
+                const capturedItems = [];
+
+                for (let i = 0; i < papers.length; i++) {
+                    const clone = createOffscreenPaperClone(papers[i], '32px 36px');
+                    offscreenHost.innerHTML = '';
+                    offscreenHost.appendChild(clone);
+
+                    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+                    const canvas = await window.html2canvas(clone, {
+                        scale: 2.5,
+                        useCORS: true,
+                        backgroundColor: '#ffffff',
+                        width: 794,
+                        windowWidth: 794,
+                        logging: false
+                    });
+
+                    const fileName = `${buildFileBaseName(isSummaryTab, isMulti, isMulti ? i : undefined)}.png`;
+                    const dataUrl = canvas.toDataURL('image/png');
+                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                    const file = new File([blob], fileName, { type: 'image/png' });
+
+                    capturedItems.push({ fileName, dataUrl, blob, file });
+                }
+
+                lastCapturedImages = capturedItems;
+
+                if (isMobileDevice()) {
+                    // Trên điện thoại: mở Modal xem trước + nút chạm trực tiếp gọi Share Sheet lưu vào Ảnh
+                    openImagePreviewModal(capturedItems);
+                } else {
+                    downloadCapturedImages();
+                    showToast(`Đã tải xuống ${capturedItems.length > 1 ? capturedItems.length + ' ảnh đơn hàng' : capturedItems[0].fileName}!`);
+                }
+            } catch (err) {
+                console.error('Lỗi chụp ảnh đơn hàng:', err);
+                showToast('Không thể chụp ảnh đơn hàng, vui lòng thử lại.', true);
+            } finally {
+                if (offscreenHost.parentNode) {
+                    offscreenHost.parentNode.removeChild(offscreenHost);
+                }
+                isCapturingImg = false;
+                if (triggerBtn) {
+                    triggerBtn.disabled = false;
+                    triggerBtn.innerHTML = origBtnHTML;
+                }
             }
         }
 
+        function openImagePreviewModal(items) {
+            const modal = document.getElementById('imagePreviewModal');
+            const list = document.getElementById('imgPreviewList');
+            const title = document.getElementById('imgPreviewTitle');
+            if (!modal || !list) return;
+
+            title.textContent = items.length > 1
+                ? `Đã chụp ${items.length} ảnh đơn hàng`
+                : 'Ảnh đơn hàng đã chụp';
+
+            list.innerHTML = items.map(item => `
+                <img src="${item.dataUrl}" alt="${escapeHTML(item.fileName)}">
+            `).join('');
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeImagePreviewModal() {
+            const modal = document.getElementById('imagePreviewModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        async function shareCapturedImagesNow() {
+            if (!lastCapturedImages || lastCapturedImages.length === 0) return;
+            const files = lastCapturedImages.map(x => x.file);
+            try {
+                if (navigator.canShare && navigator.canShare({ files })) {
+                    await navigator.share({
+                        files,
+                        title: lastCapturedImages[0].fileName
+                    });
+                    showToast('Chọn "Lưu hình ảnh" để lưu thẳng vào thư viện Ảnh!');
+                } else if (navigator.share) {
+                    await navigator.share({
+                        files,
+                        title: lastCapturedImages[0].fileName
+                    });
+                } else {
+                    downloadCapturedImages();
+                }
+            } catch (err) {
+                if (err && err.name === 'AbortError') return;
+                console.error('Lỗi chia sẻ ảnh:', err);
+                showToast('Bạn hãy nhấn giữ trực tiếp vào ảnh phía trên để chọn "Lưu vào Ảnh".');
+            }
+        }
+
+        function downloadCapturedImages() {
+            if (!lastCapturedImages || lastCapturedImages.length === 0) return;
+            lastCapturedImages.forEach((item, idx) => {
+                setTimeout(() => {
+                    const url = URL.createObjectURL(item.blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = item.fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 1500);
+                }, idx * 250);
+            });
+        }
+
         /* =========================================================
-           12. TAB 4: BẢNG TỔNG HỢP (MẪU 2 — XUẤT PDF SẠCH & IN A4)
+           12. TAB 4: BẢNG TỔNG HỢP (MẪU 2)
            ========================================================= */
         function changeSummaryMode(mode) {
             state.summaryMode = mode;
@@ -4723,7 +4563,7 @@
         }
 
         /* =========================================================
-           14. KHỞI CHẠY ỨNG DỤNG
+           14. KHỞI CHẠY ỨNG DỤNG & BẢO VỆ DỮ LIỆU LIÊN TỤC
            ========================================================= */
         function syncFormControls() {
             document.getElementById('inputOrderTitle').value = state.orderTitle ?? 'ĐƠN ĐẶT HÀNG';
@@ -4756,7 +4596,6 @@
             renderSyncBanner(false);
         });
 
-        // Tự động căn lại tỷ lệ đơn A4 khi xoay màn hình / thay đổi kích thước cửa sổ
         window.addEventListener('resize', () => {
             if (activeTab === 'order' || activeTab === 'summary') {
                 fitA4PapersToViewport();
@@ -4771,7 +4610,6 @@
             }, 150);
         });
 
-        // Bảo vệ dữ liệu tuyệt đối: tự lưu lại khi nhập, đổi giá trị, ẩn tab hoặc chuẩn bị tải lại
         document.addEventListener('input', () => saveState());
         document.addEventListener('change', () => saveState());
         window.addEventListener('beforeunload', () => saveState());
