@@ -1671,6 +1671,19 @@
             if (!imgEl || !imgEl.parentElement) return;
             imgEl.parentElement.innerHTML = getAppLogoSVG();
         }
+
+        function getCustomerPresetSVG(presetKey, label) {
+            if (presetKey === 'tam_vang') {
+                return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+                    <path d="M100 184C54 148 22 114 22 72c0-28 21-48 47-48 16 0 27 8 31 19 4-11 15-19 31-19 26 0 47 20 47 48 0 42-32 76-78 112z" fill="#16a34a"/>
+                    <path d="M100 172C60 140 33 110 33 74c0-21 16-37 36-37 14 0 24 8 31 19 7-11 17-19 31-19 20 0 36 16 36 37 0 36-27 66-67 98z" fill="#ffffff"/>
+                    <path d="M100 32c0-14 11-26 26-27-1 15-12 27-26 27z" fill="#22c55e"/>
+                    <path d="M100 35c-11 0-21-9-22-21 12 1 22 10 22 21z" fill="#15803d"/>
+                    <text x="100" y="92" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="28" fill="#ca8a04">TÂM</text>
+                    <text x="100" y="122" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-weight="800" font-size="28" fill="#ca8a04">VÀNG</text>
+                    <text x="100" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="10" fill="#15803d" letter-spacing="0.6">THỰC PHẨM SẠCH</text>
+                </svg>`;
+            }
             if (presetKey === 'trau_vang') {
                 return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="90" fill="#14532d"/>
