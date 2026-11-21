@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Maison Légume">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=11) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=11">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=11">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=11">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=11">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=11">
+  <!-- Icons chống cache Safari (?v=13) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=13">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=13">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=13">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=13">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=13">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=11","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=11","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=13","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=13","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -514,6 +514,112 @@
       text-align: center;
     }
 
+    /* MẪU CHUẨN TÂM VÀNG & TRÂU VÀNG */
+    .a4-paper.tv-template {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #000000;
+      padding: 10mm 12mm;
+    }
+
+    .tv-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      color: #000;
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .tv-top-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .tv-top-left {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .tv-dates {
+      text-align: center;
+      font-size: 13.5px;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 12px;
+      color: #000;
+    }
+
+    .tv-meta-lines {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.7;
+      color: #000;
+    }
+
+    .tv-logo-box {
+      width: 135px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .tv-logo-box img, .tv-logo-box svg {
+      max-width: 135px;
+      max-height: 120px;
+      object-fit: contain;
+    }
+
+    table.tv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      color: #000;
+    }
+
+    table.tv-table th, table.tv-table td {
+      border: 1.2px solid #000;
+      padding: 6px 8px;
+      background: #fff;
+      color: #000;
+    }
+
+    table.tv-table th {
+      font-weight: 800;
+      text-align: center;
+      font-size: 13.5px;
+      padding: 8px 6px;
+      background: #fff;
+    }
+
+    table.tv-table td {
+      font-weight: 500;
+    }
+
+    table.tv-table tfoot td {
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 8px 8px;
+      background: #fff;
+    }
+
+    .tv-note {
+      margin-top: 14px;
+      font-style: italic;
+      font-size: 13px;
+      font-weight: 500;
+      color: #000;
+    }
+
     .a4-note {
       margin-top: 10px;
       font-style: italic;
@@ -919,13 +1025,14 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=11" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=13" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
         </div>
       </div>
       <div class="header-actions">
+        <button type="button" class="btn btn-outline btn-sm" id="btnCloudPullHeader" style="background:rgba(255,255,255,0.14); color:#fff; border-color:rgba(255,255,255,0.35);" onclick="loadAllFromServer(true)">🔄 Tải từ Sheet</button>
         <button type="button" class="btn btn-soft btn-sm" onclick="quickGoPrint()">🖨️ In / Lưu PDF (A4)</button>
       </div>
     </div>
@@ -1153,8 +1260,11 @@
               <label for="inpAppsScriptUrl">Link Web App (https://script.google.com/macros/s/.../exec)</label>
               <input type="url" id="inpAppsScriptUrl" placeholder="Dán link Web App đã Deploy từ Google Apps Script...">
             </div>
-            <button type="button" class="btn btn-primary" onclick="saveAppsScriptUrl()">💾 Lưu cấu hình</button>
+            <button type="button" class="btn btn-primary" onclick="saveAppsScriptUrl()">💾 Lưu &amp; Tải dữ liệu</button>
+            <button type="button" class="btn btn-soft" onclick="loadAllFromServer(true)">☁️ Tải lại từ Sheet</button>
+            <button type="button" class="btn btn-outline" onclick="pushAppStateToServer(true)">⬆️ Đẩy đơn &amp; giá lên Sheet</button>
           </div>
+          <div id="serverSyncStatus" style="margin-top:8px; font-size:12px; color:#166534; font-weight:600;"></div>
         </details>
       </div>
 
@@ -1285,8 +1395,11 @@
       <!-- Lịch sử 15 phiếu nhập gần nhất -->
       <div class="card">
         <div class="card-title">
-          <span>📋 15 phiếu nhập gần nhất (Lưu cục bộ)</span>
-          <button type="button" class="btn btn-outline btn-sm" onclick="clearInboundHistory()">Xóa lịch sử cục bộ</button>
+          <span>📋 Phiếu nhập gần nhất (Đồng bộ Google Sheet)</span>
+          <div class="toolbar-group">
+            <button type="button" class="btn btn-soft btn-sm" onclick="loadAllFromServer(true)">🔄 Tải mới từ Sheet</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="clearInboundHistory()">Xóa lịch sử cục bộ</button>
+          </div>
         </div>
         <div id="inboundHistoryList"></div>
       </div>
@@ -1394,6 +1507,8 @@
     'use strict';
 
     var STORAGE_KEY = 'maison_legume_dalat_state_v1';
+    // (Tùy chọn) Dán sẵn Link Web App Apps Script vào giữa dấu nháy bên dưới để máy nào mở lên cũng tự kết nối ngay:
+    var DEFAULT_APPS_SCRIPT_URL = '';
     var LEGACY_KEYS = ['ml_dalat_orders_v3', 'ml_dalat_orders_v2', 'ml_dalat_orders_v1', 'dalat_orders_state'];
 
     var DEFAULT_PRODUCTS = [
@@ -1474,6 +1589,11 @@
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' đ';
     }
 
+    function fmtDotNum(n) {
+      var val = Math.round(Number(n) || 0);
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    }
+
     function fmtMoneyPlain(n) {
       var val = Math.round(Number(n) || 0);
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -1502,7 +1622,7 @@
       var today = toYMD(new Date());
       return {
         meta: {
-          printTitle: 'ĐƠN ĐẶT HÀNG',
+          printTitle: 'ĐƠN ĐẶT HÀNG RAU ĐÀ LẠT',
           orderDate: today,
           pickupDate: addDaysYMD(today, 1),
           deliveryDate: addDaysYMD(today, 3),
@@ -2342,6 +2462,7 @@
       else if (storeKey === 'cle_ALL') { storeLabel = 'Cleverfood (Tổng toàn chuỗi)'; groupKey = 'cleverfood'; }
       else { storeLabel = 'Cleverfood - ' + storeKey.replace('cle_', ''); groupKey = 'cleverfood'; }
 
+      var isDirectStore = (groupKey === 'trauVang' || groupKey === 'tamVang');
       var useCleName = state.settings.useCleName !== false && groupKey === 'cleverfood';
       var rowsHtml = '';
       var stt = 0, totalQty = 0, totalMoney = 0;
@@ -2356,14 +2477,25 @@
         totalMoney += money;
         var displayName = (useCleName && p.cleName) ? p.cleName : p.name;
 
-        rowsHtml += '<tr>' +
-          '<td style="text-align:center;">' + stt + '</td>' +
-          '<td>' + esc(displayName) + '</td>' +
-          '<td style="text-align:right;">' + fmtVND(price) + '</td>' +
-          '<td style="text-align:center; font-weight:700;">' + fmtQtyZero(q) + '</td>' +
-          '<td></td>' +
-          '<td style="text-align:right; font-weight:700;">' + fmtVND(money) + '</td>' +
-        '</tr>';
+        if (isDirectStore) {
+          rowsHtml += '<tr>' +
+            '<td style="text-align:center;">' + stt + '</td>' +
+            '<td style="text-align:left;">' + esc(displayName) + '</td>' +
+            '<td style="text-align:center;">' + fmtDotNum(price) + '</td>' +
+            '<td style="text-align:center;">' + fmtQtyZero(q) + '</td>' +
+            '<td></td>' +
+            '<td style="text-align:right;">' + fmtVND(money) + '</td>' +
+          '</tr>';
+        } else {
+          rowsHtml += '<tr>' +
+            '<td style="text-align:center;">' + stt + '</td>' +
+            '<td>' + esc(displayName) + '</td>' +
+            '<td style="text-align:right;">' + fmtVND(price) + '</td>' +
+            '<td style="text-align:center; font-weight:700;">' + fmtQtyZero(q) + '</td>' +
+            '<td></td>' +
+            '<td style="text-align:right; font-weight:700;">' + fmtVND(money) + '</td>' +
+          '</tr>';
+        }
       });
 
       if (!rowsHtml) {
@@ -2371,7 +2503,50 @@
       }
 
       var boxesVal = getStoreBoxes(storeKey);
-      var title = (state.meta.printTitle || 'ĐƠN ĐẶT HÀNG').trim();
+      var title = (state.meta.printTitle || 'ĐƠN ĐẶT HÀNG RAU ĐÀ LẠT').trim();
+
+      if (isDirectStore) {
+        return '<div class="a4-paper tv-template">' +
+          '<div class="tv-title">' + esc(title) + '</div>' +
+          '<div class="tv-top-grid">' +
+            '<div class="tv-top-left">' +
+              '<div class="tv-dates">' +
+                '<div>Ngày đặt hàng: ' + esc(formatDateVN(state.meta.orderDate)) + '</div>' +
+                '<div>Ngày nhận hàng: ' + esc(formatDateVN(state.meta.deliveryDate)) + '</div>' +
+              '</div>' +
+              '<div class="tv-meta-lines">' +
+                '<div>Nhà cung cấp: ' + esc(state.meta.supplier) + '</div>' +
+                '<div>Cửa hàng: ' + esc(storeLabel) + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="tv-logo-box">' + renderLogoHTML(groupKey) + '</div>' +
+          '</div>' +
+          '<table class="tv-table">' +
+            '<thead><tr>' +
+              '<th style="width:46px;">STT</th>' +
+              '<th>Tên sản phẩm</th>' +
+              '<th style="width:96px;">Đơn giá</th>' +
+              '<th style="width:94px;">Số lượng</th>' +
+              '<th style="width:90px;">Thực<br>nhận</th>' +
+              '<th style="width:128px;">Thành tiền</th>' +
+            '</tr></thead>' +
+            '<tbody>' + rowsHtml + '</tbody>' +
+            '<tfoot>' +
+              '<tr>' +
+                '<td colspan="3" style="text-align:center;">Tổng số lượng</td>' +
+                '<td style="text-align:center;">' + fmtQtyZero(totalQty) + '</td>' +
+                '<td></td>' +
+                '<td style="text-align:right;">' + fmtVND(totalMoney) + '</td>' +
+              '</tr>' +
+              '<tr>' +
+                '<td colspan="3" style="text-align:center;">Số thùng</td>' +
+                '<td colspan="3" style="text-align:center; font-size:15px;">' + (boxesVal > 0 ? fmtQtyZero(boxesVal) : '') + '</td>' +
+              '</tr>' +
+            '</tfoot>' +
+          '</table>' +
+          (state.meta.shippingNote ? ('<div class="tv-note">' + esc(state.meta.shippingNote) + '</div>') : '') +
+        '</div>';
+      }
 
       return '<div class="a4-paper">' +
         '<div class="a4-title">' + esc(title) + '</div>' +
@@ -3234,8 +3409,13 @@
       var url = (document.getElementById('inpAppsScriptUrl').value || '').trim();
       state.settings.appsScriptUrl = url;
       saveState();
-      if (url) document.getElementById('detAppsScriptConfig').open = false;
-      showToast('Đã lưu link kết nối Google Apps Script!');
+      if (url) {
+        document.getElementById('detAppsScriptConfig').open = false;
+        showToast('Đã lưu link! Đang tải dữ liệu từ Sheet...');
+        window.loadAllFromServer(true);
+      } else {
+        showToast('Đã xóa link kết nối Google Apps Script!');
+      }
     };
 
     function calcInboundRowTotal(r) {
@@ -3459,6 +3639,166 @@
       renderInboundHistory();
     };
 
+    /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
+    function setServerSyncStatus(msg, isError) {
+      var el = document.getElementById('serverSyncStatus');
+      if (!el) return;
+      el.style.color = isError ? '#dc2626' : '#166534';
+      el.textContent = msg;
+    }
+
+    function getActiveAppsScriptUrl() {
+      var u = (state && state.settings && state.settings.appsScriptUrl) ? state.settings.appsScriptUrl.trim() : '';
+      return u || (DEFAULT_APPS_SCRIPT_URL || '').trim();
+    }
+
+    window.loadAllFromServer = async function (showFeedback) {
+      var url = getActiveAppsScriptUrl();
+      if (!url) {
+        if (showFeedback) {
+          showToast('Chưa có Link Apps Script! Hãy dán vào mục Cấu hình ở Tab 5.');
+          window.switchTab('tab5');
+          var det = document.getElementById('detAppsScriptConfig');
+          if (det) det.open = true;
+        }
+        return false;
+      }
+
+      var hdrBtn = document.getElementById('btnCloudPullHeader');
+      if (hdrBtn) { hdrBtn.disabled = true; hdrBtn.textContent = '⏳ Đang tải...'; }
+      setServerSyncStatus('⏳ Đang tải dữ liệu từ Google Sheet...', false);
+
+      try {
+        var sep = url.indexOf('?') === -1 ? '?' : '&';
+        var fetchUrl = url + sep + 'action=getAll&t=' + Date.now();
+        var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
+        if (!data || data.success === false) {
+          throw new Error((data && data.error) || 'Apps Script trả về lỗi');
+        }
+
+        // 1. Nạp App State (Đơn đặt hàng, bảng giá, chi nhánh, meta) nếu có trên Sheet
+        if (data.appState && typeof data.appState === 'object') {
+          var keepUrl = state.settings.appsScriptUrl || url;
+          var keepLogos = state.logos;
+          var merged = normalizeState(Object.assign({}, state, data.appState));
+          merged.settings.appsScriptUrl = keepUrl;
+          // Giữ lại ảnh logo custom cục bộ nếu bản trên Sheet không chứa ảnh nặng
+          ['trauVang', 'tamVang', 'cleverfood'].forEach(function (k) {
+            if (keepLogos && keepLogos[k] && keepLogos[k].mode === 'custom' && keepLogos[k].data) {
+              if (!merged.logos[k] || !merged.logos[k].data) merged.logos[k] = keepLogos[k];
+            }
+          });
+          state = merged;
+        }
+
+        // 2. Nạp danh sách Nhà cung cấp từ Sheet Nha_Cung_Cap
+        if (Array.isArray(data.suppliers) && data.suppliers.length > 0) {
+          var oldAvatarMap = {};
+          (state.suppliers || []).forEach(function (s) {
+            if (s.id && s.avatar) oldAvatarMap[s.id] = s.avatar;
+          });
+          state.suppliers = data.suppliers.map(function (s, idx) {
+            var sid = s.id ? String(s.id) : ('sup_s_' + idx);
+            return {
+              id: sid,
+              code: String(s.code || ''),
+              name: String(s.name || 'Nhà cung cấp'),
+              phone: String(s.phone || ''),
+              taxCode: String(s.taxCode || ''),
+              group: String(s.group || ''),
+              address: String(s.address || ''),
+              avatar: oldAvatarMap[sid] || ''
+            };
+          });
+        }
+
+        // 3. Nạp lịch sử phiếu nhập từ Sheet Hoa_Don_Dau_Vao
+        if (Array.isArray(data.inboundHistory)) {
+          state.inboundHistory = data.inboundHistory.map(function (h) {
+            return {
+              savedAt: String(h.savedAt || ''),
+              ngayHoaDon: String(h.ngayHoaDon || ''),
+              ngayNhap: String(h.ngayNhap || ''),
+              loaiChungTu: String(h.loaiChungTu || ''),
+              maPhieu: String(h.maPhieu || ''),
+              maHoaDon: String(h.maHoaDon || ''),
+              maNcc: String(h.maNcc || ''),
+              nhaCungCap: String(h.nhaCungCap || ''),
+              sdtNcc: String(h.sdtNcc || ''),
+              mstCccd: String(h.mstCccd || ''),
+              chiTietHangHoa: String(h.chiTietHangHoa || ''),
+              tongTien: Number(h.tongTien) || 0,
+              hinhThucThanhToan: String(h.hinhThucThanhToan || ''),
+              ghiChu: String(h.ghiChu || ''),
+              synced: true
+            };
+          });
+        }
+
+        saveState();
+
+        // Render lại tab đang mở
+        if (activeTab === 'tab1') renderTab1();
+        if (activeTab === 'tab2') renderTab2();
+        if (activeTab === 'tab3') renderTab3();
+        if (activeTab === 'tab4') renderTab4();
+        if (activeTab === 'tab5') renderTab5();
+
+        var timeNow = new Date().toLocaleTimeString('vi-VN');
+        setServerSyncStatus('✓ Đã đồng bộ từ Google Sheet lúc ' + timeNow + ' (' + (state.suppliers || []).length + ' NCC, ' + (state.inboundHistory || []).length + ' phiếu nhập).', false);
+        if (showFeedback) {
+          showToast('✓ Đã tải dữ liệu mới nhất từ Google Sheet!');
+        }
+        return true;
+      } catch (err) {
+        console.warn('loadAllFromServer error:', err);
+        setServerSyncStatus('⚠ Không tải được từ Sheet: ' + (err.message || 'Kiểm tra lại Link Web App & quyền Bất kỳ ai (Anyone)'), true);
+        if (showFeedback) {
+          showToast('Không tải được từ Sheet! Hãy kiểm tra đã Deploy bản Code.gs có doGet chưa.');
+        }
+        return false;
+      } finally {
+        if (hdrBtn) { hdrBtn.disabled = false; hdrBtn.textContent = '🔄 Tải từ Sheet'; }
+      }
+    };
+
+    window.pushAppStateToServer = async function (showFeedback) {
+      var url = getActiveAppsScriptUrl();
+      if (!url) {
+        if (showFeedback) showToast('Chưa có Link Apps Script ở mục Cấu hình!');
+        return false;
+      }
+      try {
+        // Loại bỏ base64 ảnh logo nặng để lưu JSON gọn nhẹ vào ô Google Sheet
+        var lightState = {
+          meta: state.meta,
+          cleBranches: state.cleBranches,
+          products: state.products,
+          quantities: state.quantities,
+          boxes: state.boxes,
+          receiptCounters: state.receiptCounters,
+          settings: state.settings
+        };
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'saveAppState', appState: lightState })
+        });
+        if (showFeedback) {
+          var t = new Date().toLocaleTimeString('vi-VN');
+          setServerSyncStatus('✓ Đã đẩy đơn đặt hàng & bảng giá lên Sheet lúc ' + t, false);
+          showToast('✓ Đã đồng bộ đơn đặt hàng & bảng giá lên Google Sheet!');
+        }
+        return true;
+      } catch (err) {
+        if (showFeedback) showToast('Lỗi khi đẩy dữ liệu lên Sheet!');
+        return false;
+      }
+    };
+
     /* ================= LIFECYCLE AUTO-SAVE & INIT ================= */
     window.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'hidden') saveState();
@@ -3468,7 +3808,14 @@
 
     function initApp() {
       state = loadState();
+      if (!state.settings.appsScriptUrl && DEFAULT_APPS_SCRIPT_URL) {
+        state.settings.appsScriptUrl = DEFAULT_APPS_SCRIPT_URL;
+        saveState();
+      }
       renderTab1();
+      if (getActiveAppsScriptUrl()) {
+        window.loadAllFromServer(false);
+      }
     }
 
     if (document.readyState === 'loading') {
