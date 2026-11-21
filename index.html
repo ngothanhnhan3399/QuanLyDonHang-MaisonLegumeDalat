@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-  <title>Maison Légume Dalat - Quản lý &amp; In Đơn Đặt Hàng</title>
+  <title>Phần mềm quản lý bán hàng</title>
 
   <!-- PWA Full-screen Standalone cho iPhone / Safari -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Maison Légume">
+  <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=15) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=15">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=15">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=15">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=15">
+  <!-- Icons chống cache Safari (?v=18) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=18">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=18">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=18">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=18">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=18">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=15","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=15","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=18","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=18","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -400,14 +400,38 @@
       margin-top: 2px;
     }
 
+    .mobile-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
     .mobile-qty-input {
-      width: 96px !important;
+      width: 82px !important;
       min-height: 44px;
       font-size: 16px !important;
       text-align: center;
       font-weight: 800;
       flex-shrink: 0;
     }
+
+    .mobile-del-btn {
+      width: 34px;
+      height: 44px;
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: #dc2626;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .mobile-del-btn:active { background: #fee2e2; transform: scale(0.96); }
 
     .mobile-sticky-bar {
       display: none;
@@ -854,10 +878,25 @@
     .history-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 8px;
+      align-items: flex-start;
+      gap: 10px;
       font-weight: 800;
       font-size: 14px;
+    }
+    .history-price {
+      color: #14532d;
+      white-space: nowrap;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .history-badge {
+      display: inline-block;
+      white-space: nowrap;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      vertical-align: middle;
+      margin-left: 4px;
     }
 
     .history-meta {
@@ -943,16 +982,20 @@
 
     /* RESPONSIVE MOBILE */
     @media (max-width: 767px) {
-      .main-wrap { width: 100%; padding: 0 10px; margin-bottom: calc(96px + var(--safe-bottom)); }
+      html, body { overflow-x: hidden; max-width: 100vw; }
+      .main-wrap { width: 100%; padding: 0 10px; margin-bottom: calc(96px + var(--safe-bottom)); overflow-x: hidden; }
       .header-inner, .tabs-inner { width: 100%; }
       .brand-title { font-size: 15.5px; }
       .brand-logo { width: 40px; height: 40px; }
+      .meta-grid { grid-template-columns: 1fr !important; }
+      .meta-grid .field { grid-column: auto !important; min-width: 0; }
       .desktop-order-view { display: none; }
       .mobile-order-view { display: block; }
       .mobile-sticky-bar.active-tab1 { display: flex; }
       input[type="text"], input[type="date"], input[type="number"], input[type="url"], input[type="tel"], select, textarea {
         font-size: 16px;
         min-height: 44px;
+        max-width: 100%;
       }
 
       /* Tab 5 item cards on mobile */
@@ -1038,7 +1081,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=15" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=18" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1514,6 +1557,19 @@
     </div>
   </div>
 
+  <!-- MODAL XÁC NHẬN & NHẬP LIỆU NỘI BỘ (THAY THẾ HỘP THOẠI TRÌNH DUYỆT) -->
+  <div id="customDialogModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeCustomDialog()">
+    <div class="modal-box" style="max-width:400px;">
+      <div class="modal-title" id="customDialogTitle">Xác nhận</div>
+      <div id="customDialogMsg" style="font-size:13.5px; color:#374151; margin-bottom:14px;"></div>
+      <input type="text" id="customDialogInput" style="display:none; margin-bottom:14px;" placeholder="Nhập nội dung...">
+      <div style="display:flex; gap:8px; justify-content:center;">
+        <button type="button" id="customDialogOkBtn" class="btn btn-dark" style="flex:1;">Đồng ý</button>
+        <button type="button" class="btn btn-outline" style="flex:1;" onclick="closeCustomDialog()">Hủy</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast no-print"></div>
 
   <script>
@@ -1554,6 +1610,59 @@
     var pendingExportBlob = null;
     var pendingExportFilename = '';
     var pendingExportMime = '';
+
+    /* ================= CUSTOM MODAL DIALOG (CONFIRM & INPUT) ================= */
+    function openConfirmDialog(message, onConfirm, isDanger) {
+      var modal = document.getElementById('customDialogModal');
+      var titleEl = document.getElementById('customDialogTitle');
+      var msgEl = document.getElementById('customDialogMsg');
+      var inpEl = document.getElementById('customDialogInput');
+      var okBtn = document.getElementById('customDialogOkBtn');
+
+      titleEl.textContent = 'Xác nhận';
+      msgEl.textContent = message;
+      inpEl.style.display = 'none';
+      inpEl.value = '';
+      okBtn.textContent = isDanger ? 'Xóa / Đặt lại' : 'Đồng ý';
+      okBtn.className = isDanger ? 'btn btn-danger' : 'btn btn-dark';
+      okBtn.onclick = function () {
+        window.closeCustomDialog();
+        if (typeof onConfirm === 'function') onConfirm();
+      };
+      modal.classList.add('show');
+    }
+
+    function openPromptDialog(title, placeholder, onSubmit) {
+      var modal = document.getElementById('customDialogModal');
+      var titleEl = document.getElementById('customDialogTitle');
+      var msgEl = document.getElementById('customDialogMsg');
+      var inpEl = document.getElementById('customDialogInput');
+      var okBtn = document.getElementById('customDialogOkBtn');
+
+      titleEl.textContent = title;
+      msgEl.textContent = '';
+      inpEl.style.display = 'block';
+      inpEl.value = '';
+      inpEl.placeholder = placeholder || '';
+      okBtn.textContent = 'Thêm';
+      okBtn.className = 'btn btn-dark';
+
+      var submitAction = function () {
+        var val = inpEl.value.trim();
+        window.closeCustomDialog();
+        if (val && typeof onSubmit === 'function') onSubmit(val);
+      };
+      okBtn.onclick = submitAction;
+      inpEl.onkeydown = function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); submitAction(); }
+      };
+      modal.classList.add('show');
+      setTimeout(function () { inpEl.focus(); }, 60);
+    }
+
+    window.closeCustomDialog = function () {
+      document.getElementById('customDialogModal').classList.remove('show');
+    };
 
     /* ================= DATE & FORMAT HELPERS ================= */
     function toYMD(dateObj) {
@@ -2073,11 +2182,14 @@
         var q = getQty(p.id, storeKey);
         var price = storeKey === 'trauVang' ? p.priceTrau : (storeKey === 'tamVang' ? p.priceTam : p.priceCle);
         return '<div class="mobile-card-item ' + (q > 0 ? 'has-val' : '') + '" id="mcard_' + esc(p.id) + '">' +
-          '<div>' +
+          '<div style="min-width:0; flex:1;">' +
             '<div class="mobile-card-name">' + (idx + 1) + '. ' + esc(p.name) + '</div>' +
             '<div class="mobile-card-price">' + fmtVND(price) + '</div>' +
           '</div>' +
-          '<input type="text" inputmode="decimal" class="mobile-qty-input" value="' + esc(fmtQty(q)) + '" placeholder="0" oninput="onMobileQtyInput(this, \'' + esc(p.id) + '\')">' +
+          '<div class="mobile-card-actions">' +
+            '<input type="text" inputmode="decimal" class="mobile-qty-input" value="' + esc(fmtQty(q)) + '" placeholder="0" oninput="onMobileQtyInput(this, \'' + esc(p.id) + '\')">' +
+            '<button type="button" class="mobile-del-btn" title="Xóa sản phẩm" onclick="deleteProduct(\'' + esc(p.id) + '\')">✕</button>' +
+          '</div>' +
         '</div>';
       }).join('');
       document.getElementById('mobileItemsList').innerHTML = itemsHtml;
@@ -2140,30 +2252,31 @@
     };
 
     window.clearTodayQuantities = function () {
-      if (!confirm('Xóa toàn bộ số lượng và số thùng của đơn hiện tại?')) return;
-      state.quantities = {};
-      state.boxes = {};
-      saveState();
-      renderTab1();
-      showToast('Đã xóa sạch số lượng cho ngày mới!');
+      openConfirmDialog('Xóa toàn bộ số lượng và số thùng của đơn hiện tại?', function () {
+        state.quantities = {};
+        state.boxes = {};
+        saveState();
+        renderTab1();
+        showToast('Đã xóa sạch số lượng cho ngày mới!');
+      }, true);
     };
 
     window.addNewProductPrompt = function () {
-      var name = prompt('Nhập tên sản phẩm mới:');
-      if (!name || !name.trim()) return;
-      state.products.push({
-        id: 'p_' + Date.now(),
-        code: '',
-        name: name.trim(),
-        cleName: name.trim(),
-        priceTrau: 0,
-        priceTam: 0,
-        priceCle: 0
+      openPromptDialog('Thêm sản phẩm mới', 'Nhập tên sản phẩm mới...', function (name) {
+        state.products.push({
+          id: 'p_' + Date.now(),
+          code: '',
+          name: name,
+          cleName: name,
+          priceTrau: 0,
+          priceTam: 0,
+          priceCle: 0
+        });
+        saveState();
+        renderTab1();
+        renderTab2();
+        showToast('Đã thêm sản phẩm: ' + name);
       });
-      saveState();
-      renderTab1();
-      renderTab2();
-      showToast('Đã thêm sản phẩm: ' + name.trim());
     };
 
     /* ================= TAB 2: PRICES, GOOGLE SHEET, LOGOS, BACKUP ================= */
@@ -2235,12 +2348,21 @@
     };
 
     window.deleteProduct = function (id) {
-      if (!confirm('Xóa sản phẩm này khỏi danh mục?')) return;
-      state.products = state.products.filter(function (x) { return x.id !== id; });
-      delete state.quantities[id];
-      saveState();
-      renderTab2();
-      showToast('Đã xóa sản phẩm!');
+      var target = state.products.find(function (x) { return x.id === id; });
+      var label = target ? target.name : 'sản phẩm này';
+      openConfirmDialog('Xóa "' + label + '" khỏi danh mục?', function () {
+        state.products = state.products.filter(function (x) { return x.id !== id; });
+        delete state.quantities[id];
+        saveState();
+        renderTab1();
+        renderTab2();
+        if (activeTab === 'tab3') renderTab3();
+        if (activeTab === 'tab4') renderTab4();
+        showToast('Đã xóa: ' + label);
+        if (getActiveAppsScriptUrl()) {
+          window.pushAppStateToServer(false);
+        }
+      }, true);
     };
 
     window.addCleBranch = function () {
@@ -2263,10 +2385,11 @@
         showToast('Cần giữ lại ít nhất 1 chi nhánh!');
         return;
       }
-      if (!confirm('Xóa chi nhánh Cleverfood - ' + code + '?')) return;
-      state.cleBranches = state.cleBranches.filter(function (b) { return b !== code; });
-      saveState();
-      renderTab2();
+      openConfirmDialog('Xóa chi nhánh Cleverfood - ' + code + '?', function () {
+        state.cleBranches = state.cleBranches.filter(function (b) { return b !== code; });
+        saveState();
+        renderTab2();
+      }, true);
     };
 
     window.triggerLogoUpload = function (groupKey) {
@@ -2511,10 +2634,13 @@
 
     window.copyBackupJSON = function () {
       var str = JSON.stringify(state);
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(str).then(function () { showToast('Đã copy mã sao lưu JSON!'); });
-      } else {
-        document.getElementById('txtRestoreJson').value = str;
+      var ta = document.getElementById('txtRestoreJson');
+      ta.value = str;
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast('Đã copy mã sao lưu JSON!');
+      } catch (e) {
         showToast('Đã xuất mã vào ô bên dưới, hãy chọn tất cả để copy!');
       }
     };
@@ -2554,12 +2680,13 @@
     };
 
     window.resetAllFactoryData = function () {
-      if (!confirm('Đặt lại toàn bộ ứng dụng về mặc định ban đầu?')) return;
-      state = createDefaultState();
-      saveState();
-      renderTab1();
-      renderTab2();
-      showToast('Đã đặt lại dữ liệu mặc định!');
+      openConfirmDialog('Đặt lại toàn bộ ứng dụng về mặc định ban đầu?', function () {
+        state = createDefaultState();
+        saveState();
+        renderTab1();
+        renderTab2();
+        showToast('Đã đặt lại dữ liệu mặc định!');
+      }, true);
     };
 
     /* ================= TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1) ================= */
@@ -2618,14 +2745,18 @@
       var hasLogo = !!logoHtml;
 
       if (isDirectStore) {
+        var shiftDatesForTamVang = (groupKey === 'tamVang' && hasLogo);
+        var datesBlockHtml = '<div class="tv-dates">' +
+          '<div>Ngày đặt hàng: ' + esc(formatDateVN(state.meta.orderDate)) + '</div>' +
+          '<div>Ngày nhận hàng: ' + esc(formatDateVN(state.meta.deliveryDate)) + '</div>' +
+        '</div>';
+
         return '<div class="a4-paper tv-template">' +
           '<div class="tv-title">' + esc(title) + '</div>' +
+          (shiftDatesForTamVang ? '' : ('<div style="margin-bottom:10px;">' + datesBlockHtml + '</div>')) +
           '<div class="tv-top-grid ' + (hasLogo ? 'has-logo' : 'no-logo') + '">' +
             '<div class="tv-top-left">' +
-              '<div class="tv-dates">' +
-                '<div>Ngày đặt hàng: ' + esc(formatDateVN(state.meta.orderDate)) + '</div>' +
-                '<div>Ngày nhận hàng: ' + esc(formatDateVN(state.meta.deliveryDate)) + '</div>' +
-              '</div>' +
+              (shiftDatesForTamVang ? datesBlockHtml : '') +
               '<div class="tv-meta-lines">' +
                 '<div>Nhà cung cấp: ' + esc(state.meta.supplier) + '</div>' +
                 '<div>Cửa hàng: ' + esc(storeLabel) + '</div>' +
@@ -3480,12 +3611,13 @@
     window.deleteSupplier = function (id) {
       var sup = findSupplierById(id);
       if (!sup) return;
-      if (!confirm('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?')) return;
-      state.suppliers = state.suppliers.filter(function (s) { return s.id !== id; });
-      saveState();
-      window.renderSupplierList();
-      renderSupplierDropdown('');
-      showToast('Đã xóa nhà cung cấp!');
+      openConfirmDialog('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?', function () {
+        state.suppliers = state.suppliers.filter(function (s) { return s.id !== id; });
+        saveState();
+        window.renderSupplierList();
+        renderSupplierDropdown('');
+        showToast('Đã xóa nhà cung cấp!');
+      }, true);
     };
 
     /* ================= TAB 5: NHẬP HÀNG (iSHOP PRO -> GOOGLE SHEET) ================= */
@@ -3726,12 +3858,12 @@
       }
       box.innerHTML = state.inboundHistory.map(function (h) {
         var badge = h.synced
-          ? '<span style="background:#dcfce7; color:#166534; padding:2px 8px; border-radius:999px; font-size:11px;">Đã gửi Sheet</span>'
-          : '<span style="background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:999px; font-size:11px;">Chỉ lưu máy</span>';
+          ? '<span class="history-badge" style="background:#dcfce7; color:#166534;">Đã gửi Sheet</span>'
+          : '<span class="history-badge" style="background:#fef3c7; color:#92400e;">Chỉ lưu máy</span>';
         return '<div class="history-card">' +
           '<div class="history-top">' +
-            '<span>' + esc(h.nhaCungCap) + (h.sdtNcc ? (' (' + esc(h.sdtNcc) + ')') : '') + ' ' + badge + '</span>' +
-            '<span style="color:#14532d;">' + fmtVND(h.tongTien) + '</span>' +
+            '<span style="min-width:0; word-break:break-word;">' + esc(h.nhaCungCap) + (h.sdtNcc ? (' (' + esc(h.sdtNcc) + ')') : '') + badge + '</span>' +
+            '<span class="history-price">' + fmtVND(h.tongTien) + '</span>' +
           '</div>' +
           '<div class="history-meta">' +
             esc(h.ngayHoaDon) +
@@ -3745,10 +3877,11 @@
     }
 
     window.clearInboundHistory = function () {
-      if (!confirm('Xóa danh sách lịch sử hiển thị cục bộ (không ảnh hưởng Google Sheet)?')) return;
-      state.inboundHistory = [];
-      saveState();
-      renderInboundHistory();
+      openConfirmDialog('Xóa danh sách lịch sử hiển thị cục bộ (không ảnh hưởng Google Sheet)?', function () {
+        state.inboundHistory = [];
+        saveState();
+        renderInboundHistory();
+      }, true);
     };
 
     /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
@@ -3939,4 +4072,3 @@
   </script>
 </body>
 </html>
-Evaluating google sheets price sync logic
