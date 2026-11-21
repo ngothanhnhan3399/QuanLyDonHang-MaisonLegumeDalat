@@ -1,3 +1,8 @@
+
+
+
+Biểu tượng HTML
+index-maison-legume-v14
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -12,15 +17,15 @@
   <meta name="apple-mobile-web-app-title" content="Maison Légume">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=13) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=13">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=13">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=13">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=13">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=13">
+  <!-- Icons chống cache Safari (?v=14) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=14">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=14">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=14">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=14">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=14">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=13","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=13","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=14","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=14","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -454,36 +459,40 @@
 
     .a4-header-row {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 10px;
+      gap: 18px;
+      margin-bottom: 12px;
     }
 
     .a4-title {
       text-align: center;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      width: 100%;
     }
 
     .a4-dates {
       text-align: center;
       font-size: 13px;
+      font-weight: 600;
       margin-bottom: 12px;
-      line-height: 1.5;
+      line-height: 1.55;
+      width: 100%;
     }
 
     .a4-info-block {
       font-size: 13.5px;
-      line-height: 1.6;
+      line-height: 1.65;
+      flex: 1;
     }
 
     .a4-logo-box {
-      width: 130px;
-      max-height: 70px;
+      width: 165px;
+      max-height: 100px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -491,8 +500,8 @@
     }
 
     .a4-logo-box img, .a4-logo-box svg {
-      max-width: 130px;
-      max-height: 68px;
+      max-width: 165px;
+      max-height: 98px;
       object-fit: contain;
     }
 
@@ -528,21 +537,30 @@
       text-transform: uppercase;
       letter-spacing: 0.4px;
       color: #000;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       line-height: 1.25;
+      width: 100%;
     }
 
     .tv-top-grid {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 10px;
+      gap: 18px;
+      margin-bottom: 12px;
+    }
+
+    .tv-top-grid.no-logo {
+      display: block;
     }
 
     .tv-top-left {
       flex: 1;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
     }
 
     .tv-dates {
@@ -550,21 +568,21 @@
       font-size: 13.5px;
       font-weight: 700;
       font-style: italic;
-      line-height: 1.65;
-      margin-bottom: 12px;
+      line-height: 1.7;
       color: #000;
+      width: 100%;
     }
 
     .tv-meta-lines {
       font-size: 14px;
       font-weight: 700;
-      line-height: 1.7;
+      line-height: 1.75;
       color: #000;
     }
 
     .tv-logo-box {
-      width: 135px;
-      height: 120px;
+      width: 170px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -572,8 +590,8 @@
     }
 
     .tv-logo-box img, .tv-logo-box svg {
-      max-width: 135px;
-      max-height: 120px;
+      max-width: 170px;
+      max-height: 150px;
       object-fit: contain;
     }
 
@@ -1025,7 +1043,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=13" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=14" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -2505,10 +2523,13 @@
       var boxesVal = getStoreBoxes(storeKey);
       var title = (state.meta.printTitle || 'ĐƠN ĐẶT HÀNG RAU ĐÀ LẠT').trim();
 
+      var logoHtml = renderLogoHTML(groupKey);
+      var hasLogo = !!logoHtml;
+
       if (isDirectStore) {
         return '<div class="a4-paper tv-template">' +
           '<div class="tv-title">' + esc(title) + '</div>' +
-          '<div class="tv-top-grid">' +
+          '<div class="tv-top-grid ' + (hasLogo ? 'has-logo' : 'no-logo') + '">' +
             '<div class="tv-top-left">' +
               '<div class="tv-dates">' +
                 '<div>Ngày đặt hàng: ' + esc(formatDateVN(state.meta.orderDate)) + '</div>' +
@@ -2519,7 +2540,7 @@
                 '<div>Cửa hàng: ' + esc(storeLabel) + '</div>' +
               '</div>' +
             '</div>' +
-            '<div class="tv-logo-box">' + renderLogoHTML(groupKey) + '</div>' +
+            (hasLogo ? ('<div class="tv-logo-box">' + logoHtml + '</div>') : '') +
           '</div>' +
           '<table class="tv-table">' +
             '<thead><tr>' +
@@ -2559,7 +2580,7 @@
             '<div><strong>Nhà cung cấp:</strong> ' + esc(state.meta.supplier) + '</div>' +
             '<div><strong>Cửa hàng:</strong> ' + esc(storeLabel) + '</div>' +
           '</div>' +
-          '<div class="a4-logo-box">' + renderLogoHTML(groupKey) + '</div>' +
+          (hasLogo ? ('<div class="a4-logo-box">' + logoHtml + '</div>') : '') +
         '</div>' +
         '<table class="a4-table">' +
           '<thead><tr>' +
@@ -3827,3 +3848,4 @@
   </script>
 </body>
 </html>
+Locating the generated website files
