@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Maison Légume">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=8) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=8">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=8">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=8">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=8">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=8">
+  <!-- Icons chống cache Safari (?v=11) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=11">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=11">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=11">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=11">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=11">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=8","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=8","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=11","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=11","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -244,6 +244,7 @@
     input[type="date"],
     input[type="number"],
     input[type="url"],
+    input[type="tel"],
     select,
     textarea {
       width: 100%;
@@ -428,14 +429,13 @@
     .paper-stage {
       width: 100%;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: block;
       padding: 8px 0 24px;
     }
 
     .paper-scale-box {
       width: 210mm;
+      margin: 0 auto;
       transform-origin: top left;
     }
 
@@ -447,9 +447,9 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
       border-radius: 4px;
       margin-bottom: 20px;
-      font-family: Arial, 'Helvetica Neue', sans-serif;
-      font-size: 13px;
-      line-height: 1.4;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12.5px;
+      line-height: 1.45;
     }
 
     .a4-header-row {
@@ -561,7 +561,136 @@
       object-fit: contain;
     }
 
-    /* TAB 5: NHẬP HÀNG (iSHOP PRO STYLE) */
+    /* TAB 5: NHẬP HÀNG & DANH BẠ NCC */
+    .supplier-select-row {
+      display: flex;
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    .supplier-select-row select {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .supplier-info-pill {
+      display: none;
+      margin-top: 8px;
+      padding: 10px 12px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 10px;
+      font-size: 12.5px;
+      color: #166534;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .supplier-info-pill.show { display: flex; }
+
+    .supplier-avatar-sm {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #dcfce7;
+      border: 1.5px solid #86efac;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #14532d;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .supplier-avatar-sm img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .supplier-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .supplier-item-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 11px 12px;
+      background: #fafafa;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .supplier-item-body {
+      flex: 1;
+      min-width: 0;
+      font-size: 12.5px;
+    }
+
+    .supplier-item-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .supplier-item-meta {
+      color: var(--muted);
+      margin-top: 2px;
+      word-break: break-word;
+    }
+
+    .supplier-item-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    /* SUPPLIER MODAL (iShop Pro Style) */
+    .ncc-avatar-upload {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      background: #f8fafc;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .ncc-avatar-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid #86efac;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      overflow: hidden;
+    }
+
+    .ncc-avatar-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .ncc-form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .ncc-form-stack .req { color: var(--danger); }
+
     .warning-5m {
       display: none;
       margin-top: 10px;
@@ -702,7 +831,7 @@
       .desktop-order-view { display: none; }
       .mobile-order-view { display: block; }
       .mobile-sticky-bar.active-tab1 { display: flex; }
-      input[type="text"], input[type="date"], input[type="number"], input[type="url"], select, textarea {
+      input[type="text"], input[type="date"], input[type="number"], input[type="url"], input[type="tel"], select, textarea {
         font-size: 16px;
         min-height: 44px;
       }
@@ -790,7 +919,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=8" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=11" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1013,7 +1142,7 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 5: NHẬP HÀNG (iSHOP PRO -> GOOGLE SHEET) ==================== -->
+    <!-- ==================== TAB 5: NHẬP HÀNG & QUẢN LÝ NCC ==================== -->
     <section id="tab5" class="tab-panel">
       <!-- Cấu hình Apps Script -->
       <div class="card">
@@ -1029,21 +1158,58 @@
         </details>
       </div>
 
+      <!-- Quản lý danh bạ Nhà cung cấp (NCC) -->
+      <div class="card">
+        <details id="detSupplierManager">
+          <summary style="cursor:pointer; font-size:14px; font-weight:800; color:#14532d; display:flex; align-items:center; justify-content:space-between; list-style:none;">
+            <span>👥 Danh bạ Nhà cung cấp (<span id="supplierCountBadge">0</span>)</span>
+            <span style="font-size:12px; color:#15803d; font-weight:700;">Bấm mở / đóng ▾</span>
+          </summary>
+          <div style="margin-top: 12px;">
+            <div class="toolbar" style="margin-bottom: 8px;">
+              <input type="text" id="inpSearchSupplier" placeholder="Tìm tên, mã, SĐT nhà cung cấp..." style="max-width:300px;" oninput="renderSupplierList()">
+              <div class="toolbar-group">
+                <button type="button" class="btn btn-soft btn-sm" id="btnSyncAllSuppliers" onclick="syncAllSuppliersToSheet()">☁️ Đồng bộ NCC lên Sheet</button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="openSupplierModal('')">+ Thêm mới nhà cung cấp</button>
+              </div>
+            </div>
+            <div id="supplierListGrid" class="supplier-list-grid"></div>
+          </div>
+        </details>
+      </div>
+
       <!-- Form phiếu nhập hàng -->
       <div class="card">
         <div class="card-title">
           <span>📦 Phiếu nhập hàng đầu vào</span>
-          <button type="button" class="btn btn-outline btn-sm" onclick="resetInboundForm()">Làm mới phiếu</button>
+          <div class="toolbar-group">
+            <button type="button" class="btn btn-soft btn-sm" onclick="openSupplierModal('')">+ Thêm NCC mới</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="resetInboundForm()">Làm mới phiếu</button>
+          </div>
         </div>
 
         <div class="meta-grid">
+          <div class="field" style="grid-column: span 2;">
+            <label for="inSupplierSelect">Nhà cung cấp (Chọn từ danh sách)</label>
+            <div class="supplier-select-row">
+              <select id="inSupplierSelect" onchange="onSelectInboundSupplier(this.value)"></select>
+              <button type="button" class="btn btn-primary btn-sm" onclick="openSupplierModal('')" title="Thêm nhà cung cấp mới">+ NCC</button>
+            </div>
+            <input type="text" id="inNhaCungCapManual" placeholder="Hoặc nhập nhanh tên NCC khác..." style="margin-top:6px; display:none;" oninput="autoFillInboundCodes()">
+            <div id="selectedSupplierInfo" class="supplier-info-pill"></div>
+          </div>
+
+          <div class="field">
+            <label for="inMstCccd">MST / CCCD</label>
+            <input type="text" id="inMstCccd" placeholder="Tự điền theo NCC hoặc nhập tay">
+          </div>
           <div class="field">
             <label for="inNgayHoaDon">Ngày hóa đơn</label>
-            <input type="date" id="inNgayHoaDon">
+            <input type="date" id="inNgayHoaDon" onchange="onInboundDateChange()">
           </div>
           <div class="field">
             <label for="inNgayNhap">Ngày nhập</label>
-            <input type="date" id="inNgayNhap">
+            <input type="date" id="inNgayNhap" onchange="onInboundDateChange()">
           </div>
           <div class="field">
             <label for="inLoaiChungTu">Loại chứng từ</label>
@@ -1054,21 +1220,15 @@
             </select>
           </div>
           <div class="field">
-            <label for="inMaPhieu">Mã phiếu</label>
-            <input type="text" id="inMaPhieu" placeholder="Ví dụ: CT001">
+            <label for="inMaPhieu">Mã phiếu (Tự sinh theo NCC)</label>
+            <div class="supplier-select-row">
+              <input type="text" id="inMaPhieu" placeholder="VD: CT21111">
+              <button type="button" class="btn btn-outline btn-sm" onclick="autoFillInboundCodes(true)" title="Tạo lại mã phiếu &amp; mã hóa đơn">🔄</button>
+            </div>
           </div>
           <div class="field">
-            <label for="inMaHoaDon">Mã hóa đơn</label>
-            <input type="text" id="inMaHoaDon" placeholder="Ví dụ: HDCT001">
-          </div>
-          <div class="field">
-            <label for="inNhaCungCap">Nhà cung cấp</label>
-            <input type="text" id="inNhaCungCap" list="dlInboundSuppliers" placeholder="Ví dụ: Cô Thể">
-            <datalist id="dlInboundSuppliers"></datalist>
-          </div>
-          <div class="field">
-            <label for="inMstCccd">MST / CCCD</label>
-            <input type="text" id="inMstCccd" placeholder="Tùy chọn">
+            <label for="inMaHoaDon">Mã hóa đơn (Tự sinh theo NCC)</label>
+            <input type="text" id="inMaHoaDon" placeholder="VD: HDCT21111">
           </div>
           <div class="field">
             <label for="inHinhThucTT">Hình thức thanh toán</label>
@@ -1147,6 +1307,72 @@
     <button type="button" class="btn btn-dark btn-sm" onclick="switchTab('tab3')">Xem &amp; In A4</button>
   </div>
 
+  <!-- MODAL THÊM / SỬA NHÀ CUNG CẤP -->
+  <div id="supplierModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeSupplierModal()">
+    <div class="modal-box" style="text-align:left;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div class="modal-title" id="supplierModalTitle" style="margin-bottom:0;">Thêm mới nhà cung cấp</div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeSupplierModal()">✕</button>
+      </div>
+
+      <input type="hidden" id="nccEditId" value="">
+      <input type="file" id="nccAvatarInput" accept="image/*" style="display:none" onchange="handleSupplierAvatarChange(event)">
+
+      <div class="ncc-avatar-upload" onclick="document.getElementById('nccAvatarInput').click()">
+        <div class="ncc-avatar-circle" id="nccAvatarPreview">👤</div>
+        <div style="font-size:13.5px; font-weight:700; color:#111827;">Ảnh nhà cung cấp</div>
+        <div style="font-size:12px; color:#6b7280;">(Bấm để chọn tối đa 1 ảnh)</div>
+      </div>
+
+      <div class="ncc-form-stack">
+        <div class="field">
+          <label for="nccName">Tên nhà cung cấp <span class="req">*</span></label>
+          <input type="text" id="nccName" placeholder="Ví dụ: Cô Thể" oninput="onSupplierNameInput(this.value)">
+        </div>
+        <div class="field">
+          <label for="nccCode">Mã NCC / Chuỗi tự sinh mã phiếu <span class="req">*</span></label>
+          <input type="text" id="nccCode" placeholder="Ví dụ: CT (tự viết tắt từ tên)" oninput="onSupplierCodeManualInput(this.value)">
+          <div id="nccCodePreview" style="font-size:12px; color:#15803d; font-weight:700; margin-top:2px;"></div>
+        </div>
+        <div class="field">
+          <label for="nccPhone">Số điện thoại <span class="req">*</span></label>
+          <input type="tel" id="nccPhone" inputmode="tel" placeholder="Ví dụ: 0912345678">
+        </div>
+        <div class="field">
+          <label for="nccTax">Mã số thuế / CCCD</label>
+          <input type="text" id="nccTax" placeholder="Nhập MST hoặc CCCD (nếu có)">
+        </div>
+        <div class="field">
+          <label for="nccGroup">Nhóm nhà cung cấp</label>
+          <select id="nccGroup">
+            <option value="">-- Chọn nhóm nhà cung cấp --</option>
+            <option value="Nhà vườn Đà Lạt">Nhà vườn Đà Lạt</option>
+            <option value="Vựa / Đầu mối">Vựa / Đầu mối</option>
+            <option value="Hợp tác xã">Hợp tác xã</option>
+            <option value="Công ty / Doanh nghiệp">Công ty / Doanh nghiệp</option>
+            <option value="Khác">Khác</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="nccAddress">Địa chỉ</label>
+          <input type="text" id="nccAddress" list="dlDalatAddresses" placeholder="Ví dụ: Phường 7, Đà Lạt, Lâm Đồng">
+          <datalist id="dlDalatAddresses">
+            <option value="Đà Lạt, Lâm Đồng"></option>
+            <option value="Đơn Dương, Lâm Đồng"></option>
+            <option value="Đức Trọng, Lâm Đồng"></option>
+            <option value="Lạc Dương, Lâm Đồng"></option>
+            <option value="Trại Mát, Đà Lạt, Lâm Đồng"></option>
+          </datalist>
+        </div>
+
+        <div style="display:flex; gap:8px; margin-top:8px;">
+          <button type="button" class="btn btn-dark" style="flex:1;" onclick="saveSupplierForm()">💾 Lưu nhà cung cấp</button>
+          <button type="button" class="btn btn-outline" onclick="closeSupplierModal()">Hủy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL XUẤT PDF / CHỤP ẢNH -->
   <div id="exportModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeExportModal()">
     <div class="modal-box">
@@ -1194,6 +1420,8 @@
     var mobileSelectedGroup = 'trauVang';
     var mobileSelectedCleBranch = 'MĐ';
     var inboundRows = [];
+    var nccTempAvatar = '';
+    var nccCodeManuallyEdited = false;
     var pendingExportBlob = null;
     var pendingExportFilename = '';
     var pendingExportMime = '';
@@ -1298,13 +1526,57 @@
           appsScriptUrl: ''
         },
         inboundHistory: [],
-        inboundSuppliers: ['Cô Thể']
+        receiptCounters: {},
+        suppliers: [
+          {
+            id: 'sup_default_1',
+            code: 'CT',
+            name: 'Cô Thể',
+            phone: '',
+            taxCode: '',
+            group: 'Nhà vườn Đà Lạt',
+            address: 'Đà Lạt, Lâm Đồng',
+            avatar: ''
+          }
+        ]
       };
     }
 
     function normalizeState(raw) {
       var def = createDefaultState();
       if (!raw || typeof raw !== 'object') return def;
+
+      // Migrate legacy inboundSuppliers (array of strings) -> suppliers (array of objects)
+      var suppliersList = [];
+      if (Array.isArray(raw.suppliers) && raw.suppliers.length) {
+        suppliersList = raw.suppliers.map(function (sup, idx) {
+          return {
+            id: sup && sup.id ? String(sup.id) : ('sup_' + idx + '_' + Date.now()),
+            code: sup && sup.code ? String(sup.code) : '',
+            name: sup && sup.name ? String(sup.name) : 'Nhà cung cấp',
+            phone: sup && sup.phone ? String(sup.phone) : '',
+            taxCode: sup && sup.taxCode ? String(sup.taxCode) : '',
+            group: sup && sup.group ? String(sup.group) : '',
+            address: sup && sup.address ? String(sup.address) : '',
+            avatar: sup && sup.avatar ? String(sup.avatar) : ''
+          };
+        });
+      } else if (Array.isArray(raw.inboundSuppliers) && raw.inboundSuppliers.length) {
+        suppliersList = raw.inboundSuppliers.map(function (nameStr, idx) {
+          return {
+            id: 'sup_mig_' + idx,
+            code: '',
+            name: String(nameStr || 'Nhà cung cấp'),
+            phone: '',
+            taxCode: '',
+            group: 'Nhà vườn Đà Lạt',
+            address: '',
+            avatar: ''
+          };
+        });
+      } else {
+        suppliersList = def.suppliers;
+      }
 
       var s = {
         meta: Object.assign({}, def.meta, raw.meta || {}),
@@ -1319,7 +1591,8 @@
         },
         settings: Object.assign({}, def.settings, raw.settings || {}),
         inboundHistory: Array.isArray(raw.inboundHistory) ? raw.inboundHistory : [],
-        inboundSuppliers: Array.isArray(raw.inboundSuppliers) && raw.inboundSuppliers.length ? raw.inboundSuppliers : def.inboundSuppliers
+        receiptCounters: (raw.receiptCounters && typeof raw.receiptCounters === 'object') ? raw.receiptCounters : {},
+        suppliers: suppliersList
       };
 
       s.products = s.products.map(function (p, i) {
@@ -1424,12 +1697,12 @@
 
     function getCustomerPresetSVG(groupKey) {
       if (groupKey === 'trauVang') {
-        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="900" fill="#92400e">TRÂU VÀNG</text></svg>';
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#fef3c7" stroke="#b45309" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="22" font-weight="900" fill="#92400e">TRÂU VÀNG</text></svg>';
       }
       if (groupKey === 'tamVang') {
-        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="900" fill="#b45309">TÂM VÀNG</text></svg>';
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#fffbeb" stroke="#d97706" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="22" font-weight="900" fill="#b45309">TÂM VÀNG</text></svg>';
       }
-      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="900" fill="#14532d">CLEVERFOOD</text></svg>';
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60"><rect x="2" y="2" width="176" height="56" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/><text x="90" y="36" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="20" font-weight="900" fill="#14532d">CLEVERFOOD</text></svg>';
     }
 
     function renderLogoHTML(groupKey) {
@@ -1568,7 +1841,6 @@
 
       var boxRowIdx = state.products.length;
       var tfoot = '<tfoot>';
-      // Dòng Tổng số lượng
       tfoot += '<tr><td colspan="2" style="text-align:right;">Tổng số lượng</td>';
       stores.forEach(function (s) {
         tfoot += '<td style="text-align:center;" id="colTot_' + esc(s.key) + '">' + fmtQtyZero(getStoreTotalQty(s.key)) + '</td>';
@@ -1578,7 +1850,6 @@
       }
       tfoot += '</tr>';
 
-      // Dòng Số thùng
       tfoot += '<tr><td colspan="2" style="text-align:right;">Số thùng</td>';
       stores.forEach(function (s, cIdx) {
         var bVal = parseNum(state.boxes[s.key]);
@@ -1767,14 +2038,12 @@
       document.getElementById('inpSheetTab').value = state.settings.sheetTab || '';
       document.getElementById('chkUpdateExistingOnly').checked = state.settings.updateExistingOnly !== false;
 
-      // Branch tags
       document.getElementById('branchTagsList').innerHTML = state.cleBranches.map(function (b) {
         return '<span class="chip-btn active" style="display:inline-flex; align-items:center; gap:6px;">' +
           esc(b) +
           ' <span style="cursor:pointer; opacity:0.85;" onclick="removeCleBranch(\'' + esc(b) + '\')">✕</span></span>';
       }).join('');
 
-      // Logos
       var logoDefs = [
         { key: 'trauVang', name: 'Trâu vàng' },
         { key: 'tamVang', name: 'Tâm vàng' },
@@ -1794,7 +2063,6 @@
         '</div>';
       }).join('');
 
-      // Price Editor Table
       var html = '<thead><tr>' +
         '<th style="width:46px;">STT</th>' +
         '<th style="text-align:left; min-width:190px;">Tên sản phẩm</th>' +
@@ -2275,10 +2543,13 @@
       if (!stage || !box) return;
       box.style.transform = 'none';
       box.style.height = 'auto';
-      var availW = stage.clientWidth - 4;
-      var paperW = 794; // 210mm in px @96dpi
-      if (window.innerWidth < 820 && availW > 100 && availW < paperW) {
+      box.style.margin = '0 auto';
+      var availW = stage.clientWidth;
+      var paperW = box.offsetWidth || 794;
+      if (availW > 100 && availW < paperW) {
         var ratio = availW / paperW;
+        box.style.margin = '0';
+        box.style.transformOrigin = 'top left';
         box.style.transform = 'scale(' + ratio.toFixed(4) + ')';
         box.style.height = Math.ceil(box.scrollHeight * ratio) + 'px';
       }
@@ -2289,7 +2560,7 @@
       if (activeTab === 'tab4') scalePaperPreview('tab4Stage', 'tab4ScaleBox');
     });
 
-    /* ================= CLEAN A4 PDF & IMAGE CAPTURE (NO SAFARI FOOTER) ================= */
+    /* ================= CLEAN A4 PDF & IMAGE CAPTURE ================= */
     function isMobileDevice() {
       return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     }
@@ -2405,7 +2676,6 @@
       showToast('Đang tạo file PDF A4...');
       var blob = await renderElementsToPDFBlob(Array.from(papers));
       if (!blob) {
-        // Offline fallback
         var oldTitle = document.title;
         document.title = '\u200B';
         window.print();
@@ -2509,6 +2779,428 @@
       }
     };
 
+    /* ================= AUTO RECEIPT & INVOICE CODE HELPERS ================= */
+    function removeVietnameseTones(str) {
+      return String(str || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D');
+    }
+
+    function sanitizePrefix(str) {
+      return removeVietnameseTones(str).toUpperCase().replace(/[^A-Z0-9]/g, '');
+    }
+
+    function suggestSupplierCode(name) {
+      var clean = removeVietnameseTones(name).trim().toUpperCase().replace(/[^A-Z0-9\s]/g, ' ');
+      var words = clean.split(/\s+/).filter(Boolean);
+      if (!words.length) return '';
+      if (words.length === 1) return words[0].slice(0, 4);
+      return words.map(function (w) { return w.charAt(0); }).join('').slice(0, 6);
+    }
+
+    function getDateDDMM(ymd) {
+      var s = (ymd && /^\d{4}-\d{2}-\d{2}$/.test(ymd)) ? ymd : toYMD(new Date());
+      var p = s.split('-');
+      return p[2] + p[1];
+    }
+
+    function getNextSeqForPrefixDate(prefix, ymd) {
+      var dateKey = (ymd && /^\d{4}-\d{2}-\d{2}$/.test(ymd)) ? ymd : toYMD(new Date());
+      var counterKey = prefix + '_' + dateKey;
+      var maxSeq = Number((state.receiptCounters && state.receiptCounters[counterKey]) || 0);
+      var basePrefix = prefix + getDateDDMM(dateKey);
+
+      (state.inboundHistory || []).forEach(function (h) {
+        var mp = String(h.maPhieu || '').toUpperCase().trim();
+        if (mp.indexOf(basePrefix) === 0) {
+          var tail = mp.slice(basePrefix.length);
+          if (/^\d+$/.test(tail)) {
+            var num = parseInt(tail, 10);
+            if (num > maxSeq) maxSeq = num;
+          }
+        }
+      });
+      return maxSeq + 1;
+    }
+
+    function getCurrentInboundPrefix() {
+      var selVal = (document.getElementById('inSupplierSelect') || {}).value || '';
+      if (selVal && selVal !== '__manual__') {
+        var sup = findSupplierById(selVal);
+        if (sup) {
+          return sanitizePrefix(sup.code) || suggestSupplierCode(sup.name) || 'NCC';
+        }
+      } else if (selVal === '__manual__') {
+        var mName = ((document.getElementById('inNhaCungCapManual') || {}).value || '').trim();
+        if (mName) return suggestSupplierCode(mName) || 'NCC';
+      }
+      return '';
+    }
+
+    window.autoFillInboundCodes = function (showNotice) {
+      var prefix = getCurrentInboundPrefix();
+      var mpInp = document.getElementById('inMaPhieu');
+      var hdInp = document.getElementById('inMaHoaDon');
+      if (!mpInp || !hdInp) return;
+
+      if (!prefix) {
+        if (showNotice) showToast('Hãy chọn Nhà cung cấp trước để tự sinh mã!');
+        return;
+      }
+
+      var dateYMD = (document.getElementById('inNgayNhap') || {}).value
+        || (document.getElementById('inNgayHoaDon') || {}).value
+        || toYMD(new Date());
+      var ddmm = getDateDDMM(dateYMD);
+      var seq = getNextSeqForPrefixDate(prefix, dateYMD);
+      var maPhieu = prefix + ddmm + seq;
+      var maHoaDon = 'HD' + maPhieu;
+
+      mpInp.value = maPhieu;
+      hdInp.value = maHoaDon;
+      if (showNotice) showToast('Đã sinh mã: ' + maPhieu + ' / ' + maHoaDon);
+    };
+
+    window.onInboundDateChange = function () {
+      if (getCurrentInboundPrefix()) {
+        window.autoFillInboundCodes(false);
+      }
+    };
+
+    window.updateSupplierCodePreview = function () {
+      var previewEl = document.getElementById('nccCodePreview');
+      if (!previewEl) return;
+      var codeRaw = (document.getElementById('nccCode') || {}).value || '';
+      var nameRaw = (document.getElementById('nccName') || {}).value || '';
+      var prefix = sanitizePrefix(codeRaw) || suggestSupplierCode(nameRaw) || 'CT';
+      var today = toYMD(new Date());
+      var ddmm = getDateDDMM(today);
+      var seq = getNextSeqForPrefixDate(prefix, today);
+      previewEl.textContent = '✨ Mẫu tự sinh hôm nay: Phiếu ' + prefix + ddmm + seq + ' • HĐ HD' + prefix + ddmm + seq;
+    };
+
+    window.onSupplierNameInput = function (val) {
+      if (!nccCodeManuallyEdited) {
+        var codeEl = document.getElementById('nccCode');
+        if (codeEl) codeEl.value = suggestSupplierCode(val);
+      }
+      window.updateSupplierCodePreview();
+    };
+
+    window.onSupplierCodeManualInput = function (val) {
+      nccCodeManuallyEdited = val.trim().length > 0;
+      window.updateSupplierCodePreview();
+    };
+
+    async function pushSupplierToSheet(supObj) {
+      var url = (state.settings.appsScriptUrl || '').trim();
+      if (!url) return false;
+      try {
+        var cleanSup = {
+          id: supObj.id,
+          code: supObj.code || '',
+          name: supObj.name || '',
+          phone: supObj.phone || '',
+          taxCode: supObj.taxCode || '',
+          group: supObj.group || '',
+          address: supObj.address || ''
+        };
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'saveSupplier', supplier: cleanSup })
+        });
+        return true;
+      } catch (err) {
+        console.warn('Sync supplier error:', err);
+        return false;
+      }
+    }
+
+    window.syncAllSuppliersToSheet = async function () {
+      var url = (state.settings.appsScriptUrl || '').trim();
+      if (!url) {
+        showToast('Chưa có Link Apps Script ở mục Cấu hình phía trên!');
+        document.getElementById('detAppsScriptConfig').open = true;
+        return;
+      }
+      var list = (state.suppliers || []).map(function (s) {
+        return {
+          id: s.id,
+          code: s.code || '',
+          name: s.name || '',
+          phone: s.phone || '',
+          taxCode: s.taxCode || '',
+          group: s.group || '',
+          address: s.address || ''
+        };
+      });
+      if (!list.length) {
+        showToast('Danh bạ chưa có nhà cung cấp nào!');
+        return;
+      }
+      var btn = document.getElementById('btnSyncAllSuppliers');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang đồng bộ...'; }
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'syncAllSuppliers', suppliers: list })
+        });
+        showToast('✓ Đã gửi ' + list.length + ' nhà cung cấp lên sheet Nha_Cung_Cap!');
+      } catch (err) {
+        showToast('Lỗi kết nối khi đồng bộ nhà cung cấp!');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '☁️ Đồng bộ NCC lên Sheet'; }
+      }
+    };
+
+    /* ================= TAB 5: SUPPLIER MANAGER (NCC) ================= */
+    function findSupplierById(id) {
+      return (state.suppliers || []).find(function (s) { return s.id === id; }) || null;
+    }
+
+    function renderSupplierDropdown(selectedId) {
+      var sel = document.getElementById('inSupplierSelect');
+      if (!sel) return;
+      var prev = selectedId !== undefined ? selectedId : sel.value;
+
+      var html = '<option value="">-- Chọn nhà cung cấp --</option>';
+      (state.suppliers || []).forEach(function (s) {
+        var lbl = (s.code ? ('[' + s.code + '] ') : '') + s.name + (s.phone ? (' - ' + s.phone) : '');
+        html += '<option value="' + esc(s.id) + '">' + esc(lbl) + '</option>';
+      });
+      html += '<option value="__manual__">✏️ Nhập tên NCC khác (không lưu danh bạ)</option>';
+      sel.innerHTML = html;
+
+      if (prev && (prev === '__manual__' || findSupplierById(prev))) {
+        sel.value = prev;
+      } else {
+        sel.value = '';
+      }
+      window.onSelectInboundSupplier(sel.value);
+    }
+
+    window.onSelectInboundSupplier = function (val) {
+      var manualInp = document.getElementById('inNhaCungCapManual');
+      var pill = document.getElementById('selectedSupplierInfo');
+      var mstInp = document.getElementById('inMstCccd');
+
+      if (val === '__manual__') {
+        manualInp.style.display = 'block';
+        pill.classList.remove('show');
+        pill.innerHTML = '';
+        return;
+      }
+
+      manualInp.style.display = 'none';
+      var sup = findSupplierById(val);
+      if (!sup) {
+        pill.classList.remove('show');
+        pill.innerHTML = '';
+        return;
+      }
+
+      // Tự động điền MST / CCCD theo NCC vừa chọn
+      if (mstInp) mstInp.value = sup.taxCode || '';
+
+      var avatarHtml = sup.avatar
+        ? '<img src="' + sup.avatar + '" alt="Avatar">'
+        : esc((sup.name || 'N').charAt(0).toUpperCase());
+
+      var details = [];
+      if (sup.code) details.push('Mã: ' + esc(sup.code));
+      if (sup.phone) details.push('SĐT: ' + esc(sup.phone));
+      if (sup.group) details.push('Nhóm: ' + esc(sup.group));
+      if (sup.address) details.push('Đ/c: ' + esc(sup.address));
+
+      pill.innerHTML =
+        '<div class="supplier-avatar-sm">' + avatarHtml + '</div>' +
+        '<div style="flex:1; min-width:0;">' +
+          '<div style="font-weight:800; color:#14532d;">' + esc(sup.name) + '</div>' +
+          '<div style="font-size:12px; color:#166534;">' + (details.length ? details.join(' • ') : 'Chưa có thông tin bổ sung') + '</div>' +
+        '</div>' +
+        '<button type="button" class="btn btn-outline btn-sm" onclick="openSupplierModal(\'' + esc(sup.id) + '\')">Sửa</button>';
+      pill.classList.add('show');
+      window.autoFillInboundCodes(false);
+    };
+
+    window.renderSupplierList = function () {
+      var grid = document.getElementById('supplierListGrid');
+      var badge = document.getElementById('supplierCountBadge');
+      var q = ((document.getElementById('inpSearchSupplier') || {}).value || '').toLowerCase().trim();
+      var list = state.suppliers || [];
+      if (badge) badge.textContent = String(list.length);
+
+      var filtered = list.filter(function (s) {
+        if (!q) return true;
+        var hay = (s.code + ' ' + s.name + ' ' + s.phone + ' ' + s.taxCode + ' ' + s.group + ' ' + s.address).toLowerCase();
+        return hay.indexOf(q) !== -1;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div style="font-size:13px; color:#6b7280; padding:6px 0;">Chưa có nhà cung cấp phù hợp. Bấm "+ Thêm mới nhà cung cấp" để tạo.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(function (s) {
+        var avatarHtml = s.avatar
+          ? '<img src="' + s.avatar + '" alt="Avatar">'
+          : esc((s.name || 'N').charAt(0).toUpperCase());
+        return '<div class="supplier-item-card">' +
+          '<div class="supplier-avatar-sm">' + avatarHtml + '</div>' +
+          '<div class="supplier-item-body">' +
+            '<div class="supplier-item-name">' + (s.code ? ('[' + esc(s.code) + '] ') : '') + esc(s.name) + '</div>' +
+            '<div class="supplier-item-meta">' +
+              (s.phone ? ('📞 ' + esc(s.phone)) : 'Chưa có SĐT') +
+              (s.taxCode ? (' • MST: ' + esc(s.taxCode)) : '') +
+            '</div>' +
+            (s.group || s.address ? ('<div class="supplier-item-meta">' + esc([s.group, s.address].filter(Boolean).join(' • ')) + '</div>') : '') +
+            '<div class="supplier-item-actions">' +
+              '<button type="button" class="btn btn-soft btn-sm" onclick="pickSupplierForInbound(\'' + esc(s.id) + '\')">Chọn nhập</button>' +
+              '<button type="button" class="btn btn-outline btn-sm" onclick="openSupplierModal(\'' + esc(s.id) + '\')">Sửa</button>' +
+              '<button type="button" class="btn btn-danger btn-sm" onclick="deleteSupplier(\'' + esc(s.id) + '\')">Xóa</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    };
+
+    window.pickSupplierForInbound = function (id) {
+      var sel = document.getElementById('inSupplierSelect');
+      if (sel) {
+        sel.value = id;
+        window.onSelectInboundSupplier(id);
+        showToast('Đã chọn nhà cung cấp cho phiếu nhập!');
+      }
+    };
+
+    window.openSupplierModal = function (editId) {
+      var sup = editId ? findSupplierById(editId) : null;
+      document.getElementById('supplierModalTitle').textContent = sup ? 'Chỉnh sửa nhà cung cấp' : 'Thêm mới nhà cung cấp';
+      document.getElementById('nccEditId').value = sup ? sup.id : '';
+      document.getElementById('nccCode').value = sup ? (sup.code || '') : '';
+      document.getElementById('nccName').value = sup ? (sup.name || '') : '';
+      document.getElementById('nccPhone').value = sup ? (sup.phone || '') : '';
+      document.getElementById('nccTax').value = sup ? (sup.taxCode || '') : '';
+      document.getElementById('nccGroup').value = sup ? (sup.group || '') : '';
+      document.getElementById('nccAddress').value = sup ? (sup.address || '') : '';
+
+      nccCodeManuallyEdited = !!(sup && sup.code);
+      nccTempAvatar = sup ? (sup.avatar || '') : '';
+      updateSupplierAvatarPreview();
+      window.updateSupplierCodePreview();
+      document.getElementById('supplierModal').classList.add('show');
+    };
+
+    window.closeSupplierModal = function () {
+      document.getElementById('supplierModal').classList.remove('show');
+    };
+
+    function updateSupplierAvatarPreview() {
+      var el = document.getElementById('nccAvatarPreview');
+      if (nccTempAvatar) {
+        el.innerHTML = '<img src="' + nccTempAvatar + '" alt="Ảnh NCC">';
+      } else {
+        el.innerHTML = '👤';
+      }
+    }
+
+    window.handleSupplierAvatarChange = function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function (ev) {
+        var img = new Image();
+        img.onload = function () {
+          var maxDim = 200;
+          var w = img.width, h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+            else { w = Math.round(w * maxDim / h); h = maxDim; }
+          }
+          var cv = document.createElement('canvas');
+          cv.width = w; cv.height = h;
+          cv.getContext('2d').drawImage(img, 0, 0, w, h);
+          nccTempAvatar = cv.toDataURL('image/jpeg', 0.8);
+          updateSupplierAvatarPreview();
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      e.target.value = '';
+    };
+
+    window.saveSupplierForm = async function () {
+      var editId = document.getElementById('nccEditId').value;
+      var name = document.getElementById('nccName').value.trim();
+      var rawCode = document.getElementById('nccCode').value.trim();
+      var code = sanitizePrefix(rawCode) || suggestSupplierCode(name);
+      var phone = document.getElementById('nccPhone').value.trim();
+      var taxCode = document.getElementById('nccTax').value.trim();
+      var group = document.getElementById('nccGroup').value;
+      var address = document.getElementById('nccAddress').value.trim();
+
+      if (!name) { showToast('Vui lòng nhập Tên nhà cung cấp!'); return; }
+      if (!phone) { showToast('Vui lòng nhập Số điện thoại!'); return; }
+
+      var targetId = editId;
+      var savedObj = null;
+      if (editId) {
+        var existing = findSupplierById(editId);
+        if (existing) {
+          existing.code = code;
+          existing.name = name;
+          existing.phone = phone;
+          existing.taxCode = taxCode;
+          existing.group = group;
+          existing.address = address;
+          existing.avatar = nccTempAvatar;
+          savedObj = existing;
+        }
+      } else {
+        targetId = 'sup_' + Date.now();
+        savedObj = {
+          id: targetId,
+          code: code,
+          name: name,
+          phone: phone,
+          taxCode: taxCode,
+          group: group,
+          address: address,
+          avatar: nccTempAvatar
+        };
+        state.suppliers.unshift(savedObj);
+      }
+
+      saveState();
+      window.closeSupplierModal();
+      window.renderSupplierList();
+      renderSupplierDropdown(targetId);
+
+      var synced = savedObj ? await pushSupplierToSheet(savedObj) : false;
+      if (synced) {
+        showToast((editId ? 'Đã cập nhật' : 'Đã thêm') + ' NCC "' + name + '" (Mã: ' + code + ') & đồng bộ lên Sheet!');
+      } else {
+        showToast((editId ? 'Đã cập nhật' : 'Đã thêm') + ' NCC "' + name + '" (Mã: ' + code + ')!');
+      }
+    };
+
+    window.deleteSupplier = function (id) {
+      var sup = findSupplierById(id);
+      if (!sup) return;
+      if (!confirm('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?')) return;
+      state.suppliers = state.suppliers.filter(function (s) { return s.id !== id; });
+      saveState();
+      window.renderSupplierList();
+      renderSupplierDropdown('');
+      showToast('Đã xóa nhà cung cấp!');
+    };
+
     /* ================= TAB 5: NHẬP HÀNG (iSHOP PRO -> GOOGLE SHEET) ================= */
     function initInboundDefaults() {
       var today = toYMD(new Date());
@@ -2527,14 +3219,12 @@
         document.getElementById('detAppsScriptConfig').open = true;
       }
 
-      // Datalists
       document.getElementById('dlProductNames').innerHTML = state.products.map(function (p) {
         return '<option value="' + esc(p.name) + '"></option>';
       }).join('');
-      document.getElementById('dlInboundSuppliers').innerHTML = (state.inboundSuppliers || []).map(function (s) {
-        return '<option value="' + esc(s) + '"></option>';
-      }).join('');
 
+      window.renderSupplierList();
+      renderSupplierDropdown();
       initInboundDefaults();
       renderInboundRows();
       renderInboundHistory();
@@ -2611,7 +3301,9 @@
       document.getElementById('inLoaiChungTu').value = 'Bảng kê thu mua (không hóa đơn)';
       document.getElementById('inMaPhieu').value = '';
       document.getElementById('inMaHoaDon').value = '';
-      document.getElementById('inNhaCungCap').value = '';
+      document.getElementById('inSupplierSelect').value = '';
+      document.getElementById('inNhaCungCapManual').value = '';
+      window.onSelectInboundSupplier('');
       document.getElementById('inMstCccd').value = '';
       document.getElementById('inHinhThucTT').value = 'Tiền mặt';
       document.getElementById('inGhiChu').value = '';
@@ -2621,10 +3313,15 @@
 
     window.submitInboundToSheet = async function () {
       var url = (state.settings.appsScriptUrl || '').trim();
-      var ncc = (document.getElementById('inNhaCungCap').value || '').trim();
+      var selVal = document.getElementById('inSupplierSelect').value;
+      var selectedSup = (selVal && selVal !== '__manual__') ? findSupplierById(selVal) : null;
+      var ncc = selectedSup
+        ? selectedSup.name
+        : (selVal === '__manual__' ? document.getElementById('inNhaCungCapManual').value.trim() : '');
+
       var validItems = inboundRows.filter(function (r) { return (r.ten || '').trim() !== '' && parseNum(r.sl) > 0; });
 
-      if (!ncc) { showToast('Vui lòng nhập Tên nhà cung cấp!'); return; }
+      if (!ncc) { showToast('Vui lòng chọn hoặc nhập Nhà cung cấp!'); return; }
       if (!validItems.length) { showToast('Vui lòng nhập ít nhất 1 sản phẩm có số lượng > 0!'); return; }
 
       var grandTotal = 0;
@@ -2637,13 +3334,23 @@
         return r.ten.trim() + ' (' + fmtQtyZero(sl) + ' ' + dvt + ' x ' + fmtMoneyPlain(gia) + 'đ = ' + fmtMoneyPlain(tt) + 'đ)';
       });
 
+      // Tự sinh mã nếu người dùng chưa có mã phiếu / mã hóa đơn
+      if (!document.getElementById('inMaPhieu').value.trim() || !document.getElementById('inMaHoaDon').value.trim()) {
+        window.autoFillInboundCodes(false);
+      }
+
       var payload = {
+        action: 'saveInvoice',
         ngayHoaDon: document.getElementById('inNgayHoaDon').value,
         ngayNhap: document.getElementById('inNgayNhap').value,
         loaiChungTu: document.getElementById('inLoaiChungTu').value,
         maPhieu: document.getElementById('inMaPhieu').value.trim(),
         maHoaDon: document.getElementById('inMaHoaDon').value.trim(),
         nhaCungCap: ncc,
+        maNcc: selectedSup ? (selectedSup.code || '') : '',
+        sdtNcc: selectedSup ? (selectedSup.phone || '') : '',
+        nhomNcc: selectedSup ? (selectedSup.group || '') : '',
+        diaChiNcc: selectedSup ? (selectedSup.address || '') : '',
         mstCccd: document.getElementById('inMstCccd').value.trim(),
         hinhThucThanhToan: document.getElementById('inHinhThucTT').value,
         ghiChu: document.getElementById('inGhiChu').value.trim(),
@@ -2661,12 +3368,6 @@
           };
         })
       };
-
-      // Lưu gợi ý NCC
-      if (state.inboundSuppliers.indexOf(ncc) === -1) {
-        state.inboundSuppliers.unshift(ncc);
-        if (state.inboundSuppliers.length > 30) state.inboundSuppliers.pop();
-      }
 
       var btn = document.getElementById('btnSaveInbound');
       btn.disabled = true;
@@ -2690,7 +3391,25 @@
         btn.textContent = '💾 Lưu phiếu lên Google Sheet';
       }
 
-      // Lưu lịch sử cục bộ (tối đa 15 phiếu)
+      // Tăng bộ đếm số thứ tự tự sinh cho mã NCC + ngày
+      var usedPrefix = getCurrentInboundPrefix();
+      var usedDate = payload.ngayNhap || payload.ngayHoaDon || toYMD(new Date());
+      if (usedPrefix) {
+        var cKey = usedPrefix + '_' + usedDate;
+        var baseP = usedPrefix + getDateDDMM(usedDate);
+        var mpUpper = (payload.maPhieu || '').toUpperCase();
+        var usedSeq = 0;
+        if (mpUpper.indexOf(baseP) === 0 && /^\d+$/.test(mpUpper.slice(baseP.length))) {
+          usedSeq = parseInt(mpUpper.slice(baseP.length), 10);
+        } else {
+          usedSeq = getNextSeqForPrefixDate(usedPrefix, usedDate);
+        }
+        if (!state.receiptCounters) state.receiptCounters = {};
+        if (usedSeq > (Number(state.receiptCounters[cKey]) || 0)) {
+          state.receiptCounters[cKey] = usedSeq;
+        }
+      }
+
       state.inboundHistory.unshift(Object.assign({
         savedAt: new Date().toLocaleString('vi-VN'),
         synced: synced
@@ -2719,7 +3438,7 @@
           : '<span style="background:#fef3c7; color:#92400e; padding:2px 8px; border-radius:999px; font-size:11px;">Chỉ lưu máy</span>';
         return '<div class="history-card">' +
           '<div class="history-top">' +
-            '<span>' + esc(h.nhaCungCap) + ' ' + badge + '</span>' +
+            '<span>' + esc(h.nhaCungCap) + (h.sdtNcc ? (' (' + esc(h.sdtNcc) + ')') : '') + ' ' + badge + '</span>' +
             '<span style="color:#14532d;">' + fmtVND(h.tongTien) + '</span>' +
           '</div>' +
           '<div class="history-meta">' +
@@ -2761,4 +3480,3 @@
   </script>
 </body>
 </html>
-Designing supplier inventory receipt interface
