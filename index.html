@@ -7,18 +7,18 @@
 
     <!-- Cấu hình chế độ Full Màn Hình như App (Standalone PWA) trên iPhone / Safari & Android -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Maison Légume">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Maison Légume Dalat">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="theme-color" content="#14532d">
     <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Maison%20L%C3%A9gume%20Dalat%22%2C%22short_name%22%3A%22Maison%20L%C3%A9gume%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%2314532d%22%7D">
 
-    <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=6) -->
-    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=6">
-    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=6">
-    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=6">
-    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=6">
-    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=6">
+    <!-- Bộ Favicon & Apple Touch Icon chống cache Safari (?v=7) -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico?v=7">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=7">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=7">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=7">
+    <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=7">
 
     <!-- Google Fonts: Be Vietnam Pro & Montserrat (tự fallback font hệ thống khi offline) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1278,6 +1278,164 @@
         }
 
         /* =========================================================
+           8B. TAB 5: NHẬP HÀNG (MÔ PHỎNG iSHOP PRO)
+           ========================================================= */
+        .transfer-warning-box {
+            margin-top: 10px;
+            padding: 11px 14px;
+            border-radius: 10px;
+            background: #fef2f2;
+            border: 1.5px solid #fecaca;
+            color: #dc2626;
+            font-size: 13.5px;
+            font-weight: 700;
+        }
+
+        .import-items-header {
+            display: grid;
+            grid-template-columns: 2.2fr 0.75fr 0.85fr 1.1fr 0.95fr 0.7fr 1.2fr 38px;
+            gap: 8px;
+            padding: 10px 10px;
+            background: #eef6f0;
+            color: var(--green-900);
+            border: 1px solid var(--border-color);
+            border-radius: 10px 10px 0 0;
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .import-items-header div:first-child {
+            text-align: left;
+            padding-left: 4px;
+        }
+
+        .import-items-list {
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            background: #ffffff;
+        }
+
+        .import-row-card {
+            display: grid;
+            grid-template-columns: 2.2fr 0.75fr 0.85fr 1.1fr 0.95fr 0.7fr 1.2fr 38px;
+            gap: 8px;
+            align-items: center;
+            padding: 9px 10px;
+            border-bottom: 1px solid #edf2ef;
+        }
+
+        .import-row-card:last-child {
+            border-bottom: none;
+        }
+
+        .import-cell-label {
+            display: none;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 3px;
+        }
+
+        .import-line-total {
+            text-align: right;
+            font-weight: 800;
+            color: var(--green-900);
+            font-size: 13.5px;
+            padding-right: 4px;
+            white-space: nowrap;
+        }
+
+        .import-summary-bar {
+            margin-top: 14px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: var(--green-50);
+            border: 1.5px solid #86efac;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .import-summary-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            font-size: 13.5px;
+            color: var(--green-900);
+        }
+
+        .import-summary-grand {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--green-900);
+        }
+
+        .import-actions-row {
+            margin-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .import-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .import-history-item {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            background: var(--bg-soft);
+        }
+
+        .import-history-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        .import-history-meta {
+            margin-top: 4px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .import-history-detail {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-strong);
+            font-size: 12.5px;
+            color: var(--text-main);
+            white-space: pre-line;
+            line-height: 1.55;
+        }
+
+        .btn-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2.5px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin360 0.75s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin360 {
+            to { transform: rotate(360deg); }
+        }
+
+        /* =========================================================
            9. RESPONSIVE CHO ĐIỆN THOẠI (< 768px)
            ========================================================= */
         @media (max-width: 767px) {
@@ -1357,102 +1515,53 @@
             .toolbar-inline-field .input-control {
                 width: 100% !important;
             }
-        }
-
-        /* =========================================================
-           10. QUY TẮC IN TRÌNH DUYỆT DỰ PHÒNG KHI MẤT MẠNG
-           ========================================================= */
-        @page {
-            size: A4 portrait;
-            margin: 0mm !important;
-        }
-
-        @media print {
-            html, body {
-                width: 210mm !important;
-                height: auto !important;
-                min-height: 0 !important;
-                background: #ffffff !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+            /* Tab 5: Dạng thẻ 2-3 hàng gọn gàng trên điện thoại */
+            .import-items-header {
+                display: none;
             }
-
-            .no-print,
-            .hidden,
-            .ios-status-bar-spacer,
-            .app-header,
-            .tab-nav,
-            .preview-toolbar,
-            .mobile-sticky-bar,
-            .modal-overlay,
-            .toast-box {
-                display: none !important;
+            .import-items-list {
+                border: none;
+                background: transparent;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
             }
-
-            .app-main,
-            .a4-scroll-wrap,
-            #view-order,
-            #view-summary,
-            #a4OrderContainer {
-                width: auto !important;
-                max-width: none !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                min-height: 0 !important;
-                height: auto !important;
-                overflow: visible !important;
-                display: block !important;
+            .import-row-card {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                padding: 12px;
+                border: 1px solid var(--border-color);
+                border-radius: 12px;
+                background: #ffffff;
+                position: relative;
             }
-
-            .a4-scale-wrap {
-                width: auto !important;
-                height: auto !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
-                box-shadow: none !important;
-                border-radius: 0 !important;
+            .import-row-card .col-prod {
+                grid-column: 1 / -1;
+                padding-right: 34px;
             }
-
-            .a4-scale-wrap + .a4-scale-wrap {
-                page-break-before: always !important;
-                break-before: page !important;
+            .import-row-card .col-total {
+                grid-column: 1 / -1;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: 6px;
+                border-top: 1px dashed #e2e8f0;
             }
-
-            .a4-paper {
-                transform: none !important;
-                width: 210mm !important;
-                max-width: 100% !important;
-                min-height: 0 !important;
-                height: auto !important;
-                margin: 0 !important;
-                padding: 10mm 12mm !important;
-                box-sizing: border-box !important;
-                box-shadow: none !important;
-                border-radius: 0 !important;
-                border: none !important;
-                page-break-after: auto !important;
-                break-after: auto !important;
+            .import-row-card .col-del {
+                position: absolute;
+                top: 8px;
+                right: 8px;
             }
-
-            .print-table th,
-            .print-table td {
-                border: 1.25px solid #000000 !important;
+            .import-cell-label {
+                display: block;
             }
-
-            .print-table .empty-corner-cell {
-                border-left: none !important;
-                border-bottom: none !important;
-                border-top: 1.25px solid #000000 !important;
-                border-right: 1.25px solid #000000 !important;
+            .import-row-card .cell-input {
+                font-size: 16px;
+                min-height: 42px;
             }
-
-            tr {
-                page-break-inside: avoid;
-                break-inside: avoid;
+            .import-actions-row .btn {
+                width: 100%;
             }
         }
     </style>
@@ -1467,22 +1576,23 @@
         <div class="header-inner">
             <div class="brand-box">
                 <div class="brand-logo-wrap" id="appHeaderLogo">
-                    <img src="./maison-legume-dalat-logo.png?v=6"
+                    <img src="./maison-legume-dalat-logo.png?v=7"
                          alt="Maison Légume Dalat"
                          onerror="handleBrandLogoError(this)">
                 </div>
                 <div>
                     <h1 class="brand-title">Maison Légume Dalat</h1>
-                    <p class="brand-sub">Đặt hàng Đà Lạt, Chi nhánh Cleverfood &amp; In PDF A4</p>
+                    <p class="brand-sub">Đặt hàng Đà Lạt, Nhập hàng iShop &amp; In PDF A4</p>
                 </div>
             </div>
 
-            <!-- 4 Tab chính -->
+            <!-- 5 Tab chính -->
             <nav class="tab-nav" aria-label="Điều hướng chính">
                 <button id="tabBtn-input" class="tab-btn active" onclick="switchTab('input')">1. Nhập số lượng</button>
                 <button id="tabBtn-pricing" class="tab-btn" onclick="switchTab('pricing')">2. Bảng giá &amp; Sheet</button>
                 <button id="tabBtn-order" class="tab-btn" onclick="switchTab('order')">3. Đơn Đặt Hàng</button>
                 <button id="tabBtn-summary" class="tab-btn" onclick="switchTab('summary')">4. Bảng Tổng Hợp</button>
+                <button id="tabBtn-import" class="tab-btn" onclick="switchTab('import')">5. Nhập hàng</button>
             </nav>
 
             <!-- Nút In / Lưu PDF (A4) trên Header Desktop -->
@@ -1850,6 +1960,157 @@
             </div>
         </section>
 
+        <!-- =====================================================
+             TAB 5: NHẬP HÀNG (MÔ PHỎNG iSHOP PRO -> GOOGLE SHEET)
+             ===================================================== -->
+        <section id="view-import" class="no-print hidden">
+
+            <!-- Cấu hình kết nối Google Apps Script (thu gọn/mở rộng) -->
+            <div class="card">
+                <details id="importScriptConfigDetails" class="paste-fallback" style="margin-top:0;">
+                    <summary>
+                        <span>⚙️ Cấu hình kết nối Google Sheet (Link Web App Apps Script)</span>
+                        <span id="importScriptStatusBadge" style="font-size:12px; color:var(--green-700);">Chưa nhập link</span>
+                    </summary>
+                    <div style="margin-top: 12px;">
+                        <label class="field-label" for="inputImportScriptUrl">Link Web App Google Apps Script</label>
+                        <input type="url" id="inputImportScriptUrl" class="input-control"
+                            placeholder="https://script.google.com/macros/s/.../exec"
+                            oninput="updateImportScriptUrl(this.value)">
+                        <p style="margin:6px 0 0; font-size:12px; color:var(--text-muted);">
+                            Link này tự động lưu trong trình duyệt. Khi bấm Lưu phiếu, dữ liệu sẽ được gửi thẳng vào Google Sheet của bạn.
+                        </p>
+                    </div>
+                </details>
+            </div>
+
+            <!-- Phần 1: Thông tin phiếu nhập -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Thông tin phiếu nhập hàng</h2>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="resetImportForm(true)">Làm mới form</button>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 12px;">
+                    <div>
+                        <label class="field-label" for="impSupplier">Nhà cung cấp / Người bán <span style="color:var(--rose-700);">*</span></label>
+                        <input type="text" id="impSupplier" list="importSupplierList" class="input-control" placeholder="Ví dụ: Cô Thể">
+                        <datalist id="importSupplierList"></datalist>
+                    </div>
+                    <div>
+                        <label class="field-label" for="impReceiptCode">Mã phiếu nhập nội bộ</label>
+                        <input type="text" id="impReceiptCode" class="input-control" placeholder="Ví dụ: CT001">
+                    </div>
+                    <div>
+                        <label class="field-label" for="impImportDate">Ngày nhập</label>
+                        <input type="date" id="impImportDate" class="input-control">
+                    </div>
+                </div>
+
+                <div class="grid-3" style="margin-bottom: 12px;">
+                    <div>
+                        <label class="field-label" for="impInvoiceCode">Mã hóa đơn / Số hóa đơn</label>
+                        <input type="text" id="impInvoiceCode" class="input-control" placeholder="Ví dụ: HDCT001">
+                    </div>
+                    <div>
+                        <label class="field-label" for="impInvoiceDate">Ngày hóa đơn</label>
+                        <input type="date" id="impInvoiceDate" class="input-control">
+                    </div>
+                    <div>
+                        <label class="field-label" for="impDocType">Loại chứng từ</label>
+                        <select id="impDocType" class="input-control">
+                            <option value="Bảng kê thu mua (không hóa đơn)">Bảng kê thu mua (không hóa đơn)</option>
+                            <option value="Hóa đơn điện tử (GTGT/Bán hàng)">Hóa đơn điện tử (GTGT/Bán hàng)</option>
+                            <option value="Phiếu giao hàng/Biên nhận">Phiếu giao hàng/Biên nhận</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid-2" style="margin-bottom: 12px;">
+                    <div>
+                        <label class="field-label" for="impTaxId">MST / CCCD người bán</label>
+                        <input type="text" id="impTaxId" class="input-control" placeholder="Không bắt buộc">
+                    </div>
+                    <div>
+                        <label class="field-label" for="impPaymentMethod">Hình thức thanh toán</label>
+                        <select id="impPaymentMethod" class="input-control" onchange="checkImportTransferWarning()">
+                            <option value="Tiền mặt">Tiền mặt</option>
+                            <option value="Chuyển khoản ngân hàng">Chuyển khoản ngân hàng</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="impTransferWarning" class="transfer-warning-box hidden">
+                    ⚠️ Nên chuyển khoản với đơn từ 5 triệu trở lên
+                </div>
+
+                <div style="margin-top: 12px;">
+                    <label class="field-label" for="impNote">Ghi chú thêm</label>
+                    <input type="text" id="impNote" class="input-control" placeholder="Ghi chú vận chuyển, công nợ, người giao...">
+                </div>
+            </div>
+
+            <!-- Phần 2: Chi tiết phiếu (Danh sách sản phẩm nhập) -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Chi tiết phiếu (Danh sách sản phẩm nhập)</h2>
+                    <button type="button" class="btn btn-soft btn-sm" onclick="addImportRow()">+ Thêm dòng sản phẩm</button>
+                </div>
+
+                <datalist id="importProductList"></datalist>
+                <datalist id="importUnitList">
+                    <option value="Kg"></option>
+                    <option value="Bó"></option>
+                    <option value="Thùng"></option>
+                    <option value="Hộp"></option>
+                    <option value="Trái"></option>
+                    <option value="Túi"></option>
+                </datalist>
+
+                <div class="import-items-header">
+                    <div>Tên sản phẩm</div>
+                    <div>ĐVT</div>
+                    <div>SL</div>
+                    <div>Giá nhập (đ)</div>
+                    <div>Giảm giá (đ)</div>
+                    <div>VAT (%)</div>
+                    <div style="text-align:right; padding-right:4px;">Thành tiền</div>
+                    <div></div>
+                </div>
+                <div id="importItemsList" class="import-items-list"></div>
+
+                <!-- Dòng tổng cộng nổi bật -->
+                <div class="import-summary-bar">
+                    <div class="import-summary-stats">
+                        <span>Tổng số mặt hàng: <strong id="impSumItems">0</strong></span>
+                        <span>Tổng số lượng: <strong id="impSumQty">0</strong></span>
+                    </div>
+                    <div class="import-summary-grand">
+                        Tổng tiền: <span id="impGrandTotal">0 đ</span>
+                    </div>
+                </div>
+
+                <!-- Phần 3: Nút thao tác -->
+                <div class="import-actions-row">
+                    <button type="button" id="btnSaveImportSheet" class="btn btn-primary btn-lg" style="flex:1;" onclick="saveImportReceipt()">
+                        💾 Lưu phiếu lên Google Sheet
+                    </button>
+                    <button type="button" class="btn btn-outline btn-lg" onclick="resetImportForm(true)">
+                        Làm mới form
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lịch sử 15 phiếu nhập gần nhất trong localStorage -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Lịch sử phiếu nhập đã lưu (15 phiếu gần nhất)</h2>
+                    <button type="button" class="btn btn-danger-soft btn-sm" onclick="openClearImportHistoryModal()">Xóa lịch sử</button>
+                </div>
+                <div id="importHistoryList" class="import-history-list"></div>
+            </div>
+        </section>
+
     </main>
 
     <!-- =========================================================
@@ -2078,10 +2339,10 @@
         let pendingConfirmAction = null;
         let toastTimer = null;
 
-        function getCleLeafKey(branchCode) {
-            return `cle_${branchCode}`;
-        }
-
+        // Trạng thái danh sách dòng sản phẩm của Tab 5 (Nhập hàng iShop)
+        let importItems = [];
+        let isSavingImport = false;
+        let lastImportGrandTotal = 0;
         function getAllLeafKeys() {
             return ['trau_vang', 'tam_vang', ...state.cleBranches.map(getCleLeafKey)];
         }
@@ -2129,6 +2390,11 @@
                     useCleAltName: false,
                     hideZeroStoreCols: true
                 },
+                importConfig: {
+                    scriptUrl: ''
+                },
+                importSuppliers: [],
+                importHistory: [],
                 products: DEFAULT_PRODUCTS_15.map(p => ({
                     id: p.id,
                     name: p.name,
@@ -2287,7 +2553,10 @@
                     cleverfood: { ...def.logos.cleverfood, ...((parsed.logos && parsed.logos.cleverfood) || {}) }
                 },
                 sheetConfig: { ...def.sheetConfig, ...(parsed.sheetConfig || {}) },
-                options: { ...def.options, ...(parsed.options || {}) }
+                options: { ...def.options, ...(parsed.options || {}) },
+                importConfig: { ...def.importConfig, ...(parsed.importConfig || {}) },
+                importSuppliers: Array.isArray(parsed.importSuppliers) ? parsed.importSuppliers : [],
+                importHistory: Array.isArray(parsed.importHistory) ? parsed.importHistory : []
             };
 
             if (Array.isArray(parsed.products) && parsed.products.length > 0) {
@@ -2462,2039 +2731,337 @@
         }
 
         /* =========================================================
-           5. ĐỒNG BỘ GOOGLE SHEET (CSV & COPY-PASTE DỰ PHÒNG)
+           12B. TAB 5: NHẬP HÀNG (MÔ PHỎNG iSHOP PRO -> GOOGLE SHEET)
            ========================================================= */
-        function updateSheetConfig(key, value) {
-            state.sheetConfig[key] = value;
-            saveState();
+        function createEmptyImportRow() {
+            return {
+                id: 'imp_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+                name: '',
+                unit: 'Kg',
+                qty: '',
+                price: '',
+                discount: '0',
+                vat: '0'
+            };
         }
 
-        function buildGoogleSheetCsvUrl(inputUrl, tabName) {
-            const raw = String(inputUrl || '').trim();
-            if (!raw) return null;
+        function calcImportLineTotal(item) {
+            const qty = parseNumber(item.qty);
+            const price = parseNumber(String(item.price || '').replace(/[^\d.,]/g, ''));
+            const discount = parseNumber(String(item.discount || '').replace(/[^\d.,]/g, ''));
+            const vat = parseNumber(item.vat);
+            if (qty <= 0 && price <= 0) return 0;
+            const raw = qty * price * (1 + vat / 100) - discount;
+            return Math.max(0, Math.round(raw));
+        }
 
-            if (/^https?:\/\//i.test(raw) && (raw.includes('output=csv') || raw.includes('format=csv') || raw.includes('tqx=out:csv'))) {
-                return raw;
+        function formatMoneyComma(num) {
+            return Math.round(num || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function updateImportScriptUrl(val) {
+            state.importConfig.scriptUrl = (val || '').trim();
+            saveState();
+            updateImportScriptBadge();
+        }
+
+        function updateImportScriptBadge() {
+            const badge = document.getElementById('importScriptStatusBadge');
+            if (!badge) return;
+            const hasUrl = !!(state.importConfig && state.importConfig.scriptUrl);
+            badge.textContent = hasUrl ? '✓ Đã kết nối' : 'Chưa nhập link';
+            badge.style.color = hasUrl ? 'var(--green-700)' : 'var(--rose-700)';
+        }
+
+        function renderImportDatalists() {
+            const prodList = document.getElementById('importProductList');
+            if (prodList) {
+                prodList.innerHTML = state.products
+                    .filter(p => p.name && p.name.trim())
+                    .map(p => `<option value="${escapeHTML(p.name)}"></option>`)
+                    .join('');
             }
+            const supList = document.getElementById('importSupplierList');
+            if (supList) {
+                supList.innerHTML = (state.importSuppliers || [])
+                    .map(s => `<option value="${escapeHTML(s)}"></option>`)
+                    .join('');
+            }
+        }
 
-            let sheetId = '';
-            const idMatch = raw.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
-            if (idMatch) {
-                sheetId = idMatch[1];
-            } else if (/^[a-zA-Z0-9-_]{20,}$/.test(raw)) {
-                sheetId = raw;
+        function initImportFormDates() {
+            const today = toISODate(new Date());
+            const impDate = document.getElementById('impImportDate');
+            const invDate = document.getElementById('impInvoiceDate');
+            if (impDate && !impDate.value) impDate.value = today;
+            if (invDate && !invDate.value) invDate.value = today;
+        }
+
+        function renderImportRows() {
+            const container = document.getElementById('importItemsList');
+            if (!container) return;
+            if (importItems.length === 0) importItems.push(createEmptyImportRow());
+
+            container.innerHTML = importItems.map((item, idx) => {
+                const lineTotal = calcImportLineTotal(item);
+                return `
+                    <div class="import-row-card" data-imp-id="${item.id}">
+                        <div class="col-prod">
+                            <span class="import-cell-label">Tên sản phẩm #${idx + 1}</span>
+                            <input type="text" list="importProductList" class="cell-input"
+                                value="${escapeHTML(item.name)}" placeholder="Chọn hoặc gõ tên SP..."
+                                oninput="updateImportRowField('${item.id}', 'name', this.value)">
+                        </div>
+                        <div>
+                            <span class="import-cell-label">ĐVT</span>
+                            <input type="text" list="importUnitList" class="cell-input" style="text-align:center;"
+                                value="${escapeHTML(item.unit)}" placeholder="Kg"
+                                oninput="updateImportRowField('${item.id}', 'unit', this.value)">
+                        </div>
+                        <div>
+                            <span class="import-cell-label">Số lượng (SL)</span>
+                            <input type="text" inputmode="decimal" class="cell-input" style="text-align:center; font-weight:700;"
+                                value="${escapeHTML(item.qty)}" placeholder="0"
+                                oninput="updateImportRowField('${item.id}', 'qty', this.value)">
+                        </div>
+                        <div>
+                            <span class="import-cell-label">Giá nhập (VNĐ)</span>
+                            <input type="text" inputmode="numeric" class="cell-input" style="text-align:right; font-weight:600;"
+                                value="${escapeHTML(item.price)}" placeholder="0"
+                                oninput="updateImportRowField('${item.id}', 'price', this.value)">
+                        </div>
+                        <div>
+                            <span class="import-cell-label">Giảm giá (VNĐ)</span>
+                            <input type="text" inputmode="numeric" class="cell-input" style="text-align:right;"
+                                value="${escapeHTML(item.discount)}" placeholder="0"
+                                oninput="updateImportRowField('${item.id}', 'discount', this.value)">
+                        </div>
+                        <div>
+                            <span class="import-cell-label">VAT (%)</span>
+                            <input type="text" inputmode="decimal" class="cell-input" style="text-align:center;"
+                                value="${escapeHTML(item.vat)}" placeholder="0"
+                                oninput="updateImportRowField('${item.id}', 'vat', this.value)">
+                        </div>
+                        <div class="col-total">
+                            <span class="import-cell-label" style="margin:0;">Thành tiền:</span>
+                            <div class="import-line-total" id="imp-line-total-${item.id}">${formatMoneyComma(lineTotal)} đ</div>
+                        </div>
+                        <div class="col-del" style="text-align:center;">
+                            <button type="button" class="btn-icon" onclick="removeImportRow('${item.id}')" title="Xóa dòng" style="font-size:16px; font-weight:700;">✕</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            recalcImportTotals();
+        }
+
+        function addImportRow() {
+            importItems.push(createEmptyImportRow());
+            renderImportRows();
+        }
+
+        function removeImportRow(id) {
+            if (importItems.length <= 1) {
+                importItems = [createEmptyImportRow()];
             } else {
-                return null;
+                importItems = importItems.filter(x => x.id !== id);
             }
-
-            const cleanTab = String(tabName || '').trim();
-            if (cleanTab) {
-                return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(cleanTab)}`;
-            }
-            const gidMatch = raw.match(/[?&#]gid=([0-9]+)/);
-            if (gidMatch) {
-                return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&gid=${gidMatch[1]}`;
-            }
-            return `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+            renderImportRows();
         }
 
-        function parseDelimitedText(text, delimiter = ',') {
-            const rows = [];
-            let currentRow = [];
-            let currentField = '';
-            let inQuotes = false;
-            const normalized = String(text || '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
-            for (let i = 0; i < normalized.length; i++) {
-                const ch = normalized[i];
-                const next = normalized[i + 1];
-
-                if (inQuotes) {
-                    if (ch === '"' && next === '"') {
-                        currentField += '"';
-                        i++;
-                    } else if (ch === '"') {
-                        inQuotes = false;
-                    } else {
-                        currentField += ch;
-                    }
-                } else {
-                    if (ch === '"') {
-                        inQuotes = true;
-                    } else if (ch === delimiter) {
-                        currentRow.push(currentField.trim());
-                        currentField = '';
-                    } else if (ch === '\n') {
-                        currentRow.push(currentField.trim());
-                        if (currentRow.some(c => c !== '')) rows.push(currentRow);
-                        currentRow = [];
-                        currentField = '';
-                    } else {
-                        currentField += ch;
-                    }
-                }
-            }
-
-            if (currentField !== '' || currentRow.length > 0) {
-                currentRow.push(currentField.trim());
-                if (currentRow.some(c => c !== '')) rows.push(currentRow);
-            }
-            return rows;
+        function updateImportRowField(id, field, val) {
+            const item = importItems.find(x => x.id === id);
+            if (!item) return;
+            item[field] = val;
+            const lineEl = document.getElementById(`imp-line-total-${id}`);
+            if (lineEl) lineEl.textContent = `${formatMoneyComma(calcImportLineTotal(item))} đ`;
+            recalcImportTotals();
         }
 
-        function applyParsedPriceTable(rows, sourceLabel) {
-            if (!rows || rows.length < 2) {
-                throw new Error('Không tìm thấy đủ dữ liệu (cần ít nhất 1 dòng tiêu đề và 1 dòng sản phẩm).');
-            }
+        function recalcImportTotals() {
+            let validCount = 0;
+            let sumQty = 0;
+            let grandTotal = 0;
 
-            let headerIdx = 0;
-            for (let i = 0; i < Math.min(rows.length, 6); i++) {
-                const normRow = rows[i].map(normalizeText);
-                if (normRow.some(c => c.includes('ten san pham') || c.includes('don gia'))) {
-                    headerIdx = i;
-                    break;
+            importItems.forEach(item => {
+                const q = parseNumber(item.qty);
+                const lt = calcImportLineTotal(item);
+                if ((item.name && item.name.trim()) || q > 0 || lt > 0) {
+                    validCount++;
+                    sumQty += q;
+                    grandTotal += lt;
                 }
-            }
+            });
 
-            const normHeaders = rows[headerIdx].map(normalizeText);
+            lastImportGrandTotal = grandTotal;
+            const elItems = document.getElementById('impSumItems');
+            const elQty = document.getElementById('impSumQty');
+            const elTotal = document.getElementById('impGrandTotal');
+            if (elItems) elItems.textContent = validCount;
+            if (elQty) elQty.textContent = formatQty(sumQty);
+            if (elTotal) elTotal.textContent = `${formatMoneyComma(grandTotal)} đ`;
 
-            let nameIdx = normHeaders.findIndex(h => h === 'ten san pham' || (h.includes('ten san pham') && !h.includes('cleverfood') && !h.includes('cle')));
-            if (nameIdx === -1) nameIdx = 0;
-
-            const idxTrauVang = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('trau vang'));
-            const idxTamVang  = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('tam vang'));
-            const idxClePrice = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('don gia') && (h.includes('cle') || h.includes('cleverfood')));
-            const idxCleName  = normHeaders.findIndex((h, i) => i !== nameIdx && h.includes('ten san pham') && (h.includes('cle') || h.includes('cleverfood')));
-
-            if (idxTrauVang === -1 && idxTamVang === -1 && idxClePrice === -1) {
-                throw new Error('Không tìm thấy cột đơn giá nào khớp (Đơn giá Trâu vàng, Đơn giá Tâm vàng, Đơn giá Cle).');
-            }
-
-            let updatedCount = 0;
-            let addedCount = 0;
-            const onlyExisting = !!state.sheetConfig.updateExistingOnly;
-
-            for (let r = headerIdx + 1; r < rows.length; r++) {
-                const row = rows[r];
-                const prodName = (row[nameIdx] || '').trim();
-                if (!prodName) continue;
-
-                const normName = normalizeText(prodName);
-                if (normName === 'tong' || normName.startsWith('tong ')) continue;
-
-                const pTV  = idxTrauVang !== -1 ? parsePriceValue(row[idxTrauVang]) : NaN;
-                const pTam = idxTamVang  !== -1 ? parsePriceValue(row[idxTamVang])  : NaN;
-                const pCle = idxClePrice !== -1 ? parsePriceValue(row[idxClePrice]) : NaN;
-                const cName = idxCleName !== -1 ? (row[idxCleName] || '').trim() : '';
-
-                const hasValidPrice = (!isNaN(pTV) && pTV > 0) || (!isNaN(pTam) && pTam > 0) || (!isNaN(pCle) && pCle > 0);
-                if (!hasValidPrice) continue;
-
-                const existing = state.products.find(p => normalizeText(p.name) === normName);
-                if (existing) {
-                    if (!isNaN(pTV) && pTV > 0)   existing.prices.trau_vang = pTV;
-                    if (!isNaN(pTam) && pTam > 0) existing.prices.tam_vang = pTam;
-                    if (!isNaN(pCle) && pCle > 0) existing.prices.cle = pCle;
-                    if (cName) existing.cleName = cName;
-                    updatedCount++;
-                } else if (!onlyExisting) {
-                    state.products.push({
-                        id: 'p' + Date.now() + '_' + r,
-                        name: prodName,
-                        prices: {
-                            trau_vang: !isNaN(pTV) && pTV > 0 ? pTV : 0,
-                            tam_vang:  !isNaN(pTam) && pTam > 0 ? pTam : 0,
-                            cle:       !isNaN(pCle) && pCle > 0 ? pCle : 0
-                        },
-                        cleName: cName,
-                        quantities: {}
-                    });
-                    addedCount++;
-                }
-            }
-
-            const now = new Date();
-            const timeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ngày ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
-            const summaryMsg = `Đã cập nhật giá ${updatedCount} sản phẩm`
-                + (addedCount > 0 ? `, thêm mới ${addedCount} sản phẩm` : '')
-                + ` (${sourceLabel}).`;
-
-            state.sheetConfig.lastSyncAt = timeStr;
-            state.sheetConfig.lastSyncInfo = summaryMsg;
-            saveState();
-
-            renderPriceTable();
-            renderAllInputViews();
-            renderSyncBanner(false);
-            showToast(summaryMsg);
+            checkImportTransferWarning();
         }
 
-        async function syncFromGoogleSheet() {
-            const csvUrl = buildGoogleSheetCsvUrl(state.sheetConfig.url, state.sheetConfig.tabName);
-            if (!csvUrl) {
-                renderSyncBanner(true, 'Vui lòng nhập Link Google Sheet (hoặc Sheet ID) hợp lệ trước khi cập nhật.');
-                showToast('Link Google Sheet chưa hợp lệ.', true);
+        function checkImportTransferWarning() {
+            const warnEl = document.getElementById('impTransferWarning');
+            if (!warnEl) return;
+            warnEl.classList.toggle('hidden', lastImportGrandTotal < 5000000);
+        }
+
+        function resetImportForm(showNotice) {
+            const today = toISODate(new Date());
+            document.getElementById('impSupplier').value = '';
+            document.getElementById('impReceiptCode').value = '';
+            document.getElementById('impImportDate').value = today;
+            document.getElementById('impInvoiceCode').value = '';
+            document.getElementById('impInvoiceDate').value = today;
+            document.getElementById('impDocType').value = 'Bảng kê thu mua (không hóa đơn)';
+            document.getElementById('impTaxId').value = '';
+            document.getElementById('impPaymentMethod').value = 'Tiền mặt';
+            document.getElementById('impNote').value = '';
+            importItems = [createEmptyImportRow()];
+            renderImportRows();
+            if (showNotice) showToast('Đã làm mới form phiếu nhập.');
+        }
+
+        async function saveImportReceipt() {
+            if (isSavingImport) return;
+
+            const scriptUrl = (state.importConfig && state.importConfig.scriptUrl || '').trim();
+            if (!scriptUrl || !/^https?:\/\//i.test(scriptUrl)) {
+                const details = document.getElementById('importScriptConfigDetails');
+                if (details) details.open = true;
+                showToast('Vui lòng nhập Link Web App Google Apps Script ở mục Cấu hình phía trên.', true);
                 return;
             }
 
-            const btn = document.getElementById('btnSyncSheet');
+            const supplier = document.getElementById('impSupplier').value.trim();
+            if (!supplier) {
+                document.getElementById('impSupplier').focus();
+                showToast('Vui lòng nhập Tên nhà cung cấp / Người bán.', true);
+                return;
+            }
+
+            const validLines = importItems.filter(it => (it.name && it.name.trim()) || parseNumber(it.qty) > 0);
+            if (validLines.length === 0) {
+                showToast('Vui lòng nhập ít nhất 1 dòng sản phẩm.', true);
+                return;
+            }
+
+            const detailLines = validLines.map(it => {
+                const name = (it.name || 'Sản phẩm').trim();
+                const unit = (it.unit || 'Kg').trim();
+                const qty = parseNumber(it.qty);
+                const price = parseNumber(String(it.price || '').replace(/[^\d.,]/g, ''));
+                const total = calcImportLineTotal(it);
+                return `${name} (${formatQty(qty)} ${unit} x ${formatMoneyComma(price)}đ = ${formatMoneyComma(total)}đ)`;
+            });
+
+            const payload = {
+                ngayHoaDon: document.getElementById('impInvoiceDate').value || document.getElementById('impImportDate').value || toISODate(new Date()),
+                ngayNhap: document.getElementById('impImportDate').value || toISODate(new Date()),
+                loaiChungTu: document.getElementById('impDocType').value,
+                maPhieu: document.getElementById('impReceiptCode').value.trim(),
+                maHoaDon: document.getElementById('impInvoiceCode').value.trim(),
+                nhaCungCap: supplier,
+                mstCccd: document.getElementById('impTaxId').value.trim(),
+                chiTietHangHoa: detailLines.join('\n'),
+                tongTien: lastImportGrandTotal,
+                hinhThucThanhToan: document.getElementById('impPaymentMethod').value,
+                ghiChu: document.getElementById('impNote').value.trim()
+            };
+
+            const btn = document.getElementById('btnSaveImportSheet');
             const origHTML = btn.innerHTML;
+            isSavingImport = true;
             btn.disabled = true;
-            btn.innerHTML = '<span>Đang tải bảng giá...</span>';
+            btn.innerHTML = '<span class="btn-spinner"></span> <span>Đang lưu lên Google Sheet...</span>';
 
             try {
-                const res = await fetch(csvUrl, { cache: 'no-store' });
-                if (!res.ok) {
-                    throw new Error(`Không tải được dữ liệu (HTTP ${res.status}). Hãy kiểm tra quyền chia sẻ công khai và tên Tab.`);
-                }
-                const csvText = await res.text();
-                if (/^\s*<!doctype html/i.test(csvText) || /^\s*<html/i.test(csvText)) {
-                    throw new Error('File Google Sheet đang ở chế độ riêng tư. Hãy bật Chia sẻ -> "Bất kỳ ai có đường liên kết -> Người xem" hoặc dùng khung Dán nhanh bên dưới.');
+                await fetch(scriptUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Lưu nhà cung cấp vào danh sách gợi ý
+                if (!state.importSuppliers.some(s => normalizeText(s) === normalizeText(supplier))) {
+                    state.importSuppliers.unshift(supplier);
+                    if (state.importSuppliers.length > 50) state.importSuppliers.length = 50;
                 }
 
-                const rows = parseDelimitedText(csvText, ',');
-                const label = state.sheetConfig.tabName ? `Tab "${state.sheetConfig.tabName}"` : 'Google Sheet';
-                applyParsedPriceTable(rows, label);
+                // Lưu lịch sử 15 phiếu gần nhất trong localStorage
+                const now = new Date();
+                const savedAt = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}`;
+                state.importHistory.unshift({
+                    id: 'hist_' + Date.now(),
+                    savedAt,
+                    ...payload
+                });
+                if (state.importHistory.length > 15) state.importHistory.length = 15;
+
+                saveState();
+                renderImportDatalists();
+                renderImportHistory();
+                resetImportForm(false);
+                showToast('Đã gửi và lưu phiếu nhập hàng lên Google Sheet thành công!');
             } catch (err) {
-                console.error('Lỗi đồng bộ Google Sheet:', err);
-                renderSyncBanner(true, err.message || 'Lỗi kết nối tới Google Sheet.');
-                showToast('Không thể tải Google Sheet.', true);
+                console.error('Lỗi gửi phiếu nhập:', err);
+                showToast('Không thể kết nối tới Google Apps Script. Kiểm tra lại mạng hoặc đường link.', true);
             } finally {
+                isSavingImport = false;
                 btn.disabled = false;
                 btn.innerHTML = origHTML;
             }
         }
 
-        function importFromPastedTable() {
-            const raw = document.getElementById('pasteSheetArea').value.trim();
-            if (!raw) {
-                showToast('Vui lòng dán bảng copy từ Google Sheet vào khung.', true);
-                return;
-            }
-            try {
-                const delimiter = raw.includes('\t') ? '\t' : ',';
-                const rows = parseDelimitedText(raw, delimiter);
-                applyParsedPriceTable(rows, 'Dán trực tiếp');
-                document.getElementById('pasteSheetArea').value = '';
-            } catch (err) {
-                renderSyncBanner(true, err.message || 'Dữ liệu dán không đúng định dạng bảng.');
-                showToast('Lỗi đọc dữ liệu dán.', true);
-            }
-        }
-
-        function renderSyncBanner(isError, customErrorMsg = '') {
-            const banner = document.getElementById('sheetSyncBanner');
-            if (!banner) return;
-            if (isError) {
-                banner.className = 'sync-banner error';
-                banner.innerHTML = `<div><strong>Lỗi đồng bộ:</strong> ${escapeHTML(customErrorMsg)}</div>`;
-                return;
-            }
-            if (state.sheetConfig.lastSyncAt) {
-                banner.className = 'sync-banner';
-                banner.innerHTML = `<div><strong>Cập nhật gần nhất (${escapeHTML(state.sheetConfig.lastSyncAt)}):</strong> ${escapeHTML(state.sheetConfig.lastSyncInfo)}</div>`;
-            } else {
-                banner.className = 'sync-banner hidden';
-            }
-        }
-
-        /* =========================================================
-           6. XỬ LÝ TỰ ĐỘNG TÍNH NGÀY (+1 LẤY, +3 NHẬN) & TIÊU ĐỀ ĐƠN
-           ========================================================= */
-        function handleOrderDateChange(newOrderDate) {
-            state.orderDate = newOrderDate;
-            if (newOrderDate) {
-                state.pickupDate = addDaysISO(newOrderDate, 1);
-                state.deliveryDate = addDaysISO(newOrderDate, 3);
-                document.getElementById('inputPickupDate').value = state.pickupDate;
-                document.getElementById('inputDeliveryDate').value = state.deliveryDate;
-            }
-            saveState();
-            updateDatePreviews();
-            if (activeTab === 'order') renderOrderPreview();
-            if (activeTab === 'summary') renderSummaryPreview();
-            showToast('Đã tự động tính Ngày lấy (+1) và Ngày nhận (+3).');
-        }
-
-        function updateOrderTitle(value, sourceInputId) {
-            state.orderTitle = value;
-            const input1 = document.getElementById('inputOrderTitle');
-            const input3 = document.getElementById('quickOrderTitleInput');
-            if (input1 && sourceInputId !== 'inputOrderTitle') input1.value = value;
-            if (input3 && sourceInputId !== 'quickOrderTitleInput') input3.value = value;
-            saveState();
-            if (activeTab === 'order') renderOrderPreview();
-        }
-
-        function updateField(field, value) {
-            state[field] = value;
-            saveState();
-            updateDatePreviews();
-            if (activeTab === 'order') renderOrderPreview();
-            if (activeTab === 'summary') renderSummaryPreview();
-        }
-
-        function updateDatePreviews() {
-            document.getElementById('previewOrderDate').textContent = formatVietnameseDate(state.orderDate);
-            document.getElementById('previewPickupDate').textContent = formatVietnameseDate(state.pickupDate);
-            document.getElementById('previewDeliveryDate').textContent = formatVietnameseDate(state.deliveryDate);
-        }
-
-        function toggleOption(key, checked) {
-            state.options[key] = checked;
-            saveState();
-            if (activeTab === 'order') renderOrderPreview();
-            if (activeTab === 'summary') renderSummaryPreview();
-        }
-
-        /* =========================================================
-           7. QUẢN LÝ CHI NHÁNH CON CLEVERFOOD & LOGO 3 KHÁCH HÀNG
-           ========================================================= */
-        function renderCleBranchesManager() {
-            const wrap = document.getElementById('cleBranchesWrap');
+        function renderImportHistory() {
+            const wrap = document.getElementById('importHistoryList');
             if (!wrap) return;
-            if (state.cleBranches.length === 0) {
-                wrap.innerHTML = `<span style="font-size:12.5px; color:var(--text-muted);">Chưa có chi nhánh con nào. Hãy thêm bên dưới.</span>`;
+            const list = state.importHistory || [];
+            if (list.length === 0) {
+                wrap.innerHTML = `<div style="font-size:13px; color:var(--text-muted); text-align:center; padding:14px;">Chưa có phiếu nhập nào được lưu.</div>`;
                 return;
             }
-            wrap.innerHTML = state.cleBranches.map(code => `
-                <span class="branch-tag">
-                    <span>Cleverfood - ${escapeHTML(code)}</span>
-                    <button type="button" onclick="confirmDeleteCleBranch('${escapeHTML(code)}')" title="Xóa chi nhánh ${escapeHTML(code)}">&times;</button>
-                </span>
-            `).join('');
-        }
 
-        function addCleBranch() {
-            const input = document.getElementById('inputNewCleBranch');
-            const raw = (input.value || '').trim();
-            if (!raw) {
-                showToast('Vui lòng nhập mã hoặc tên chi nhánh Cleverfood.', true);
-                return;
-            }
-            if (state.cleBranches.some(b => normalizeText(b) === normalizeText(raw))) {
-                showToast(`Chi nhánh "${raw}" đã tồn tại.`, true);
-                return;
-            }
-            state.cleBranches.push(raw);
-            state.boxes[getCleLeafKey(raw)] = '';
-            input.value = '';
-            saveState();
-            renderCleBranchesManager();
-            renderAllInputViews();
-            renderOrderTargetDropdown();
-            showToast(`Đã thêm chi nhánh Cleverfood - ${raw}.`);
-        }
-
-        function confirmDeleteCleBranch(branchCode) {
-            if (state.cleBranches.length <= 1) {
-                showToast('Cần giữ lại ít nhất 1 chi nhánh con Cleverfood.', true);
-                return;
-            }
-            openConfirmModal(
-                'Xóa chi nhánh Cleverfood?',
-                `Bạn có chắc muốn xóa chi nhánh "${branchCode}" cùng số lượng đã nhập của chi nhánh này không?`,
-                () => {
-                    const leafKey = getCleLeafKey(branchCode);
-                    state.cleBranches = state.cleBranches.filter(b => b !== branchCode);
-                    delete state.boxes[leafKey];
-                    state.products.forEach(p => {
-                        if (p.quantities) delete p.quantities[leafKey];
-                    });
-                    if (mobileCleBranch === branchCode) mobileCleBranch = state.cleBranches[0] || '';
-                    if (state.orderTarget === leafKey) state.orderTarget = 'cle_all';
-                    saveState();
-                    renderCleBranchesManager();
-                    renderAllInputViews();
-                    renderOrderTargetDropdown();
-                    showToast(`Đã xóa chi nhánh Cleverfood - ${branchCode}.`);
-                }
-            );
-        }
-
-        function getLogoMarkupByGroup(groupKey) {
-            const cfg = state.logos[groupKey];
-            if (!cfg || cfg.mode === 'none') return '';
-            if (cfg.mode === 'custom' && cfg.custom) {
-                return `<img src="${cfg.custom}" alt="Logo ${groupKey}">`;
-            }
-            const labelMap = { trau_vang: 'Trâu vàng', tam_vang: 'Tâm vàng', cleverfood: 'Cleverfood' };
-            return getCustomerPresetSVG(cfg.preset || groupKey, labelMap[groupKey] || groupKey);
-        }
-
-        function renderCustomerLogosGrid() {
-            const grid = document.getElementById('customerLogosGrid');
-            if (!grid) return;
-
-            const groups = [
-                { key: 'trau_vang',  title: 'Trâu vàng',  sub: 'Khách hàng độc lập' },
-                { key: 'tam_vang',   title: 'Tâm vàng',   sub: 'Khách hàng độc lập' },
-                { key: 'cleverfood', title: 'Cleverfood', sub: 'Dùng chung cho tất cả chi nhánh con' }
-            ];
-
-            grid.innerHTML = groups.map(g => {
-                const cfg = state.logos[g.key];
-                const hasLogo = cfg && cfg.mode !== 'none';
-                const markup = getLogoMarkupByGroup(g.key);
-                return `
-                    <div class="logo-card">
-                        <div class="logo-card-top">
-                            <span class="logo-card-title">${g.title}</span>
-                            <span class="logo-card-sub">${g.sub}</span>
-                        </div>
-                        <div class="store-logo-row">
-                            <div class="store-logo-thumb">
-                                ${hasLogo ? markup : '<span style="font-size:10px;color:#94a3b8;text-align:center;">Đang ẩn</span>'}
-                            </div>
-                            <div class="store-logo-actions">
-                                <label class="btn btn-soft btn-sm" style="cursor:pointer;">
-                                    <span>Tải ảnh</span>
-                                    <input type="file" accept="image/*" class="hidden" onchange="handleCustomerLogoUpload('${g.key}', event)">
-                                </label>
-                                <button class="btn btn-outline btn-sm" onclick="cycleCustomerLogo('${g.key}')">Đổi mẫu SVG</button>
-                                <button class="btn ${hasLogo ? 'btn-danger-soft' : 'btn-soft'} btn-sm" onclick="toggleCustomerLogo('${g.key}')">
-                                    ${hasLogo ? 'Ẩn' : 'Hiện'}
-                                </button>
-                            </div>
-                        </div>
+            wrap.innerHTML = list.map(item => `
+                <div class="import-history-item">
+                    <div class="import-history-top">
+                        <span>${escapeHTML(item.nhaCungCap)} ${item.maPhieu ? `(${escapeHTML(item.maPhieu)})` : ''}</span>
+                        <span style="color:var(--green-900); white-space:nowrap;">${formatMoneyComma(item.tongTien)} đ</span>
                     </div>
-                `;
-            }).join('');
-        }
-
-        function handleCustomerLogoUpload(groupKey, event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            const cfg = state.logos[groupKey];
-            if (!cfg) return;
-
-            if (file.type === 'image/svg+xml') {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    cfg.mode = 'custom';
-                    cfg.custom = e.target.result;
-                    saveState();
-                    renderCustomerLogosGrid();
-                    if (activeTab === 'order') renderOrderPreview();
-                    showToast('Đã cập nhật logo SVG thành công.');
-                };
-                reader.readAsDataURL(file);
-                event.target.value = '';
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = e => {
-                const img = new Image();
-                img.onload = () => {
-                    const maxDim = 300;
-                    let w = img.width, h = img.height;
-                    if (w > maxDim || h > maxDim) {
-                        const ratio = Math.min(maxDim / w, maxDim / h);
-                        w = Math.round(w * ratio);
-                        h = Math.round(h * ratio);
-                    }
-                    const canvas = document.createElement('canvas');
-                    canvas.width = w;
-                    canvas.height = h;
-                    const ctx = canvas.getContext('2d');
-                    ctx.clearRect(0, 0, w, h);
-                    ctx.drawImage(img, 0, 0, w, h);
-
-                    cfg.mode = 'custom';
-                    cfg.custom = canvas.toDataURL('image/png');
-                    saveState();
-                    renderCustomerLogosGrid();
-                    if (activeTab === 'order') renderOrderPreview();
-                    showToast('Đã tải & nén nhẹ logo (tối đa 300px).');
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-            event.target.value = '';
-        }
-
-        function cycleCustomerLogo(groupKey) {
-            const cfg = state.logos[groupKey];
-            const presets = ['tam_vang', 'trau_vang', 'cleverfood', 'default'];
-            const nextIdx = cfg.mode === 'preset' ? (presets.indexOf(cfg.preset) + 1) % presets.length : 0;
-            cfg.mode = 'preset';
-            cfg.preset = presets[nextIdx];
-            saveState();
-            renderCustomerLogosGrid();
-            if (activeTab === 'order') renderOrderPreview();
-        }
-
-        function toggleCustomerLogo(groupKey) {
-            const cfg = state.logos[groupKey];
-            cfg.mode = cfg.mode === 'none' ? (cfg.custom ? 'custom' : 'preset') : 'none';
-            saveState();
-            renderCustomerLogosGrid();
-            if (activeTab === 'order') renderOrderPreview();
-        }
-
-        /* =========================================================
-           8. TAB 1: NHẬP SỐ LƯỢNG DESKTOP & MOBILE
-           ========================================================= */
-        function renderAllInputViews() {
-            renderDesktopFilterPills();
-            renderDesktopQtyTable();
-            renderMobileView();
-        }
-
-        function setDesktopFilter(mode) {
-            desktopFilter = mode;
-            renderDesktopFilterPills();
-            renderDesktopQtyTable();
-        }
-
-        function renderDesktopFilterPills() {
-            const wrap = document.getElementById('desktopFilterPills');
-            if (!wrap) return;
-            const cleLabel = `Cleverfood (${state.cleBranches.join(', ')})`;
-            const pills = [
-                { key: 'all',        label: 'Tất cả' },
-                { key: 'standalone', label: 'Trâu vàng & Tâm vàng' },
-                { key: 'cleverfood', label: cleLabel }
-            ];
-            wrap.innerHTML = pills.map(p => `
-                <button class="filter-pill ${desktopFilter === p.key ? 'active' : ''}"
-                    onclick="setDesktopFilter('${p.key}')">${escapeHTML(p.label)}</button>
-            `).join('');
-        }
-
-        function renderDesktopQtyTable() {
-            const thead = document.getElementById('desktopQtyHead');
-            const tbody = document.getElementById('desktopQtyBody');
-            if (!thead || !tbody) return;
-
-            const showStandalone = desktopFilter === 'all' || desktopFilter === 'standalone';
-            const showCle        = desktopFilter === 'all' || desktopFilter === 'cleverfood';
-            const cleCount       = state.cleBranches.length;
-
-            if (showCle) {
-                thead.innerHTML = `
-                    <tr>
-                        <th rowspan="2" style="width:48px;">STT</th>
-                        <th rowspan="2" class="col-left" style="min-width:230px;">Tên sản phẩm</th>
-                        ${showStandalone ? `
-                            <th rowspan="2" style="min-width:108px;">Trâu vàng</th>
-                            <th rowspan="2" style="min-width:108px;">Tâm vàng</th>
-                        ` : ''}
-                        <th colspan="${cleCount + 1}" class="th-cle-group">Cleverfood</th>
-                        ${desktopFilter === 'all' ? `<th rowspan="2" style="width:94px; background:#dcfce7;">Tổng</th>` : ''}
-                    </tr>
-                    <tr>
-                        ${state.cleBranches.map(b => `<th class="th-cle-sub" style="min-width:92px;">${escapeHTML(b)}</th>`).join('')}
-                        <th class="th-cle-sub" style="width:92px; background:#bbf7d0; color:var(--green-900);">Tổng Cle</th>
-                    </tr>
-                `;
-            } else {
-                thead.innerHTML = `
-                    <tr>
-                        <th style="width:48px;">STT</th>
-                        <th class="col-left" style="min-width:240px;">Tên sản phẩm</th>
-                        <th style="min-width:120px;">Trâu vàng</th>
-                        <th style="min-width:120px;">Tâm vàng</th>
-                        <th style="width:100px; background:#dcfce7;">Tổng</th>
-                    </tr>
-                `;
-            }
-
-            tbody.innerHTML = state.products.map((p, rowIdx) => {
-                const qTV  = (p.quantities && p.quantities.trau_vang) || '';
-                const qTam = (p.quantities && p.quantities.tam_vang)  || '';
-                let cleSum = 0;
-                state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
-                const rowGrand = parseNumber(qTV) + parseNumber(qTam) + cleSum;
-                const standaloneSum = parseNumber(qTV) + parseNumber(qTam);
-
-                return `
-                    <tr>
-                        <td style="text-align:center; font-weight:600; color:var(--text-muted); font-size:12.5px;">${rowIdx + 1}</td>
-                        <td>
-                            <input type="text" class="cell-input name-input"
-                                data-col="qty-name" data-row="${rowIdx}"
-                                value="${escapeHTML(p.name)}"
-                                placeholder="Tên sản phẩm..."
-                                oninput="updateProductName('${p.id}', this.value)"
-                                onkeydown="handleVerticalKeyNav(event)">
-                        </td>
-                        ${showStandalone ? `
-                            <td style="text-align:center;">
-                                <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                    data-col="qty-trau_vang" data-row="${rowIdx}"
-                                    value="${escapeHTML(qTV)}" placeholder="0"
-                                    oninput="updateLeafQty('${p.id}', 'trau_vang', this.value)"
-                                    onkeydown="handleVerticalKeyNav(event)">
-                            </td>
-                            <td style="text-align:center;">
-                                <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                    data-col="qty-tam_vang" data-row="${rowIdx}"
-                                    value="${escapeHTML(qTam)}" placeholder="0"
-                                    oninput="updateLeafQty('${p.id}', 'tam_vang', this.value)"
-                                    onkeydown="handleVerticalKeyNav(event)">
-                            </td>
-                        ` : ''}
-                        ${showCle ? `
-                            ${state.cleBranches.map(b => {
-                                const leafKey = getCleLeafKey(b);
-                                const qVal = (p.quantities && p.quantities[leafKey]) || '';
-                                return `
-                                    <td style="text-align:center;">
-                                        <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                            data-col="qty-${leafKey}" data-row="${rowIdx}"
-                                            value="${escapeHTML(qVal)}" placeholder="0"
-                                            oninput="updateLeafQty('${p.id}', '${leafKey}', this.value)"
-                                            onkeydown="handleVerticalKeyNav(event)">
-                                    </td>
-                                `;
-                            }).join('')}
-                            <td id="row-cle-total-${p.id}" style="text-align:center; font-weight:700; color:var(--green-900); background:#f0fdf4;">
-                                ${cleSum > 0 ? formatQty(cleSum) : '0'}
-                            </td>
-                        ` : ''}
-                        ${desktopFilter !== 'cleverfood' ? `
-                            <td id="row-grand-total-${p.id}" style="text-align:center; font-weight:800; color:var(--green-900); background:#e8f8ed;">
-                                ${formatQty(desktopFilter === 'standalone' ? standaloneSum : rowGrand)}
-                            </td>
-                        ` : ''}
-                    </tr>
-                `;
-            }).join('');
-
-            renderDesktopQtyFooter();
-        }
-
-        function calcLeafTotals() {
-            const qtySums = {};
-            const itemCounts = {};
-            const keys = getAllLeafKeys();
-            keys.forEach(k => { qtySums[k] = 0; itemCounts[k] = 0; });
-
-            let cleQtyTotal = 0;
-            let cleItemCount = 0;
-            let grandQty = 0;
-            let grandItemCount = 0;
-            let standaloneQty = 0;
-            let standaloneItemCount = 0;
-
-            state.products.forEach(p => {
-                let prodCle = 0;
-                const qTV  = parseNumber(p.quantities && p.quantities.trau_vang);
-                const qTam = parseNumber(p.quantities && p.quantities.tam_vang);
-
-                qtySums.trau_vang += qTV;
-                if (qTV > 0) itemCounts.trau_vang++;
-
-                qtySums.tam_vang += qTam;
-                if (qTam > 0) itemCounts.tam_vang++;
-
-                standaloneQty += qTV + qTam;
-                if (qTV + qTam > 0) standaloneItemCount++;
-
-                state.cleBranches.forEach(b => {
-                    const k = getCleLeafKey(b);
-                    const q = parseNumber(p.quantities && p.quantities[k]);
-                    qtySums[k] += q;
-                    if (q > 0) itemCounts[k]++;
-                    prodCle += q;
-                });
-
-                cleQtyTotal += prodCle;
-                if (prodCle > 0) cleItemCount++;
-
-                const prodGrand = qTV + qTam + prodCle;
-                grandQty += prodGrand;
-                if (prodGrand > 0) grandItemCount++;
-            });
-
-            let cleBoxesTotal = 0;
-            state.cleBranches.forEach(b => cleBoxesTotal += parseNumber(state.boxes[getCleLeafKey(b)]));
-            const standaloneBoxes = parseNumber(state.boxes.trau_vang) + parseNumber(state.boxes.tam_vang);
-            const grandBoxes = standaloneBoxes + cleBoxesTotal;
-
-            return {
-                qtySums, itemCounts,
-                cleQtyTotal, cleItemCount, cleBoxesTotal,
-                standaloneQty, standaloneItemCount, standaloneBoxes,
-                grandQty, grandItemCount, grandBoxes
-            };
-        }
-
-        function renderDesktopQtyFooter() {
-            const tfoot = document.getElementById('desktopQtyFoot');
-            if (!tfoot) return;
-
-            const showStandalone = desktopFilter === 'all' || desktopFilter === 'standalone';
-            const showCle        = desktopFilter === 'all' || desktopFilter === 'cleverfood';
-            const boxRowIdx      = state.products.length;
-            const t              = calcLeafTotals();
-
-            tfoot.innerHTML = `
-                <tr>
-                    <td colspan="2" style="text-align:right; padding-right:12px;">Tổng số lượng:</td>
-                    ${showStandalone ? `
-                        <td id="foot-qty-trau_vang" style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.trau_vang)}</td>
-                        <td id="foot-qty-tam_vang"  style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums.tam_vang)}</td>
-                    ` : ''}
-                    ${showCle ? `
-                        ${state.cleBranches.map(b => {
-                            const k = getCleLeafKey(b);
-                            return `<td id="foot-qty-${k}" style="text-align:center; color:var(--green-900);">${formatQty(t.qtySums[k])}</td>`;
-                        }).join('')}
-                        <td id="foot-qty-cle_total" style="text-align:center; color:var(--green-900); background:#dcfce7;">${formatQty(t.cleQtyTotal)}</td>
-                    ` : ''}
-                    ${desktopFilter !== 'cleverfood' ? `
-                        <td id="foot-qty-grand" style="text-align:center; color:var(--green-900); background:#bbf7d0;">
-                            ${formatQty(desktopFilter === 'standalone' ? t.standaloneQty : t.grandQty)}
-                        </td>
-                    ` : ''}
-                </tr>
-
-                <tr class="meta-row-tr">
-                    <td colspan="2" style="text-align:right; padding-right:12px;">Số mặt hàng:</td>
-                    ${showStandalone ? `
-                        <td id="foot-cnt-trau_vang" style="text-align:center;">${t.itemCounts.trau_vang}</td>
-                        <td id="foot-cnt-tam_vang"  style="text-align:center;">${t.itemCounts.tam_vang}</td>
-                    ` : ''}
-                    ${showCle ? `
-                        ${state.cleBranches.map(b => {
-                            const k = getCleLeafKey(b);
-                            return `<td id="foot-cnt-${k}" style="text-align:center;">${t.itemCounts[k]}</td>`;
-                        }).join('')}
-                        <td id="foot-cnt-cle_total" style="text-align:center;">${t.cleItemCount}</td>
-                    ` : ''}
-                    ${desktopFilter !== 'cleverfood' ? `
-                        <td id="foot-cnt-grand" style="text-align:center;">
-                            ${desktopFilter === 'standalone' ? t.standaloneItemCount : t.grandItemCount}
-                        </td>
-                    ` : ''}
-                </tr>
-
-                <tr class="box-row-tr">
-                    <td colspan="2" style="text-align:right; padding-right:12px; color:var(--amber-700);">Số thùng đóng gói:</td>
-                    ${showStandalone ? `
-                        <td style="text-align:center;">
-                            <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                style="border-color:#f59e0b;"
-                                data-col="qty-trau_vang" data-row="${boxRowIdx}"
-                                value="${escapeHTML(state.boxes.trau_vang || '')}" placeholder="0"
-                                oninput="updateLeafBoxes('trau_vang', this.value)"
-                                onkeydown="handleVerticalKeyNav(event)">
-                        </td>
-                        <td style="text-align:center;">
-                            <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                style="border-color:#f59e0b;"
-                                data-col="qty-tam_vang" data-row="${boxRowIdx}"
-                                value="${escapeHTML(state.boxes.tam_vang || '')}" placeholder="0"
-                                oninput="updateLeafBoxes('tam_vang', this.value)"
-                                onkeydown="handleVerticalKeyNav(event)">
-                        </td>
-                    ` : ''}
-                    ${showCle ? `
-                        ${state.cleBranches.map(b => {
-                            const k = getCleLeafKey(b);
-                            return `
-                                <td style="text-align:center;">
-                                    <input type="text" inputmode="decimal" class="cell-input qty-input"
-                                        style="border-color:#f59e0b;"
-                                        data-col="qty-${k}" data-row="${boxRowIdx}"
-                                        value="${escapeHTML(state.boxes[k] || '')}" placeholder="0"
-                                        oninput="updateLeafBoxes('${k}', this.value)"
-                                        onkeydown="handleVerticalKeyNav(event)">
-                                </td>
-                            `;
-                        }).join('')}
-                        <td id="foot-box-cle_total" style="text-align:center; color:var(--amber-700); font-size:15px;">${formatQty(t.cleBoxesTotal)}</td>
-                    ` : ''}
-                    ${desktopFilter !== 'cleverfood' ? `
-                        <td id="foot-box-grand" style="text-align:center; color:var(--amber-700); font-size:15px;">
-                            ${formatQty(desktopFilter === 'standalone' ? t.standaloneBoxes : t.grandBoxes)}
-                        </td>
-                    ` : ''}
-                </tr>
-            `;
-        }
-
-        function updateLeafQty(prodId, leafKey, val) {
-            const p = state.products.find(item => item.id === prodId);
-            if (!p) return;
-            if (!p.quantities) p.quantities = {};
-            p.quantities[leafKey] = val;
-            saveState();
-
-            let cleSum = 0;
-            state.cleBranches.forEach(b => cleSum += parseNumber(p.quantities[getCleLeafKey(b)]));
-            const standaloneSum = parseNumber(p.quantities.trau_vang) + parseNumber(p.quantities.tam_vang);
-            const cleCell = document.getElementById(`row-cle-total-${prodId}`);
-            if (cleCell) cleCell.textContent = cleSum > 0 ? formatQty(cleSum) : '0';
-            const grandCell = document.getElementById(`row-grand-total-${prodId}`);
-            if (grandCell) grandCell.textContent = formatQty(desktopFilter === 'standalone' ? standaloneSum : standaloneSum + cleSum);
-
-            refreshDesktopFooterNumbers();
-        }
-
-        function updateLeafBoxes(leafKey, val) {
-            state.boxes[leafKey] = val;
-            saveState();
-            refreshDesktopFooterNumbers();
-        }
-
-        function refreshDesktopFooterNumbers() {
-            const t = calcLeafTotals();
-            const setTxt = (id, txt) => { const el = document.getElementById(id); if (el) el.textContent = txt; };
-
-            setTxt('foot-qty-trau_vang', formatQty(t.qtySums.trau_vang));
-            setTxt('foot-qty-tam_vang',  formatQty(t.qtySums.tam_vang));
-            setTxt('foot-cnt-trau_vang', t.itemCounts.trau_vang);
-            setTxt('foot-cnt-tam_vang',  t.itemCounts.tam_vang);
-
-            state.cleBranches.forEach(b => {
-                const k = getCleLeafKey(b);
-                setTxt(`foot-qty-${k}`, formatQty(t.qtySums[k]));
-                setTxt(`foot-cnt-${k}`, t.itemCounts[k]);
-            });
-
-            setTxt('foot-qty-cle_total', formatQty(t.cleQtyTotal));
-            setTxt('foot-cnt-cle_total', t.cleItemCount);
-            setTxt('foot-box-cle_total', formatQty(t.cleBoxesTotal));
-
-            setTxt('foot-qty-grand', formatQty(desktopFilter === 'standalone' ? t.standaloneQty : t.grandQty));
-            setTxt('foot-cnt-grand', desktopFilter === 'standalone' ? t.standaloneItemCount : t.grandItemCount);
-            setTxt('foot-box-grand', formatQty(desktopFilter === 'standalone' ? t.standaloneBoxes : t.grandBoxes));
-        }
-
-        function handleVerticalKeyNav(event) {
-            const isDown = (event.key === 'Enter' && !event.shiftKey) || event.key === 'ArrowDown';
-            const isUp   = (event.key === 'Enter' && event.shiftKey)  || event.key === 'ArrowUp';
-            if (!isDown && !isUp) return;
-
-            event.preventDefault();
-            const current = event.target;
-            const col = current.dataset.col;
-            const row = parseInt(current.dataset.row, 10);
-            const targetRow = isDown ? row + 1 : row - 1;
-            const nextInput = document.querySelector(`[data-col="${col}"][data-row="${targetRow}"]`);
-            if (nextInput) {
-                nextInput.focus();
-                if (typeof nextInput.select === 'function') nextInput.select();
-            }
-        }
-
-        /* --- Giao diện Điện thoại (< 768px) --- */
-        function selectMobileGroup(grp) {
-            mobileGroup = grp;
-            if (grp === 'cleverfood' && !state.cleBranches.includes(mobileCleBranch)) {
-                mobileCleBranch = state.cleBranches[0] || '';
-            }
-            renderMobileView();
-        }
-
-        function selectMobileCleBranch(branchCode) {
-            mobileCleBranch = branchCode;
-            renderMobileView();
-        }
-
-        function handleMobileSearch(val) {
-            mobileSearchQuery = val;
-            renderMobileProductListOnly();
-        }
-
-        function renderMobileView() {
-            const grpWrap = document.getElementById('mobileGroupPills');
-            const subWrap = document.getElementById('mobileSubPills');
-            if (!grpWrap || !subWrap) return;
-
-            const t = calcLeafTotals();
-            const groups = [
-                { key: 'trau_vang',  label: 'Trâu vàng',  qty: t.qtySums.trau_vang },
-                { key: 'tam_vang',   label: 'Tâm vàng',   qty: t.qtySums.tam_vang },
-                { key: 'cleverfood', label: 'Cleverfood', qty: t.cleQtyTotal }
-            ];
-
-            grpWrap.innerHTML = groups.map(g => `
-                <button class="group-pill ${mobileGroup === g.key ? 'active' : ''}" onclick="selectMobileGroup('${g.key}')">
-                    <div>${g.label}</div>
-                    <div style="font-size:11px; opacity:0.88; margin-top:2px;">${formatQty(g.qty)} kg</div>
-                </button>
-            `).join('');
-
-            if (mobileGroup === 'cleverfood') {
-                subWrap.classList.remove('hidden');
-                if (!state.cleBranches.includes(mobileCleBranch)) mobileCleBranch = state.cleBranches[0] || '';
-                subWrap.innerHTML = state.cleBranches.map(b => {
-                    const k = getCleLeafKey(b);
-                    return `
-                        <button class="sub-pill ${mobileCleBranch === b ? 'active' : ''}" onclick="selectMobileCleBranch('${escapeHTML(b)}')">
-                            ${escapeHTML(b)} (${formatQty(t.qtySums[k])} kg &bull; ${t.itemCounts[k]})
-                        </button>
-                    `;
-                }).join('');
-            } else {
-                subWrap.classList.add('hidden');
-            }
-
-            renderMobileProductListOnly();
-            updateMobileStickyBar();
-        }
-
-        function renderMobileProductListOnly() {
-            const list = document.getElementById('mobileProductList');
-            if (!list) return;
-
-            const leafKey = getActiveMobileLeafKey();
-            const priceGroup = leafKey.startsWith('cle_') ? 'cle' : leafKey;
-            const qNorm = normalizeText(mobileSearchQuery);
-            const filtered = state.products.filter(p => !qNorm || normalizeText(p.name).includes(qNorm));
-
-            if (filtered.length === 0) {
-                list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted); font-size:13px;">Không tìm thấy sản phẩm phù hợp.</div>`;
-                return;
-            }
-
-            list.innerHTML = filtered.map((p, idx) => {
-                const qVal = (p.quantities && p.quantities[leafKey]) || '';
-                const qNum = parseNumber(qVal);
-                const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
-                return `
-                    <div class="mobile-prod-card ${qNum > 0 ? 'has-qty' : ''}" id="mobile-card-${p.id}">
-                        <div class="mobile-prod-info">
-                            <div class="mobile-prod-name">${idx + 1}. ${escapeHTML(p.name || 'Chưa đặt tên')}</div>
-                            <div class="mobile-prod-meta">
-                                <span>Giá: <strong>${formatMoney(unitPrice)} đ</strong></span>
-                                <span id="mobile-amt-${p.id}" style="color:var(--green-700); font-weight:600;">
-                                    ${qNum > 0 ? '&bull; ' + formatVND(unitPrice * qNum) : ''}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="mobile-qty-wrap">
-                            <input type="text" inputmode="decimal"
-                                class="mobile-qty-input"
-                                value="${escapeHTML(qVal)}"
-                                placeholder="0 kg"
-                                oninput="updateMobileLeafQty('${p.id}', this.value)">
-                        </div>
+                    <div class="import-history-meta">
+                        Ngày HĐ: ${escapeHTML(item.ngayHoaDon)} &bull; ${escapeHTML(item.hinhThucThanhToan)} &bull; Lưu lúc ${escapeHTML(item.savedAt || '')}
+                        ${item.maHoaDon ? ` &bull; Số HĐ: ${escapeHTML(item.maHoaDon)}` : ''}
                     </div>
-                `;
-            }).join('');
-        }
-
-        function updateMobileLeafQty(prodId, val) {
-            const leafKey = getActiveMobileLeafKey();
-            const priceGroup = leafKey.startsWith('cle_') ? 'cle' : leafKey;
-            const p = state.products.find(item => item.id === prodId);
-            if (!p) return;
-            if (!p.quantities) p.quantities = {};
-            p.quantities[leafKey] = val;
-            saveState();
-
-            const qNum = parseNumber(val);
-            const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
-            const card = document.getElementById(`mobile-card-${prodId}`);
-            if (card) card.classList.toggle('has-qty', qNum > 0);
-            const amtEl = document.getElementById(`mobile-amt-${prodId}`);
-            if (amtEl) amtEl.innerHTML = qNum > 0 ? `&bull; ${formatVND(unitPrice * qNum)}` : '';
-
-            updateMobileStickyBar();
-
-            const t = calcLeafTotals();
-            const grpWrap = document.getElementById('mobileGroupPills');
-            if (grpWrap) {
-                const pills = grpWrap.querySelectorAll('.group-pill');
-                if (pills[0]) pills[0].children[1].textContent = `${formatQty(t.qtySums.trau_vang)} kg`;
-                if (pills[1]) pills[1].children[1].textContent = `${formatQty(t.qtySums.tam_vang)} kg`;
-                if (pills[2]) pills[2].children[1].textContent = `${formatQty(t.cleQtyTotal)} kg`;
-            }
-            if (mobileGroup === 'cleverfood') {
-                const subWrap = document.getElementById('mobileSubPills');
-                if (subWrap) {
-                    subWrap.innerHTML = state.cleBranches.map(b => {
-                        const k = getCleLeafKey(b);
-                        return `
-                            <button class="sub-pill ${mobileCleBranch === b ? 'active' : ''}" onclick="selectMobileCleBranch('${escapeHTML(b)}')">
-                                ${escapeHTML(b)} (${formatQty(t.qtySums[k])} kg &bull; ${t.itemCounts[k]})
-                            </button>
-                        `;
-                    }).join('');
-                }
-            }
-        }
-
-        function handleMobileBoxChange(val) {
-            const leafKey = getActiveMobileLeafKey();
-            state.boxes[leafKey] = val;
-            saveState();
-        }
-
-        function updateMobileStickyBar() {
-            const leafKey = getActiveMobileLeafKey();
-            const t = calcLeafTotals();
-            let storeLabel = 'Trâu vàng';
-            if (leafKey === 'tam_vang') storeLabel = 'Tâm vàng';
-            else if (leafKey.startsWith('cle_')) storeLabel = `Cleverfood - ${leafKey.slice(4)}`;
-
-            const nameEl = document.getElementById('mobileStickyStoreName');
-            const qtyEl  = document.getElementById('mobileStickyTotalQty');
-            const boxEl  = document.getElementById('mobileStickyBoxInput');
-
-            if (nameEl) nameEl.textContent = storeLabel;
-            if (qtyEl)  qtyEl.textContent  = `Tổng: ${formatQty(t.qtySums[leafKey] || 0)} kg`;
-            if (boxEl)  boxEl.value        = state.boxes[leafKey] || '';
-        }
-
-        function jumpToPrintFromMobile() {
-            state.orderTarget = getActiveMobileLeafKey();
-            saveState();
-            switchTab('order');
-            scrollToTopInstant();
-        }
-
-        function scrollToTopInstant() {
-            window.scrollTo(0, 0);
-            document.documentElement.scrollTop = 0;
-            document.body.scrollTop = 0;
-        }
-
-        /* =========================================================
-           9. TAB 2: BẢNG GIÁ CHI TIẾT (15 MẶT HÀNG MẶC ĐỊNH)
-           ========================================================= */
-        function renderPriceTable() {
-            const tbody = document.getElementById('priceTableBody');
-            const countBadge = document.getElementById('productCountBadge');
-            if (countBadge) countBadge.textContent = state.products.length;
-            if (!tbody) return;
-
-            tbody.innerHTML = state.products.map((p, rowIdx) => `
-                <tr>
-                    <td style="text-align:center; font-weight:600; color:var(--text-muted); font-size:12.5px;">${rowIdx + 1}</td>
-                    <td>
-                        <input type="text" class="cell-input name-input"
-                            data-col="pr-name" data-row="${rowIdx}"
-                            value="${escapeHTML(p.name)}" placeholder="Tên sản phẩm..."
-                            oninput="updateProductName('${p.id}', this.value)"
-                            onkeydown="handleVerticalKeyNav(event)">
-                    </td>
-                    <td style="text-align:center;">
-                        <input type="number" step="1000" min="0" class="cell-input price-input"
-                            data-col="pr-tv" data-row="${rowIdx}"
-                            value="${p.prices.trau_vang || 0}"
-                            oninput="updateGroupPrice('${p.id}', 'trau_vang', this.value)"
-                            onkeydown="handleVerticalKeyNav(event)">
-                    </td>
-                    <td style="text-align:center;">
-                        <input type="number" step="1000" min="0" class="cell-input price-input"
-                            data-col="pr-tam" data-row="${rowIdx}"
-                            value="${p.prices.tam_vang || 0}"
-                            oninput="updateGroupPrice('${p.id}', 'tam_vang', this.value)"
-                            onkeydown="handleVerticalKeyNav(event)">
-                    </td>
-                    <td style="text-align:center;">
-                        <input type="number" step="1000" min="0" class="cell-input price-input"
-                            data-col="pr-cle" data-row="${rowIdx}"
-                            value="${p.prices.cle || 0}"
-                            oninput="updateGroupPrice('${p.id}', 'cle', this.value)"
-                            onkeydown="handleVerticalKeyNav(event)">
-                    </td>
-                    <td>
-                        <input type="text" class="cell-input name-input" style="font-size:12.5px; color:var(--text-muted);"
-                            data-col="pr-clename" data-row="${rowIdx}"
-                            value="${escapeHTML(p.cleName || '')}" placeholder="Mã - Tên sản phẩm Cleverfood..."
-                            oninput="updateProductCleName('${p.id}', this.value)"
-                            onkeydown="handleVerticalKeyNav(event)">
-                    </td>
-                    <td style="text-align:center;">
-                        <button class="btn-icon" onclick="deleteProduct('${p.id}')" title="Xóa mặt hàng">
-                            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function updateProductName(prodId, val) {
-            const p = state.products.find(x => x.id === prodId);
-            if (!p) return;
-            p.name = val;
-            saveState();
-        }
-
-        function updateGroupPrice(prodId, groupKey, val) {
-            const p = state.products.find(x => x.id === prodId);
-            if (!p) return;
-            p.prices[groupKey] = Math.round(parseNumber(val));
-            saveState();
-        }
-
-        function updateProductCleName(prodId, val) {
-            const p = state.products.find(x => x.id === prodId);
-            if (!p) return;
-            p.cleName = val;
-            saveState();
-        }
-
-        function addProduct() {
-            state.products.push({
-                id: 'p' + Date.now(),
-                name: '',
-                prices: { trau_vang: 0, tam_vang: 0, cle: 0 },
-                cleName: '',
-                quantities: {}
-            });
-            saveState();
-            renderAllInputViews();
-            renderPriceTable();
-            showToast('Đã thêm 1 mặt hàng mới vào cuối danh sách.');
-        }
-
-        function deleteProduct(prodId) {
-            state.products = state.products.filter(p => p.id !== prodId);
-            saveState();
-            renderAllInputViews();
-            renderPriceTable();
-            showToast('Đã xóa mặt hàng.');
-        }
-
-        function fillSampleData() {
-            state.orderDate = '2026-11-18';
-            state.pickupDate = '2026-11-19';
-            state.deliveryDate = '2026-11-21';
-            state.supplier = 'Thuỷ (Rau Đà Lạt)';
-            state.footerNote = 'Đơn giá đã bao gồm phí vận chuyển Đà Lạt - chợ Quảng Bá';
-
-            state.boxes = { trau_vang: '6', tam_vang: '5' };
-            state.cleBranches.forEach((b, i) => {
-                state.boxes[getCleLeafKey(b)] = i < 4 ? ['2', '2', '1', '2'][i] : '';
-            });
-
-            const sampleMap = {
-                'bap cai tim (su tim)':      { tv: '5',    tam: '',    md: '3',   ldt: '2',   htm: '',    hqv: '2'   },
-                'bap cai trai tim (su tim)': { tv: '10',   tam: '10',  md: '4',   ldt: '5',   htm: '3',   hqv: '4'   },
-                'bi ngoi xanh':              { tv: '8',    tam: '6',   md: '3',   ldt: '2,5', htm: '2',   hqv: '3'   },
-                'bong cai xanh baby':        { tv: '13,3', tam: '10',  md: '5',   ldt: '4',   htm: '3',   hqv: '4'   },
-                'ca cherry cam sua':         { tv: '3,6',  tam: '3',   md: '2',   ldt: '2',   htm: '1,5', hqv: '2'   },
-                'cai thao hoa tien':         { tv: '8,4',  tam: '',    md: '3',   ldt: '3',   htm: '2',   hqv: ''    },
-                'can tay':                   { tv: '6',    tam: '5,5', md: '2',   ldt: '2',   htm: '1',   hqv: '2'   },
-                'cu cai do':                 { tv: '2,5',  tam: '3',   md: '1,5', ldt: '1',   htm: '1',   hqv: '1,5' },
-                'cu den':                    { tv: '2',    tam: '2,5', md: '2',   ldt: '1,5', htm: '',    hqv: '2'   },
-                'dua leo baby':              { tv: '10',   tam: '',    md: '4',   ldt: '3',   htm: '2',   hqv: '3'   },
-                'dau cove nhat':             { tv: '6,5',  tam: '10',  md: '3',   ldt: '2',   htm: '2',   hqv: '2'   },
-                'dau ha lan':                { tv: '',     tam: '2',   md: '1',   ldt: '',    htm: '1',   hqv: '1'   },
-                'ot chuong do':              { tv: '9,4',  tam: '7',   md: '3',   ldt: '2',   htm: '2',   hqv: '3'   },
-                'ot chuong vang':            { tv: '8',    tam: '4,7', md: '2',   ldt: '2',   htm: '1,5', hqv: '2'   },
-                'xa lach thuy tinh':         { tv: '15',   tam: '15',  md: '6',   ldt: '5',   htm: '4',   hqv: '5'   }
-            };
-
-            state.products.forEach(p => {
-                p.quantities = {};
-                const found = sampleMap[normalizeText(p.name)];
-                if (found) {
-                    p.quantities.trau_vang = found.tv;
-                    p.quantities.tam_vang  = found.tam;
-                    if (state.cleBranches.includes('MĐ'))  p.quantities[getCleLeafKey('MĐ')]  = found.md;
-                    if (state.cleBranches.includes('LĐT')) p.quantities[getCleLeafKey('LĐT')] = found.ldt;
-                    if (state.cleBranches.includes('HTM')) p.quantities[getCleLeafKey('HTM')] = found.htm;
-                    if (state.cleBranches.includes('HQV')) p.quantities[getCleLeafKey('HQV')] = found.hqv;
-                }
-            });
-
-            saveState();
-            syncFormControls();
-            renderAllInputViews();
-            if (activeTab === 'order') renderOrderPreview();
-            if (activeTab === 'summary') renderSummaryPreview();
-            showToast('Đã điền số liệu mẫu cho Trâu vàng, Tâm vàng & 4 chi nhánh Cleverfood!');
-        }
-
-        function openClearQtyModal() {
-            openConfirmModal(
-                'Xóa số lượng cho ngày mới?',
-                'Toàn bộ ô Số lượng và Số thùng sẽ được xóa sạch. Danh sách mặt hàng, bảng giá, chi nhánh Cleverfood và link Google Sheet vẫn được giữ nguyên.',
-                () => {
-                    Object.keys(state.boxes).forEach(k => state.boxes[k] = '');
-                    state.products.forEach(p => { p.quantities = {}; });
-                    saveState();
-                    renderAllInputViews();
-                    if (activeTab === 'order') renderOrderPreview();
-                    if (activeTab === 'summary') renderSummaryPreview();
-                    showToast('Đã xóa sạch số lượng cho ngày mới.');
-                }
-            );
-        }
-
-        function openReset15Modal() {
-            openConfirmModal(
-                'Khôi phục 15 mặt hàng gốc?',
-                'Danh sách sẽ quay lại đúng 15 mặt hàng nông sản Đà Lạt mặc định cùng đơn giá gốc. Link Google Sheet và logo của bạn vẫn được giữ.',
-                () => {
-                    state.products = DEFAULT_PRODUCTS_15.map(p => ({
-                        id: p.id,
-                        name: p.name,
-                        prices: { ...p.prices },
-                        cleName: p.cleName,
-                        quantities: {}
-                    }));
-                    saveState();
-                    renderAllInputViews();
-                    renderPriceTable();
-                    showToast('Đã khôi phục đúng 15 mặt hàng gốc.');
-                }
-            );
-        }
-
-        /* =========================================================
-           10. TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1)
-           ========================================================= */
-        function renderOrderTargetDropdown() {
-            const select = document.getElementById('orderTargetSelect');
-            if (!select) return;
-
-            const opts = [
-                { val: 'trau_vang', label: 'Trâu vàng' },
-                { val: 'tam_vang',  label: 'Tâm vàng' },
-                ...state.cleBranches.map(b => ({ val: getCleLeafKey(b), label: `Cleverfood - ${b}` })),
-                { val: 'cle_all',   label: 'Cleverfood (Tổng toàn chuỗi)' }
-            ];
-
-            if (!opts.some(o => o.val === state.orderTarget)) {
-                state.orderTarget = 'tam_vang';
-            }
-
-            select.innerHTML = opts.map(o => `
-                <option value="${escapeHTML(o.val)}" ${state.orderTarget === o.val ? 'selected' : ''}>
-                    ${escapeHTML(o.label)}
-                </option>
-            `).join('');
-
-            const isCle = state.orderTarget.startsWith('cle_');
-            document.getElementById('wrapCleAltNameOpt').classList.toggle('hidden', !isCle);
-        }
-
-        function changeOrderTarget(val) {
-            state.orderTarget = val;
-            printMultiCleMode = false;
-            saveState();
-            const isCle = val.startsWith('cle_');
-            document.getElementById('wrapCleAltNameOpt').classList.toggle('hidden', !isCle);
-            renderOrderPreview();
-        }
-
-        function getOrderTargetLabel(targetKey) {
-            if (targetKey === 'trau_vang') return 'Trau-vang';
-            if (targetKey === 'tam_vang') return 'Tam-vang';
-            if (targetKey === 'cle_all') return 'Cleverfood-Tong';
-            if (targetKey && targetKey.startsWith('cle_')) {
-                return `Cleverfood-${slugifyTitleCase(targetKey.slice(4))}`;
-            }
-            return 'Don-hang';
-        }
-
-        function buildOrderSheetHTML(targetKey) {
-            let storeDisplayName = '';
-            let priceGroup = 'tam_vang';
-            let logoGroup = 'tam_vang';
-            let boxesVal = '';
-            let isCle = false;
-
-            if (targetKey === 'trau_vang') {
-                storeDisplayName = 'Trâu vàng';
-                priceGroup = 'trau_vang';
-                logoGroup = 'trau_vang';
-                boxesVal = state.boxes.trau_vang || '';
-            } else if (targetKey === 'tam_vang') {
-                storeDisplayName = 'Tâm vàng';
-                priceGroup = 'tam_vang';
-                logoGroup = 'tam_vang';
-                boxesVal = state.boxes.tam_vang || '';
-            } else if (targetKey === 'cle_all') {
-                storeDisplayName = 'Cleverfood (Tổng toàn chuỗi)';
-                priceGroup = 'cle';
-                logoGroup = 'cleverfood';
-                isCle = true;
-                let totalCleBoxes = 0;
-                state.cleBranches.forEach(b => totalCleBoxes += parseNumber(state.boxes[getCleLeafKey(b)]));
-                boxesVal = totalCleBoxes > 0 ? formatQty(totalCleBoxes) : '0';
-            } else if (targetKey.startsWith('cle_')) {
-                const branch = targetKey.slice(4);
-                storeDisplayName = `Cleverfood - ${branch}`;
-                priceGroup = 'cle';
-                logoGroup = 'cleverfood';
-                isCle = true;
-                boxesVal = state.boxes[targetKey] || '';
-            }
-
-            const getQtyForProd = p => {
-                if (targetKey === 'cle_all') {
-                    let s = 0;
-                    state.cleBranches.forEach(b => s += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
-                    return s;
-                }
-                return parseNumber(p.quantities && p.quantities[targetKey]);
-            };
-
-            const filtered = state.products.filter(p => getQtyForProd(p) > 0);
-
-            let totalQty = 0;
-            let totalAmount = 0;
-
-            const rowsHTML = filtered.length > 0
-                ? filtered.map((p, idx) => {
-                    const qty = getQtyForProd(p);
-                    const unitPrice = (p.prices && p.prices[priceGroup]) || 0;
-                    const lineAmt = Math.round(unitPrice * qty);
-                    totalQty += qty;
-                    totalAmount += lineAmt;
-
-                    const displayName = (isCle && state.options.useCleAltName && p.cleName)
-                        ? p.cleName
-                        : p.name;
-
-                    return `
-                        <tr>
-                            <td style="text-align:center; width:7%;">${idx + 1}</td>
-                            <td style="text-align:left; width:36%;">${escapeHTML(displayName)}</td>
-                            <td style="text-align:center; width:14%;">${formatMoney(unitPrice)}</td>
-                            <td style="text-align:center; width:13%;">${formatQty(qty)}</td>
-                            <td style="text-align:center; width:12%;"></td>
-                            <td style="text-align:right; width:18%;">${formatVND(lineAmt)}</td>
-                        </tr>
-                    `;
-                }).join('')
-                : `
-                    <tr>
-                        <td colspan="6" style="text-align:center; padding:24px; font-style:italic; color:#555;">
-                            Chưa có sản phẩm nào có số lượng &gt; 0 cho "${escapeHTML(storeDisplayName)}".
-                        </td>
-                    </tr>
-                `;
-
-            const logoHTML = getLogoMarkupByGroup(logoGroup);
-            const hasLogo = logoHTML !== '';
-            const boxesDisplay = String(boxesVal || '').trim() !== '' ? escapeHTML(boxesVal) : '0';
-            const headingText = String(state.orderTitle || '').trim() || 'ĐƠN ĐẶT HÀNG';
-
-            return `
-                <div class="a4-scale-wrap">
-                    <div class="a4-paper">
-                        <div style="text-align:center; margin-bottom:14px;">
-                            <h1 style="font-size:26px; font-weight:800; letter-spacing:0.6px; margin:0; color:#000;">
-                                ${escapeHTML(headingText)}
-                            </h1>
-                        </div>
-
-                        <div style="position:relative; margin-bottom:14px; min-height:${hasLogo ? '104px' : 'auto'};">
-                            <div style="text-align:center; font-style:italic; font-weight:700; font-size:14px; line-height:1.8; ${hasLogo ? 'padding:0 112px;' : ''}">
-                                <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
-                                <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
-                            </div>
-
-                            <div style="margin-top:14px; font-weight:700; font-size:14.5px; line-height:1.8;">
-                                <div>Nhà cung cấp: ${escapeHTML(state.supplier)}</div>
-                                <div>Cửa hàng: ${escapeHTML(storeDisplayName)}</div>
-                            </div>
-
-                            ${hasLogo ? `
-                                <div class="order-logo-slot" style="position:absolute; top:-8px; right:0; width:108px; height:108px; display:flex; align-items:center; justify-content:center;">
-                                    ${logoHTML}
-                                </div>
-                            ` : ''}
-                        </div>
-
-                        <table class="print-table">
-                            <thead>
-                                <tr>
-                                    <th style="width:7%;">STT</th>
-                                    <th style="width:36%;">Tên sản phẩm</th>
-                                    <th style="width:14%;">Đơn giá</th>
-                                    <th style="width:13%;">Số lượng</th>
-                                    <th style="width:12%;">Thực nhận</th>
-                                    <th style="width:18%;">Thành tiền</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${rowsHTML}
-                                <tr style="font-weight:700; font-size:14.5px;">
-                                    <td colspan="3" style="text-align:center; padding:8px;">Tổng số lượng</td>
-                                    <td style="text-align:center; padding:8px;">${formatQty(totalQty)}</td>
-                                    <td style="text-align:center; padding:8px;">0</td>
-                                    <td style="text-align:right; padding:8px;">${formatVND(totalAmount)}</td>
-                                </tr>
-                                <tr style="font-weight:700; font-size:14.5px;">
-                                    <td colspan="3" style="text-align:center; padding:8px;">Số thùng</td>
-                                    <td colspan="3" style="text-align:center; padding:8px;">${boxesDisplay}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        ${state.footerNote && state.footerNote.trim() !== '' ? `
-                            <div style="margin-top:18px; font-style:italic; font-size:13.5px; color:#000;">
-                                ${escapeHTML(state.footerNote)}
-                            </div>
-                        ` : ''}
+                    <div style="margin-top:6px;">
+                        <button type="button" class="btn btn-outline btn-sm" onclick="toggleImportHistoryDetail('${item.id}')">Xem chi tiết</button>
                     </div>
+                    <div id="imp-hist-det-${item.id}" class="import-history-detail hidden">${escapeHTML(item.chiTietHangHoa)}${item.ghiChu ? `\nGhi chú: ${escapeHTML(item.ghiChu)}` : ''}</div>
                 </div>
-            `;
-        }
-
-        function fitA4PapersToViewport() {
-            const isMobile = window.innerWidth < 768;
-            const wraps = document.querySelectorAll('.a4-scale-wrap');
-            const availableWidth = Math.max(260, window.innerWidth - 24);
-
-            wraps.forEach(wrap => {
-                const paper = wrap.querySelector('.a4-paper');
-                if (!paper) return;
-
-                const parentSection = wrap.closest('section');
-                if (parentSection && parentSection.classList.contains('hidden')) return;
-
-                if (!isMobile) {
-                    paper.style.transform = '';
-                    wrap.style.width = '';
-                    wrap.style.height = '';
-                    return;
-                }
-
-                paper.style.transform = 'none';
-                wrap.style.width = 'auto';
-                wrap.style.height = 'auto';
-
-                const baseWidth = paper.offsetWidth || 794;
-                const baseHeight = paper.offsetHeight || 1050;
-                const scale = Math.min(1, availableWidth / baseWidth);
-
-                paper.style.transformOrigin = 'top left';
-                paper.style.transform = `scale(${scale})`;
-                wrap.style.width = `${Math.floor(baseWidth * scale)}px`;
-                wrap.style.height = `${Math.ceil(baseHeight * scale)}px`;
-            });
-        }
-
-        function normalizeOrderLogoSizes(container) {
-            container.querySelectorAll('.order-logo-slot svg, .order-logo-slot img').forEach(el => {
-                el.style.maxWidth = '100%';
-                el.style.maxHeight = '100%';
-                el.style.width = 'auto';
-                el.style.height = 'auto';
-                el.style.objectFit = 'contain';
-            });
-        }
-
-        function renderOrderPreview() {
-            const container = document.getElementById('a4OrderContainer');
-            if (!container) return;
-
-            if (printMultiCleMode) {
-                const activeBranches = state.cleBranches.filter(b => {
-                    const k = getCleLeafKey(b);
-                    return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
-                });
-                if (activeBranches.length === 0) {
-                    printMultiCleMode = false;
-                    container.innerHTML = buildOrderSheetHTML(state.orderTarget);
-                } else {
-                    container.innerHTML = activeBranches
-                        .map(b => buildOrderSheetHTML(getCleLeafKey(b)))
-                        .join('');
-                }
-            } else {
-                container.innerHTML = buildOrderSheetHTML(state.orderTarget);
-            }
-
-            normalizeOrderLogoSizes(container);
-            requestAnimationFrame(fitA4PapersToViewport);
-        }
-
-        /* =========================================================
-           11. XUẤT PDF A4 KHÔNG CHÂN TRANG (MODAL CHẠM TRỰC TIẾP TRÊN IPHONE)
-               & CHỤP ẢNH ĐƠN HÀNG (.PNG) LƯU VÀO THƯ VIỆN ẢNH
-           ========================================================= */
-        function buildFileBaseName(isSummaryTab, isMultiCle, branchIndex) {
-            const datePart = formatDateForFileName(state.orderDate);
-            if (isSummaryTab) {
-                return `Bang-tong-hop-${datePart}`;
-            }
-            const titleSlug = slugifyTitleCase(state.orderTitle || 'Don dat hang') || 'Don-dat-hang';
-            if (isMultiCle) {
-                if (typeof branchIndex === 'number') {
-                    const activeBranches = state.cleBranches.filter(b => {
-                        const k = getCleLeafKey(b);
-                        return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
-                    });
-                    const bName = activeBranches[branchIndex]
-                        ? slugifyTitleCase(activeBranches[branchIndex])
-                        : `Chi-nhanh-${branchIndex + 1}`;
-                    return `${titleSlug}-Cleverfood-${bName}-${datePart}`;
-                }
-                return `${titleSlug}-Cleverfood-Cac-chi-nhanh-${datePart}`;
-            }
-            const storeSlug = getOrderTargetLabel(state.orderTarget);
-            return `${titleSlug}-${storeSlug}-${datePart}`;
-        }
-
-        function createOffscreenPaperClone(sourcePaper, paddingCSS) {
-            const clone = sourcePaper.cloneNode(true);
-            clone.style.cssText = [
-                'position: relative',
-                'width: 794px',
-                'min-height: 0',
-                'height: auto',
-                'background: #ffffff',
-                'color: #000000',
-                'transform: none',
-                'zoom: 1',
-                'margin: 0',
-                `padding: ${paddingCSS}`,
-                'box-shadow: none',
-                'border: none',
-                'border-radius: 0',
-                'box-sizing: border-box',
-                'font-family: Montserrat, "Be Vietnam Pro", Arial, sans-serif'
-            ].join(';');
-
-            clone.querySelectorAll('.order-logo-slot svg').forEach(svg => {
-                svg.setAttribute('width', '104');
-                svg.setAttribute('height', '104');
-                svg.style.width = '104px';
-                svg.style.height = '104px';
-            });
-
-            return clone;
-        }
-
-        function clearReadyPdfPayload() {
-            if (readyPdfPayload && readyPdfPayload.blobUrl) {
-                try { URL.revokeObjectURL(readyPdfPayload.blobUrl); } catch (e) {}
-            }
-            readyPdfPayload = null;
-        }
-
-        function openPdfReadyModal(payload) {
-            clearReadyPdfPayload();
-            readyPdfPayload = payload;
-            const badge = document.getElementById('pdfReadyFileNameBadge');
-            if (badge) badge.textContent = payload.fileName;
-            document.getElementById('pdfReadyModal').classList.remove('hidden');
-        }
-
-        function closePdfReadyModal() {
-            document.getElementById('pdfReadyModal').classList.add('hidden');
-        }
-
-        async function shareReadyPdfNow() {
-            if (!readyPdfPayload) return;
-            const { file, fileName } = readyPdfPayload;
-            try {
-                if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                    await navigator.share({ files: [file], title: fileName });
-                    closePdfReadyModal();
-                    showToast(`Đã mở bảng In / Lưu PDF cho ${fileName}!`);
-                } else if (navigator.share) {
-                    await navigator.share({ files: [file], title: fileName });
-                    closePdfReadyModal();
-                } else {
-                    downloadReadyPdfNow();
-                }
-            } catch (err) {
-                if (err && err.name === 'AbortError') {
-                    // Người dùng tự đóng bảng chia sẻ iOS
-                    return;
-                }
-                console.error('Lỗi gọi Share Sheet PDF:', err);
-                downloadReadyPdfNow();
-            }
-        }
-
-        function downloadReadyPdfNow() {
-            if (!readyPdfPayload) return;
-            const a = document.createElement('a');
-            a.href = readyPdfPayload.blobUrl;
-            a.download = readyPdfPayload.fileName;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            showToast(`Đang tải xuống ${readyPdfPayload.fileName}...`);
-        }
-
-        function openOfflinePrintModal() {
-            document.getElementById('offlinePrintModal').classList.remove('hidden');
-        }
-
-        function closeOfflinePrintModal() {
-            document.getElementById('offlinePrintModal').classList.add('hidden');
-        }
-
-        function triggerFallbackBrowserPrint() {
-            let restored = false;
-            const restore = () => {
-                if (restored) return;
-                restored = true;
-                document.title = DEFAULT_DOC_TITLE;
-                window.removeEventListener('afterprint', restore);
-                requestAnimationFrame(fitA4PapersToViewport);
-            };
-            document.title = '\u200B';
-            window.addEventListener('afterprint', restore, { once: true });
-            window.print();
-            setTimeout(restore, 1500);
-        }
-
-        async function exportCleanPDF(targetContainerId, triggerBtn) {
-            if (isExportingPDF) return;
-
-            if (activeTab === 'input' || activeTab === 'pricing') {
-                switchTab('order');
-                scrollToTopInstant();
-                targetContainerId = 'a4OrderContainer';
-                await new Promise(r => setTimeout(r, 140));
-            }
-
-            // Chỉ hiện hộp thoại dự phòng khi hoàn toàn không tải được thư viện (mất mạng)
-            if (typeof window.html2canvas !== 'function' || !window.jspdf || typeof window.jspdf.jsPDF !== 'function') {
-                openOfflinePrintModal();
-                return;
-            }
-
-            const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
-            const rootEl = document.getElementById(containerId);
-            if (!rootEl) {
-                showToast('Không tìm thấy vùng nội dung để tạo PDF.', true);
-                return;
-            }
-
-            const papers = Array.from(rootEl.querySelectorAll('.a4-paper'));
-            if (papers.length === 0) {
-                showToast('Chưa có trang A4 nào để xuất PDF.', true);
-                return;
-            }
-
-            isExportingPDF = true;
-            const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
-            if (triggerBtn) {
-                triggerBtn.disabled = true;
-                triggerBtn.innerHTML = '<span>Đang tạo PDF...</span>';
-            }
-
-            const offscreenHost = document.createElement('div');
-            offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
-            document.body.appendChild(offscreenHost);
-
-            try {
-                if (document.fonts && document.fonts.ready) {
-                    await document.fonts.ready;
-                }
-
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4',
-                    compress: true
-                });
-
-                const pageWidthMM = 210;
-                const pageHeightMM = 297;
-
-                for (let i = 0; i < papers.length; i++) {
-                    const clone = createOffscreenPaperClone(papers[i], '36px 42px');
-                    offscreenHost.innerHTML = '';
-                    offscreenHost.appendChild(clone);
-
-                    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-                    const canvas = await window.html2canvas(clone, {
-                        scale: 2,
-                        useCORS: true,
-                        backgroundColor: '#ffffff',
-                        width: 794,
-                        windowWidth: 794,
-                        logging: false
-                    });
-
-                    const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                    let renderW = pageWidthMM;
-                    let renderH = (canvas.height * renderW) / canvas.width;
-                    let offsetX = 0;
-
-                    if (renderH > pageHeightMM) {
-                        const shrinkRatio = pageHeightMM / renderH;
-                        renderH = pageHeightMM;
-                        renderW = renderW * shrinkRatio;
-                        offsetX = (pageWidthMM - renderW) / 2;
-                    }
-
-                    if (i > 0) pdf.addPage();
-                    pdf.addImage(imgData, 'JPEG', offsetX, 0, renderW, renderH, undefined, 'FAST');
-                }
-
-                const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
-                const fileName = `${buildFileBaseName(isSummaryTab, !isSummaryTab && printMultiCleMode)}.pdf`;
-
-                const pdfBlob = pdf.output('blob');
-                const pdfFile = new File([pdfBlob], fileName, { type: 'application/pdf' });
-                const blobUrl = URL.createObjectURL(pdfBlob);
-
-                if (isMobileDevice()) {
-                    // Trên iPhone / Android: mở Modal chạm trực tiếp để giữ 100% user-gesture khi gọi navigator.share()
-                    openPdfReadyModal({ blob: pdfBlob, file: pdfFile, fileName, blobUrl });
-                } else {
-                    // Trên máy tính: tải thẳng file PDF sạch xuống
-                    pdf.save(fileName);
-                    setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
-                    showToast(`Đã xuất file PDF thành công: ${fileName}`);
-                }
-            } catch (err) {
-                console.error('Lỗi xuất PDF:', err);
-                showToast('Có lỗi khi tạo file PDF, vui lòng thử lại.', true);
-            } finally {
-                if (offscreenHost.parentNode) {
-                    offscreenHost.parentNode.removeChild(offscreenHost);
-                }
-                isExportingPDF = false;
-                if (triggerBtn) {
-                    triggerBtn.disabled = false;
-                    triggerBtn.innerHTML = origBtnHTML;
-                }
-            }
-        }
-
-        async function printAllCleBranches(triggerBtn) {
-            const activeBranches = state.cleBranches.filter(b => {
-                const k = getCleLeafKey(b);
-                return state.products.some(p => parseNumber(p.quantities && p.quantities[k]) > 0);
-            });
-            if (activeBranches.length === 0) {
-                showToast('Chưa có chi nhánh Cleverfood nào có số lượng > 0.', true);
-                return;
-            }
-            printMultiCleMode = true;
-            renderOrderPreview();
-            await new Promise(r => setTimeout(r, 140));
-            try {
-                await exportCleanPDF('a4OrderContainer', triggerBtn);
-            } finally {
-                printMultiCleMode = false;
-                renderOrderPreview();
-            }
-        }
-
-        function printCurrentOrder(btn) {
-            printMultiCleMode = false;
-            renderOrderPreview();
-            setTimeout(() => exportCleanPDF('a4OrderContainer', btn), 100);
-        }
-
-        function handleHeaderPrintClick(btn) {
-            const targetId = activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer';
-            exportCleanPDF(targetId, btn);
-        }
-
-        /* --- CHỤP ĐƠN HÀNG (.PNG) LƯU VÀO THƯ VIỆN ẢNH --- */
-        async function captureOrderImage(targetContainerId, triggerBtn) {
-            if (isCapturingImg) return;
-
-            if (typeof window.html2canvas !== 'function') {
-                showToast('Cần có kết nối mạng để chụp ảnh đơn hàng.', true);
-                return;
-            }
-
-            const containerId = targetContainerId || (activeTab === 'summary' ? 'view-summary' : 'a4OrderContainer');
-            const rootEl = document.getElementById(containerId);
-            if (!rootEl) return;
-
-            const papers = Array.from(rootEl.querySelectorAll('.a4-paper'));
-            if (papers.length === 0) {
-                showToast('Chưa có đơn hàng nào để chụp.', true);
-                return;
-            }
-
-            isCapturingImg = true;
-            const origBtnHTML = triggerBtn ? triggerBtn.innerHTML : '';
-            if (triggerBtn) {
-                triggerBtn.disabled = true;
-                triggerBtn.innerHTML = '<span>Đang chụp...</span>';
-            }
-
-            const offscreenHost = document.createElement('div');
-            offscreenHost.style.cssText = 'position:fixed; left:-9999px; top:0; width:794px; background:#ffffff; z-index:-1; pointer-events:none;';
-            document.body.appendChild(offscreenHost);
-
-            try {
-                if (document.fonts && document.fonts.ready) {
-                    await document.fonts.ready;
-                }
-
-                const isSummaryTab = (activeTab === 'summary' || containerId === 'view-summary');
-                const isMulti = !isSummaryTab && printMultiCleMode && papers.length > 1;
-                const capturedItems = [];
-
-                for (let i = 0; i < papers.length; i++) {
-                    const clone = createOffscreenPaperClone(papers[i], '32px 36px');
-                    offscreenHost.innerHTML = '';
-                    offscreenHost.appendChild(clone);
-
-                    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-                    const canvas = await window.html2canvas(clone, {
-                        scale: 2.5,
-                        useCORS: true,
-                        backgroundColor: '#ffffff',
-                        width: 794,
-                        windowWidth: 794,
-                        logging: false
-                    });
-
-                    const fileName = `${buildFileBaseName(isSummaryTab, isMulti, isMulti ? i : undefined)}.png`;
-                    const dataUrl = canvas.toDataURL('image/png');
-                    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-                    const file = new File([blob], fileName, { type: 'image/png' });
-
-                    capturedItems.push({ fileName, dataUrl, blob, file });
-                }
-
-                lastCapturedImages = capturedItems;
-
-                if (isMobileDevice()) {
-                    // Trên điện thoại: mở Modal xem trước + nút chạm trực tiếp gọi Share Sheet lưu vào Ảnh
-                    openImagePreviewModal(capturedItems);
-                } else {
-                    downloadCapturedImages();
-                    showToast(`Đã tải xuống ${capturedItems.length > 1 ? capturedItems.length + ' ảnh đơn hàng' : capturedItems[0].fileName}!`);
-                }
-            } catch (err) {
-                console.error('Lỗi chụp ảnh đơn hàng:', err);
-                showToast('Không thể chụp ảnh đơn hàng, vui lòng thử lại.', true);
-            } finally {
-                if (offscreenHost.parentNode) {
-                    offscreenHost.parentNode.removeChild(offscreenHost);
-                }
-                isCapturingImg = false;
-                if (triggerBtn) {
-                    triggerBtn.disabled = false;
-                    triggerBtn.innerHTML = origBtnHTML;
-                }
-            }
-        }
-
-        function openImagePreviewModal(items) {
-            const modal = document.getElementById('imagePreviewModal');
-            const list = document.getElementById('imgPreviewList');
-            const title = document.getElementById('imgPreviewTitle');
-            if (!modal || !list) return;
-
-            title.textContent = items.length > 1
-                ? `Đã chụp ${items.length} ảnh đơn hàng`
-                : 'Ảnh đơn hàng đã chụp';
-
-            list.innerHTML = items.map(item => `
-                <img src="${item.dataUrl}" alt="${escapeHTML(item.fileName)}">
             `).join('');
-
-            modal.classList.remove('hidden');
         }
 
-        function closeImagePreviewModal() {
-            const modal = document.getElementById('imagePreviewModal');
-            if (modal) modal.classList.add('hidden');
+        function toggleImportHistoryDetail(id) {
+            const el = document.getElementById(`imp-hist-det-${id}`);
+            if (el) el.classList.toggle('hidden');
         }
 
-        async function shareCapturedImagesNow() {
-            if (!lastCapturedImages || lastCapturedImages.length === 0) return;
-            const files = lastCapturedImages.map(x => x.file);
-            try {
-                if (navigator.canShare && navigator.canShare({ files })) {
-                    await navigator.share({
-                        files,
-                        title: lastCapturedImages[0].fileName
-                    });
-                    showToast('Chọn "Lưu hình ảnh" để lưu thẳng vào thư viện Ảnh!');
-                } else if (navigator.share) {
-                    await navigator.share({
-                        files,
-                        title: lastCapturedImages[0].fileName
-                    });
-                } else {
-                    downloadCapturedImages();
+        function openClearImportHistoryModal() {
+            openConfirmModal(
+                'Xóa lịch sử phiếu nhập trên máy?',
+                'Chỉ xóa danh sách lịch sử hiển thị cục bộ trên trình duyệt này. Dữ liệu đã lưu trên Google Sheet vẫn giữ nguyên.',
+                () => {
+                    state.importHistory = [];
+                    saveState();
+                    renderImportHistory();
+                    showToast('Đã xóa lịch sử phiếu nhập cục bộ.');
                 }
-            } catch (err) {
-                if (err && err.name === 'AbortError') return;
-                console.error('Lỗi chia sẻ ảnh:', err);
-                showToast('Bạn hãy nhấn giữ trực tiếp vào ảnh phía trên để chọn "Lưu vào Ảnh".');
-            }
-        }
-
-        function downloadCapturedImages() {
-            if (!lastCapturedImages || lastCapturedImages.length === 0) return;
-            lastCapturedImages.forEach((item, idx) => {
-                setTimeout(() => {
-                    const url = URL.createObjectURL(item.blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = item.fileName;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    setTimeout(() => URL.revokeObjectURL(url), 1500);
-                }, idx * 250);
-            });
-        }
-
-        /* =========================================================
-           12. TAB 4: BẢNG TỔNG HỢP (MẪU 2)
-           ========================================================= */
-        function changeSummaryMode(mode) {
-            state.summaryMode = mode;
-            saveState();
-            renderSummaryPreview();
-        }
-
-        function renderSummaryPreview() {
-            const sheet = document.getElementById('a4SummarySheet');
-            if (!sheet) return;
-
-            const mode = state.summaryMode || 'all_detail';
-            let cols = [];
-
-            if (mode === 'grouped') {
-                cols = [
-                    { key: 'trau_vang', label: 'Trâu vàng',  type: 'leaf' },
-                    { key: 'tam_vang',  label: 'Tâm vàng',   type: 'leaf' },
-                    { key: 'cle_all',   label: 'Cleverfood', type: 'cle_sum' }
-                ];
-            } else if (mode === 'cle_only') {
-                cols = state.cleBranches.map(b => ({ key: getCleLeafKey(b), label: b, type: 'leaf' }));
-            } else {
-                cols = [
-                    { key: 'trau_vang', label: 'Trâu vàng', type: 'leaf' },
-                    { key: 'tam_vang',  label: 'Tâm vàng',  type: 'leaf' },
-                    ...state.cleBranches.map(b => ({ key: getCleLeafKey(b), label: `Cle-${b}`, type: 'leaf' }))
-                ];
-            }
-
-            const getColProdQty = (col, p) => {
-                if (col.type === 'cle_sum') {
-                    let s = 0;
-                    state.cleBranches.forEach(b => s += parseNumber(p.quantities && p.quantities[getCleLeafKey(b)]));
-                    return s;
-                }
-                return parseNumber(p.quantities && p.quantities[col.key]);
-            };
-
-            const getColBoxes = col => {
-                if (col.type === 'cle_sum') {
-                    let s = 0;
-                    state.cleBranches.forEach(b => s += parseNumber(state.boxes[getCleLeafKey(b)]));
-                    return s;
-                }
-                return parseNumber(state.boxes[col.key]);
-            };
-
-            if (state.options.hideZeroStoreCols) {
-                const nonEmpty = cols.filter(c => {
-                    const hasQty = state.products.some(p => getColProdQty(c, p) > 0);
-                    return hasQty || getColBoxes(c) > 0;
-                });
-                if (nonEmpty.length > 0) cols = nonEmpty;
-            }
-
-            const filteredProducts = state.products.filter(p => {
-                let sum = 0;
-                cols.forEach(c => sum += getColProdQty(c, p));
-                return sum > 0;
-            });
-
-            const colQtyTotals = {};
-            const colItemCounts = {};
-            cols.forEach(c => { colQtyTotals[c.key] = 0; colItemCounts[c.key] = 0; });
-
-            let grandTotalQty = 0;
-            let grandTotalItems = 0;
-
-            const rowsHTML = filteredProducts.length > 0
-                ? filteredProducts.map((p, idx) => {
-                    let rowSum = 0;
-                    const cells = cols.map(c => {
-                        const q = getColProdQty(c, p);
-                        rowSum += q;
-                        colQtyTotals[c.key] += q;
-                        if (q > 0) colItemCounts[c.key] += 1;
-                        return `<td style="text-align:center;">${q > 0 ? formatQty(q) : ''}</td>`;
-                    }).join('');
-
-                    grandTotalQty += rowSum;
-                    if (rowSum > 0) grandTotalItems += 1;
-
-                    return `
-                        <tr>
-                            <td style="text-align:center; width:6%;">${idx + 1}</td>
-                            <td style="text-align:left;">${escapeHTML(p.name)}</td>
-                            ${cells}
-                            <td style="text-align:center; font-weight:700; font-size:14px;">${formatQty(rowSum)}</td>
-                        </tr>
-                    `;
-                }).join('')
-                : `
-                    <tr>
-                        <td colspan="${cols.length + 3}" style="text-align:center; padding:24px; font-style:italic; color:#555;">
-                            Chưa có sản phẩm nào có số lượng &gt; 0.
-                        </td>
-                    </tr>
-                `;
-
-            let totalBoxes = 0;
-            const boxFontSize = cols.length > 5 ? '17px' : '20px';
-            const boxCells = cols.map(c => {
-                const b = getColBoxes(c);
-                totalBoxes += b;
-                return `<td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">${formatQty(b)}</td>`;
-            }).join('');
-
-            const tableFontSize = cols.length > 5 ? '12.5px' : '13.5px';
-
-            sheet.innerHTML = `
-                <div style="text-align:center; font-weight:700; font-size:15.5px; line-height:1.85; margin-bottom:12px; color:#000;">
-                    <div>Ngày đặt hàng: ${escapeHTML(formatVietnameseDate(state.orderDate))}</div>
-                    <div>Ngày lấy hàng: ${escapeHTML(formatVietnameseDate(state.pickupDate))}</div>
-                    <div>Ngày nhận hàng: ${escapeHTML(formatVietnameseDate(state.deliveryDate))}</div>
-                </div>
-
-                <table class="print-table" style="font-size:${tableFontSize};">
-                    <thead>
-                        <tr>
-                            <th style="width:6%;">STT</th>
-                            <th style="min-width:170px;">Tên sản phẩm</th>
-                            ${cols.map(c => `<th>${escapeHTML(c.label)}</th>`).join('')}
-                            <th style="min-width:68px;">Tổng</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rowsHTML}
-
-                        <tr>
-                            <td rowspan="3" class="empty-corner-cell"></td>
-                            <td style="text-align:center; font-weight:700; font-size:14.5px; padding:7px;">Tổng số lượng</td>
-                            ${cols.map(c => `<td style="text-align:center; font-weight:700; font-size:14.5px;">${formatQty(colQtyTotals[c.key])}</td>`).join('')}
-                            <td style="text-align:center; font-weight:700; font-size:14.5px;">${formatQty(grandTotalQty)}</td>
-                        </tr>
-
-                        <tr>
-                            <td style="text-align:center; font-weight:700; font-size:14.5px; padding:7px;">Số lượng sản phẩm</td>
-                            ${cols.map(c => `<td style="text-align:center; font-weight:700; font-size:14.5px;">${colItemCounts[c.key]}</td>`).join('')}
-                            <td style="text-align:center; font-weight:700; font-size:14.5px;">${grandTotalItems}</td>
-                        </tr>
-
-                        <tr>
-                            <td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">Số thùng</td>
-                            ${boxCells}
-                            <td style="text-align:center; font-weight:800; font-size:${boxFontSize}; padding:8px 5px;">${formatQty(totalBoxes)}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-
-            requestAnimationFrame(fitA4PapersToViewport);
+            );
         }
 
         /* =========================================================
@@ -4504,7 +3071,7 @@
             activeTab = tabName;
             printMultiCleMode = false;
 
-            ['input', 'pricing', 'order', 'summary'].forEach(t => {
+            ['input', 'pricing', 'order', 'summary', 'import'].forEach(t => {
                 document.getElementById(`view-${t}`).classList.toggle('hidden', t !== tabName);
                 document.getElementById(`tabBtn-${t}`).classList.toggle('active', t === tabName);
             });
@@ -4522,6 +3089,12 @@
                 renderCustomerLogosGrid();
                 renderPriceTable();
                 renderSyncBanner(false);
+            } else if (tabName === 'import') {
+                initImportFormDates();
+                renderImportDatalists();
+                renderImportRows();
+                renderImportHistory();
+                updateImportScriptBadge();
             } else {
                 renderAllInputViews();
             }
@@ -4582,6 +3155,10 @@
             document.getElementById('summaryModeSelect').value = state.summaryMode || 'all_detail';
             document.getElementById('chkHideZeroStoreCols').checked = !!state.options.hideZeroStoreCols;
 
+            const impUrlEl = document.getElementById('inputImportScriptUrl');
+            if (impUrlEl) impUrlEl.value = (state.importConfig && state.importConfig.scriptUrl) || '';
+            updateImportScriptBadge();
+
             updateDatePreviews();
         }
 
@@ -4594,6 +3171,11 @@
             renderAllInputViews();
             renderOrderTargetDropdown();
             renderSyncBanner(false);
+            initImportFormDates();
+            renderImportDatalists();
+            importItems = [createEmptyImportRow()];
+            renderImportRows();
+            renderImportHistory();
         });
 
         window.addEventListener('resize', () => {
