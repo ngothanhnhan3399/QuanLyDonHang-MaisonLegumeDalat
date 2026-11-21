@@ -1,8 +1,3 @@
-
-
-
-Biểu tượng HTML
-index-maison-legume-v14
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -17,15 +12,15 @@ index-maison-legume-v14
   <meta name="apple-mobile-web-app-title" content="Maison Légume">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=14) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=14">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=14">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=14">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=14">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=14">
+  <!-- Icons chống cache Safari (?v=15) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=15">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=15">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=15">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=15">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=15">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=14","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=14","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Maison L%C3%A9gume Dalat","short_name":"Maison L%C3%A9gume","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=15","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=15","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1043,7 +1038,7 @@ index-maison-legume-v14
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=14" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=15" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1150,8 +1145,9 @@ index-maison-legume-v14
             <input type="checkbox" id="chkUpdateExistingOnly" checked onchange="updateSettings('updateExistingOnly', this.checked)">
             Chỉ cập nhật giá cho các sản phẩm đang có
           </label>
-          <button type="button" class="btn btn-primary" onclick="syncPricesFromGoogleSheet()">☁️ Tải giá từ Google Sheet</button>
+          <button type="button" class="btn btn-primary" id="btnSyncPriceSheet" onclick="syncPricesFromGoogleSheet()">☁️ Tải giá từ Google Sheet</button>
         </div>
+        <div id="priceSyncStatus" style="margin-top:8px; font-size:12.5px; font-weight:700; color:#166534;"></div>
 
         <details style="margin-top: 12px;">
           <summary style="cursor:pointer; font-size:13px; font-weight:700; color:#15803d;">📋 Dán nhanh bảng giá (Copy &amp; Paste dự phòng)</summary>
@@ -2330,44 +2326,106 @@ index-maison-legume-v14
       return rows;
     }
 
+    function normVN(str) {
+      return String(str || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/đ/g, 'd')
+        .replace(/Đ/g, 'D')
+        .toLowerCase()
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function parsePriceCell(val) {
+      if (val === null || val === undefined) return null;
+      var s = String(val).trim();
+      if (!s) return null;
+      var digits = s.replace(/[^\d]/g, '');
+      if (!digits) return null;
+      return Number(digits);
+    }
+
+    function setPriceSyncStatus(msg, isErr) {
+      var el = document.getElementById('priceSyncStatus');
+      if (!el) return;
+      el.style.color = isErr ? '#dc2626' : '#166534';
+      el.textContent = msg;
+    }
+
     function applyParsedPriceRows(rows) {
       if (!rows || rows.length < 2) {
+        setPriceSyncStatus('⚠ Không có dữ liệu bảng giá hợp lệ từ Sheet!', true);
         showToast('Không có dữ liệu bảng giá hợp lệ!');
         return;
       }
-      var headers = rows[0].map(function (h) { return h.toLowerCase().trim(); });
-      var idxName = headers.findIndex(function (h) { return h.indexOf('tên sản phẩm') !== -1 && h.indexOf('clever') === -1; });
-      var idxCle = headers.findIndex(function (h) { return h.indexOf('cle') !== -1 && h.indexOf('tên') === -1; });
-      var idxTrau = headers.findIndex(function (h) { return h.indexOf('trâu') !== -1; });
-      var idxTam = headers.findIndex(function (h) { return h.indexOf('tâm') !== -1; });
-      var idxCleName = headers.findIndex(function (h) { return h.indexOf('tên') !== -1 && h.indexOf('clever') !== -1; });
 
-      if (idxName === -1) idxName = 0;
+      // Tự động dò dòng tiêu đề trong 5 dòng đầu (phòng trường hợp dòng 1 là tiêu đề bảng)
+      var headerRowIdx = 0;
+      var idxName = -1, idxCle = -1, idxTrau = -1, idxTam = -1, idxCleName = -1;
+
+      for (var rIdx = 0; rIdx < Math.min(5, rows.length); rIdx++) {
+        var hNorm = rows[rIdx].map(normVN);
+        var cName = hNorm.findIndex(function (h) {
+          return (h.indexOf('ten san pham') !== -1 || h.indexOf('ten hang') !== -1 || h === 'san pham' || h === 'mat hang') && h.indexOf('clever') === -1 && h.indexOf('cle') === -1;
+        });
+        var cCle = hNorm.findIndex(function (h) {
+          return (h.indexOf('cle') !== -1 || h.indexOf('clever') !== -1) && h.indexOf('ten') === -1;
+        });
+        var cTrau = hNorm.findIndex(function (h) { return h.indexOf('trau') !== -1; });
+        var cTam = hNorm.findIndex(function (h) { return h.indexOf('tam') !== -1; });
+        var cCleName = hNorm.findIndex(function (h) {
+          return h.indexOf('ten') !== -1 && (h.indexOf('clever') !== -1 || h.indexOf('cle') !== -1);
+        });
+
+        if (cName !== -1 || cCle !== -1 || cTrau !== -1 || cTam !== -1) {
+          headerRowIdx = rIdx;
+          idxName = cName;
+          idxCle = cCle;
+          idxTrau = cTrau;
+          idxTam = cTam;
+          idxCleName = cCleName;
+          break;
+        }
+      }
+
+      // Nếu không tìm thấy cột tên rõ ràng, mặc định cột 0 (hoặc cột 1 nếu cột 0 là STT)
+      if (idxName === -1) {
+        var firstH = normVN(rows[headerRowIdx][0]);
+        idxName = (firstH === 'stt' || firstH === 'ma' || firstH === 'ma hang') ? 1 : 0;
+      }
+
       var onlyExisting = state.settings.updateExistingOnly !== false;
       var updated = 0, added = 0;
 
-      for (var i = 1; i < rows.length; i++) {
+      for (var i = headerRowIdx + 1; i < rows.length; i++) {
         var r = rows[i];
-        var name = (r[idxName] || '').trim();
+        var name = String(r[idxName] || '').trim();
         if (!name) continue;
-        var pCle = idxCle !== -1 ? Number(String(r[idxCle] || '').replace(/[^\d]/g, '')) || 0 : null;
-        var pTrau = idxTrau !== -1 ? Number(String(r[idxTrau] || '').replace(/[^\d]/g, '')) || 0 : null;
-        var pTam = idxTam !== -1 ? Number(String(r[idxTam] || '').replace(/[^\d]/g, '')) || 0 : null;
-        var cName = idxCleName !== -1 ? (r[idxCleName] || '').trim() : '';
+        var nameNorm = normVN(name);
 
-        var existing = state.products.find(function (p) { return p.name.toLowerCase().trim() === name.toLowerCase(); });
+        var pCle = idxCle !== -1 ? parsePriceCell(r[idxCle]) : null;
+        var pTrau = idxTrau !== -1 ? parsePriceCell(r[idxTrau]) : null;
+        var pTam = idxTam !== -1 ? parsePriceCell(r[idxTam]) : null;
+        var cNameVal = idxCleName !== -1 ? String(r[idxCleName] || '').trim() : '';
+
+        var existing = state.products.find(function (p) {
+          return normVN(p.name) === nameNorm || (p.cleName && normVN(p.cleName) === nameNorm);
+        });
+
         if (existing) {
-          if (pCle !== null && pCle > 0) existing.priceCle = pCle;
-          if (pTrau !== null && pTrau > 0) existing.priceTrau = pTrau;
-          if (pTam !== null && pTam > 0) existing.priceTam = pTam;
-          if (cName) existing.cleName = cName;
-          updated++;
+          var changed = false;
+          if (pCle !== null) { existing.priceCle = pCle; changed = true; }
+          if (pTrau !== null) { existing.priceTrau = pTrau; changed = true; }
+          if (pTam !== null) { existing.priceTam = pTam; changed = true; }
+          if (cNameVal) { existing.cleName = cNameVal; changed = true; }
+          if (changed) updated++;
         } else if (!onlyExisting) {
           state.products.push({
             id: 'p_' + Date.now() + '_' + i,
             code: '',
             name: name,
-            cleName: cName || name,
+            cleName: cNameVal || name,
             priceTrau: pTrau || 0,
             priceTam: pTam || 0,
             priceCle: pCle || 0
@@ -2375,29 +2433,62 @@ index-maison-legume-v14
           added++;
         }
       }
+
       saveState();
       renderTab2();
+      renderTab1();
+      if (activeTab === 'tab3') renderTab3();
+
+      var nowStr = new Date().toLocaleTimeString('vi-VN');
+      var summary = '✓ Đã cập nhật bảng giá trực tiếp: ' + updated + ' sản phẩm' + (added ? (' & thêm ' + added + ' mới') : '') + ' lúc ' + nowStr + '.';
+      setPriceSyncStatus(summary, false);
       showToast('Đã cập nhật ' + updated + ' sản phẩm' + (added ? (' & thêm ' + added + ' mới') : '') + '!');
+
+      // Tự đồng bộ lên App_State nếu đã cấu hình Apps Script
+      if (getActiveAppsScriptUrl()) {
+        window.pushAppStateToServer(false);
+      }
     }
 
     window.syncPricesFromGoogleSheet = async function () {
-      var url = (state.settings.sheetUrl || '').trim();
-      var tab = (state.settings.sheetTab || '').trim();
+      var url = (document.getElementById('inpSheetUrl').value || state.settings.sheetUrl || '').trim();
+      var tab = (document.getElementById('inpSheetTab').value || state.settings.sheetTab || '').trim();
+      state.settings.sheetUrl = url;
+      state.settings.sheetTab = tab;
+      saveState();
+
       var m = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
       if (!m) {
+        setPriceSyncStatus('⚠ Vui lòng nhập Link Google Sheet hợp lệ!', true);
         showToast('Vui lòng nhập Link Google Sheet hợp lệ!');
         return;
       }
-      var csvUrl = 'https://docs.google.com/spreadsheets/d/' + m[1] + '/gviz/tq?tqx=out:csv' + (tab ? ('&sheet=' + encodeURIComponent(tab)) : '');
-      showToast('Đang tải bảng giá từ Google Sheet...');
+
+      var sheetId = m[1];
+      var gidMatch = url.match(/[#&?]gid=(\d+)/);
+      var csvUrl = 'https://docs.google.com/spreadsheets/d/' + sheetId + '/gviz/tq?tqx=out:csv';
+      if (tab) csvUrl += '&sheet=' + encodeURIComponent(tab);
+      else if (gidMatch) csvUrl += '&gid=' + gidMatch[1];
+      csvUrl += '&t=' + Date.now();
+
+      var btn = document.getElementById('btnSyncPriceSheet');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang tải giá...'; }
+      setPriceSyncStatus('⏳ Đang tải bảng giá mới nhất từ Google Sheet...', false);
+
       try {
-        var res = await fetch(csvUrl);
+        var res = await fetch(csvUrl, { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         var text = await res.text();
+        if (!text || text.trim().indexOf('<!DOCTYPE') === 0 || text.trim().indexOf('<html') === 0) {
+          throw new Error('Sheet chưa bật quyền chia sẻ công khai (Bất kỳ ai có đường liên kết -> Người xem)');
+        }
         var rows = parseCSVText(text, ',');
         applyParsedPriceRows(rows);
       } catch (err) {
-        showToast('Không tải được Sheet (kiểm tra quyền chia sẻ công khai hoặc dùng Dán nhanh).');
+        setPriceSyncStatus('⚠ Không tải được Sheet: ' + (err.message || 'Kiểm tra quyền chia sẻ công khai hoặc dùng Dán nhanh bên dưới.'), true);
+        showToast('Không tải được Sheet! Kiểm tra quyền chia sẻ công khai.');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '☁️ Tải giá từ Google Sheet'; }
       }
     };
 
@@ -3848,4 +3939,4 @@ index-maison-legume-v14
   </script>
 </body>
 </html>
-Locating the generated website files
+Evaluating google sheets price sync logic
