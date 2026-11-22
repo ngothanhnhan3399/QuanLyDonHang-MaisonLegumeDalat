@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=22) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=22">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=22">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=22">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=22">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=22">
+  <!-- Icons chống cache Safari (?v=25) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=25">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=25">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=25">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=25">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=25">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=22","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=22","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=25","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=25","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -320,14 +320,19 @@
     }
 
     input[type="text"],
+    input[type="password"],
     input[type="date"],
     input[type="number"],
     input[type="url"],
     input[type="tel"],
+    input[type="email"],
+    input[type="search"],
     select,
     textarea {
       width: 100%;
-      padding: 10px 12px;
+      padding: 0 12px;
+      height: 42px;
+      line-height: 40px;
       border: 1.5px solid var(--border);
       border-radius: 10px;
       font-family: inherit;
@@ -335,6 +340,21 @@
       color: var(--text);
       background: #fff;
       outline: none;
+      vertical-align: middle;
+    }
+
+    textarea {
+      height: auto;
+      min-height: 84px;
+      padding: 10px 12px;
+      line-height: 1.45;
+    }
+
+    input[type="date"],
+    select {
+      line-height: normal;
+      padding-top: 0;
+      padding-bottom: 0;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -421,8 +441,10 @@
 
     .qty-input {
       width: 82px !important;
+      height: 36px !important;
+      line-height: 34px !important;
       text-align: center;
-      padding: 7px 6px !important;
+      padding: 0 6px !important;
       font-weight: 700;
       border-radius: 8px !important;
     }
@@ -442,8 +464,10 @@
 
     .price-input {
       width: 110px !important;
+      height: 36px !important;
+      line-height: 34px !important;
       text-align: right;
-      padding: 7px 8px !important;
+      padding: 0 8px !important;
       font-weight: 600;
     }
 
@@ -863,6 +887,11 @@
       gap: 6px;
       align-items: stretch;
     }
+    .supplier-select-row input,
+    .supplier-select-row select {
+      flex: 1;
+      min-width: 0;
+    }
 
     .supplier-select-row select {
       flex: 1;
@@ -1148,9 +1177,16 @@
       .desktop-order-view { display: none; }
       .mobile-order-view { display: block; }
       .mobile-sticky-bar.active-tab1 { display: flex; }
-      input[type="text"], input[type="date"], input[type="number"], input[type="url"], input[type="tel"], select, textarea {
+      input[type="text"], input[type="password"], input[type="date"], input[type="number"], input[type="url"], input[type="tel"], input[type="email"], input[type="search"], select {
         font-size: 16px;
+        height: 44px;
         min-height: 44px;
+        max-width: 100%;
+      }
+      textarea {
+        font-size: 16px;
+        min-height: 84px;
+        height: auto;
         max-width: 100%;
       }
 
@@ -1236,7 +1272,7 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=22" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=25" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
       <div class="login-sub">Phần mềm quản lý bán hàng nội bộ</div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
@@ -1264,7 +1300,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=22" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=25" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1544,7 +1580,7 @@
           </div>
         </div>
         <div style="font-size:11.5px; color:#4b5563; margin-top:4px; line-height:1.5;">
-          ✨ Quy tắc: 1 khách <b>+1</b> • ≥2 khách <b>+2</b> | Ớt chuông (đỏ, vàng, xanh, baby, Palermo): 1 khách giữ nguyên, ≥2 khách <b>+1</b> | Cà cherry: <b>làm tròn lên số nguyên</b> | Món ngoài danh mục → tự vào <b>Tự đặt</b>.
+          ✨ Quy tắc: Mặc định 1 khách <b>+1</b>, ≥2 khách <b>+2</b> (Lơ bi kèm <b>(đơn xx)</b>) | Bí ngòi xanh &amp; Ớt chuông: 1 khách <b>giữ nguyên</b>, ≥2 khách <b>+1</b> | Cà cherry: <b>&lt;1kg đặt 1</b>, ≥1kg phần lẻ <b>&gt;0,5 tăng</b>, <b>≤0,2 giảm</b> | Hàng chợ: <b>giữ nguyên</b> (riêng Khoai Nhật <b>+1</b>) | Món khác → vào <b>Tự đặt</b>.
         </div>
         <div id="orderCopyGrid" class="order-copy-grid"></div>
       </div>
@@ -3382,22 +3418,62 @@
       return normName.indexOf('cherry') !== -1 || normName.indexOf('ca socola') !== -1;
     }
 
-    function isBellPepperProductName(normName) {
-      return normName.indexOf('ot chuong') !== -1 || normName.indexOf('palermo') !== -1 || normName.indexOf('ot baby') !== -1;
+    function isKeepOneAddOneMoreProduct(normName) {
+      return normName.indexOf('bi ngoi xanh') !== -1 ||
+             normName.indexOf('ot chuong') !== -1 ||
+             normName.indexOf('palermo') !== -1 ||
+             normName.indexOf('ot baby') !== -1;
     }
 
-    function calcOrderQtyWithRules(normName, rawQty, customerCount, applyBuffer) {
+    function isBroccoliBabyProduct(normName) {
+      return normName.indexOf('bong cai xanh baby') !== -1 || normName.indexOf('lo bi') !== -1;
+    }
+
+    function isKhoaiNhatProduct(normName) {
+      return normName.indexOf('khoai lang nhat') !== -1 || normName.indexOf('khoai nhat') !== -1;
+    }
+
+    function isMarketKeepSameProduct(normName, groupId) {
+      if (isKhoaiNhatProduct(normName)) return false;
+      if (groupId === 'cho') return true;
+      return normName.indexOf('bi nhat') !== -1 ||
+             normName.indexOf('cu cai trang') !== -1 ||
+             normName.indexOf('cu den') !== -1 ||
+             normName.indexOf('ot xiem xanh') !== -1 ||
+             normName.indexOf('tieu xanh') !== -1 ||
+             normName.indexOf('xa lach thuy tinh') !== -1;
+    }
+
+    function roundCherryQty(rawQty) {
+      if (rawQty > 0 && rawQty < 1) return 1;
+      var floorVal = Math.floor(rawQty);
+      var frac = Math.round((rawQty - floorVal) * 100) / 100;
+      if (frac > 0.5) return floorVal + 1;
+      if (frac <= 0.2) return floorVal;
+      return Math.round(rawQty * 100) / 100;
+    }
+
+    function calcOrderQtyWithRules(normName, rawQty, customerCount, applyBuffer, groupId) {
       if (rawQty <= 0) return 0;
       if (!applyBuffer) return rawQty;
-      // Cà cherry: làm tròn lên số nguyên (VD 0,6 -> 1), áp dụng cả 1 khách lẫn >=2 khách
+
+      // 1. Cà cherry: phần lẻ > 0,5 tăng lên nguyên, <= 0,2 giảm xuống nguyên
       if (isCherryProductName(normName)) {
-        return Math.ceil(rawQty);
+        return roundCherryQty(rawQty);
       }
-      // Ớt chuông (đỏ, vàng, xanh, Palermo, ớt baby): 1 khách giữ nguyên, >=2 khách tăng 1
-      if (isBellPepperProductName(normName)) {
+      // 2. Khoai lang Nhật (trong nhóm Chợ): tăng 1
+      if (isKhoaiNhatProduct(normName)) {
+        return Math.round((rawQty + 1) * 100) / 100;
+      }
+      // 3. Các mặt hàng Chợ còn lại (Bí Nhật, Củ cải trắng, Củ dền, Ớt xiêm xanh, Tiêu xanh, Xà lách thủy tinh): giữ nguyên
+      if (isMarketKeepSameProduct(normName, groupId)) {
+        return rawQty;
+      }
+      // 4. Bí ngòi xanh & Ớt chuông (đỏ, vàng, xanh, baby, Palermo): 1 khách giữ nguyên, >=2 khách +1
+      if (isKeepOneAddOneMoreProduct(normName)) {
         return Math.round((rawQty + (customerCount >= 2 ? 1 : 0)) * 100) / 100;
       }
-      // Các mặt hàng khác: 1 khách tăng 1, >=2 khách tăng 2
+      // 5. Bông cải xanh baby & các mặt hàng khác (Tự đặt, Cà Beef...): 1 khách +1, >=2 khách +2
       var extra = customerCount >= 2 ? 2 : 1;
       return Math.round((rawQty + extra) * 100) / 100;
     }
@@ -3460,14 +3536,20 @@
         grp.items.forEach(function (it) {
           var p = prodByNorm[it.match];
           var finalQ = 0;
+          var rawQ = 0;
           if (p) {
             usedProductIds[p.id] = true;
             var st = getProductStatsByScope(p.id, scope);
-            finalQ = calcOrderQtyWithRules(it.match, st.rawQty, st.customerCount, applyBuffer);
+            rawQ = st.rawQty;
+            finalQ = calcOrderQtyWithRules(it.match, st.rawQty, st.customerCount, applyBuffer, grp.id);
           }
           if (hideZero && finalQ <= 0) return;
           grpQtySum += finalQ;
-          lines.push(it.label + ' ' + fmtQtyZero(finalQ));
+          var lineText = it.label + ' ' + fmtQtyZero(finalQ);
+          if (isBroccoliBabyProduct(it.match) && rawQ > 0) {
+            lineText += ' (đơn ' + fmtQtyZero(rawQ) + ')';
+          }
+          lines.push(lineText);
         });
         blocks.push({
           id: grp.id,
@@ -3485,9 +3567,13 @@
         var st = getProductStatsByScope(p.id, scope);
         if (st.rawQty <= 0) return;
         var normNm = normVN(p.name);
-        var finalQ = calcOrderQtyWithRules(normNm, st.rawQty, st.customerCount, applyBuffer);
+        var finalQ = calcOrderQtyWithRules(normNm, st.rawQty, st.customerCount, applyBuffer, 'tu_dat');
         if (tuDatBlock && finalQ > 0) {
-          tuDatBlock.lines.push(getOrderShortName(p) + ' ' + fmtQtyZero(finalQ));
+          var extraLine = getOrderShortName(p) + ' ' + fmtQtyZero(finalQ);
+          if (isBroccoliBabyProduct(normNm)) {
+            extraLine += ' (đơn ' + fmtQtyZero(st.rawQty) + ')';
+          }
+          tuDatBlock.lines.push(extraLine);
           tuDatBlock.totalQty = Math.round((tuDatBlock.totalQty + finalQ) * 100) / 100;
         }
       });
