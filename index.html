@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=18) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=18">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=18">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=18">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=18">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=18">
+  <!-- Icons chống cache Safari (?v=19) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=19">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=19">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=19">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=19">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=19">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=18","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=18","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=19","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=19","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -224,12 +224,19 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 12px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .field.span-2 { grid-column: span 2; }
     }
 
     .field {
       display: flex;
       flex-direction: column;
       gap: 5px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .field.full { grid-column: 1 / -1; }
@@ -987,8 +994,11 @@
       .header-inner, .tabs-inner { width: 100%; }
       .brand-title { font-size: 15.5px; }
       .brand-logo { width: 40px; height: 40px; }
-      .meta-grid { grid-template-columns: 1fr !important; }
-      .meta-grid .field { grid-column: auto !important; min-width: 0; }
+      .card { padding: 14px 12px; max-width: 100%; overflow-x: hidden; }
+      .meta-grid { display: flex !important; flex-direction: column !important; gap: 10px; }
+      .meta-grid .field, .meta-grid .field.span-2 { width: 100% !important; min-width: 0 !important; max-width: 100% !important; }
+      .supplier-select-row { width: 100%; min-width: 0; }
+      input[type="date"] { -webkit-appearance: none; appearance: none; display: block; width: 100% !important; min-width: 0 !important; }
       .desktop-order-view { display: none; }
       .mobile-order-view { display: block; }
       .mobile-sticky-bar.active-tab1 { display: flex; }
@@ -1081,7 +1091,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=18" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=19" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1174,7 +1184,7 @@
       <div class="card">
         <div class="card-title">🔄 Đồng bộ bảng giá từ Google Sheet</div>
         <div class="meta-grid">
-          <div class="field" style="grid-column: span 2;">
+          <div class="field span-2">
             <label for="inpSheetUrl">Link Google Sheet</label>
             <input type="url" id="inpSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." oninput="updateSettings('sheetUrl', this.value)">
           </div>
@@ -1356,7 +1366,7 @@
         </div>
 
         <div class="meta-grid">
-          <div class="field" style="grid-column: span 2;">
+          <div class="field span-2">
             <label for="inSupplierSelect">Nhà cung cấp (Chọn từ danh sách)</label>
             <div class="supplier-select-row">
               <select id="inSupplierSelect" onchange="onSelectInboundSupplier(this.value)"></select>
@@ -1557,19 +1567,6 @@
     </div>
   </div>
 
-  <!-- MODAL XÁC NHẬN & NHẬP LIỆU NỘI BỘ (THAY THẾ HỘP THOẠI TRÌNH DUYỆT) -->
-  <div id="customDialogModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeCustomDialog()">
-    <div class="modal-box" style="max-width:400px;">
-      <div class="modal-title" id="customDialogTitle">Xác nhận</div>
-      <div id="customDialogMsg" style="font-size:13.5px; color:#374151; margin-bottom:14px;"></div>
-      <input type="text" id="customDialogInput" style="display:none; margin-bottom:14px;" placeholder="Nhập nội dung...">
-      <div style="display:flex; gap:8px; justify-content:center;">
-        <button type="button" id="customDialogOkBtn" class="btn btn-dark" style="flex:1;">Đồng ý</button>
-        <button type="button" class="btn btn-outline" style="flex:1;" onclick="closeCustomDialog()">Hủy</button>
-      </div>
-    </div>
-  </div>
-
   <div id="toast" class="toast no-print"></div>
 
   <script>
@@ -1610,59 +1607,6 @@
     var pendingExportBlob = null;
     var pendingExportFilename = '';
     var pendingExportMime = '';
-
-    /* ================= CUSTOM MODAL DIALOG (CONFIRM & INPUT) ================= */
-    function openConfirmDialog(message, onConfirm, isDanger) {
-      var modal = document.getElementById('customDialogModal');
-      var titleEl = document.getElementById('customDialogTitle');
-      var msgEl = document.getElementById('customDialogMsg');
-      var inpEl = document.getElementById('customDialogInput');
-      var okBtn = document.getElementById('customDialogOkBtn');
-
-      titleEl.textContent = 'Xác nhận';
-      msgEl.textContent = message;
-      inpEl.style.display = 'none';
-      inpEl.value = '';
-      okBtn.textContent = isDanger ? 'Xóa / Đặt lại' : 'Đồng ý';
-      okBtn.className = isDanger ? 'btn btn-danger' : 'btn btn-dark';
-      okBtn.onclick = function () {
-        window.closeCustomDialog();
-        if (typeof onConfirm === 'function') onConfirm();
-      };
-      modal.classList.add('show');
-    }
-
-    function openPromptDialog(title, placeholder, onSubmit) {
-      var modal = document.getElementById('customDialogModal');
-      var titleEl = document.getElementById('customDialogTitle');
-      var msgEl = document.getElementById('customDialogMsg');
-      var inpEl = document.getElementById('customDialogInput');
-      var okBtn = document.getElementById('customDialogOkBtn');
-
-      titleEl.textContent = title;
-      msgEl.textContent = '';
-      inpEl.style.display = 'block';
-      inpEl.value = '';
-      inpEl.placeholder = placeholder || '';
-      okBtn.textContent = 'Thêm';
-      okBtn.className = 'btn btn-dark';
-
-      var submitAction = function () {
-        var val = inpEl.value.trim();
-        window.closeCustomDialog();
-        if (val && typeof onSubmit === 'function') onSubmit(val);
-      };
-      okBtn.onclick = submitAction;
-      inpEl.onkeydown = function (e) {
-        if (e.key === 'Enter') { e.preventDefault(); submitAction(); }
-      };
-      modal.classList.add('show');
-      setTimeout(function () { inpEl.focus(); }, 60);
-    }
-
-    window.closeCustomDialog = function () {
-      document.getElementById('customDialogModal').classList.remove('show');
-    };
 
     /* ================= DATE & FORMAT HELPERS ================= */
     function toYMD(dateObj) {
@@ -2252,31 +2196,30 @@
     };
 
     window.clearTodayQuantities = function () {
-      openConfirmDialog('Xóa toàn bộ số lượng và số thùng của đơn hiện tại?', function () {
-        state.quantities = {};
-        state.boxes = {};
-        saveState();
-        renderTab1();
-        showToast('Đã xóa sạch số lượng cho ngày mới!');
-      }, true);
+      if (!confirm('Xóa toàn bộ số lượng và số thùng của đơn hiện tại?')) return;
+      state.quantities = {};
+      state.boxes = {};
+      saveState();
+      renderTab1();
+      showToast('Đã xóa sạch số lượng cho ngày mới!');
     };
 
     window.addNewProductPrompt = function () {
-      openPromptDialog('Thêm sản phẩm mới', 'Nhập tên sản phẩm mới...', function (name) {
-        state.products.push({
-          id: 'p_' + Date.now(),
-          code: '',
-          name: name,
-          cleName: name,
-          priceTrau: 0,
-          priceTam: 0,
-          priceCle: 0
-        });
-        saveState();
-        renderTab1();
-        renderTab2();
-        showToast('Đã thêm sản phẩm: ' + name);
+      var name = prompt('Nhập tên sản phẩm mới:');
+      if (!name || !name.trim()) return;
+      state.products.push({
+        id: 'p_' + Date.now(),
+        code: '',
+        name: name.trim(),
+        cleName: name.trim(),
+        priceTrau: 0,
+        priceTam: 0,
+        priceCle: 0
       });
+      saveState();
+      renderTab1();
+      renderTab2();
+      showToast('Đã thêm sản phẩm: ' + name.trim());
     };
 
     /* ================= TAB 2: PRICES, GOOGLE SHEET, LOGOS, BACKUP ================= */
@@ -2350,19 +2293,18 @@
     window.deleteProduct = function (id) {
       var target = state.products.find(function (x) { return x.id === id; });
       var label = target ? target.name : 'sản phẩm này';
-      openConfirmDialog('Xóa "' + label + '" khỏi danh mục?', function () {
-        state.products = state.products.filter(function (x) { return x.id !== id; });
-        delete state.quantities[id];
-        saveState();
-        renderTab1();
-        renderTab2();
-        if (activeTab === 'tab3') renderTab3();
-        if (activeTab === 'tab4') renderTab4();
-        showToast('Đã xóa: ' + label);
-        if (getActiveAppsScriptUrl()) {
-          window.pushAppStateToServer(false);
-        }
-      }, true);
+      if (!confirm('Xóa "' + label + '" khỏi danh mục?')) return;
+      state.products = state.products.filter(function (x) { return x.id !== id; });
+      delete state.quantities[id];
+      saveState();
+      renderTab1();
+      renderTab2();
+      if (activeTab === 'tab3') renderTab3();
+      if (activeTab === 'tab4') renderTab4();
+      showToast('Đã xóa: ' + label);
+      if (getActiveAppsScriptUrl()) {
+        window.pushAppStateToServer(false);
+      }
     };
 
     window.addCleBranch = function () {
@@ -2385,11 +2327,10 @@
         showToast('Cần giữ lại ít nhất 1 chi nhánh!');
         return;
       }
-      openConfirmDialog('Xóa chi nhánh Cleverfood - ' + code + '?', function () {
-        state.cleBranches = state.cleBranches.filter(function (b) { return b !== code; });
-        saveState();
-        renderTab2();
-      }, true);
+      if (!confirm('Xóa chi nhánh Cleverfood - ' + code + '?')) return;
+      state.cleBranches = state.cleBranches.filter(function (b) { return b !== code; });
+      saveState();
+      renderTab2();
     };
 
     window.triggerLogoUpload = function (groupKey) {
@@ -2634,13 +2575,10 @@
 
     window.copyBackupJSON = function () {
       var str = JSON.stringify(state);
-      var ta = document.getElementById('txtRestoreJson');
-      ta.value = str;
-      ta.select();
-      try {
-        document.execCommand('copy');
-        showToast('Đã copy mã sao lưu JSON!');
-      } catch (e) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str).then(function () { showToast('Đã copy mã sao lưu JSON!'); });
+      } else {
+        document.getElementById('txtRestoreJson').value = str;
         showToast('Đã xuất mã vào ô bên dưới, hãy chọn tất cả để copy!');
       }
     };
@@ -2680,13 +2618,12 @@
     };
 
     window.resetAllFactoryData = function () {
-      openConfirmDialog('Đặt lại toàn bộ ứng dụng về mặc định ban đầu?', function () {
-        state = createDefaultState();
-        saveState();
-        renderTab1();
-        renderTab2();
-        showToast('Đã đặt lại dữ liệu mặc định!');
-      }, true);
+      if (!confirm('Đặt lại toàn bộ ứng dụng về mặc định ban đầu?')) return;
+      state = createDefaultState();
+      saveState();
+      renderTab1();
+      renderTab2();
+      showToast('Đã đặt lại dữ liệu mặc định!');
     };
 
     /* ================= TAB 3: ĐƠN ĐẶT HÀNG (MẪU 1) ================= */
@@ -3611,13 +3548,12 @@
     window.deleteSupplier = function (id) {
       var sup = findSupplierById(id);
       if (!sup) return;
-      openConfirmDialog('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?', function () {
-        state.suppliers = state.suppliers.filter(function (s) { return s.id !== id; });
-        saveState();
-        window.renderSupplierList();
-        renderSupplierDropdown('');
-        showToast('Đã xóa nhà cung cấp!');
-      }, true);
+      if (!confirm('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?')) return;
+      state.suppliers = state.suppliers.filter(function (s) { return s.id !== id; });
+      saveState();
+      window.renderSupplierList();
+      renderSupplierDropdown('');
+      showToast('Đã xóa nhà cung cấp!');
     };
 
     /* ================= TAB 5: NHẬP HÀNG (iSHOP PRO -> GOOGLE SHEET) ================= */
@@ -3877,11 +3813,10 @@
     }
 
     window.clearInboundHistory = function () {
-      openConfirmDialog('Xóa danh sách lịch sử hiển thị cục bộ (không ảnh hưởng Google Sheet)?', function () {
-        state.inboundHistory = [];
-        saveState();
-        renderInboundHistory();
-      }, true);
+      if (!confirm('Xóa danh sách lịch sử hiển thị cục bộ (không ảnh hưởng Google Sheet)?')) return;
+      state.inboundHistory = [];
+      saveState();
+      renderInboundHistory();
     };
 
     /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
