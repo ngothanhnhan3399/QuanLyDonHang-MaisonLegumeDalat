@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=20) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=20">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=20">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=20">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=20">
+  <!-- Icons chống cache Safari (?v=21) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=21">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=21">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=21">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=21">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=21">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=20","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=20","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=21","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=21","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -535,13 +535,34 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 8px;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-size: 13px;
     }
 
     table.a4-table th, table.a4-table td {
       border: 1px solid #000;
       padding: 6px 7px;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
+
+    /* Tự động co gọn để luôn vừa 1 trang A4 khi nhiều mặt hàng */
+    .a4-paper.compact-1 { padding: 9mm 12mm; }
+    .a4-paper.compact-1 .a4-summary-dates { font-size: 13px; line-height: 1.45; margin-bottom: 8px; }
+    .a4-paper.compact-1 table.a4-table, .a4-paper.compact-1 table.tv-table { font-size: 11.5px; }
+    .a4-paper.compact-1 table.a4-table th, .a4-paper.compact-1 table.a4-table td,
+    .a4-paper.compact-1 table.tv-table th, .a4-paper.compact-1 table.tv-table td { padding: 4px 6px; }
+
+    .a4-paper.compact-2 { padding: 7mm 11mm; }
+    .a4-paper.compact-2 .a4-summary-dates { font-size: 12px; line-height: 1.35; margin-bottom: 6px; }
+    .a4-paper.compact-2 table.a4-table, .a4-paper.compact-2 table.tv-table { font-size: 10.5px; }
+    .a4-paper.compact-2 table.a4-table th, .a4-paper.compact-2 table.a4-table td,
+    .a4-paper.compact-2 table.tv-table th, .a4-paper.compact-2 table.tv-table td { padding: 3px 5px; line-height: 1.25; }
+
+    .a4-paper.compact-3 { padding: 5.5mm 10mm; }
+    .a4-paper.compact-3 .a4-summary-dates { font-size: 11px; line-height: 1.28; margin-bottom: 5px; }
+    .a4-paper.compact-3 table.a4-table, .a4-paper.compact-3 table.tv-table { font-size: 9.5px; }
+    .a4-paper.compact-3 table.a4-table th, .a4-paper.compact-3 table.a4-table td,
+    .a4-paper.compact-3 table.tv-table th, .a4-paper.compact-3 table.tv-table td { padding: 2px 4px; line-height: 1.18; }
 
     table.a4-table th {
       background: #f3f4f6;
@@ -672,6 +693,7 @@
 
     .a4-summary-dates {
       text-align: center;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-weight: 700;
       font-size: 14px;
       line-height: 1.65;
@@ -1143,7 +1165,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=20" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=21" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -3062,6 +3084,7 @@
       document.getElementById('chkUseCleName').checked = state.settings.useCleName !== false;
       document.getElementById('inpPrintTitleTab3').value = state.meta.printTitle || 'ĐƠN ĐẶT HÀNG';
       document.getElementById('tab3PaperContainer').innerHTML = buildSingleOrderPaperHTML(sel.value);
+      fitPaperToSingleA4('tab3PaperContainer');
       scalePaperPreview('tab3Stage', 'tab3ScaleBox');
     };
 
@@ -3091,7 +3114,10 @@
       var rowsHtml = '';
       var stt = 0;
       var grandTotal = 0;
-      state.products.forEach(function (p) {
+      var sortedProducts = state.products.slice().sort(function (a, b) {
+        return String(a.name || '').localeCompare(String(b.name || ''), 'vi');
+      });
+      sortedProducts.forEach(function (p) {
         var rowSum = 0;
         var cells = cols.map(function (c) {
           var q = c.key === 'cle_ALL' ? getCleProductTotal(p.id) : getQty(p.id, c.key);
@@ -3143,17 +3169,17 @@
           '<tbody>' + rowsHtml + '</tbody>' +
           '<tfoot>' +
             '<tr style="font-weight:700; background:#f9fafb;">' +
-              '<td colspan="2" style="text-align:right;">Tổng số lượng</td>' +
+              '<td colspan="2" style="text-align:center;">Tổng số lượng</td>' +
               colTotalsHtml +
               '<td style="text-align:center;">' + fmtQtyZero(grandTotal) + '</td>' +
             '</tr>' +
             '<tr style="font-weight:700;">' +
-              '<td colspan="2" style="text-align:right;">Số lượng sản phẩm</td>' +
+              '<td colspan="2" style="text-align:center;">Số lượng sản phẩm</td>' +
               colCountsHtml +
               '<td style="text-align:center;">' + stt + '</td>' +
             '</tr>' +
             '<tr style="font-weight:700; background:#f3f4f6;">' +
-              '<td colspan="2" style="text-align:right; font-size:15px;">Số thùng</td>' +
+              '<td colspan="2" style="text-align:center; font-size:15px;">Số thùng</td>' +
               colBoxesHtml +
               '<td style="text-align:center; font-size:16px;">' + (totBoxesAll > 0 ? fmtQtyZero(totBoxesAll) : '') + '</td>' +
             '</tr>' +
@@ -3162,6 +3188,7 @@
       '</div>';
 
       document.getElementById('tab4PaperContainer').innerHTML = html;
+      fitPaperToSingleA4('tab4PaperContainer');
       scalePaperPreview('tab4Stage', 'tab4ScaleBox');
       renderOrderCopyTexts();
     };
@@ -3312,6 +3339,33 @@
       }
       copyTextToClipboard(parts.join('\n\n'), '✓ Đã copy toàn bộ ' + parts.length + ' nhóm đặt hàng!');
     };
+
+    /* AUTO-FIT A4 SINGLE PAGE WHEN MANY ROWS */
+    function fitPaperToSingleA4(containerId) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      var papers = container.querySelectorAll('.a4-paper');
+      // 297mm at 96dpi ≈ 1122px; dùng ngưỡng an toàn 1100px để không bao giờ tràn sang trang 2
+      var MAX_A4_HEIGHT_PX = 1100;
+      papers.forEach(function (paper) {
+        paper.classList.remove('compact-1', 'compact-2', 'compact-3');
+        paper.style.fontSize = '';
+        var levels = ['compact-1', 'compact-2', 'compact-3'];
+        for (var i = 0; i < levels.length; i++) {
+          if (paper.scrollHeight <= MAX_A4_HEIGHT_PX) break;
+          paper.classList.add(levels[i]);
+        }
+        // Nếu vẫn dài hơn 1 trang A4 (rất nhiều dòng), tự co thêm font bảng
+        if (paper.scrollHeight > MAX_A4_HEIGHT_PX) {
+          var tbl = paper.querySelector('table');
+          if (tbl) {
+            var ratio = MAX_A4_HEIGHT_PX / paper.scrollHeight;
+            var newSize = Math.max(7.5, Math.floor(9.5 * ratio * 10) / 10);
+            tbl.style.fontSize = newSize + 'px';
+          }
+        }
+      });
+    }
 
     /* AUTO-SCALE A4 PREVIEW ON MOBILE */
     function scalePaperPreview(stageId, scaleBoxId) {
@@ -4429,4 +4483,4 @@
   </script>
 </body>
 </html>
-Integrating new inventory items
+Adjusting inventory table formatting for page fitting
