@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=25) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=25">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=25">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=25">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=25">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=25">
+  <!-- Icons chống cache Safari (?v=26) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=26">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=26">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=26">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=26">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=26">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=25","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=25","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=26","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=26","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1272,7 +1272,7 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=25" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=26" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
       <div class="login-sub">Phần mềm quản lý bán hàng nội bộ</div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
@@ -1300,7 +1300,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=25" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=26" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -3999,8 +3999,8 @@
       window.updateSupplierCodePreview();
     };
 
-    async function pushSupplierToSheet(supObj) {
-      var url = (state.settings.appsScriptUrl || '').trim();
+    async function pushSupplierToSheet(supObj, oldInfo) {
+      var url = getActiveAppsScriptUrl();
       if (!url) return false;
       try {
         var cleanSup = {
@@ -4016,11 +4016,35 @@
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ action: 'saveSupplier', supplier: cleanSup })
+          body: JSON.stringify({
+            action: 'saveSupplier',
+            supplier: cleanSup,
+            oldSupplier: oldInfo || null
+          })
         });
         return true;
       } catch (err) {
         console.warn('Sync supplier error:', err);
+        return false;
+      }
+    }
+
+    async function deleteSupplierFromSheet(supObj) {
+      var url = getActiveAppsScriptUrl();
+      if (!url || !supObj) return false;
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            action: 'deleteSupplier',
+            supplier: { id: supObj.id || '', code: supObj.code || '', name: supObj.name || '' }
+          })
+        });
+        return true;
+      } catch (err) {
+        console.warn('Delete supplier sync error:', err);
         return false;
       }
     }
@@ -4255,9 +4279,11 @@
 
       var targetId = editId;
       var savedObj = null;
+      var oldInfo = null;
       if (editId) {
         var existing = findSupplierById(editId);
         if (existing) {
+          oldInfo = { id: existing.id, code: existing.code || '', name: existing.name || '' };
           existing.code = code;
           existing.name = name;
           existing.phone = phone;
@@ -4266,6 +4292,22 @@
           existing.address = address;
           existing.avatar = nccTempAvatar;
           savedObj = existing;
+
+          // Cập nhật đồng bộ ngay vào lịch sử phiếu nhập cục bộ
+          var oldNameNorm = normVN(oldInfo.name);
+          var oldCodeUpper = String(oldInfo.code || '').toUpperCase().trim();
+          (state.inboundHistory || []).forEach(function (h) {
+            var matchByCode = oldCodeUpper && String(h.maNcc || '').toUpperCase().trim() === oldCodeUpper;
+            var matchByName = oldNameNorm && normVN(h.nhaCungCap) === oldNameNorm;
+            if (matchByCode || matchByName) {
+              h.maNcc = code;
+              h.nhaCungCap = name;
+              h.sdtNcc = phone;
+              h.mstCccd = taxCode;
+              h.nhomNcc = group;
+              h.diaChiNcc = address;
+            }
+          });
         }
       } else {
         targetId = 'sup_' + Date.now();
@@ -4286,16 +4328,17 @@
       window.closeSupplierModal();
       window.renderSupplierList();
       renderSupplierDropdown(targetId);
+      renderInboundHistory();
 
-      var synced = savedObj ? await pushSupplierToSheet(savedObj) : false;
+      var synced = savedObj ? await pushSupplierToSheet(savedObj, oldInfo) : false;
       if (synced) {
-        showToast((editId ? 'Đã cập nhật' : 'Đã thêm') + ' NCC "' + name + '" (Mã: ' + code + ') & đồng bộ lên Sheet!');
+        showToast((editId ? 'Đã cập nhật' : 'Đã thêm') + ' NCC "' + name + '" & đồng bộ vào file Nhập hàng!');
       } else {
         showToast((editId ? 'Đã cập nhật' : 'Đã thêm') + ' NCC "' + name + '" (Mã: ' + code + ')!');
       }
     };
 
-    window.deleteSupplier = function (id) {
+    window.deleteSupplier = async function (id) {
       var sup = findSupplierById(id);
       if (!sup) return;
       if (!confirm('Xóa nhà cung cấp "' + sup.name + '" khỏi danh bạ?')) return;
@@ -4303,7 +4346,8 @@
       saveState();
       window.renderSupplierList();
       renderSupplierDropdown('');
-      showToast('Đã xóa nhà cung cấp!');
+      var synced = await deleteSupplierFromSheet(sup);
+      showToast(synced ? 'Đã xóa nhà cung cấp & cập nhật Sheet Nhập hàng!' : 'Đã xóa nhà cung cấp!');
     };
 
     /* ================= TAB 5: NHẬP HÀNG (iSHOP PRO -> GOOGLE SHEET) ================= */
