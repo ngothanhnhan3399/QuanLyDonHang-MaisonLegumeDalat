@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=19) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=19">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=19">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=19">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=19">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=19">
+  <!-- Icons chống cache Safari (?v=20) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=20">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=20">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=20">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=20">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=20">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=19","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=19","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=20","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=20","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -678,6 +678,58 @@
       margin-bottom: 12px;
     }
 
+    /* TAB 4: COPY ORDER TEXT CARDS */
+    .order-copy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .order-copy-card {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .order-copy-card.has-order {
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .order-copy-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .order-copy-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .order-copy-pre {
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #111827;
+      margin: 0;
+      flex: 1;
+    }
+
     /* LOGO CARDS IN TAB 2 */
     .logo-grid {
       display: grid;
@@ -1091,7 +1143,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=19" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=20" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1294,6 +1346,7 @@
           <div class="toolbar-group">
             <button type="button" class="btn btn-dark" onclick="exportCurrentViewPDF('tab4')">🖨️ In / Lưu PDF (A4)</button>
             <button type="button" class="btn btn-primary" onclick="captureCurrentViewImage('tab4')">📸 Chụp đơn</button>
+            <button type="button" class="btn btn-soft" onclick="document.getElementById('orderCopySection').scrollIntoView({behavior:'smooth'})">📋 Copy đặt hàng</button>
           </div>
           <div class="toolbar-group">
             <select id="selSummaryMode" style="width: 220px;" onchange="renderTab4()">
@@ -1313,6 +1366,27 @@
         <div class="paper-scale-box" id="tab4ScaleBox">
           <div id="tab4PaperContainer"></div>
         </div>
+      </div>
+
+      <div class="card no-print" id="orderCopySection">
+        <div class="card-title">
+          <span>📋 Nội dung đặt hàng theo nhóm (Copy gửi đặt hàng)</span>
+          <button type="button" class="btn btn-dark btn-sm" onclick="copyAllOrderGroups()">📋 Copy tất cả các nhóm</button>
+        </div>
+        <div class="toolbar" style="margin-bottom: 4px;">
+          <div class="toolbar-group">
+            <select id="selOrderCopyScope" style="width: 240px;" onchange="renderOrderCopyTexts()">
+              <option value="all">Tổng toàn bộ đơn hôm nay</option>
+              <option value="cleOnly">Riêng chuỗi Cleverfood</option>
+              <option value="directOnly">Riêng Trâu vàng &amp; Tâm vàng</option>
+            </select>
+            <label style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; cursor:pointer;">
+              <input type="checkbox" id="chkCopyHideZero" checked onchange="renderOrderCopyTexts()">
+              Ẩn món số lượng = 0
+            </label>
+          </div>
+        </div>
+        <div id="orderCopyGrid" class="order-copy-grid"></div>
       </div>
     </section>
 
@@ -1579,28 +1653,185 @@
     var LEGACY_KEYS = ['ml_dalat_orders_v3', 'ml_dalat_orders_v2', 'ml_dalat_orders_v1', 'dalat_orders_state'];
 
     var DEFAULT_PRODUCTS = [
-      { id: 'p1',  code: 'MLBAPCAITIM',       name: 'Bắp cải tím (sú tím)',       cleName: 'Bắp cải tím',         priceTrau: 32000, priceTam: 32000, priceCle: 34000 },
-      { id: 'p2',  code: 'MLBAPCAITRAITIM',   name: 'Bắp cải trái tim (sú tim)',  cleName: 'Bắp cải trái tim',    priceTrau: 28000, priceTam: 28000, priceCle: 30000 },
-      { id: 'p3',  code: 'MLBINGOIXANH',      name: 'Bí ngòi xanh',               cleName: 'Bí ngòi xanh',        priceTrau: 30000, priceTam: 30000, priceCle: 32000 },
-      { id: 'p4',  code: 'MLBONGCAIXANHBABY', name: 'Bông cải xanh baby',         cleName: 'Bông cải xanh baby',  priceTrau: 75000, priceTam: 75000, priceCle: 78000 },
-      { id: 'p5',  code: 'MLCACHERRYCAMSUA',  name: 'Cà cherry cam sữa',          cleName: 'Cà chua cherry cam',  priceTrau: 65000, priceTam: 65000, priceCle: 68000 },
-      { id: 'p6',  code: 'MLCAITHAOHOATIEN',  name: 'Cải thảo hỏa tiễn',          cleName: 'Cải thảo hỏa tiễn',   priceTrau: 35000, priceTam: 35000, priceCle: 38000 },
-      { id: 'p7',  code: 'MLCANTAY',          name: 'Cần tây',                    cleName: 'Cần tây Đà Lạt',      priceTrau: 32000, priceTam: 32000, priceCle: 35000 },
-      { id: 'p8',  code: 'MLCUCAIDO',         name: 'Củ cải đỏ',                  cleName: 'Củ cải đỏ',           priceTrau: 45000, priceTam: 45000, priceCle: 48000 },
-      { id: 'p9',  code: 'MLCUDEN',           name: 'Củ dền',                     cleName: 'Củ dền',              priceTrau: 35000, priceTam: 35000, priceCle: 38000 },
-      { id: 'p10', code: 'MLDUALEOBABY',      name: 'Dưa leo baby',               cleName: 'Dưa leo baby',        priceTrau: 35000, priceTam: 35000, priceCle: 38000 },
-      { id: 'p11', code: 'MLDAUCOVENHAT',     name: 'Đậu cove Nhật',              cleName: 'Đậu cove Nhật',       priceTrau: 45000, priceTam: 45000, priceCle: 48000 },
-      { id: 'p12', code: 'MLDAUHALAN',        name: 'Đậu Hà Lan',                 cleName: 'Đậu Hà Lan',          priceTrau: 85000, priceTam: 85000, priceCle: 90000 },
-      { id: 'p13', code: 'MLOTCHUONGDO',      name: 'Ớt chuông đỏ',               cleName: 'Ớt chuông đỏ',        priceTrau: 65000, priceTam: 65000, priceCle: 68000 },
-      { id: 'p14', code: 'MLOTCHUONGVANG',    name: 'Ớt chuông vàng',             cleName: 'Ớt chuông vàng',      priceTrau: 65000, priceTam: 65000, priceCle: 68000 },
-      { id: 'p15', code: 'MLXALACHTHUYTINH',  name: 'Xà lách thủy tinh',          cleName: 'Xà lách thủy tinh',   priceTrau: 55000, priceTam: 55000, priceCle: 58000 }
+      { id: 'p1',  code: 'MLBAPCAITIM',       name: 'Bắp cải tím (sú tím)',       cleName: 'Bắp cải tím',         priceTrau: 32000, priceTam: 32000, priceCle: 34000, isDirectDefault: true,  isCleDefault: false, cleOrder: 99 },
+      { id: 'p2',  code: 'MLBAPCAITRAITIM',   name: 'Bắp cải trái tim (sú tim)',  cleName: 'Bắp cải trái tim',    priceTrau: 28000, priceTam: 28000, priceCle: 30000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 1 },
+      { id: 'p3',  code: 'MLBINGOIXANH',      name: 'Bí ngòi xanh',               cleName: 'Bí ngòi xanh',        priceTrau: 30000, priceTam: 30000, priceCle: 32000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 2 },
+      { id: 'p4',  code: 'MLBONGCAIXANHBABY', name: 'Bông cải xanh baby',         cleName: 'Bông cải xanh baby',  priceTrau: 75000, priceTam: 75000, priceCle: 78000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 4 },
+      { id: 'p5',  code: 'MLCACHERRYCAMSUA',  name: 'Cà cherry cam sữa',          cleName: 'Cà chua cherry cam',  priceTrau: 65000, priceTam: 65000, priceCle: 68000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 5 },
+      { id: 'p6',  code: 'MLCAITHAOHOATIEN',  name: 'Cải thảo hỏa tiễn',          cleName: 'Cải thảo hỏa tiễn',   priceTrau: 35000, priceTam: 35000, priceCle: 38000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 10 },
+      { id: 'p7',  code: 'MLCANTAY',          name: 'Cần tây',                    cleName: 'Cần tây Đà Lạt',      priceTrau: 32000, priceTam: 32000, priceCle: 35000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 11 },
+      { id: 'p8',  code: 'MLCUCAIDO',         name: 'Củ cải đỏ',                  cleName: 'Củ cải đỏ',           priceTrau: 45000, priceTam: 45000, priceCle: 48000, isDirectDefault: true,  isCleDefault: false, cleOrder: 99 },
+      { id: 'p9',  code: 'MLCUDEN',           name: 'Củ dền',                     cleName: 'Củ dền',              priceTrau: 35000, priceTam: 35000, priceCle: 38000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 13 },
+      { id: 'p10', code: 'MLDUALEOBABY',      name: 'Dưa leo baby',               cleName: 'Dưa leo baby',        priceTrau: 35000, priceTam: 35000, priceCle: 38000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 14 },
+      { id: 'p11', code: 'MLDAUCOVENHAT',     name: 'Đậu cove Nhật',              cleName: 'Đậu cove Nhật',       priceTrau: 45000, priceTam: 45000, priceCle: 48000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 15 },
+      { id: 'p12', code: 'MLDAUHALAN',        name: 'Đậu Hà Lan',                 cleName: 'Đậu Hà Lan',          priceTrau: 85000, priceTam: 85000, priceCle: 90000, isDirectDefault: true,  isCleDefault: false, cleOrder: 99 },
+      { id: 'p13', code: 'MLOTCHUONGDO',      name: 'Ớt chuông đỏ',               cleName: 'Ớt chuông đỏ',        priceTrau: 65000, priceTam: 65000, priceCle: 68000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 18 },
+      { id: 'p14', code: 'MLOTCHUONGVANG',    name: 'Ớt chuông vàng',             cleName: 'Ớt chuông vàng',      priceTrau: 65000, priceTam: 65000, priceCle: 68000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 19 },
+      { id: 'p15', code: 'MLXALACHTHUYTINH',  name: 'Xà lách thủy tinh',          cleName: 'Xà lách thủy tinh',   priceTrau: 55000, priceTam: 55000, priceCle: 58000, isDirectDefault: true,  isCleDefault: true,  cleOrder: 23 },
+      { id: 'p16', code: 'MLBINHATNON',       name: 'Bí Nhật non',                cleName: 'Bí Nhật non',         priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 3 },
+      { id: 'p17', code: 'MLCACHERRYDO',      name: 'Cà cherry đỏ',               cleName: 'Cà cherry đỏ',        priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 6 },
+      { id: 'p18', code: 'MLCACHERRYSOCOLA',  name: 'Cà cherry socola',           cleName: 'Cà cherry socola',    priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 7 },
+      { id: 'p19', code: 'MLCACHUABEEF',      name: 'Cà chua Beef',               cleName: 'Cà chua Beef',        priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 8 },
+      { id: 'p20', code: 'MLCAROTBABY',       name: 'Cà rốt baby',                cleName: 'Cà rốt baby',         priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 9 },
+      { id: 'p21', code: 'MLCUCAITRANG',      name: 'Củ cải trắng',               cleName: 'Củ cải trắng',        priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 12 },
+      { id: 'p22', code: 'MLKHOAILANGNHAT',   name: 'Khoai lang Nhật',            cleName: 'Khoai lang Nhật',     priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 16 },
+      { id: 'p23', code: 'MLOTCHUONGBABY',    name: 'Ớt chuông baby',             cleName: 'Ớt chuông baby',      priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 17 },
+      { id: 'p24', code: 'MLOTNGOTPALERMO',   name: 'Ớt ngọt Palermo',            cleName: 'Ớt ngọt Palermo',     priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 20 },
+      { id: 'p25', code: 'MLOTXIEMXANH',      name: 'Ớt xiêm xanh',               cleName: 'Ớt xiêm xanh',        priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 21 },
+      { id: 'p26', code: 'MLTIEUXANH',        name: 'Tiêu xanh',                  cleName: 'Tiêu xanh',           priceTrau: 0,     priceTam: 0,     priceCle: 0,     isDirectDefault: false, isCleDefault: true,  cleOrder: 22 }
+    ];
+
+    // Bảng quy đổi Tên sản phẩm -> Tên gọi tắt đặt hàng
+    var SHORT_NAME_MAP = {
+      'bap cai tim (su tim)': 'Sú tím',
+      'bap cai tim': 'Sú tím',
+      'bap cai trai tim (su tim)': 'Sú trái tim',
+      'bap cai trai tim': 'Sú trái tim',
+      'bap cai tron (su tron)': 'Sú tròn',
+      'bap vang': 'Bắp vàng',
+      'bap nep': 'Bắp nếp',
+      'bap nu hoang': 'Bắp Nữ hoàng',
+      'bi chanh (bi dao)': 'Bí chanh',
+      'bi do ho lo/tron': 'Bí đỏ',
+      'bi ngoi vang': 'Bí ngòi vàng',
+      'bi ngoi xanh': 'Bí ngòi xanh',
+      'bi nhat non': 'Bí Nhật',
+      'bi sua': 'Bí sữa',
+      'bong cai trang (sup lo trang)': 'Lơ trắng',
+      'bong cai xanh (sup lo xanh)': 'Lơ xanh',
+      'bong cai xanh baby': 'Lơ bi đẹp',
+      'bo (vip)': 'Bơ',
+      'ca cherry cam sua': 'Cà cherry cam',
+      'ca chua cherry cam': 'Cà cherry cam',
+      'ca cherry do': 'Cà cherry đỏ',
+      'ca cherry socola': 'Cà socola',
+      'ca chua beef': 'Cà Beef',
+      'ca rot baby': 'Rốt bi',
+      'ca rot da lat': 'Cà rốt Đà Lạt',
+      'ca tim': 'Cà tím',
+      'cai cau vong': 'Cầu vồng',
+      'cai kale': 'Kale',
+      'cai thao da lat': 'Cải thảo Đà Lạt',
+      'cai thao hoa tien': 'Hỏa tiễn',
+      'can tay': 'Cần tây',
+      'can tay da lat': 'Cần tây',
+      'chanh day': 'Chanh dây',
+      'chanh khong hat': 'Chanh không hạt',
+      'chanh vang': 'Chanh vàng',
+      'chuoi laba': 'Chuối Laba',
+      'cu cai do': 'Củ cải đỏ',
+      'cu cai trang': 'Củ cải trắng',
+      'cu den': 'Củ dền',
+      'cu hoi': 'Củ hồi',
+      'dua leo baby': 'Dưa bi',
+      'dua leo nhat/ha lan': 'Dưa Nhật',
+      'dua mat': 'Dứa mật',
+      'dau bap': 'Đậu bắp',
+      'dau cove nhat': 'Đậu Cove',
+      'dau ha lan': 'Đậu Hà Lan',
+      'dau hat ha lan': 'Đậu hạt Hà Lan',
+      'dau hat tuoi hon hop': 'Đậu hạt mix',
+      'hanh boa ro': 'Boa rô',
+      'hanh ta tim': 'Hành ta tím',
+      'hanh tay': 'Hành tây',
+      'hanh tay tim': 'Hành tây tím',
+      'hong gion fuji': 'Hồng giòn',
+      'khoai lang mat': 'Khoai mật',
+      'khoai lang nhat': 'Khoai Nhật',
+      'khoai mon sap': 'Khoai môn sáp',
+      'khoai so': 'Khoai sọ',
+      'khoai tam mat ong': 'Khoai tẩm mật ong',
+      'khoai tay': 'Khoai tây',
+      'khoai tay bi': 'Khoai tây bi',
+      'la huong thao': 'Lá hương thảo',
+      'hoa thien ly': 'Hoa thiên lý',
+      'mang tay': 'Măng tây',
+      'ngong hanh': 'Ngồng hành',
+      'ot chuong baby': 'Ớt baby',
+      'ot chuong do': 'Đỏ',
+      'ot chuong vang': 'Vàng',
+      'ot chuong xanh': 'Xanh',
+      'ot hiem': 'Ớt hiểm',
+      'ot xiem xanh': 'Ớt xiêm xanh',
+      'ot ngot palermo': 'Ớt ngọt Palermo',
+      'ot sung': 'Ớt sừng',
+      'su hao': 'Su hào',
+      'toi tim da lat': 'Tỏi tím Đà Lạt',
+      'xa lach lo lo tim': 'Xà lách lô lô tím',
+      'xa lach lo lo xanh': 'Xà lách lô lô xanh',
+      'xa lach my (iceberg)': 'Xà lách Mỹ',
+      'xa lach rocket': 'Xà lách Rocket',
+      'xa lach thuy tinh': 'Xà lách thủy tinh',
+      'tieu xanh': 'Tiêu xanh'
+    };
+
+    var ORDER_COPY_GROUPS = [
+      {
+        id: 'tu_dat',
+        title: 'Tự đặt',
+        items: [
+          { match: 'bap cai trai tim (su tim)', label: 'Sú trái tim' },
+          { match: 'bi ngoi xanh',              label: 'Bí ngòi xanh' },
+          { match: 'ca rot baby',               label: 'Rốt bi' },
+          { match: 'cai thao hoa tien',         label: 'Hỏa tiễn' },
+          { match: 'can tay',                   label: 'Cần tây' },
+          { match: 'dua leo baby',              label: 'Dưa bi' },
+          { match: 'dau cove nhat',             label: 'Đậu Cove' }
+        ]
+      },
+      {
+        id: 'lo_bi',
+        title: 'ĐƠN LƠ BI',
+        items: [
+          { match: 'bong cai xanh baby', label: 'Lơ bi đẹp' }
+        ]
+      },
+      {
+        id: 'ca_cherry',
+        title: 'Cà Cherry',
+        items: [
+          { match: 'ca cherry cam sua', label: 'Cà cherry cam' },
+          { match: 'ca cherry do',      label: 'Cà cherry đỏ' },
+          { match: 'ca cherry socola',  label: 'Cà socola' }
+        ]
+      },
+      {
+        id: 'ca_beef',
+        title: 'ĐƠN CÀ BEEF',
+        items: [
+          { match: 'ca chua beef', label: 'Cà Beef' }
+        ]
+      },
+      {
+        id: 'cho',
+        title: 'Chợ',
+        items: [
+          { match: 'bi nhat non',       label: 'Bí Nhật' },
+          { match: 'cu cai trang',      label: 'Củ cải trắng' },
+          { match: 'cu den',            label: 'Củ dền' },
+          { match: 'khoai lang nhat',   label: 'Khoai Nhật' },
+          { match: 'ot xiem xanh',      label: 'Ớt xiêm xanh' },
+          { match: 'tieu xanh',         label: 'Tiêu xanh' },
+          { match: 'xa lach thuy tinh', label: 'Xà lách thủy tinh' }
+        ]
+      },
+      {
+        id: 'ot_chuong',
+        title: 'ỚT CHUÔNG',
+        items: [
+          { match: 'ot chuong baby',  label: 'Ớt baby' },
+          { match: 'ot chuong do',    label: 'Đỏ' },
+          { match: 'ot chuong vang',  label: 'Vàng' },
+          { match: 'ot ngot palermo', label: 'Ớt ngọt Palermo' }
+        ]
+      }
     ];
 
     var state = null;
     var activeTab = 'tab1';
     var desktopFilter = 'all';
     var mobileSelectedGroup = 'trauVang';
-    var mobileSelectedCleBranch = 'MĐ';
+    var mobileSelectedCleBranch = 'LĐT';
     var inboundRows = [];
     var nccTempAvatar = '';
     var nccCodeManuallyEdited = false;
@@ -1696,7 +1927,7 @@
           supplier: 'Thuỷ (Rau Đà Lạt)',
           shippingNote: 'Đơn giá đã bao gồm phí vận chuyển Đà Lạt - chợ Quảng Bá'
         },
-        cleBranches: ['MĐ', 'LĐT', 'HTM', 'HQV'],
+        cleBranches: ['LĐT', 'MĐ', 'HTM', 'HQV'],
         products: JSON.parse(JSON.stringify(DEFAULT_PRODUCTS)),
         quantities: {},
         boxes: {},
@@ -1782,16 +2013,39 @@
         suppliers: suppliersList
       };
 
+      function normKeyQuick(str) {
+        return String(str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().replace(/\s+/g, ' ').trim();
+      }
+      var defByNorm = {};
+      DEFAULT_PRODUCTS.forEach(function (dp) {
+        defByNorm[normKeyQuick(dp.name)] = dp;
+      });
+
       s.products = s.products.map(function (p, i) {
+        var nm = p && p.name ? String(p.name) : ('Sản phẩm ' + (i + 1));
+        var dp = defByNorm[normKeyQuick(nm)];
         return {
           id: p && p.id ? String(p.id) : ('p_' + i + '_' + Date.now()),
-          code: p && p.code ? String(p.code) : '',
-          name: p && p.name ? String(p.name) : ('Sản phẩm ' + (i + 1)),
-          cleName: p && p.cleName ? String(p.cleName) : (p && p.name ? String(p.name) : ''),
+          code: p && p.code ? String(p.code) : (dp ? dp.code : ''),
+          name: nm,
+          cleName: p && p.cleName ? String(p.cleName) : (dp ? dp.cleName : nm),
           priceTrau: Number(p && p.priceTrau) || 0,
           priceTam: Number(p && p.priceTam) || 0,
-          priceCle: Number(p && p.priceCle) || 0
+          priceCle: Number(p && p.priceCle) || 0,
+          isDirectDefault: (p && typeof p.isDirectDefault === 'boolean') ? p.isDirectDefault : (dp ? dp.isDirectDefault : true),
+          isCleDefault: (p && typeof p.isCleDefault === 'boolean') ? p.isCleDefault : (dp ? dp.isCleDefault : true),
+          cleOrder: (p && typeof p.cleOrder === 'number') ? p.cleOrder : (dp ? dp.cleOrder : 99)
         };
+      });
+
+      // Tự động bổ sung các mặt hàng mặc định của Cleverfood nếu dữ liệu cũ chưa có
+      var existingNorms = {};
+      s.products.forEach(function (p) { existingNorms[normKeyQuick(p.name)] = true; });
+      DEFAULT_PRODUCTS.forEach(function (dp) {
+        if (dp.isCleDefault && !existingNorms[normKeyQuick(dp.name)]) {
+          s.products.push(Object.assign({}, dp));
+          existingNorms[normKeyQuick(dp.name)] = true;
+        }
       });
       return s;
     }
@@ -1987,6 +2241,21 @@
       return all;
     }
 
+    function getFilteredProductsForTab1(mode) {
+      if (mode === 'cle') {
+        return state.products
+          .filter(function (p) { return p.isCleDefault !== false || getCleProductTotal(p.id) > 0; })
+          .slice()
+          .sort(function (a, b) { return (a.cleOrder || 99) - (b.cleOrder || 99); });
+      }
+      if (mode === 'direct') {
+        return state.products.filter(function (p) {
+          return p.isDirectDefault !== false || getQty(p.id, 'trauVang') > 0 || getQty(p.id, 'tamVang') > 0;
+        });
+      }
+      return state.products;
+    }
+
     function renderDesktopOrderTable() {
       var stores = getVisibleDesktopStores();
       var showCleSum = desktopFilter !== 'direct';
@@ -2000,8 +2269,9 @@
       if (showCleSum) thead += '<th style="background:#ccfbf1; color:#115e59;">Tổng Cle</th>';
       thead += '</tr></thead>';
 
+      var visibleProducts = getFilteredProductsForTab1(desktopFilter);
       var tbody = '<tbody>';
-      state.products.forEach(function (p, rIdx) {
+      visibleProducts.forEach(function (p, rIdx) {
         tbody += '<tr>';
         tbody += '<td style="text-align:center; font-weight:700; color:#6b7280;">' + (rIdx + 1) + '</td>';
         tbody += '<td style="font-weight:700;">' + esc(p.name) + '</td>';
@@ -2026,7 +2296,7 @@
       });
       tbody += '</tbody>';
 
-      var boxRowIdx = state.products.length;
+      var boxRowIdx = visibleProducts.length;
       var tfoot = '<tfoot>';
       tfoot += '<tr><td colspan="2" style="text-align:right;">Tổng số lượng</td>';
       stores.forEach(function (s) {
@@ -2122,7 +2392,8 @@
       }
 
       var storeKey = getActiveMobileStoreKey();
-      var itemsHtml = state.products.map(function (p, idx) {
+      var mobProducts = getFilteredProductsForTab1(mobileSelectedGroup === 'cleverfood' ? 'cle' : 'direct');
+      var itemsHtml = mobProducts.map(function (p, idx) {
         var q = getQty(p.id, storeKey);
         var price = storeKey === 'trauVang' ? p.priceTrau : (storeKey === 'tamVang' ? p.priceTam : p.priceCle);
         return '<div class="mobile-card-item ' + (q > 0 ? 'has-val' : '') + '" id="mcard_' + esc(p.id) + '">' +
@@ -2214,7 +2485,10 @@
         cleName: name.trim(),
         priceTrau: 0,
         priceTam: 0,
-        priceCle: 0
+        priceCle: 0,
+        isDirectDefault: true,
+        isCleDefault: true,
+        cleOrder: 99
       });
       saveState();
       renderTab1();
@@ -2889,6 +3163,154 @@
 
       document.getElementById('tab4PaperContainer').innerHTML = html;
       scalePaperPreview('tab4Stage', 'tab4ScaleBox');
+      renderOrderCopyTexts();
+    };
+
+    function getOrderShortName(prod) {
+      var k1 = normVN(prod.name);
+      if (SHORT_NAME_MAP[k1]) return SHORT_NAME_MAP[k1];
+      if (prod.cleName) {
+        var k2 = normVN(prod.cleName);
+        if (SHORT_NAME_MAP[k2]) return SHORT_NAME_MAP[k2];
+      }
+      return prod.name;
+    }
+
+    function getProductTotalByScope(prodId, scope) {
+      var sum = 0;
+      if (scope === 'all' || scope === 'directOnly') {
+        sum += getQty(prodId, 'trauVang') + getQty(prodId, 'tamVang');
+      }
+      if (scope === 'all' || scope === 'cleOnly') {
+        sum += getCleProductTotal(prodId);
+      }
+      return Math.round(sum * 100) / 100;
+    }
+
+    function copyTextToClipboard(text, okMsg) {
+      if (!text) return;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () {
+          showToast(okMsg || 'Đã copy!');
+        }).catch(function () {
+          fallbackCopyText(text, okMsg);
+        });
+      } else {
+        fallbackCopyText(text, okMsg);
+      }
+    }
+
+    function fallbackCopyText(text, okMsg) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed; left:-9999px; top:0;';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(okMsg || 'Đã copy!');
+      } catch (e) {
+        showToast('Không thể copy tự động, hãy chọn thủ công!');
+      }
+      document.body.removeChild(ta);
+    }
+
+    var lastGeneratedOrderBlocks = [];
+
+    window.renderOrderCopyTexts = function () {
+      var grid = document.getElementById('orderCopyGrid');
+      if (!grid) return;
+      var scopeEl = document.getElementById('selOrderCopyScope');
+      var hideZeroEl = document.getElementById('chkCopyHideZero');
+      var scope = scopeEl ? scopeEl.value : 'all';
+      var hideZero = hideZeroEl ? hideZeroEl.checked : true;
+
+      // Map normalized product name -> product object
+      var prodByNorm = {};
+      state.products.forEach(function (p) {
+        prodByNorm[normVN(p.name)] = p;
+        if (p.cleName && !prodByNorm[normVN(p.cleName)]) {
+          prodByNorm[normVN(p.cleName)] = p;
+        }
+      });
+
+      var usedProductIds = {};
+      var blocks = [];
+
+      ORDER_COPY_GROUPS.forEach(function (grp) {
+        var lines = [];
+        var grpQtySum = 0;
+        grp.items.forEach(function (it) {
+          var p = prodByNorm[it.match];
+          var q = 0;
+          if (p) {
+            usedProductIds[p.id] = true;
+            q = getProductTotalByScope(p.id, scope);
+          }
+          if (hideZero && q <= 0) return;
+          grpQtySum += q;
+          lines.push(it.label + ' ' + fmtQtyZero(q));
+        });
+        blocks.push({
+          id: grp.id,
+          title: grp.title,
+          lines: lines,
+          totalQty: Math.round(grpQtySum * 100) / 100,
+          text: lines.length ? (grp.title + '\n' + lines.join('\n')) : ''
+        });
+      });
+
+      // Các sản phẩm khác có đặt hàng nhưng không nằm trong 6 nhóm cố định
+      var extraLines = [];
+      var extraSum = 0;
+      state.products.forEach(function (p) {
+        if (usedProductIds[p.id]) return;
+        var q = getProductTotalByScope(p.id, scope);
+        if (q <= 0) return;
+        extraSum += q;
+        extraLines.push(getOrderShortName(p) + ' ' + fmtQtyZero(q));
+      });
+      if (extraLines.length) {
+        blocks.push({
+          id: 'khac',
+          title: 'Mặt hàng khác',
+          lines: extraLines,
+          totalQty: Math.round(extraSum * 100) / 100,
+          text: 'Mặt hàng khác\n' + extraLines.join('\n')
+        });
+      }
+
+      lastGeneratedOrderBlocks = blocks;
+
+      grid.innerHTML = blocks.map(function (b, idx) {
+        var hasOrder = b.lines.length > 0 && b.totalQty > 0;
+        var bodyText = b.text || '(Chưa có món nào được đặt trong nhóm này)';
+        return '<div class="order-copy-card ' + (hasOrder ? 'has-order' : '') + '">' +
+          '<div class="order-copy-head">' +
+            '<div class="order-copy-title">' + esc(b.title) + (b.totalQty > 0 ? (' <span style="font-size:11.5px; color:#15803d;">(' + fmtQtyZero(b.totalQty) + ')</span>') : '') + '</div>' +
+            '<button type="button" class="btn ' + (b.text ? 'btn-primary' : 'btn-outline') + ' btn-sm" ' + (b.text ? '' : 'disabled') + ' onclick="copySingleOrderGroup(' + idx + ')">📋 Copy</button>' +
+          '</div>' +
+          '<pre class="order-copy-pre" style="' + (b.text ? '' : 'color:#9ca3af; font-weight:500;') + '">' + esc(bodyText) + '</pre>' +
+        '</div>';
+      }).join('');
+    };
+
+    window.copySingleOrderGroup = function (idx) {
+      var b = lastGeneratedOrderBlocks[idx];
+      if (!b || !b.text) return;
+      copyTextToClipboard(b.text, '✓ Đã copy nhóm: ' + b.title);
+    };
+
+    window.copyAllOrderGroups = function () {
+      var parts = lastGeneratedOrderBlocks
+        .filter(function (b) { return !!b.text; })
+        .map(function (b) { return b.text; });
+      if (!parts.length) {
+        showToast('Chưa có món nào để copy!');
+        return;
+      }
+      copyTextToClipboard(parts.join('\n\n'), '✓ Đã copy toàn bộ ' + parts.length + ' nhóm đặt hàng!');
     };
 
     /* AUTO-SCALE A4 PREVIEW ON MOBILE */
@@ -4007,3 +4429,4 @@
   </script>
 </body>
 </html>
+Integrating new inventory items
