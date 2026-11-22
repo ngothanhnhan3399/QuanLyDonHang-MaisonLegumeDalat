@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=21) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=21">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=21">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=21">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=21">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=21">
+  <!-- Icons chống cache Safari (?v=22) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=22">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=22">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=22">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=22">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=22">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=21","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=21","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=22","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=22","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -56,6 +56,78 @@
       line-height: 1.45;
       -webkit-font-smoothing: antialiased;
     }
+
+    /* LOGIN GATE */
+    .login-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, #0f3d21 0%, #14532d 55%, #166534 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-gate.hidden { display: none !important; }
+
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      text-align: center;
+    }
+
+    .login-logo {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      object-fit: contain;
+      background: #f0fdf4;
+      padding: 6px;
+      margin: 0 auto 12px;
+      display: block;
+      box-shadow: 0 4px 12px rgba(20, 83, 45, 0.16);
+    }
+
+    .login-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .login-sub {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .login-error {
+      display: none;
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid #fecaca;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .login-error.show { display: block; }
+
+    .app-shell-locked { display: none !important; }
 
     /* HEADER & TABS */
     .app-header {
@@ -1161,11 +1233,38 @@
 </head>
 <body>
 
+  <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
+  <div id="loginGate" class="login-gate no-print">
+    <div class="login-card">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=22" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <div class="login-title">Maison Légume Dalat</div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ</div>
+      <form class="login-form" onsubmit="handleLoginSubmit(event)">
+        <div class="field">
+          <label for="loginUser">Tên tài khoản</label>
+          <input type="text" id="loginUser" autocomplete="username" placeholder="Nhập tên tài khoản" required>
+        </div>
+        <div class="field">
+          <label for="loginPass">Mật khẩu</label>
+          <input type="password" id="loginPass" autocomplete="current-password" placeholder="Nhập mật khẩu" required>
+        </div>
+        <label style="display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:#374151; cursor:pointer;">
+          <input type="checkbox" id="loginRemember" checked>
+          Ghi nhớ đăng nhập trên thiết bị này
+        </label>
+        <div id="loginError" class="login-error">Sai tên tài khoản hoặc mật khẩu!</div>
+        <button type="submit" class="btn btn-dark" style="width:100%; min-height:44px; font-size:14px;">🔐 Đăng nhập</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="appShell" class="app-shell-locked">
+
   <!-- HEADER -->
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=21" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=22" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1174,6 +1273,7 @@
       <div class="header-actions">
         <button type="button" class="btn btn-outline btn-sm" id="btnCloudPullHeader" style="background:rgba(255,255,255,0.14); color:#fff; border-color:rgba(255,255,255,0.35);" onclick="loadAllFromServer(true)">🔄 Tải từ Sheet</button>
         <button type="button" class="btn btn-soft btn-sm" onclick="quickGoPrint()">🖨️ In / Lưu PDF (A4)</button>
+        <button type="button" class="btn btn-outline btn-sm" style="background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.3);" onclick="logoutApp()" title="Đăng xuất">🔒</button>
       </div>
     </div>
   </header>
@@ -1193,6 +1293,37 @@
 
     <!-- ==================== TAB 1: NHẬP ĐƠN ==================== -->
     <section id="tab1" class="tab-panel active">
+      <div class="card no-print">
+        <details id="detOrderSheetConfig">
+          <summary style="cursor:pointer; font-size:14px; font-weight:800; color:#14532d; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+            <span>☁️ Đồng bộ 2 chiều Google Sheet Đặt hàng</span>
+            <span id="orderSheetMiniStatus" style="font-size:12px; font-weight:700; color:#15803d;">Chưa gắn link Apps Script ▾</span>
+          </summary>
+          <div style="margin-top:12px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
+              <div class="field" style="flex:1; min-width:240px;">
+                <label for="inpOrderScriptUrl">Link Web App Apps Script của file Đặt hàng (tài khoản Google riêng)</label>
+                <input type="url" id="inpOrderScriptUrl" placeholder="Dán link Web App (Code-DatHang.gs) đuôi /exec...">
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="saveOrderScriptUrl()">💾 Lưu link</button>
+            </div>
+            <div class="toolbar" style="margin-top:10px; margin-bottom:0;">
+              <div class="toolbar-group">
+                <button type="button" class="btn btn-soft btn-sm" id="btnPullOrderAll" onclick="pullOrdersFromSheet('all', true)">📥 Tải tất cả</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="pullOrdersFromSheet('direct', true)">📥 Tải Trâu &amp; Tâm vàng</button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="pullOrdersFromSheet('cle', true)">📥 Tải Cleverfood</button>
+                <button type="button" class="btn btn-dark btn-sm" id="btnPushOrderNow" onclick="pushOrdersToSheet('all', true)">☁️ Lưu ngay lên Sheet Đặt hàng</button>
+              </div>
+              <label style="display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; cursor:pointer;">
+                <input type="checkbox" id="chkOrderAutoSync" checked onchange="updateSettings('orderAutoSync', this.checked)">
+                Tự động cập nhật Sheet khi thay đổi
+              </label>
+            </div>
+            <div id="orderSheetSyncStatus" style="margin-top:8px; font-size:12px; font-weight:600; color:#166534;"></div>
+          </div>
+        </details>
+      </div>
+
       <div class="card no-print">
         <div class="meta-grid">
           <div class="field">
@@ -1406,7 +1537,14 @@
               <input type="checkbox" id="chkCopyHideZero" checked onchange="renderOrderCopyTexts()">
               Ẩn món số lượng = 0
             </label>
+            <label style="display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:600; cursor:pointer; color:#14532d;">
+              <input type="checkbox" id="chkCopyApplyBuffer" checked onchange="renderOrderCopyTexts()">
+              Áp dụng quy tắc cộng dự phòng
+            </label>
           </div>
+        </div>
+        <div style="font-size:11.5px; color:#4b5563; margin-top:4px; line-height:1.5;">
+          ✨ Quy tắc: 1 khách <b>+1</b> • ≥2 khách <b>+2</b> | Ớt chuông (đỏ, vàng, xanh, baby, Palermo): 1 khách giữ nguyên, ≥2 khách <b>+1</b> | Cà cherry: <b>làm tròn lên số nguyên</b> | Món ngoài danh mục → tự vào <b>Tự đặt</b>.
         </div>
         <div id="orderCopyGrid" class="order-copy-grid"></div>
       </div>
@@ -1661,6 +1799,8 @@
         <button type="button" class="btn btn-soft" style="width:100%;" onclick="closeExportModal()">Đóng</button>
       </div>
     </div>
+  </div>
+
   </div>
 
   <div id="toast" class="toast no-print"></div>
@@ -1963,7 +2103,9 @@
           sheetTab: '',
           updateExistingOnly: true,
           useCleName: true,
-          appsScriptUrl: ''
+          appsScriptUrl: '',
+          orderScriptUrl: '',
+          orderAutoSync: true
         },
         inboundHistory: [],
         receiptCounters: {},
@@ -2121,6 +2263,7 @@
       if (n <= 0) delete state.quantities[productId][storeKey];
       else state.quantities[productId][storeKey] = n;
       saveState();
+      scheduleOrderSheetSync(storeKey.indexOf('cle_') === 0 ? 'cle' : 'direct');
     }
 
     function getCleProductTotal(productId) {
@@ -2215,6 +2358,11 @@
 
     /* ================= TAB 1: META & ORDER INPUT ================= */
     function bindMetaInputs() {
+      var osInp = document.getElementById('inpOrderScriptUrl');
+      if (osInp) osInp.value = (state.settings && state.settings.orderScriptUrl) || '';
+      var osAuto = document.getElementById('chkOrderAutoSync');
+      if (osAuto) osAuto.checked = state.settings.orderAutoSync !== false;
+      updateOrderSheetMiniBadge();
       document.getElementById('inpPrintTitle').value = state.meta.printTitle || 'ĐƠN ĐẶT HÀNG';
       document.getElementById('inpPrintTitleTab3').value = state.meta.printTitle || 'ĐƠN ĐẶT HÀNG';
       document.getElementById('inpOrderDate').value = state.meta.orderDate || '';
@@ -2241,11 +2389,15 @@
         document.getElementById('inpDeliveryDate').value = state.meta.deliveryDate;
       }
       saveState();
+      scheduleOrderSheetSync('all');
     };
 
     window.updateMetaField = function (field, val) {
       state.meta[field] = val;
       saveState();
+      if (field === 'pickupDate' || field === 'deliveryDate') {
+        scheduleOrderSheetSync('all');
+      }
     };
 
     window.setDesktopFilter = function (mode) {
@@ -2371,6 +2523,7 @@
       saveState();
       var cleBoxEl = document.getElementById('boxTot_cle_ALL');
       if (cleBoxEl) cleBoxEl.textContent = fmtQtyZero(getStoreBoxes('cle_ALL'));
+      scheduleOrderSheetSync(storeKey.indexOf('cle_') === 0 ? 'cle' : 'direct');
     };
 
     window.onOrderKeyNav = function (e, row, col) {
@@ -2494,6 +2647,7 @@
       state.boxes = {};
       saveState();
       renderTab1();
+      scheduleOrderSheetSync('all');
       showToast('Đã xóa sạch số lượng cho ngày mới!');
     };
 
@@ -3203,15 +3357,49 @@
       return prod.name;
     }
 
-    function getProductTotalByScope(prodId, scope) {
+    function getProductStatsByScope(prodId, scope) {
       var sum = 0;
+      var customerCount = 0;
       if (scope === 'all' || scope === 'directOnly') {
-        sum += getQty(prodId, 'trauVang') + getQty(prodId, 'tamVang');
+        var qTrau = getQty(prodId, 'trauVang');
+        var qTam = getQty(prodId, 'tamVang');
+        if (qTrau > 0) { sum += qTrau; customerCount++; }
+        if (qTam > 0) { sum += qTam; customerCount++; }
       }
       if (scope === 'all' || scope === 'cleOnly') {
-        sum += getCleProductTotal(prodId);
+        state.cleBranches.forEach(function (b) {
+          var qb = getQty(prodId, 'cle_' + b);
+          if (qb > 0) { sum += qb; customerCount++; }
+        });
       }
-      return Math.round(sum * 100) / 100;
+      return {
+        rawQty: Math.round(sum * 100) / 100,
+        customerCount: customerCount
+      };
+    }
+
+    function isCherryProductName(normName) {
+      return normName.indexOf('cherry') !== -1 || normName.indexOf('ca socola') !== -1;
+    }
+
+    function isBellPepperProductName(normName) {
+      return normName.indexOf('ot chuong') !== -1 || normName.indexOf('palermo') !== -1 || normName.indexOf('ot baby') !== -1;
+    }
+
+    function calcOrderQtyWithRules(normName, rawQty, customerCount, applyBuffer) {
+      if (rawQty <= 0) return 0;
+      if (!applyBuffer) return rawQty;
+      // Cà cherry: làm tròn lên số nguyên (VD 0,6 -> 1), áp dụng cả 1 khách lẫn >=2 khách
+      if (isCherryProductName(normName)) {
+        return Math.ceil(rawQty);
+      }
+      // Ớt chuông (đỏ, vàng, xanh, Palermo, ớt baby): 1 khách giữ nguyên, >=2 khách tăng 1
+      if (isBellPepperProductName(normName)) {
+        return Math.round((rawQty + (customerCount >= 2 ? 1 : 0)) * 100) / 100;
+      }
+      // Các mặt hàng khác: 1 khách tăng 1, >=2 khách tăng 2
+      var extra = customerCount >= 2 ? 2 : 1;
+      return Math.round((rawQty + extra) * 100) / 100;
     }
 
     function copyTextToClipboard(text, okMsg) {
@@ -3250,10 +3438,11 @@
       if (!grid) return;
       var scopeEl = document.getElementById('selOrderCopyScope');
       var hideZeroEl = document.getElementById('chkCopyHideZero');
+      var bufferEl = document.getElementById('chkCopyApplyBuffer');
       var scope = scopeEl ? scopeEl.value : 'all';
       var hideZero = hideZeroEl ? hideZeroEl.checked : true;
+      var applyBuffer = bufferEl ? bufferEl.checked : true;
 
-      // Map normalized product name -> product object
       var prodByNorm = {};
       state.products.forEach(function (p) {
         prodByNorm[normVN(p.name)] = p;
@@ -3270,43 +3459,42 @@
         var grpQtySum = 0;
         grp.items.forEach(function (it) {
           var p = prodByNorm[it.match];
-          var q = 0;
+          var finalQ = 0;
           if (p) {
             usedProductIds[p.id] = true;
-            q = getProductTotalByScope(p.id, scope);
+            var st = getProductStatsByScope(p.id, scope);
+            finalQ = calcOrderQtyWithRules(it.match, st.rawQty, st.customerCount, applyBuffer);
           }
-          if (hideZero && q <= 0) return;
-          grpQtySum += q;
-          lines.push(it.label + ' ' + fmtQtyZero(q));
+          if (hideZero && finalQ <= 0) return;
+          grpQtySum += finalQ;
+          lines.push(it.label + ' ' + fmtQtyZero(finalQ));
         });
         blocks.push({
           id: grp.id,
           title: grp.title,
           lines: lines,
           totalQty: Math.round(grpQtySum * 100) / 100,
-          text: lines.length ? (grp.title + '\n' + lines.join('\n')) : ''
+          text: ''
         });
       });
 
-      // Các sản phẩm khác có đặt hàng nhưng không nằm trong 6 nhóm cố định
-      var extraLines = [];
-      var extraSum = 0;
+      // Các món chưa xác định nhóm -> đưa vào nhóm "Tự đặt"
+      var tuDatBlock = blocks.find(function (b) { return b.id === 'tu_dat'; });
       state.products.forEach(function (p) {
         if (usedProductIds[p.id]) return;
-        var q = getProductTotalByScope(p.id, scope);
-        if (q <= 0) return;
-        extraSum += q;
-        extraLines.push(getOrderShortName(p) + ' ' + fmtQtyZero(q));
+        var st = getProductStatsByScope(p.id, scope);
+        if (st.rawQty <= 0) return;
+        var normNm = normVN(p.name);
+        var finalQ = calcOrderQtyWithRules(normNm, st.rawQty, st.customerCount, applyBuffer);
+        if (tuDatBlock && finalQ > 0) {
+          tuDatBlock.lines.push(getOrderShortName(p) + ' ' + fmtQtyZero(finalQ));
+          tuDatBlock.totalQty = Math.round((tuDatBlock.totalQty + finalQ) * 100) / 100;
+        }
       });
-      if (extraLines.length) {
-        blocks.push({
-          id: 'khac',
-          title: 'Mặt hàng khác',
-          lines: extraLines,
-          totalQty: Math.round(extraSum * 100) / 100,
-          text: 'Mặt hàng khác\n' + extraLines.join('\n')
-        });
-      }
+
+      blocks.forEach(function (b) {
+        b.text = b.lines.length ? (b.title + '\n' + b.lines.join('\n')) : '';
+      });
 
       lastGeneratedOrderBlocks = blocks;
 
@@ -4455,6 +4643,420 @@
       }
     };
 
+    /* ================= ĐỒNG BỘ 2 CHIỀU TRANG ĐẶT HÀNG (SHEET RIÊNG) ================= */
+    var ORDER_SYNC_TOKEN = 'MLD_ORDER_SYNC_2026_NHAN';
+    var orderSyncTimer = null;
+    var orderSyncPendingTarget = null;
+
+    function getOrderScriptUrl() {
+      return (state && state.settings && state.settings.orderScriptUrl) ? state.settings.orderScriptUrl.trim() : '';
+    }
+
+    function updateOrderSheetMiniBadge(customText, isErr) {
+      var mini = document.getElementById('orderSheetMiniStatus');
+      var st = document.getElementById('orderSheetSyncStatus');
+      var url = getOrderScriptUrl();
+      if (mini) {
+        if (customText) {
+          mini.style.color = isErr ? '#dc2626' : '#15803d';
+          mini.textContent = customText;
+        } else {
+          mini.style.color = url ? '#15803d' : '#b45309';
+          mini.textContent = url ? '✓ Đã kết nối ▾' : 'Chưa gắn link Apps Script ▾';
+        }
+      }
+      if (st && customText) {
+        st.style.color = isErr ? '#dc2626' : '#166534';
+        st.textContent = customText;
+      }
+    }
+
+    window.saveOrderScriptUrl = function () {
+      var inp = document.getElementById('inpOrderScriptUrl');
+      var url = (inp ? inp.value : '').trim();
+      state.settings.orderScriptUrl = url;
+      saveState();
+      if (url) {
+        updateOrderSheetMiniBadge('✓ Đã lưu link! Đang tải dữ liệu...', false);
+        showToast('Đã lưu link Sheet Đặt hàng!');
+        window.pullOrdersFromSheet('all', true);
+      } else {
+        updateOrderSheetMiniBadge('Chưa gắn link Apps Script ▾', false);
+        showToast('Đã xóa link Sheet Đặt hàng!');
+      }
+    };
+
+    function buildOrderSheetPayload(target) {
+      var sortedProducts = state.products.slice().sort(function (a, b) {
+        return String(a.name || '').localeCompare(String(b.name || ''), 'vi');
+      });
+
+      var payload = {
+        action: 'syncOrders',
+        token: ORDER_SYNC_TOKEN,
+        meta: {
+          orderDateVN: formatDateVN(state.meta.orderDate),
+          pickupDateVN: formatDateVN(state.meta.pickupDate),
+          deliveryDateVN: formatDateVN(state.meta.deliveryDate)
+        }
+      };
+
+      // 1. Tab "Danh sách đặt hàng" (Trâu vàng & Tâm vàng) - tự thêm/xóa cột theo người đặt
+      if (target === 'all' || target === 'direct') {
+        var directAllCols = [
+          { key: 'trauVang', label: 'Trâu vàng' },
+          { key: 'tamVang',  label: 'Tâm vàng' }
+        ];
+        var activeDirectCols = directAllCols.filter(function (c) {
+          return getStoreTotalQty(c.key) > 0 || getStoreBoxes(c.key) > 0;
+        });
+        if (!activeDirectCols.length) activeDirectCols = directAllCols;
+
+        var directRows = [];
+        sortedProducts.forEach(function (p) {
+          var vals = activeDirectCols.map(function (c) { return getQty(p.id, c.key); });
+          var hasVal = vals.some(function (v) { return v > 0; });
+          if (hasVal || p.isDirectDefault !== false) {
+            directRows.push({ name: p.name, values: vals });
+          }
+        });
+        payload.directData = {
+          columns: activeDirectCols.map(function (c) { return c.label; }),
+          rows: directRows,
+          boxes: activeDirectCols.map(function (c) { return getStoreBoxes(c.key); })
+        };
+      }
+
+      // 2. Tab "Danh sách đặt hàng Cleverfood" - tự thêm/xóa cột theo chi nhánh có đặt
+      if (target === 'all' || target === 'cle') {
+        var cleAllCols = state.cleBranches.map(function (b) {
+          return { key: 'cle_' + b, label: b };
+        });
+        var activeCleCols = cleAllCols.filter(function (c) {
+          return getStoreTotalQty(c.key) > 0 || getStoreBoxes(c.key) > 0;
+        });
+        if (!activeCleCols.length) activeCleCols = cleAllCols;
+
+        var cleRows = [];
+        sortedProducts.forEach(function (p) {
+          var vals = activeCleCols.map(function (c) { return getQty(p.id, c.key); });
+          var hasVal = vals.some(function (v) { return v > 0; });
+          if (hasVal || p.isCleDefault !== false) {
+            cleRows.push({ name: p.name, values: vals });
+          }
+        });
+        payload.cleData = {
+          columns: activeCleCols.map(function (c) { return c.label; }),
+          rows: cleRows,
+          boxes: activeCleCols.map(function (c) { return getStoreBoxes(c.key); })
+        };
+      }
+
+      return payload;
+    }
+
+    function scheduleOrderSheetSync(target) {
+      if (!getOrderScriptUrl()) return;
+      if (state.settings.orderAutoSync === false) return;
+      if (orderSyncPendingTarget === 'all' || target === 'all') {
+        orderSyncPendingTarget = 'all';
+      } else if (orderSyncPendingTarget && orderSyncPendingTarget !== target) {
+        orderSyncPendingTarget = 'all';
+      } else {
+        orderSyncPendingTarget = target || 'all';
+      }
+      updateOrderSheetMiniBadge('⏳ Chờ lưu lên Sheet Đặt hàng...', false);
+      clearTimeout(orderSyncTimer);
+      orderSyncTimer = setTimeout(function () {
+        var t = orderSyncPendingTarget || 'all';
+        orderSyncPendingTarget = null;
+        window.pushOrdersToSheet(t, false);
+      }, 1800);
+    }
+
+    window.pushOrdersToSheet = async function (target, showFeedback) {
+      var url = getOrderScriptUrl();
+      if (!url) {
+        if (showFeedback) {
+          showToast('Chưa gắn Link Web App Đặt hàng!');
+          var det = document.getElementById('detOrderSheetConfig');
+          if (det) det.open = true;
+        }
+        return false;
+      }
+
+      var btn = document.getElementById('btnPushOrderNow');
+      if (btn && showFeedback) { btn.disabled = true; btn.textContent = '⏳ Đang lưu...'; }
+      updateOrderSheetMiniBadge('⏳ Đang cập nhật Sheet Đặt hàng...', false);
+
+      try {
+        var payload = buildOrderSheetPayload(target || 'all');
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        var nowStr = new Date().toLocaleTimeString('vi-VN');
+        var labelTarget = target === 'cle' ? 'Cleverfood' : (target === 'direct' ? 'Trâu & Tâm vàng' : 'cả 2 trang');
+        updateOrderSheetMiniBadge('✓ Đã lưu ' + labelTarget + ' lên Sheet lúc ' + nowStr, false);
+        if (showFeedback) showToast('✓ Đã cập nhật dữ liệu lên Sheet Đặt hàng!');
+        return true;
+      } catch (err) {
+        console.warn('pushOrdersToSheet error:', err);
+        updateOrderSheetMiniBadge('⚠ Lỗi gửi lên Sheet Đặt hàng', true);
+        if (showFeedback) showToast('Lỗi kết nối khi lưu lên Sheet Đặt hàng!');
+        return false;
+      } finally {
+        if (btn && showFeedback) { btn.disabled = false; btn.textContent = '☁️ Lưu ngay lên Sheet Đặt hàng'; }
+      }
+    };
+
+    function applyPulledOrderBlock(block, isCle) {
+      if (!block || !block.exists) return 0;
+
+      // Cập nhật ngày nếu sheet có ngày hợp lệ
+      if (block.dates) {
+        if (block.dates.orderDate) state.meta.orderDate = block.dates.orderDate;
+        if (block.dates.pickupDate) state.meta.pickupDate = block.dates.pickupDate;
+        if (block.dates.deliveryDate) state.meta.deliveryDate = block.dates.deliveryDate;
+      }
+
+      // Xác định ánh xạ tên cột trên Sheet -> storeKey trên Web
+      var colMap = {};
+      (block.columns || []).forEach(function (colLabel) {
+        var cNorm = normVN(colLabel);
+        if (!isCle) {
+          if (cNorm.indexOf('trau') !== -1) colMap[colLabel] = 'trauVang';
+          else if (cNorm.indexOf('tam') !== -1) colMap[colLabel] = 'tamVang';
+        } else {
+          var branchCode = String(colLabel || '').replace(/^cle\s*-\s*/i, '').trim().toUpperCase();
+          if (branchCode) {
+            if (state.cleBranches.indexOf(branchCode) === -1) {
+              state.cleBranches.push(branchCode);
+            }
+            colMap[colLabel] = 'cle_' + branchCode;
+          }
+        }
+      });
+
+      // Xóa số lượng cũ của nhóm đang tải trước khi nạp mới
+      var keysToReset = isCle
+        ? state.cleBranches.map(function (b) { return 'cle_' + b; })
+        : ['trauVang', 'tamVang'];
+
+      Object.keys(state.quantities).forEach(function (pid) {
+        keysToReset.forEach(function (k) {
+          if (state.quantities[pid]) delete state.quantities[pid][k];
+        });
+      });
+      keysToReset.forEach(function (k) { delete state.boxes[k]; });
+
+      // Nạp số lượng từng mặt hàng
+      var loadedCount = 0;
+      (block.items || []).forEach(function (it) {
+        var nm = String(it.name || '').trim();
+        if (!nm) return;
+        var nmNorm = normVN(nm);
+        var prod = state.products.find(function (p) {
+          return normVN(p.name) === nmNorm || (p.cleName && normVN(p.cleName) === nmNorm);
+        });
+        if (!prod) {
+          prod = {
+            id: 'p_sheet_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
+            code: '',
+            name: nm,
+            cleName: nm,
+            priceTrau: 0,
+            priceTam: 0,
+            priceCle: 0,
+            isDirectDefault: !isCle,
+            isCleDefault: isCle,
+            cleOrder: 99
+          };
+          state.products.push(prod);
+        }
+
+        Object.keys(it.quantities || {}).forEach(function (colLabel) {
+          var storeKey = colMap[colLabel];
+          var q = parseNum(it.quantities[colLabel]);
+          if (storeKey && q > 0) {
+            if (!state.quantities[prod.id]) state.quantities[prod.id] = {};
+            state.quantities[prod.id][storeKey] = q;
+            loadedCount++;
+          }
+        });
+      });
+
+      // Nạp số thùng
+      Object.keys(block.boxes || {}).forEach(function (colLabel) {
+        var storeKey = colMap[colLabel];
+        var bVal = parseNum(block.boxes[colLabel]);
+        if (storeKey && bVal > 0) state.boxes[storeKey] = bVal;
+      });
+
+      return loadedCount;
+    }
+
+    window.pullOrdersFromSheet = async function (type, showFeedback) {
+      var url = getOrderScriptUrl();
+      if (!url) {
+        if (showFeedback) {
+          showToast('Chưa gắn Link Web App Đặt hàng!');
+          var det = document.getElementById('detOrderSheetConfig');
+          if (det) det.open = true;
+        }
+        return false;
+      }
+
+      updateOrderSheetMiniBadge('⏳ Đang tải từ Sheet Đặt hàng...', false);
+      try {
+        var sep = url.indexOf('?') === -1 ? '?' : '&';
+        var fetchUrl = url + sep + 'action=getOrders&type=' + encodeURIComponent(type || 'all') + '&token=' + encodeURIComponent(ORDER_SYNC_TOKEN) + '&t=' + Date.now();
+        var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
+        if (!data || data.success === false) {
+          throw new Error((data && data.error) || 'Lỗi đọc dữ liệu từ Apps Script');
+        }
+
+        var count = 0;
+        if (data.direct) count += applyPulledOrderBlock(data.direct, false);
+        if (data.cle) count += applyPulledOrderBlock(data.cle, true);
+
+        saveState();
+        renderTab1();
+        if (activeTab === 'tab3') renderTab3();
+        if (activeTab === 'tab4') renderTab4();
+
+        var nowStr = new Date().toLocaleTimeString('vi-VN');
+        updateOrderSheetMiniBadge('✓ Đã tải từ Sheet lúc ' + nowStr + ' (' + count + ' ô SL)', false);
+        if (showFeedback) showToast('✓ Đã tải đơn đặt hàng từ Google Sheet!');
+        return true;
+      } catch (err) {
+        console.warn('pullOrdersFromSheet error:', err);
+        updateOrderSheetMiniBadge('⚠ Không tải được: ' + (err.message || 'Kiểm tra quyền Anyone'), true);
+        if (showFeedback) showToast('Không tải được Sheet Đặt hàng! Kiểm tra link Web App.');
+        return false;
+      }
+    };
+
+    /* ================= ĐĂNG NHẬP NỘI BỘ (SHA-256) ================= */
+    var AUTH_STORAGE_KEY = 'mld_auth_session_v1';
+    var EXPECTED_AUTH_HASH = '66b9eec145bf126c446befc436c49e37b3ed64a5a48158669d84a3d8a764ef2d';
+
+    function sha256Fallback(ascii) {
+      function rightRotate(v, a) { return (v >>> a) | (v << (32 - a)); }
+      var maxWord = Math.pow(2, 32);
+      var i, j, result = '';
+      var words = [], asciiBitLength = ascii.length * 8;
+      var hash = sha256Fallback.h = sha256Fallback.h || [];
+      var k = sha256Fallback.k = sha256Fallback.k || [];
+      var primeCounter = k.length;
+      var isComposite = {};
+      for (var candidate = 2; primeCounter < 64; candidate++) {
+        if (!isComposite[candidate]) {
+          for (i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+          hash[primeCounter] = (Math.pow(candidate, 0.5) * maxWord) | 0;
+          k[primeCounter++] = (Math.pow(candidate, 1 / 3) * maxWord) | 0;
+        }
+      }
+      ascii += '\x80';
+      while (ascii.length % 64 - 56) ascii += '\x00';
+      for (i = 0; i < ascii.length; i++) {
+        j = ascii.charCodeAt(i);
+        words[i >> 2] |= j << ((3 - i) % 4) * 8;
+      }
+      words[words.length] = ((asciiBitLength / maxWord) | 0);
+      words[words.length] = (asciiBitLength);
+      var h = hash.slice(0);
+      for (j = 0; j < words.length;) {
+        var w = words.slice(j, j += 16);
+        var oldHash = h.slice(0);
+        for (i = 0; i < 64; i++) {
+          var w15 = w[i - 15], w2 = w[i - 2];
+          var a = h[0], e = h[4];
+          var temp1 = h[7] + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) + ((e & h[5]) ^ ((~e) & h[6])) + k[i] +
+            (w[i] = (i < 16) ? w[i] : (w[i - 16] + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) + w[i - 7] + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) | 0);
+          var temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) + ((a & h[1]) ^ (a & h[2]) ^ (h[1] & h[2]));
+          h = [(temp1 + temp2) | 0].concat(h);
+          h[4] = (h[4] + temp1) | 0;
+          h.pop();
+        }
+        for (i = 0; i < 8; i++) h[i] = (h[i] + oldHash[i]) | 0;
+      }
+      for (i = 0; i < 8; i++) {
+        for (j = 3; j + 1; j--) {
+          var b = (h[i] >> (j * 8)) & 255;
+          result += ((b < 16) ? 0 : '') + b.toString(16);
+        }
+      }
+      return result;
+    }
+
+    async function computeSha256Hex(str) {
+      try {
+        if (window.crypto && window.crypto.subtle) {
+          var buf = new TextEncoder().encode(str);
+          var digest = await window.crypto.subtle.digest('SHA-256', buf);
+          return Array.from(new Uint8Array(digest)).map(function (b) {
+            return b.toString(16).padStart(2, '0');
+          }).join('');
+        }
+      } catch (e) {}
+      return sha256Fallback(unescape(encodeURIComponent(str)));
+    }
+
+    function isUserLoggedIn() {
+      try {
+        return localStorage.getItem(AUTH_STORAGE_KEY) === EXPECTED_AUTH_HASH ||
+               sessionStorage.getItem(AUTH_STORAGE_KEY) === EXPECTED_AUTH_HASH;
+      } catch (e) { return false; }
+    }
+
+    function unlockAppUI() {
+      var gate = document.getElementById('loginGate');
+      var shell = document.getElementById('appShell');
+      if (gate) gate.classList.add('hidden');
+      if (shell) shell.classList.remove('app-shell-locked');
+    }
+
+    window.handleLoginSubmit = async function (e) {
+      e.preventDefault();
+      var u = (document.getElementById('loginUser').value || '').trim();
+      var p = document.getElementById('loginPass').value || '';
+      var remember = document.getElementById('loginRemember').checked;
+      var errEl = document.getElementById('loginError');
+
+      var hash = await computeSha256Hex(u + '::' + p);
+      if (hash === EXPECTED_AUTH_HASH) {
+        errEl.classList.remove('show');
+        try {
+          if (remember) {
+            localStorage.setItem(AUTH_STORAGE_KEY, EXPECTED_AUTH_HASH);
+            sessionStorage.removeItem(AUTH_STORAGE_KEY);
+          } else {
+            sessionStorage.setItem(AUTH_STORAGE_KEY, EXPECTED_AUTH_HASH);
+            localStorage.removeItem(AUTH_STORAGE_KEY);
+          }
+        } catch (ex) {}
+        unlockAppUI();
+        initAppAfterLogin();
+        showToast('✓ Đăng nhập thành công!');
+      } else {
+        errEl.classList.add('show');
+      }
+    };
+
+    window.logoutApp = function () {
+      if (!confirm('Đăng xuất khỏi phần mềm quản lý bán hàng?')) return;
+      try {
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
+      } catch (e) {}
+      location.reload();
+    };
+
     /* ================= LIFECYCLE AUTO-SAVE & INIT ================= */
     window.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'hidden') saveState();
@@ -4462,7 +5064,10 @@
     window.addEventListener('pagehide', saveState);
     window.addEventListener('beforeunload', saveState);
 
-    function initApp() {
+    var appInitialized = false;
+    function initAppAfterLogin() {
+      if (appInitialized) return;
+      appInitialized = true;
       state = loadState();
       if (!state.settings.appsScriptUrl && DEFAULT_APPS_SCRIPT_URL) {
         state.settings.appsScriptUrl = DEFAULT_APPS_SCRIPT_URL;
@@ -4471,6 +5076,13 @@
       renderTab1();
       if (getActiveAppsScriptUrl()) {
         window.loadAllFromServer(false);
+      }
+    }
+
+    function initApp() {
+      if (isUserLoggedIn()) {
+        unlockAppUI();
+        initAppAfterLogin();
       }
     }
 
@@ -4483,4 +5095,3 @@
   </script>
 </body>
 </html>
-Adjusting inventory table formatting for page fitting
