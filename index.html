@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=50) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=50">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=50">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=50">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=50">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=50">
+  <!-- Icons chống cache Safari (?v=51) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=51">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=51">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=51">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=51">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=51">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=50","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=50","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=51","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=51","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1726,9 +1726,9 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=50" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=51" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v50</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v51</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1754,7 +1754,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=50" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=51" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -2524,6 +2524,33 @@
     <!-- ==================== TAB 8: HÓA ĐƠN ==================== -->
     <section id="tab8" class="tab-panel">
       <div class="card no-print">
+        <details id="detInvSheetConfig">
+          <summary style="cursor:pointer; font-size:14px; font-weight:800; color:#14532d; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+            <span>☁️ Lưu hóa đơn vào Google Sheet khách hàng</span>
+            <span id="invSheetMiniStatus" style="font-size:12px; font-weight:700; color:#b45309;">Chưa gắn link Apps Script ▾</span>
+          </summary>
+          <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+            <div class="field">
+              <label for="inpInvTargetSheetUrl">Link Google Sheet của khách hàng đang chọn (<strong id="invTargetStoreLabel">Trâu vàng</strong>)</label>
+              <input type="url" id="inpInvTargetSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." oninput="onInvTargetSheetUrlInput(this.value)">
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
+              <div class="field" style="flex:1; min-width:240px;">
+                <label for="inpInvScriptUrl">Link Web App Apps Script Hóa đơn (Code-HoaDon.js, cài 1 lần dùng chung, đuôi /exec)</label>
+                <input type="url" id="inpInvScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="saveInvScriptUrl()">💾 Lưu &amp; Kiểm tra</button>
+            </div>
+            <label style="display:inline-flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; cursor:pointer;">
+              <input type="checkbox" id="chkInvUpdateSummary" checked onchange="updateSettings('invUpdateSummary', this.checked)">
+              Tự động ghi số tiền vào tab "Tổng kết đơn hàng" (nếu file có tab này)
+            </label>
+          </div>
+          <div id="invSheetSyncStatus" style="margin-top:8px; font-size:12px; font-weight:600; color:#166534;"></div>
+        </details>
+      </div>
+
+      <div class="card no-print">
         <div class="card-title">
           <span>🧾 Bước 1: Chọn khách hàng &amp; Kiểm tra dữ liệu hóa đơn</span>
           <button type="button" class="btn btn-soft btn-sm" onclick="reloadInvoiceDraftFromTab1(true)">🔄 Tải lại số liệu từ Tab 1</button>
@@ -2536,7 +2563,11 @@
           </div>
           <div class="field">
             <label for="inpInvDeliveryDate">Ngày nhận hàng</label>
-            <input type="date" id="inpInvDeliveryDate" onchange="onInvoiceMetaFieldChange()">
+            <input type="date" id="inpInvDeliveryDate" onchange="onInvoiceDateChange(this.value)">
+          </div>
+          <div class="field">
+            <label for="inpInvTabName">Tên tab lưu trên Sheet (DD-MM)</label>
+            <input type="text" id="inpInvTabName" placeholder="VD: 24-11" oninput="onInvoiceTabNameManualInput()">
           </div>
           <div class="field">
             <label for="inpInvStoreAddr">Địa chỉ / Khu vực cửa hàng</label>
@@ -2580,8 +2611,9 @@
         <div class="card no-print">
           <div class="toolbar" style="margin-bottom:0;">
             <div class="toolbar-group">
-              <button type="button" class="btn btn-dark" onclick="exportCurrentViewPDF('tab8')">🖨️ In / Lưu PDF (A4)</button>
-              <button type="button" class="btn btn-primary" onclick="captureCurrentViewImage('tab8')">📸 Chụp ảnh hóa đơn</button>
+              <button type="button" class="btn btn-dark" id="btnSaveInvToSheet" onclick="saveInvoiceToGoogleSheet()">☁️ Lưu vào Google Sheet</button>
+              <button type="button" class="btn btn-primary" onclick="exportCurrentViewPDF('tab8')">🖨️ In / Lưu PDF (A4)</button>
+              <button type="button" class="btn btn-soft" onclick="captureCurrentViewImage('tab8')">📸 Chụp ảnh hóa đơn</button>
             </div>
             <div style="font-size:12.5px; font-weight:700; color:#15803d;" id="invFileNameHint"></div>
           </div>
@@ -3077,6 +3109,12 @@
           revScriptUrl: '',
           revSheetUrl: 'https://docs.google.com/spreadsheets/d/1_o_7JQLip5s2Wx8YkmeXZHpPVh72N5u9x1SMIXOH3gU/edit?gid=349786834#gid=349786834',
           revTabName: 'Tháng 11',
+          invScriptUrl: '',
+          invUpdateSummary: true,
+          invSheetUrls: {
+            trauVang: 'https://docs.google.com/spreadsheets/d/1Hoge4dG0eaQX3prXu9kAPloxT0C6MF336qVUS4_nqq0/edit',
+            tamVang: 'https://docs.google.com/spreadsheets/d/17JlIfLZ4M60hdzXapkztOoCu3umlLMxtr1a5QknXSyU/edit'
+          },
           showTab5: false
         },
         inboundHistory: [],
@@ -3151,7 +3189,9 @@
           tamVang: Object.assign({}, def.logos.tamVang, (raw.logos && raw.logos.tamVang) || {}),
           cleverfood: Object.assign({}, def.logos.cleverfood, (raw.logos && raw.logos.cleverfood) || {})
         },
-        settings: Object.assign({}, def.settings, raw.settings || {}),
+        settings: Object.assign({}, def.settings, raw.settings || {}, {
+          invSheetUrls: Object.assign({}, def.settings.invSheetUrls, (raw.settings && raw.settings.invSheetUrls) || {})
+        }),
         inboundHistory: Array.isArray(raw.inboundHistory) ? raw.inboundHistory : [],
         shipHistory: Array.isArray(raw.shipHistory) ? raw.shipHistory : [],
         revHistory: Array.isArray(raw.revHistory) ? raw.revHistory : [],
@@ -7382,6 +7422,11 @@
         if (prevCard) prevCard.style.display = 'none';
       }
 
+      var tInp = document.getElementById('inpInvTabName');
+      if (tInp && !invTabNameTouched) {
+        tInp.value = formatDateDM((dateInp && dateInp.value) || state.meta.deliveryDate || toYMD(new Date()));
+      }
+      updateInvSheetConfigUI();
       renderInvoiceCheckTable();
       if (invoiceConfirmed) {
         renderInvoicePaper();
@@ -7400,6 +7445,11 @@
       if (noteInp) noteInp.value = '';
       var prevCard = document.getElementById('invPreviewCard');
       if (prevCard) prevCard.style.display = 'none';
+      invTabNameTouched = false;
+      var dInp = document.getElementById('inpInvDeliveryDate');
+      var tInp = document.getElementById('inpInvTabName');
+      if (tInp) tInp.value = formatDateDM((dInp && dInp.value) || state.meta.deliveryDate || toYMD(new Date()));
+      updateInvSheetConfigUI();
       renderInvoiceCheckTable();
     };
 
@@ -7595,6 +7645,201 @@
       }
     }
 
+    var INV_SYNC_TOKEN = 'MLD_INV_2026_NHAN';
+    var invTabNameTouched = false;
+
+    function getInvScriptUrl() {
+      return (state && state.settings && state.settings.invScriptUrl) ? state.settings.invScriptUrl.trim() : '';
+    }
+
+    function getInvTargetSheetUrl(storeKey) {
+      if (!state || !state.settings || !state.settings.invSheetUrls) return '';
+      return String(state.settings.invSheetUrls[storeKey] || '').trim();
+    }
+
+    function updateInvSheetConfigUI() {
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var lbl = document.getElementById('invTargetStoreLabel');
+      if (lbl) lbl.textContent = getInvoiceStoreDisplayName(storeKey);
+      var shInp = document.getElementById('inpInvTargetSheetUrl');
+      if (shInp) shInp.value = getInvTargetSheetUrl(storeKey);
+      var scInp = document.getElementById('inpInvScriptUrl');
+      if (scInp) scInp.value = getInvScriptUrl();
+      var chk = document.getElementById('chkInvUpdateSummary');
+      if (chk) chk.checked = state.settings.invUpdateSummary !== false;
+
+      var mini = document.getElementById('invSheetMiniStatus');
+      if (mini) {
+        var hasScript = !!getInvScriptUrl();
+        var hasSheet = !!getInvTargetSheetUrl(storeKey);
+        if (hasScript && hasSheet) {
+          mini.style.color = '#15803d';
+          mini.textContent = '✓ Sẵn sàng lưu vào file ' + getInvoiceStoreDisplayName(storeKey) + ' ▾';
+        } else if (!hasScript) {
+          mini.style.color = '#b45309';
+          mini.textContent = 'Chưa gắn link Apps Script ▾';
+        } else {
+          mini.style.color = '#b45309';
+          mini.textContent = 'Chưa có link file ' + getInvoiceStoreDisplayName(storeKey) + ' ▾';
+        }
+      }
+    }
+
+    window.onInvTargetSheetUrlInput = function (val) {
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      if (!state.settings.invSheetUrls) state.settings.invSheetUrls = {};
+      state.settings.invSheetUrls[storeKey] = String(val || '').trim();
+      saveState();
+      updateInvSheetConfigUI();
+    };
+
+    window.onInvoiceDateChange = function (val) {
+      invTabNameTouched = false;
+      var tInp = document.getElementById('inpInvTabName');
+      if (tInp && val) tInp.value = formatDateDM(val);
+      window.onInvoiceMetaFieldChange();
+    };
+
+    window.onInvoiceTabNameManualInput = function () {
+      invTabNameTouched = true;
+    };
+
+    window.saveInvScriptUrl = async function () {
+      var scInp = document.getElementById('inpInvScriptUrl');
+      var shInp = document.getElementById('inpInvTargetSheetUrl');
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      state.settings.invScriptUrl = (scInp ? scInp.value : '').trim();
+      if (!state.settings.invSheetUrls) state.settings.invSheetUrls = {};
+      state.settings.invSheetUrls[storeKey] = (shInp ? shInp.value : '').trim();
+      saveState();
+      updateInvSheetConfigUI();
+
+      var st = document.getElementById('invSheetSyncStatus');
+      if (!state.settings.invScriptUrl) {
+        if (st) st.textContent = '';
+        showToast('Đã xóa link Apps Script Hóa đơn!');
+        return;
+      }
+
+      if (st) { st.style.color = '#166534'; st.textContent = '⏳ Đang kiểm tra kết nối Google Sheet...'; }
+      var res = await checkInvTabOnSheet();
+      if (res && res.success) {
+        var det = document.getElementById('detInvSheetConfig');
+        if (det) det.open = false;
+        if (st) {
+          st.style.color = '#166534';
+          st.textContent = '✓ Đã kết nối file "' + res.spreadsheetName + '" • Tab mới sẽ chèn ngay sau "' + (res.insertAfterTab || 'Đơn giá') + '".';
+        }
+        showToast('✓ Đã kết nối Google Sheet "' + res.spreadsheetName + '"!');
+      } else {
+        if (st) { st.style.color = '#dc2626'; st.textContent = '⚠ Không kiểm tra được Sheet. Kiểm tra lại Link Web App & quyền Anyone.'; }
+      }
+    };
+
+    async function checkInvTabOnSheet() {
+      var url = getInvScriptUrl();
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var sheetUrl = getInvTargetSheetUrl(storeKey);
+      if (!url || !sheetUrl) return null;
+      var deliveryYMD = ((document.getElementById('inpInvDeliveryDate') || {}).value || state.meta.deliveryDate || toYMD(new Date())).trim();
+      var tabName = ((document.getElementById('inpInvTabName') || {}).value || formatDateDM(deliveryYMD)).trim();
+      try {
+        var sep = url.indexOf('?') === -1 ? '?' : '&';
+        var fetchUrl = url + sep + 'action=checkInvoiceTab&sheetUrl=' + encodeURIComponent(sheetUrl) + '&tabName=' + encodeURIComponent(tabName) + '&deliveryDate=' + encodeURIComponent(deliveryYMD) + '&token=' + encodeURIComponent(INV_SYNC_TOKEN) + '&t=' + Date.now();
+        var r = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+        if (!r.ok) return null;
+        return await r.json();
+      } catch (e) {
+        return null;
+      }
+    }
+
+    window.saveInvoiceToGoogleSheet = async function () {
+      var url = getInvScriptUrl();
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var sheetUrl = getInvTargetSheetUrl(storeKey);
+
+      if (!url) {
+        showToast('Hãy dán Link Web App Apps Script Hóa đơn (Code-HoaDon.js) ở mục Cấu hình phía trên!');
+        var det = document.getElementById('detInvSheetConfig');
+        if (det) det.open = true;
+        return;
+      }
+      if (!sheetUrl) {
+        showToast('Hãy dán Link Google Sheet của ' + getInvoiceStoreDisplayName(storeKey) + ' ở mục Cấu hình phía trên!');
+        var det2 = document.getElementById('detInvSheetConfig');
+        if (det2) det2.open = true;
+        return;
+      }
+
+      var validItems = invoiceDraftItems.filter(function (it) {
+        return String(it.name || '').trim() !== '' && parseNum(it.qty) > 0;
+      });
+      if (!validItems.length) {
+        showToast('Chưa có mặt hàng nào để lưu!');
+        return;
+      }
+
+      var deliveryYMD = ((document.getElementById('inpInvDeliveryDate') || {}).value || state.meta.deliveryDate || toYMD(new Date())).trim();
+      var tabName = ((document.getElementById('inpInvTabName') || {}).value || formatDateDM(deliveryYMD)).trim();
+      if (!tabName) { showToast('Vui lòng nhập Tên tab lưu trên Sheet!'); return; }
+
+      var btn = document.getElementById('btnSaveInvToSheet');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang kiểm tra Sheet...'; }
+
+      var chk = await checkInvTabOnSheet();
+      if (chk && chk.exists) {
+        if (!confirm('Tab "' + tabName + '" đã tồn tại trong file "' + (chk.spreadsheetName || getInvoiceStoreDisplayName(storeKey)) + '". Bạn có muốn ghi đè không?')) {
+          if (btn) { btn.disabled = false; btn.textContent = '☁️ Lưu vào Google Sheet'; }
+          return;
+        }
+      }
+
+      if (btn) btn.textContent = '⏳ Đang lưu lên Sheet...';
+      try {
+        var payload = {
+          action: 'saveInvoiceTab',
+          token: INV_SYNC_TOKEN,
+          sheetUrl: sheetUrl,
+          tabName: tabName,
+          overwrite: true,
+          updateSummary: state.settings.invUpdateSummary !== false,
+          deliveryDate: deliveryYMD,
+          deliveryDateVN: formatDateVNInvoice(deliveryYMD),
+          storeName: getInvoiceStoreDisplayName(storeKey),
+          storeAddr: ((document.getElementById('inpInvStoreAddr') || {}).value || '').trim(),
+          adjust: parseMoneyInput((document.getElementById('inpInvAdjust') || {}).value),
+          note: ((document.getElementById('inpInvNote') || {}).value || '').trim(),
+          items: validItems.map(function (it) {
+            return { name: String(it.name || '').trim(), qty: parseNum(it.qty), price: Number(it.price) || 0 };
+          })
+        };
+
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+
+        await new Promise(function (resolve) { setTimeout(resolve, 1300); });
+        var verify = await checkInvTabOnSheet();
+        var st = document.getElementById('invSheetSyncStatus');
+        if (verify && verify.exists) {
+          var msg = '✓ Đã lưu tab "' + tabName + '" vào file "' + verify.spreadsheetName + '" (trong cụm Đơn giá tháng ' + Number(deliveryYMD.split('-')[1] || 11) + ')!';
+          if (st) { st.style.color = '#166534'; st.textContent = msg; }
+          showToast(msg);
+        } else {
+          showToast('✓ Đã gửi hóa đơn "' + tabName + '" lên Google Sheet!');
+        }
+      } catch (err) {
+        console.warn('saveInvoiceToGoogleSheet error:', err);
+        showToast('Lỗi kết nối khi lưu hóa đơn lên Google Sheet!');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '☁️ Lưu vào Google Sheet'; }
+      }
+    };
+
     window.confirmGenerateInvoice = function () {
       var valid = invoiceDraftItems.filter(function (it) {
         return String(it.name || '').trim() !== '' && parseNum(it.qty) > 0;
@@ -7608,7 +7853,7 @@
       if (card) card.style.display = 'block';
       renderInvoicePaper();
       if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      showToast('✓ Đã tạo hóa đơn! Bạn có thể In / Lưu PDF hoặc Chụp ảnh.');
+      showToast('✓ Đã tạo hóa đơn! Bạn có thể Lưu lên Google Sheet, In PDF hoặc Chụp ảnh.');
     };
 
     /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
