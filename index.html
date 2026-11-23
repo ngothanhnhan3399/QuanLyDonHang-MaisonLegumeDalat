@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=45) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=45">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=45">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=45">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=45">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=45">
+  <!-- Icons chống cache Safari (?v=46) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=46">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=46">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=46">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=46">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=46">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=45","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=45","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=46","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=46","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1519,9 +1519,9 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=45" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=46" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v45</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v46</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1547,7 +1547,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=45" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=46" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1845,14 +1845,20 @@
         </div>
 
         <details id="detTrackingSheetConfig" style="margin-bottom:12px;">
-          <summary style="cursor:pointer; font-size:13px; font-weight:700; color:#15803d;">⚙️ Cấu hình link Web App file Theo dõi đơn hàng ▾</summary>
-          <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
-            <div class="field" style="flex:1; min-width:240px;">
-              <label for="inpTrackingScriptUrl">Link Web App Apps Script (Code-TheoDoiDonHang) đuôi /exec</label>
-              <input type="url" id="inpTrackingScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+          <summary style="cursor:pointer; font-size:13px; font-weight:700; color:#15803d;">⚙️ Cấu hình kết nối &amp; đổi file Google Sheet theo tháng ▾</summary>
+          <div style="margin-top:10px; display:flex; flex-direction:column; gap:10px;">
+            <div class="field">
+              <label for="inpTrackingSheetUrl">Link Google Sheet tháng hiện tại (Sang tháng mới chỉ cần dán link mới vào đây)</label>
+              <input type="url" id="inpTrackingSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
             </div>
-            <button type="button" class="btn btn-primary btn-sm" onclick="saveTrackingScriptUrl()">💾 Lưu &amp; Kiểm tra</button>
-            <button type="button" class="btn btn-soft btn-sm" onclick="refreshTrackingTabsList(true)">🔄 Quét tab đã có</button>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
+              <div class="field" style="flex:1; min-width:240px;">
+                <label for="inpTrackingScriptUrl">Link Web App Apps Script (cài 1 lần dùng mãi, đuôi /exec)</label>
+                <input type="url" id="inpTrackingScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="saveTrackingScriptUrl()">💾 Lưu &amp; Kiểm tra</button>
+              <button type="button" class="btn btn-soft btn-sm" onclick="refreshTrackingTabsList(true)">🔄 Quét tab đã có</button>
+            </div>
           </div>
         </details>
 
@@ -2097,13 +2103,19 @@
             <span>🚚 Kết nối Google Sheet Tiền ship hàng</span>
             <span id="shipSheetMiniStatus" style="font-size:12px; font-weight:700; color:#b45309;">Chưa gắn link Apps Script ▾</span>
           </summary>
-          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
-            <div class="field" style="flex:1; min-width:240px;">
-              <label for="inpShipScriptUrl">Link Web App Apps Script (Code-TienShipHang) đuôi /exec</label>
-              <input type="url" id="inpShipScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+          <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
+            <div class="field">
+              <label for="inpShipSheetUrl">Link Google Sheet Tiền ship hàng tháng hiện tại (Sang tháng 12 chỉ cần dán link mới vào đây)</label>
+              <input type="url" id="inpShipSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
             </div>
-            <button type="button" class="btn btn-primary btn-sm" onclick="saveShipScriptUrl()">💾 Lưu &amp; Tải bảng</button>
-            <button type="button" class="btn btn-soft btn-sm" onclick="loadShipRowsFromSheet(true)">🔄 Tải mới từ Sheet</button>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
+              <div class="field" style="flex:1; min-width:240px;">
+                <label for="inpShipScriptUrl">Link Web App Apps Script (cài 1 lần dùng mãi, đuôi /exec)</label>
+                <input type="url" id="inpShipScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+              </div>
+              <button type="button" class="btn btn-primary btn-sm" onclick="saveShipScriptUrl()">💾 Lưu &amp; Tải bảng</button>
+              <button type="button" class="btn btn-soft btn-sm" onclick="loadShipRowsFromSheet(true)">🔄 Tải mới từ Sheet</button>
+            </div>
           </div>
           <div id="shipSyncStatus" style="margin-top:8px; font-size:12px; font-weight:600; color:#166534;"></div>
         </details>
@@ -2639,7 +2651,9 @@
           orderScriptUrl: '',
           orderAutoSync: true,
           trackingScriptUrl: '',
+          trackingSheetUrl: 'https://docs.google.com/spreadsheets/d/1o9_lVq_vPMRNiFtvfSKzVF5-UKbNYFTTFWoa1xrSSyU/edit',
           shipScriptUrl: '',
+          shipSheetUrl: 'https://docs.google.com/spreadsheets/d/19Z8Uxe7MTcJ2z-doXkeMiA3vb-9cuJX7AvBDUr8pm08/edit?gid=1699044386#gid=1699044386',
           showTab5: false
         },
         inboundHistory: [],
@@ -4089,6 +4103,10 @@
       return (state && state.settings && state.settings.trackingScriptUrl) ? state.settings.trackingScriptUrl.trim() : '';
     }
 
+    function getTrackingSheetUrl() {
+      return (state && state.settings && state.settings.trackingSheetUrl) ? state.settings.trackingSheetUrl.trim() : '';
+    }
+
     function getStoreUnitPriceForTracking(prod, storeKey) {
       if (storeKey === 'trauVang') return Number(prod.priceTrau) || 0;
       if (storeKey === 'tamVang') return Number(prod.priceTam) || 0;
@@ -4150,6 +4168,8 @@
     window.renderTrackingExportCard = function () {
       var urlInp = document.getElementById('inpTrackingScriptUrl');
       if (urlInp) urlInp.value = getTrackingScriptUrl();
+      var shInp = document.getElementById('inpTrackingSheetUrl');
+      if (shInp) shInp.value = getTrackingSheetUrl();
       updateTrackingMiniStatus();
 
       var dateInp = document.getElementById('inpTrackDeliveryDate');
@@ -4210,8 +4230,10 @@
 
     window.saveTrackingScriptUrl = function () {
       var inp = document.getElementById('inpTrackingScriptUrl');
+      var shInp = document.getElementById('inpTrackingSheetUrl');
       var url = (inp ? inp.value : '').trim();
       state.settings.trackingScriptUrl = url;
+      state.settings.trackingSheetUrl = (shInp ? shInp.value : '').trim();
       saveState();
       if (url) {
         var det = document.getElementById('detTrackingSheetConfig');
@@ -4283,7 +4305,8 @@
 
       try {
         var sep = url.indexOf('?') === -1 ? '?' : '&';
-        var fetchUrl = url + sep + 'action=checkTab&tabName=' + encodeURIComponent(tabName) + '&token=' + encodeURIComponent(TRACKING_SYNC_TOKEN) + '&t=' + Date.now();
+        var shUrl = getTrackingSheetUrl();
+        var fetchUrl = url + sep + 'action=checkTab&tabName=' + encodeURIComponent(tabName) + '&sheetUrl=' + encodeURIComponent(shUrl) + '&token=' + encodeURIComponent(TRACKING_SYNC_TOKEN) + '&t=' + Date.now();
         var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         var data = await res.json();
@@ -4293,7 +4316,8 @@
 
         trackingKnownTabs = Array.isArray(data.allTabs) ? data.allTabs : [];
         trackingLastCheck = data;
-        updateTrackingMiniStatus('✓ Đã kết nối (' + trackingKnownTabs.length + ' tab)', false);
+        var ssTitle = data.spreadsheetName ? (data.spreadsheetName + ' • ') : '';
+        updateTrackingMiniStatus('✓ ' + ssTitle + trackingKnownTabs.length + ' tab', false);
         renderTrackingExistingTabsStrip();
 
         if (data.exists && data.existingInfo) {
@@ -4491,6 +4515,7 @@
         var payload = {
           action: 'createTrackingTab',
           token: TRACKING_SYNC_TOKEN,
+          sheetUrl: getTrackingSheetUrl(),
           tabName: finalTabName,
           overwrite: overwrite,
           meta: trackingPendingPayload.meta,
@@ -5914,6 +5939,10 @@
       return (state && state.settings && state.settings.shipScriptUrl) ? state.settings.shipScriptUrl.trim() : '';
     }
 
+    function getShipSheetUrl() {
+      return (state && state.settings && state.settings.shipSheetUrl) ? state.settings.shipSheetUrl.trim() : '';
+    }
+
     function updateShipMiniStatus(text, isErr) {
       var el = document.getElementById('shipSheetMiniStatus');
       var st = document.getElementById('shipSyncStatus');
@@ -5933,9 +5962,37 @@
       }
     }
 
+    function autoFillShipMetricsForCustomer(custName, onlyIfEmpty) {
+      var storeKey = custName === 'Cleverfood' ? 'cle_ALL' : (custName === 'Trâu vàng' ? 'trauVang' : (custName === 'Tâm vàng' ? 'tamVang' : ''));
+      if (!storeKey) return;
+      var boxInp = document.getElementById('inpShipBoxes');
+      var kgInp = document.getElementById('inpShipKg');
+      var hintEl = document.getElementById('shipOrderKgHint');
+      var boxes = getStoreBoxes(storeKey);
+      var orderKg = getStoreTotalQty(storeKey);
+
+      if (boxInp && (!onlyIfEmpty || !boxInp.value.trim())) {
+        boxInp.value = boxes > 0 ? fmtQtyZero(boxes) : '';
+      }
+      if (kgInp && (!onlyIfEmpty || !kgInp.value.trim())) {
+        kgInp.value = orderKg > 0 ? fmtQtyZero(orderKg) : '';
+      }
+      if (hintEl) {
+        if (orderKg > 0 || boxes > 0) {
+          hintEl.style.display = 'block';
+          hintEl.textContent = 'Đơn hôm nay: ' + fmtQtyZero(boxes) + ' thùng • ' + fmtQtyZero(orderKg) + ' kg (có thể sửa lại theo cân thực tế)';
+        } else {
+          hintEl.style.display = 'none';
+        }
+      }
+      updateShipCalcPreview();
+    }
+
     function renderTab6() {
       var urlInp = document.getElementById('inpShipScriptUrl');
       if (urlInp) urlInp.value = getShipScriptUrl();
+      var shInp = document.getElementById('inpShipSheetUrl');
+      if (shInp) shInp.value = getShipSheetUrl();
       if (!getShipScriptUrl()) {
         var det = document.getElementById('detShipSheetConfig');
         if (det) det.open = true;
@@ -5946,6 +6003,8 @@
       if (dateInp && !dateInp.value) {
         dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
       }
+      var curCust = (document.getElementById('selShipCustomer') || {}).value || 'Cleverfood';
+      autoFillShipMetricsForCustomer(curCust, true);
       updateShipCalcPreview();
       renderShipTable();
 
@@ -5956,8 +6015,10 @@
 
     window.saveShipScriptUrl = function () {
       var inp = document.getElementById('inpShipScriptUrl');
+      var shInp = document.getElementById('inpShipSheetUrl');
       var url = (inp ? inp.value : '').trim();
       state.settings.shipScriptUrl = url;
+      state.settings.shipSheetUrl = (shInp ? shInp.value : '').trim();
       saveState();
       if (url) {
         var det = document.getElementById('detShipSheetConfig');
@@ -5986,6 +6047,7 @@
           window.onShipReceiverChange('Duy Anh');
         }
       }
+      autoFillShipMetricsForCustomer(val, false);
     };
 
     window.onShipReceiverChange = function (val) {
@@ -6140,7 +6202,8 @@
 
       try {
         var sep = url.indexOf('?') === -1 ? '?' : '&';
-        var fetchUrl = url + sep + 'action=getShipRows&token=' + encodeURIComponent(SHIP_SYNC_TOKEN) + '&t=' + Date.now();
+        var shUrl = getShipSheetUrl();
+        var fetchUrl = url + sep + 'action=getShipRows&sheetUrl=' + encodeURIComponent(shUrl) + '&token=' + encodeURIComponent(SHIP_SYNC_TOKEN) + '&t=' + Date.now();
         var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         var data = await res.json();
@@ -6153,7 +6216,8 @@
         renderShipTable();
 
         var nowStr = new Date().toLocaleTimeString('vi-VN');
-        updateShipMiniStatus('✓ Đã đồng bộ lúc ' + nowStr + ' (' + shipSheetRowsCache.length + ' dòng)', false);
+        var ssLabel = data.spreadsheetName ? (data.spreadsheetName + ' • ') : '';
+        updateShipMiniStatus('✓ ' + ssLabel + shipSheetRowsCache.length + ' dòng (' + nowStr + ')', false);
         if (showFeedback) showToast('✓ Đã tải bảng Tiền ship hàng từ Google Sheet!');
         return true;
       } catch (err) {
@@ -6201,6 +6265,7 @@
             body: JSON.stringify({
               action: 'addShipRow',
               token: SHIP_SYNC_TOKEN,
+              sheetUrl: getShipSheetUrl(),
               pickupDate: pickupDate,
               receiver: receiver,
               customer: customer,
