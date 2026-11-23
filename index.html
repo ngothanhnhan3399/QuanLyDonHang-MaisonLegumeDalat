@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=43) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=43">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=43">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=43">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=43">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=43">
+  <!-- Icons chống cache Safari (?v=45) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=45">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=45">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=45">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=45">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=45">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=43","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=43","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=45","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=45","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1519,9 +1519,9 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=43" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=45" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v43</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v45</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1547,7 +1547,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=43" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=45" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -1568,7 +1568,8 @@
       <button type="button" class="tab-btn" data-tab="tab2" onclick="switchTab('tab2')">2. Bảng giá &amp; Cài đặt</button>
       <button type="button" class="tab-btn" data-tab="tab3" onclick="switchTab('tab3')">3. Đơn đặt hàng</button>
       <button type="button" class="tab-btn" data-tab="tab4" onclick="switchTab('tab4')">4. Bảng tổng hợp</button>
-      <button type="button" class="tab-btn" data-tab="tab5" onclick="switchTab('tab5')">5. Nhập hàng</button>
+      <button type="button" class="tab-btn" id="tabBtn5" data-tab="tab5" onclick="switchTab('tab5')">5. Nhập hàng</button>
+      <button type="button" class="tab-btn" data-tab="tab6" onclick="switchTab('tab6')">6. Tiền ship hàng</button>
     </div>
   </nav>
 
@@ -1672,6 +1673,17 @@
 
     <!-- ==================== TAB 2: BẢNG GIÁ & CÀI ĐẶT ==================== -->
     <section id="tab2" class="tab-panel">
+      <!-- Tùy chọn ẩn/hiện Tab -->
+      <div class="card">
+        <div class="card-title">🎛️ Tùy chọn hiển thị giao diện</div>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <label style="display:flex; align-items:center; gap:9px; font-size:13.5px; font-weight:700; color:#111827; cursor:pointer;">
+            <input type="checkbox" id="chkShowTab5" onchange="toggleTab5Visibility(this.checked)">
+            Hiển thị Tab "5. Nhập hàng" trên thanh menu
+          </label>
+          <span id="tab5VisibilityHint" style="font-size:12px; color:#6b7280; font-weight:600;">Dữ liệu nhập hàng &amp; danh bạ NCC vẫn được giữ nguyên khi ẩn tab.</span>
+        </div>
+      </div>
       <!-- Đồng bộ Google Sheet -->
       <div class="card">
         <div class="card-title">🔄 Đồng bộ bảng giá từ Google Sheet</div>
@@ -1966,6 +1978,7 @@
           <div class="toolbar-group">
             <button type="button" class="btn btn-soft btn-sm" onclick="openSupplierModal('')">+ Thêm NCC mới</button>
             <button type="button" class="btn btn-outline btn-sm" onclick="resetInboundForm()">Làm mới phiếu</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="toggleTab5Visibility(false)" title="Ẩn tạm Tab 5 (có thể bật lại ở Tab 2)">🙈 Ẩn tab này</button>
           </div>
         </div>
 
@@ -2073,6 +2086,105 @@
           </div>
         </div>
         <div id="inboundHistoryList"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 6: TIỀN SHIP HÀNG ==================== -->
+    <section id="tab6" class="tab-panel">
+      <div class="card">
+        <details id="detShipSheetConfig">
+          <summary style="cursor:pointer; font-size:14px; font-weight:800; color:#14532d; display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap;">
+            <span>🚚 Kết nối Google Sheet Tiền ship hàng</span>
+            <span id="shipSheetMiniStatus" style="font-size:12px; font-weight:700; color:#b45309;">Chưa gắn link Apps Script ▾</span>
+          </summary>
+          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
+            <div class="field" style="flex:1; min-width:240px;">
+              <label for="inpShipScriptUrl">Link Web App Apps Script (Code-TienShipHang) đuôi /exec</label>
+              <input type="url" id="inpShipScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="saveShipScriptUrl()">💾 Lưu &amp; Tải bảng</button>
+            <button type="button" class="btn btn-soft btn-sm" onclick="loadShipRowsFromSheet(true)">🔄 Tải mới từ Sheet</button>
+          </div>
+          <div id="shipSyncStatus" style="margin-top:8px; font-size:12px; font-weight:600; color:#166534;"></div>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>➕ Thêm cước tiền ship hàng</span>
+          <button type="button" class="btn btn-outline btn-sm" onclick="resetShipForm()">Làm mới</button>
+        </div>
+
+        <div class="toolbar" style="margin-bottom:12px;">
+          <div class="toolbar-group">
+            <span style="font-size:12px; font-weight:700; color:#4b5563;">Điền nhanh từ đơn hôm nay:</span>
+            <button type="button" class="chip-btn" onclick="quickFillShipFromOrder('cle')">Cleverfood (Anh Hoàn)</button>
+            <button type="button" class="chip-btn" onclick="quickFillShipFromOrder('trau')">Trâu vàng (Duy Anh)</button>
+            <button type="button" class="chip-btn" onclick="quickFillShipFromOrder('tam')">Tâm vàng (Duy Anh)</button>
+          </div>
+        </div>
+
+        <div class="meta-grid">
+          <div class="field">
+            <label for="inpShipDate">Ngày lấy hàng</label>
+            <input type="date" id="inpShipDate">
+          </div>
+
+          <div class="field">
+            <label for="selShipCustomer">Tên khách hàng</label>
+            <select id="selShipCustomer" onchange="onShipCustomerChange(this.value)">
+              <option value="Cleverfood">Cleverfood</option>
+              <option value="Trâu vàng">Trâu vàng</option>
+              <option value="Tâm vàng">Tâm vàng</option>
+              <option value="__manual__">✏️ Nhập tên khách khác...</option>
+            </select>
+            <input type="text" id="inpShipCustomerManual" placeholder="Nhập tên khách hàng..." style="margin-top:6px; display:none;">
+          </div>
+
+          <div class="field">
+            <label for="selShipReceiver">Tên người nhận</label>
+            <select id="selShipReceiver" onchange="onShipReceiverChange(this.value)">
+              <option value="Anh Hoàn">Anh Hoàn</option>
+              <option value="Duy Anh">Duy Anh</option>
+              <option value="__manual__">✏️ Nhập tên người nhận khác...</option>
+            </select>
+            <input type="text" id="inpShipReceiverManual" placeholder="Nhập tên người nhận..." style="margin-top:6px; display:none;">
+          </div>
+
+          <div class="field">
+            <label for="inpShipBoxes">Số thùng</label>
+            <input type="text" id="inpShipBoxes" inputmode="decimal" placeholder="VD: 8">
+          </div>
+
+          <div class="field">
+            <label for="inpShipKg">Số lượng (kg)</label>
+            <input type="text" id="inpShipKg" inputmode="decimal" placeholder="Nhập số kg..." oninput="updateShipCalcPreview()">
+            <div id="shipOrderKgHint" style="font-size:11.5px; color:#15803d; font-weight:600; display:none;"></div>
+          </div>
+
+          <div class="field">
+            <label for="inpShipRate">Đơn giá ship (đ/kg)</label>
+            <input type="number" id="inpShipRate" inputmode="numeric" value="6500" oninput="updateShipCalcPreview()">
+          </div>
+        </div>
+
+        <div class="in-total-banner">
+          <div>
+            <div style="font-size:12px; font-weight:700; color:#166534;" id="shipFormulaText">THÀNH TIỀN SHIP (= Số kg × 6.500 đ)</div>
+            <div class="in-total-value" id="shipCalcTotal">0 đ</div>
+          </div>
+          <button type="button" id="btnAddShipRow" class="btn btn-dark" onclick="submitShipRowToSheet()">➕ Thêm vào bảng Tiền ship hàng</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span>📋 Bảng Tiền ship hàng (Đồng bộ Google Sheet)</span>
+          <button type="button" class="btn btn-soft btn-sm" id="btnRefreshShipTable" onclick="loadShipRowsFromSheet(true)">🔄 Tải mới từ Sheet</button>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="shipDataTable"></table>
+        </div>
       </div>
     </section>
 
@@ -2526,9 +2638,12 @@
           appsScriptUrl: '',
           orderScriptUrl: '',
           orderAutoSync: true,
-          trackingScriptUrl: ''
+          trackingScriptUrl: '',
+          shipScriptUrl: '',
+          showTab5: false
         },
         inboundHistory: [],
+        shipHistory: [],
         receiptCounters: {},
         suppliers: [
           {
@@ -2599,6 +2714,7 @@
         },
         settings: Object.assign({}, def.settings, raw.settings || {}),
         inboundHistory: Array.isArray(raw.inboundHistory) ? raw.inboundHistory : [],
+        shipHistory: Array.isArray(raw.shipHistory) ? raw.shipHistory : [],
         receiptCounters: (raw.receiptCounters && typeof raw.receiptCounters === 'object') ? raw.receiptCounters : {},
         suppliers: suppliersList
       };
@@ -2755,7 +2871,30 @@
     };
 
     /* ================= TAB SWITCHING ================= */
+    function applyTab5Visibility() {
+      var show = !!(state && state.settings && state.settings.showTab5);
+      var btn5 = document.getElementById('tabBtn5');
+      if (btn5) btn5.style.display = show ? '' : 'none';
+      var chk = document.getElementById('chkShowTab5');
+      if (chk) chk.checked = show;
+      if (!show && activeTab === 'tab5') {
+        window.switchTab('tab1');
+      }
+    }
+
+    window.toggleTab5Visibility = function (show) {
+      state.settings.showTab5 = !!show;
+      saveState();
+      applyTab5Visibility();
+      showToast(show ? '✓ Đã bật hiển thị Tab 5. Nhập hàng!' : '🙈 Đã ẩn Tab 5. Nhập hàng (bật lại ở Tab 2 khi cần).');
+    };
+
     window.switchTab = function (tabId) {
+      if (tabId === 'tab5' && state && state.settings && !state.settings.showTab5) {
+        state.settings.showTab5 = true;
+        saveState();
+        applyTab5Visibility();
+      }
       activeTab = tabId;
       document.querySelectorAll('.tab-panel').forEach(function (el) {
         el.classList.toggle('active', el.id === tabId);
@@ -2772,6 +2911,7 @@
       if (tabId === 'tab3') { renderTab3(); window.scrollTo(0, 0); }
       if (tabId === 'tab4') { renderTab4(); window.scrollTo(0, 0); }
       if (tabId === 'tab5') renderTab5();
+      if (tabId === 'tab6') renderTab6();
     };
 
     window.quickGoPrint = function () {
@@ -3137,6 +3277,7 @@
 
     /* ================= TAB 2: PRICES, GOOGLE SHEET, LOGOS, BACKUP ================= */
     function renderTab2() {
+      applyTab5Visibility();
       document.getElementById('inpSheetUrl').value = state.settings.sheetUrl || '';
       document.getElementById('inpSheetTab').value = state.settings.sheetTab || '';
       document.getElementById('chkUpdateExistingOnly').checked = state.settings.updateExistingOnly !== false;
@@ -5764,6 +5905,348 @@
       renderInboundHistory();
     };
 
+    /* ================= TAB 6: TIỀN SHIP HÀNG ================= */
+    var SHIP_SYNC_TOKEN = 'MLD_SHIP_2026_NHAN';
+    var shipSheetRowsCache = [];
+    var shipSheetTotalsCache = null;
+
+    function getShipScriptUrl() {
+      return (state && state.settings && state.settings.shipScriptUrl) ? state.settings.shipScriptUrl.trim() : '';
+    }
+
+    function updateShipMiniStatus(text, isErr) {
+      var el = document.getElementById('shipSheetMiniStatus');
+      var st = document.getElementById('shipSyncStatus');
+      var url = getShipScriptUrl();
+      if (el) {
+        if (text) {
+          el.style.color = isErr ? '#dc2626' : '#15803d';
+          el.textContent = text;
+        } else {
+          el.style.color = url ? '#15803d' : '#b45309';
+          el.textContent = url ? '✓ Đã kết nối ▾' : 'Chưa gắn link Apps Script ▾';
+        }
+      }
+      if (st && text) {
+        st.style.color = isErr ? '#dc2626' : '#166534';
+        st.textContent = text;
+      }
+    }
+
+    function renderTab6() {
+      var urlInp = document.getElementById('inpShipScriptUrl');
+      if (urlInp) urlInp.value = getShipScriptUrl();
+      if (!getShipScriptUrl()) {
+        var det = document.getElementById('detShipSheetConfig');
+        if (det) det.open = true;
+      }
+      updateShipMiniStatus();
+
+      var dateInp = document.getElementById('inpShipDate');
+      if (dateInp && !dateInp.value) {
+        dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+      }
+      updateShipCalcPreview();
+      renderShipTable();
+
+      if (getShipScriptUrl() && !shipSheetRowsCache.length) {
+        window.loadShipRowsFromSheet(false);
+      }
+    }
+
+    window.saveShipScriptUrl = function () {
+      var inp = document.getElementById('inpShipScriptUrl');
+      var url = (inp ? inp.value : '').trim();
+      state.settings.shipScriptUrl = url;
+      saveState();
+      if (url) {
+        var det = document.getElementById('detShipSheetConfig');
+        if (det) det.open = false;
+        showToast('Đã lưu link! Đang tải bảng Tiền ship hàng...');
+        window.loadShipRowsFromSheet(true);
+      } else {
+        shipSheetRowsCache = [];
+        shipSheetTotalsCache = null;
+        updateShipMiniStatus();
+        renderShipTable();
+        showToast('Đã xóa link Sheet Tiền ship hàng!');
+      }
+    };
+
+    window.onShipCustomerChange = function (val) {
+      var manual = document.getElementById('inpShipCustomerManual');
+      if (manual) manual.style.display = val === '__manual__' ? 'block' : 'none';
+      var recSel = document.getElementById('selShipReceiver');
+      if (recSel) {
+        if (val === 'Cleverfood') {
+          recSel.value = 'Anh Hoàn';
+          window.onShipReceiverChange('Anh Hoàn');
+        } else if (val === 'Trâu vàng' || val === 'Tâm vàng') {
+          recSel.value = 'Duy Anh';
+          window.onShipReceiverChange('Duy Anh');
+        }
+      }
+    };
+
+    window.onShipReceiverChange = function (val) {
+      var manual = document.getElementById('inpShipReceiverManual');
+      if (manual) manual.style.display = val === '__manual__' ? 'block' : 'none';
+    };
+
+    window.quickFillShipFromOrder = function (type) {
+      var dateInp = document.getElementById('inpShipDate');
+      if (dateInp) dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+
+      var custSel = document.getElementById('selShipCustomer');
+      var recSel = document.getElementById('selShipReceiver');
+      var boxInp = document.getElementById('inpShipBoxes');
+      var kgInp = document.getElementById('inpShipKg');
+      var hintEl = document.getElementById('shipOrderKgHint');
+
+      var storeKey = type === 'cle' ? 'cle_ALL' : (type === 'trau' ? 'trauVang' : 'tamVang');
+      var custName = type === 'cle' ? 'Cleverfood' : (type === 'trau' ? 'Trâu vàng' : 'Tâm vàng');
+      var recName = type === 'cle' ? 'Anh Hoàn' : 'Duy Anh';
+
+      if (custSel) { custSel.value = custName; window.onShipCustomerChange(custName); }
+      if (recSel) { recSel.value = recName; window.onShipReceiverChange(recName); }
+
+      var boxes = getStoreBoxes(storeKey);
+      var orderKg = getStoreTotalQty(storeKey);
+      if (boxInp) boxInp.value = boxes > 0 ? fmtQtyZero(boxes) : '';
+      if (kgInp) {
+        kgInp.value = orderKg > 0 ? fmtQtyZero(orderKg) : '';
+        kgInp.focus();
+        kgInp.select();
+      }
+      if (hintEl) {
+        if (orderKg > 0) {
+          hintEl.style.display = 'block';
+          hintEl.textContent = 'Tổng SL đơn hôm nay: ' + fmtQtyZero(orderKg) + ' kg (bạn có thể sửa lại theo cân thực tế)';
+        } else {
+          hintEl.style.display = 'none';
+        }
+      }
+      updateShipCalcPreview();
+    };
+
+    window.updateShipCalcPreview = function () {
+      var kg = parseNum((document.getElementById('inpShipKg') || {}).value);
+      var rate = parseNum((document.getElementById('inpShipRate') || {}).value) || 6500;
+      var money = Math.round(kg * rate);
+      var totEl = document.getElementById('shipCalcTotal');
+      var frmEl = document.getElementById('shipFormulaText');
+      if (totEl) totEl.textContent = fmtVND(money);
+      if (frmEl) {
+        frmEl.textContent = kg > 0
+          ? ('THÀNH TIỀN SHIP (' + fmtQtyZero(kg) + ' kg × ' + fmtDotNum(rate) + ' đ)')
+          : ('THÀNH TIỀN SHIP (= Số kg × ' + fmtDotNum(rate) + ' đ)');
+      }
+    };
+
+    window.resetShipForm = function () {
+      var dateInp = document.getElementById('inpShipDate');
+      if (dateInp) dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+      var boxInp = document.getElementById('inpShipBoxes');
+      var kgInp = document.getElementById('inpShipKg');
+      var rateInp = document.getElementById('inpShipRate');
+      var hintEl = document.getElementById('shipOrderKgHint');
+      if (boxInp) boxInp.value = '';
+      if (kgInp) kgInp.value = '';
+      if (rateInp) rateInp.value = '6500';
+      if (hintEl) hintEl.style.display = 'none';
+      updateShipCalcPreview();
+    };
+
+    function formatShipDateDMY(ymd) {
+      if (!ymd) return '';
+      var m = String(ymd).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (m) return m[3] + '/' + m[2] + '/' + m[1];
+      return String(ymd);
+    }
+
+    function renderShipTable() {
+      var tbl = document.getElementById('shipDataTable');
+      if (!tbl) return;
+
+      var rows = shipSheetRowsCache.length ? shipSheetRowsCache : (state.shipHistory || []);
+      var sumBoxes = 0, sumKg = 0, sumMoney = 0;
+
+      var html = '<thead><tr>' +
+        '<th style="width:48px;">STT</th>' +
+        '<th>Ngày lấy hàng</th>' +
+        '<th>Tên người nhận</th>' +
+        '<th>Tên khách hàng</th>' +
+        '<th>Số thùng</th>' +
+        '<th>Số kg</th>' +
+        '<th>Số tiền</th>' +
+      '</tr></thead><tbody>';
+
+      if (!rows.length) {
+        html += '<tr><td colspan="7" style="text-align:center; padding:18px; color:#6b7280;">Chưa có dữ liệu tiền ship hàng.</td></tr>';
+      } else {
+        rows.forEach(function (r, idx) {
+          var b = parseNum(r.boxes);
+          var k = parseNum(r.kg);
+          var m = Math.round(Number(r.money) || (k * 6500));
+          sumBoxes += b;
+          sumKg += k;
+          sumMoney += m;
+
+          var recBadgeBg = r.receiver === 'Anh Hoàn' ? '#dcfce7' : (r.receiver === 'Duy Anh' ? '#dbeafe' : '#f3f4f6');
+          var recBadgeCol = r.receiver === 'Anh Hoàn' ? '#166534' : (r.receiver === 'Duy Anh' ? '#1e40af' : '#374151');
+
+          html += '<tr>' +
+            '<td style="text-align:center; font-weight:700; color:#6b7280;">' + esc(r.stt || (idx + 1)) + '</td>' +
+            '<td style="text-align:center; font-weight:600;">' + esc(r.pickupDate) + '</td>' +
+            '<td style="text-align:center;"><span style="display:inline-block; padding:2px 10px; border-radius:999px; font-weight:700; font-size:12.5px; background:' + recBadgeBg + '; color:' + recBadgeCol + ';">' + esc(r.receiver) + '</span></td>' +
+            '<td style="text-align:center; font-weight:700;">' + esc(r.customer) + '</td>' +
+            '<td style="text-align:center; font-weight:700;">' + fmtQtyZero(b) + '</td>' +
+            '<td style="text-align:center; font-weight:700;">' + fmtQtyZero(k) + '</td>' +
+            '<td style="text-align:right; font-weight:800; color:#14532d;">' + fmtVND(m) + '</td>' +
+          '</tr>';
+        });
+      }
+
+      if (shipSheetTotalsCache) {
+        sumBoxes = shipSheetTotalsCache.boxes;
+        sumKg = shipSheetTotalsCache.kg;
+        sumMoney = shipSheetTotalsCache.money;
+      }
+
+      html += '</tbody><tfoot><tr>' +
+        '<td colspan="4" style="text-align:center;">Tổng</td>' +
+        '<td style="text-align:center;">' + fmtQtyZero(sumBoxes) + '</td>' +
+        '<td style="text-align:center;">' + fmtQtyZero(sumKg) + '</td>' +
+        '<td style="text-align:right;">' + fmtVND(sumMoney) + '</td>' +
+      '</tr></tfoot>';
+
+      tbl.innerHTML = html;
+    }
+
+    window.loadShipRowsFromSheet = async function (showFeedback) {
+      var url = getShipScriptUrl();
+      if (!url) {
+        if (showFeedback) {
+          showToast('Hãy dán Link Web App Apps Script Tiền ship hàng trước!');
+          var det = document.getElementById('detShipSheetConfig');
+          if (det) det.open = true;
+        }
+        return false;
+      }
+
+      var btn = document.getElementById('btnRefreshShipTable');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang tải...'; }
+      updateShipMiniStatus('⏳ Đang tải từ Sheet...', false);
+
+      try {
+        var sep = url.indexOf('?') === -1 ? '?' : '&';
+        var fetchUrl = url + sep + 'action=getShipRows&token=' + encodeURIComponent(SHIP_SYNC_TOKEN) + '&t=' + Date.now();
+        var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
+        if (!data || data.success === false) {
+          throw new Error((data && data.error) || 'Apps Script báo lỗi');
+        }
+
+        shipSheetRowsCache = Array.isArray(data.rows) ? data.rows : [];
+        shipSheetTotalsCache = data.totals || null;
+        renderShipTable();
+
+        var nowStr = new Date().toLocaleTimeString('vi-VN');
+        updateShipMiniStatus('✓ Đã đồng bộ lúc ' + nowStr + ' (' + shipSheetRowsCache.length + ' dòng)', false);
+        if (showFeedback) showToast('✓ Đã tải bảng Tiền ship hàng từ Google Sheet!');
+        return true;
+      } catch (err) {
+        console.warn('loadShipRowsFromSheet error:', err);
+        updateShipMiniStatus('⚠ Lỗi kết nối Sheet: ' + (err.message || 'Kiểm tra quyền Anyone'), true);
+        if (showFeedback) showToast('Không tải được Sheet Tiền ship hàng!');
+        return false;
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '🔄 Tải mới từ Sheet'; }
+      }
+    };
+
+    window.submitShipRowToSheet = async function () {
+      var pickupDate = ((document.getElementById('inpShipDate') || {}).value || '').trim();
+      var custSel = (document.getElementById('selShipCustomer') || {}).value || '';
+      var customer = custSel === '__manual__'
+        ? ((document.getElementById('inpShipCustomerManual') || {}).value || '').trim()
+        : custSel;
+      var recSel = (document.getElementById('selShipReceiver') || {}).value || '';
+      var receiver = recSel === '__manual__'
+        ? ((document.getElementById('inpShipReceiverManual') || {}).value || '').trim()
+        : recSel;
+      var boxes = parseNum((document.getElementById('inpShipBoxes') || {}).value);
+      var kg = parseNum((document.getElementById('inpShipKg') || {}).value);
+      var rate = parseNum((document.getElementById('inpShipRate') || {}).value) || 6500;
+
+      if (!pickupDate) { showToast('Vui lòng chọn Ngày lấy hàng!'); return; }
+      if (!receiver) { showToast('Vui lòng chọn/nhập Tên người nhận!'); return; }
+      if (!customer) { showToast('Vui lòng chọn/nhập Tên khách hàng!'); return; }
+      if (kg <= 0) { showToast('Vui lòng nhập Số lượng (kg) > 0!'); return; }
+
+      var money = Math.round(kg * rate);
+      var url = getShipScriptUrl();
+
+      var btn = document.getElementById('btnAddShipRow');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang thêm...'; }
+
+      var synced = false;
+      try {
+        if (url) {
+          await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'addShipRow',
+              token: SHIP_SYNC_TOKEN,
+              pickupDate: pickupDate,
+              receiver: receiver,
+              customer: customer,
+              boxes: boxes,
+              kg: kg,
+              rate: rate
+            })
+          });
+          synced = true;
+        }
+      } catch (err) {
+        console.warn('submitShipRowToSheet error:', err);
+      }
+
+      if (!state.shipHistory) state.shipHistory = [];
+      state.shipHistory.push({
+        pickupDate: formatShipDateDMY(pickupDate),
+        receiver: receiver,
+        customer: customer,
+        boxes: boxes,
+        kg: kg,
+        money: money
+      });
+      saveState();
+
+      if (url && synced) {
+        await new Promise(function (resolve) { setTimeout(resolve, 1000); });
+        await window.loadShipRowsFromSheet(false);
+        showToast('✓ Đã thêm vào Google Sheet Tiền ship hàng (' + fmtVND(money) + ')!');
+      } else {
+        renderShipTable();
+        showToast('Đã lưu cục bộ (hãy gắn Link Apps Script để đồng bộ Google Sheet).');
+      }
+
+      // Xóa nhanh ô số thùng & số kg để tiện nhập dòng tiếp theo (giữ nguyên ngày)
+      var boxInp = document.getElementById('inpShipBoxes');
+      var kgInp = document.getElementById('inpShipKg');
+      var hintEl = document.getElementById('shipOrderKgHint');
+      if (boxInp) boxInp.value = '';
+      if (kgInp) kgInp.value = '';
+      if (hintEl) hintEl.style.display = 'none';
+      updateShipCalcPreview();
+
+      if (btn) { btn.disabled = false; btn.textContent = '➕ Thêm vào bảng Tiền ship hàng'; }
+    };
+
     /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
     function setServerSyncStatus(msg, isError) {
       var el = document.getElementById('serverSyncStatus');
@@ -5863,6 +6346,7 @@
         }
 
         saveState();
+        applyTab5Visibility();
 
         // Render lại tab đang mở
         if (activeTab === 'tab1') renderTab1();
@@ -6356,6 +6840,7 @@
         state.settings.appsScriptUrl = DEFAULT_APPS_SCRIPT_URL;
         saveState();
       }
+      applyTab5Visibility();
       renderTab1();
       if (getActiveAppsScriptUrl()) {
         window.loadAllFromServer(false);
