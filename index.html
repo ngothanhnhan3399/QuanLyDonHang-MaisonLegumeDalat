@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=47) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=47">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=47">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=47">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=47">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=47">
+  <!-- Icons chống cache Safari (?v=49) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=49">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=49">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=49">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=49">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=49">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=47","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=47","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=49","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=49","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -444,6 +444,17 @@
     }
 
     table.data-table tr:nth-child(even) td { background: #fafafa; }
+    table.data-table tr.rev-click-row { cursor: pointer; transition: background 0.12s ease; }
+    table.data-table tr.rev-click-row:hover td { background: #fef9c3 !important; }
+    .rev-dmg-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 8px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      border: 1px dashed #d97706; background: #fffbeb; color: #b45309;
+      cursor: pointer; white-space: nowrap;
+    }
+    .rev-dmg-pill.empty {
+      border-color: #cbd5e1; background: #f8fafc; color: #64748b; font-weight: 600;
+    }
 
     table.data-table tfoot td {
       background: #f0fdf4 !important;
@@ -1519,9 +1530,9 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=47" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=49" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v47</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v49</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1547,7 +1558,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=47" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=49" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -2251,7 +2262,7 @@
 
         <div class="meta-grid">
           <div class="field">
-            <label for="inpRevDate">Ngày (Ngày lấy hàng)</label>
+            <label for="inpRevDate">Ngày (Ngày nhận hàng)</label>
             <input type="date" id="inpRevDate">
           </div>
 
@@ -2303,6 +2314,9 @@
         <div class="card-title">
           <span id="revTableTitle">📋 Bảng Doanh thu (Đồng bộ Google Sheet)</span>
           <button type="button" class="btn btn-soft btn-sm" id="btnRefreshRevTable" onclick="loadRevRowsFromSheet(true)">🔄 Tải mới từ Sheet</button>
+        </div>
+        <div style="font-size:12px; color:#6b7280; margin:-6px 0 10px; font-weight:600;">
+          💡 Bấm trực tiếp vào bất kỳ đơn nào bên dưới để thêm hoặc sửa tiền <strong>Hư hỏng</strong> (tự động trừ vào Thực thu trên Google Sheet).
         </div>
         <div class="table-wrap">
           <table class="data-table" id="revDataTable"></table>
@@ -2428,6 +2442,30 @@
       <div style="display:flex; gap:8px; margin-top:14px;">
         <button type="button" id="btnConfirmCreateTrackTab" class="btn btn-dark" style="flex:1;" onclick="confirmCreateTrackingTab()">✅ Xác nhận tạo tab</button>
         <button type="button" class="btn btn-outline" onclick="closeTrackingConfirmModal()">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CẬP NHẬT HƯ HỎNG THEO ĐƠN (TAB 7) -->
+  <div id="revDamageModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeRevDamageModal()">
+    <div class="modal-box" style="text-align:left; max-width:440px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div class="modal-title" style="margin-bottom:0;">✏️ Cập nhật Hư hỏng theo đơn</div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeRevDamageModal()">✕</button>
+      </div>
+      <div id="revDmgOrderSummary" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; font-size:13px; line-height:1.65; margin-bottom:12px;"></div>
+      <div class="field" style="margin-bottom:12px;">
+        <label for="inpRevDmgModalVal">Số tiền hư hỏng (đ) — nhập 0 hoặc để trống để xóa</label>
+        <input type="text" id="inpRevDmgModalVal" inputmode="numeric" placeholder="VD: 150000" oninput="updateRevDamageModalPreview()" onkeydown="if(event.key==='Enter'){event.preventDefault(); saveRevDamageModal();}">
+      </div>
+      <div style="background:#f0fdf4; border:1.5px solid #86efac; border-radius:10px; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <span style="font-size:12.5px; font-weight:700; color:#166534;">THỰC THU SAU KHI TRỪ</span>
+        <span id="revDmgModalActualPreview" style="font-size:18px; font-weight:900; color:#14532d;">0 đ</span>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" id="btnSaveRevDamageModal" class="btn btn-dark" style="flex:1;" onclick="saveRevDamageModal()">💾 Lưu hư hỏng</button>
+        <button type="button" class="btn btn-outline" onclick="clearRevDamageModalInput()">Xóa về 0</button>
+        <button type="button" class="btn btn-outline" onclick="closeRevDamageModal()">Hủy</button>
       </div>
     </div>
   </div>
@@ -6504,14 +6542,22 @@
     function autoFillRevMetricsForCustomer(custName, onlyIfEmpty) {
       var storeKey = custName === 'Cleverfood' ? 'cle_ALL' : (custName === 'Trâu vàng' ? 'trauVang' : (custName === 'Tâm vàng' ? 'tamVang' : ''));
       if (!storeKey) return;
-      var dateYMD = ((document.getElementById('inpRevDate') || {}).value || state.meta.pickupDate || state.meta.orderDate || toYMD(new Date())).trim();
+      var revDateYMD = ((document.getElementById('inpRevDate') || {}).value || state.meta.deliveryDate || state.meta.orderDate || toYMD(new Date())).trim();
       var invInp = document.getElementById('inpRevInvoice');
       var shipInp = document.getElementById('inpRevShip');
       var invHint = document.getElementById('revInvoiceHint');
       var shipHint = document.getElementById('revShipHint');
 
       var orderMoney = calcStoreOrderTotalMoney(storeKey);
-      var shipMoney = findShipMoneyForDateCustomer(dateYMD, custName);
+      // Bảng Tiền ship ghi theo Ngày lấy hàng (thường trước Ngày nhận hàng 2 ngày)
+      var shipLookupDate = (revDateYMD === state.meta.deliveryDate && state.meta.pickupDate)
+        ? state.meta.pickupDate
+        : addDaysYMD(revDateYMD, -2);
+      var shipMoney = findShipMoneyForDateCustomer(shipLookupDate, custName);
+      if (shipMoney <= 0 && shipLookupDate !== revDateYMD) {
+        shipMoney = findShipMoneyForDateCustomer(revDateYMD, custName);
+        if (shipMoney > 0) shipLookupDate = revDateYMD;
+      }
 
       if (invInp && (!onlyIfEmpty || !invInp.value.trim()) && orderMoney > 0) {
         invInp.value = fmtDotNum(orderMoney);
@@ -6531,7 +6577,7 @@
       if (shipHint) {
         if (shipMoney > 0) {
           shipHint.style.display = 'block';
-          shipHint.textContent = 'Tự lấy từ bảng Tiền ship ngày ' + formatShipDateDMY(dateYMD) + ': ' + fmtVND(shipMoney);
+          shipHint.textContent = 'Tự lấy từ bảng Tiền ship ngày lấy ' + formatShipDateDMY(shipLookupDate) + ': ' + fmtVND(shipMoney);
         } else {
           shipHint.style.display = 'none';
         }
@@ -6554,7 +6600,7 @@
 
       var dateInp = document.getElementById('inpRevDate');
       if (dateInp && !dateInp.value) {
-        dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+        dateInp.value = state.meta.deliveryDate || state.meta.orderDate || toYMD(new Date());
       }
 
       var curCust = (document.getElementById('selRevCustomer') || {}).value || 'Cleverfood';
@@ -6598,7 +6644,7 @@
 
     window.quickFillRevFromOrder = function (type) {
       var dateInp = document.getElementById('inpRevDate');
-      if (dateInp) dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+      if (dateInp) dateInp.value = state.meta.deliveryDate || state.meta.orderDate || toYMD(new Date());
 
       var custSel = document.getElementById('selRevCustomer');
       var custName = type === 'cle' ? 'Cleverfood' : (type === 'trau' ? 'Trâu vàng' : 'Tâm vàng');
@@ -6630,7 +6676,7 @@
 
     window.resetRevForm = function () {
       var dateInp = document.getElementById('inpRevDate');
-      if (dateInp) dateInp.value = state.meta.pickupDate || state.meta.orderDate || toYMD(new Date());
+      if (dateInp) dateInp.value = state.meta.deliveryDate || state.meta.orderDate || toYMD(new Date());
       ['inpRevInvoice', 'inpRevShip', 'inpRevDamage'].forEach(function (id) {
         var el = document.getElementById(id);
         if (el) el.value = '';
@@ -6676,14 +6722,18 @@
           sumDmg += dmg;
           sumAct += act;
 
-          html += '<tr>' +
+          var dmgPill = dmg > 0
+            ? '<span class="rev-dmg-pill">' + fmtVND(dmg) + ' ✏️</span>'
+            : '<span class="rev-dmg-pill empty">+ Hư hỏng</span>';
+
+          html += '<tr class="rev-click-row" onclick="openRevDamageModal(' + idx + ')" title="Bấm để cập nhật tiền hư hỏng cho đơn này">' +
             '<td style="text-align:center; font-weight:700; color:#6b7280;">' + esc(r.stt || (idx + 1)) + '</td>' +
             '<td style="text-align:center; font-weight:600; white-space:nowrap;">' + esc(r.date) + '</td>' +
             '<td style="text-align:center; font-weight:700; white-space:nowrap;">' + esc(r.customer) + '</td>' +
             '<td style="text-align:right; font-weight:600; white-space:nowrap;">' + fmtVND(inv) + '</td>' +
             '<td style="text-align:right; font-weight:600; color:#1d4ed8; white-space:nowrap;">' + fmtVND(ship) + '</td>' +
             '<td style="text-align:right; font-weight:800; color:#991b1b; white-space:nowrap;">' + fmtVND(rev) + '</td>' +
-            '<td style="text-align:right; font-weight:600; color:#b45309; white-space:nowrap;">' + (dmg > 0 ? fmtVND(dmg) : '') + '</td>' +
+            '<td style="text-align:right; white-space:nowrap;">' + dmgPill + '</td>' +
             '<td style="text-align:right; font-weight:800; color:#14532d; white-space:nowrap;">' + fmtVND(act) + '</td>' +
           '</tr>';
         });
@@ -6708,6 +6758,113 @@
 
       tbl.innerHTML = html;
     }
+
+    var revDamageEditIdx = -1;
+
+    window.openRevDamageModal = function (idx) {
+      var rows = revSheetRowsCache.length ? revSheetRowsCache : (state.revHistory || []);
+      var r = rows[idx];
+      if (!r) return;
+      revDamageEditIdx = idx;
+
+      var inv = Math.round(Number(r.invoice) || 0);
+      var ship = Math.round(Number(r.ship) || 0);
+      var rev = (r.revenue !== undefined && r.revenue !== null) ? Math.round(Number(r.revenue)) : (inv - ship);
+      var dmg = Math.round(Number(r.damage) || 0);
+
+      document.getElementById('revDmgOrderSummary').innerHTML =
+        '<div><strong>Đơn #' + esc(r.stt || (idx + 1)) + ':</strong> ' + esc(r.customer) + ' • Ngày ' + esc(r.date) + '</div>' +
+        '<div>Số tiền trên HĐ: <strong>' + fmtVND(inv) + '</strong> • Tiền ship: <strong style="color:#1d4ed8;">' + fmtVND(ship) + '</strong></div>' +
+        '<div>Doanh thu (= HĐ − Ship): <strong style="color:#991b1b;">' + fmtVND(rev) + '</strong></div>';
+
+      var inp = document.getElementById('inpRevDmgModalVal');
+      inp.value = dmg > 0 ? fmtDotNum(dmg) : '';
+      window.updateRevDamageModalPreview();
+      document.getElementById('revDamageModal').classList.add('show');
+      setTimeout(function () { inp.focus(); inp.select(); }, 60);
+    };
+
+    window.closeRevDamageModal = function () {
+      document.getElementById('revDamageModal').classList.remove('show');
+      revDamageEditIdx = -1;
+    };
+
+    window.clearRevDamageModalInput = function () {
+      var inp = document.getElementById('inpRevDmgModalVal');
+      if (inp) inp.value = '';
+      window.updateRevDamageModalPreview();
+    };
+
+    window.updateRevDamageModalPreview = function () {
+      var rows = revSheetRowsCache.length ? revSheetRowsCache : (state.revHistory || []);
+      var r = rows[revDamageEditIdx];
+      if (!r) return;
+      var inv = Math.round(Number(r.invoice) || 0);
+      var ship = Math.round(Number(r.ship) || 0);
+      var dmg = parseMoneyInput((document.getElementById('inpRevDmgModalVal') || {}).value);
+      var act = inv - ship - dmg;
+      var el = document.getElementById('revDmgModalActualPreview');
+      if (el) el.textContent = fmtVND(act);
+    };
+
+    window.saveRevDamageModal = async function () {
+      var isFromSheet = revSheetRowsCache.length > 0;
+      var rows = isFromSheet ? revSheetRowsCache : (state.revHistory || []);
+      var r = rows[revDamageEditIdx];
+      if (!r) return;
+
+      var dmg = parseMoneyInput((document.getElementById('inpRevDmgModalVal') || {}).value);
+      if (dmg < 0) dmg = 0;
+
+      var inv = Math.round(Number(r.invoice) || 0);
+      var ship = Math.round(Number(r.ship) || 0);
+      var act = inv - ship - dmg;
+      var url = getRevScriptUrl();
+
+      var btn = document.getElementById('btnSaveRevDamageModal');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang lưu...'; }
+
+      var synced = false;
+      try {
+        if (url && r.rowNumber) {
+          await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify({
+              action: 'updateRevenueDamage',
+              token: REV_SYNC_TOKEN,
+              sheetUrl: getRevSheetUrl(),
+              tabName: getRevTabName(),
+              rowNumber: r.rowNumber,
+              damage: dmg
+            })
+          });
+          synced = true;
+        }
+      } catch (err) {
+        console.warn('saveRevDamageModal error:', err);
+      }
+
+      // Cập nhật ngay trên giao diện
+      r.damage = dmg;
+      r.actual = act;
+      if (!isFromSheet) saveState();
+      else revSheetTotalsCache = null;
+
+      window.closeRevDamageModal();
+      renderRevTable();
+
+      if (url && synced) {
+        await new Promise(function (resolve) { setTimeout(resolve, 1000); });
+        await window.loadRevRowsFromSheet(false);
+        showToast('✓ Đã cập nhật Hư hỏng (' + fmtVND(dmg) + ') lên Google Sheet!');
+      } else {
+        showToast('✓ Đã cập nhật Hư hỏng cục bộ!');
+      }
+
+      if (btn) { btn.disabled = false; btn.textContent = '💾 Lưu hư hỏng'; }
+    };
 
     window.loadRevRowsFromSheet = async function (showFeedback) {
       var url = getRevScriptUrl();
@@ -6781,7 +6938,7 @@
       var ship = parseMoneyInput((document.getElementById('inpRevShip') || {}).value);
       var damage = parseMoneyInput((document.getElementById('inpRevDamage') || {}).value);
 
-      if (!pickupDate) { showToast('Vui lòng chọn Ngày (ngày lấy hàng)!'); return; }
+      if (!pickupDate) { showToast('Vui lòng chọn Ngày (ngày nhận hàng)!'); return; }
       if (!customer) { showToast('Vui lòng chọn/nhập Tên khách hàng!'); return; }
       if (invoice <= 0) { showToast('Vui lòng nhập Số tiền trên hóa đơn > 0!'); return; }
 
