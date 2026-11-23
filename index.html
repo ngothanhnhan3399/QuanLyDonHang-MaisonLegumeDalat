@@ -12,15 +12,15 @@
   <meta name="apple-mobile-web-app-title" content="Quản lý bán hàng">
   <meta name="theme-color" content="#14532d">
 
-  <!-- Icons chống cache Safari (?v=51) -->
-  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=51">
-  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=51">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=51">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=51">
-  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=51">
+  <!-- Icons chống cache Safari (?v=53) -->
+  <link rel="icon" type="image/x-icon" href="./favicon.ico?v=53">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=53">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=53">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png?v=53">
+  <link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png?v=53">
 
   <!-- Inline Web App Manifest -->
-  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=51","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=51","sizes":"512x512","type":"image/png"}]}'>
+  <link rel="manifest" href='data:application/manifest+json,{"name":"Ph%E1%BA%A7n%20m%E1%BB%81m%20qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","short_name":"Qu%E1%BA%A3n%20l%C3%BD%20b%C3%A1n%20h%C3%A0ng","display":"standalone","start_url":"./","background_color":"#14532d","theme_color":"#14532d","icons":[{"src":"./icon-192.png?v=53","sizes":"192x192","type":"image/png"},{"src":"./icon-512.png?v=53","sizes":"512x512","type":"image/png"}]}'>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1726,9 +1726,9 @@
   <!-- MÀN HÌNH ĐĂNG NHẬP NỘI BỘ -->
   <div id="loginGate" class="login-gate no-print">
     <div class="login-card">
-      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=51" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+      <img class="login-logo" src="./maison-legume-dalat-logo.png?v=53" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v51</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v53</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1754,7 +1754,7 @@
   <header class="app-header no-print">
     <div class="header-inner">
       <div class="brand">
-        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=51" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
+        <img id="headerLogoImg" class="brand-logo" src="./maison-legume-dalat-logo.png?v=53" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
         <div>
           <div class="brand-title">Maison Légume Dalat</div>
           <div class="brand-sub">Quản lý đặt hàng, in đơn A4 &amp; nhập kho</div>
@@ -2550,10 +2550,40 @@
         </details>
       </div>
 
-      <div class="card no-print">
+      <div class="card no-print" id="invIssuedPickerCard">
         <div class="card-title">
-          <span>🧾 Bước 1: Chọn khách hàng &amp; Kiểm tra dữ liệu hóa đơn</span>
-          <button type="button" class="btn btn-soft btn-sm" onclick="reloadInvoiceDraftFromTab1(true)">🔄 Tải lại số liệu từ Tab 1</button>
+          <span>🗂️ Chọn hóa đơn đã xuất để xem / in lại (<span id="invHistoryCountBadge">0</span>)</span>
+          <button type="button" class="btn btn-outline btn-sm" onclick="toggleLoadInvoiceFromSheetBox()">📂 Mở HĐ trên Google Sheet</button>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <select id="selIssuedInvoices" style="flex:1; min-width:240px;"></select>
+          <button type="button" class="btn btn-dark btn-sm" onclick="printSelectedIssuedInvoice('pdf')">🖨️ In / Lưu PDF ngay</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="printSelectedIssuedInvoice('img')">📸 Chụp ảnh ngay</button>
+          <button type="button" class="btn btn-soft btn-sm" onclick="openSelectedIssuedInvoice()">👁️ Xem / Sửa</button>
+          <button type="button" class="btn btn-danger btn-sm" onclick="deleteSelectedIssuedInvoice()" title="Xóa hóa đơn này khỏi danh sách đã xuất">🗑️</button>
+        </div>
+        <div id="invIssuedEmptyHint" style="margin-top:8px; font-size:12px; color:#6b7280; font-weight:600;">
+          Mỗi khi bạn bấm "✅ Đồng ý &amp; Tạo hóa đơn" hoặc "☁️ Lưu vào Google Sheet", hóa đơn sẽ tự động lưu vào đây để chọn in lại bất cứ lúc nào.
+        </div>
+      </div>
+
+      <div class="card no-print" id="invEditCard">
+        <div class="card-title">
+          <span>🧾 Bước 1: Chọn khách hàng &amp; Kiểm tra / Chỉnh sửa hóa đơn</span>
+          <div class="toolbar-group">
+            <button type="button" class="btn btn-soft btn-sm" onclick="reloadInvoiceDraftFromTab1(true)">🔄 Tải từ Tab 1</button>
+            <button type="button" class="btn btn-outline btn-sm" id="btnToggleLoadSheetInv" onclick="toggleLoadInvoiceFromSheetBox()">📂 Mở HĐ đã lưu trên Sheet</button>
+          </div>
+        </div>
+
+        <div id="invLoadFromSheetBox" style="display:none; margin-bottom:12px; padding:10px 12px; background:#f0fdf4; border:1px solid #86efac; border-radius:10px;">
+          <div style="font-size:12px; font-weight:800; color:#14532d; margin-bottom:8px;">📂 Chọn tab hóa đơn đã lưu trên Google Sheet để chỉnh sửa số lượng &amp; tính lại:</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <select id="selInvSheetTabs" style="flex:1; min-width:180px;"></select>
+            <button type="button" class="btn btn-primary btn-sm" id="btnLoadSelectedInvTab" onclick="loadSelectedInvoiceTabFromSheet(false)">📥 Tải để xem / sửa</button>
+            <button type="button" class="btn btn-dark btn-sm" id="btnLoadAndPrintInvTab" onclick="loadSelectedInvoiceTabFromSheet(true)">🖨️ Tải &amp; In PDF ngay</button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="refreshInvSheetTabsDropdown(true)">🔄 Quét lại</button>
+          </div>
         </div>
 
         <div class="meta-grid" style="margin-bottom:12px;">
@@ -2577,9 +2607,9 @@
             <label for="inpInvAdjust">Khoản điều chỉnh (đ, nhập số âm nếu trừ)</label>
             <input type="text" id="inpInvAdjust" inputmode="text" placeholder="0" oninput="onInvoiceMetaFieldChange()">
           </div>
-          <div class="field span-2">
-            <label for="inpInvNote">Ghi chú trên hóa đơn</label>
-            <input type="text" id="inpInvNote" placeholder="Ghi chú công nợ, chuyển khoản, hàng tặng..." oninput="onInvoiceMetaFieldChange()">
+          <div class="field full">
+            <label for="inpInvNote">Ghi chú trên hóa đơn (tự động ghi khi bấm Hủy/Giảm SL, có thể sửa thêm nhiều dòng)</label>
+            <textarea id="inpInvNote" rows="2" placeholder="VD: đã huỷ 2kg Ớt chuông đỏ do hỏng dập&#10;7,5kg - 2kg = 5,5 kg" oninput="onInvoiceMetaFieldChange()"></textarea>
           </div>
         </div>
 
@@ -2614,6 +2644,7 @@
               <button type="button" class="btn btn-dark" id="btnSaveInvToSheet" onclick="saveInvoiceToGoogleSheet()">☁️ Lưu vào Google Sheet</button>
               <button type="button" class="btn btn-primary" onclick="exportCurrentViewPDF('tab8')">🖨️ In / Lưu PDF (A4)</button>
               <button type="button" class="btn btn-soft" onclick="captureCurrentViewImage('tab8')">📸 Chụp ảnh hóa đơn</button>
+              <button type="button" class="btn btn-outline" onclick="scrollToInvoiceEditorForAdjust()">✏️ Sửa SL / Hủy hỏng &amp; Tính lại</button>
             </div>
             <div style="font-size:12.5px; font-weight:700; color:#15803d;" id="invFileNameHint"></div>
           </div>
@@ -2769,6 +2800,36 @@
         <button type="button" id="btnSaveRevDamageModal" class="btn btn-dark" style="flex:1;" onclick="saveRevDamageModal()">💾 Lưu hư hỏng</button>
         <button type="button" class="btn btn-outline" onclick="clearRevDamageModalInput()">Xóa về 0</button>
         <button type="button" class="btn btn-outline" onclick="closeRevDamageModal()">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL HỦY / GIẢM SỐ LƯỢNG SAU XUẤT HÓA ĐƠN (TAB 8) -->
+  <div id="invAdjustQtyModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeInvAdjustQtyModal()">
+    <div class="modal-box" style="text-align:left; max-width:450px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div class="modal-title" style="margin-bottom:0;">✂️ Điều chỉnh / Hủy số lượng hỏng</div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeInvAdjustQtyModal()">✕</button>
+      </div>
+      <div id="invAdjItemSummary" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:10px; padding:10px 12px; font-size:13px; line-height:1.65; margin-bottom:12px;"></div>
+      <div class="meta-grid" style="margin-bottom:10px;">
+        <div class="field">
+          <label for="inpInvAdjReduce">Số lượng huỷ / giảm (kg)</label>
+          <input type="text" id="inpInvAdjReduce" inputmode="decimal" placeholder="VD: 2" oninput="updateInvAdjustQtyPreview()" onkeydown="if(event.key==='Enter'){event.preventDefault(); applyInvAdjustQtyModal();}">
+        </div>
+        <div class="field">
+          <label for="inpInvAdjReason">Lý do</label>
+          <input type="text" id="inpInvAdjReason" value="do hỏng dập" placeholder="VD: do hỏng dập" oninput="updateInvAdjustQtyPreview()">
+        </div>
+      </div>
+      <label style="display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:#374151; margin-bottom:10px; cursor:pointer;">
+        <input type="checkbox" id="chkInvAdjAutoNote" checked onchange="updateInvAdjustQtyPreview()">
+        Tự động thêm vào Ghi chú trên hóa đơn
+      </label>
+      <div id="invAdjPreviewBox" style="background:#fffbeb; border:1.5px solid #fcd34d; border-radius:10px; padding:10px 12px; font-size:12.5px; line-height:1.6; color:#92400e; margin-bottom:14px;"></div>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn btn-dark" style="flex:1;" onclick="applyInvAdjustQtyModal()">✅ Áp dụng &amp; Tính lại HĐ</button>
+        <button type="button" class="btn btn-outline" onclick="closeInvAdjustQtyModal()">Đóng</button>
       </div>
     </div>
   </div>
@@ -3120,6 +3181,7 @@
         inboundHistory: [],
         shipHistory: [],
         revHistory: [],
+        invoiceHistory: [],
         receiptCounters: {},
         suppliers: [
           {
@@ -3195,6 +3257,7 @@
         inboundHistory: Array.isArray(raw.inboundHistory) ? raw.inboundHistory : [],
         shipHistory: Array.isArray(raw.shipHistory) ? raw.shipHistory : [],
         revHistory: Array.isArray(raw.revHistory) ? raw.revHistory : [],
+        invoiceHistory: Array.isArray(raw.invoiceHistory) ? raw.invoiceHistory : [],
         receiptCounters: (raw.receiptCounters && typeof raw.receiptCounters === 'object') ? raw.receiptCounters : {},
         suppliers: suppliersList
       };
@@ -7427,6 +7490,7 @@
         tInp.value = formatDateDM((dateInp && dateInp.value) || state.meta.deliveryDate || toYMD(new Date()));
       }
       updateInvSheetConfigUI();
+      renderIssuedInvoicesPicker();
       renderInvoiceCheckTable();
       if (invoiceConfirmed) {
         renderInvoicePaper();
@@ -7526,16 +7590,16 @@
       if (!tbl) return;
 
       var html = '<thead><tr>' +
-        '<th style="width:44px;">STT</th>' +
-        '<th style="text-align:left; min-width:190px;">Mặt hàng</th>' +
-        '<th style="width:92px;">Số lượng</th>' +
-        '<th style="width:120px;">Đơn giá</th>' +
-        '<th style="width:126px;">Thành tiền</th>' +
-        '<th style="width:48px;">Xóa</th>' +
+        '<th style="width:42px;">STT</th>' +
+        '<th style="text-align:left; min-width:180px;">Mặt hàng</th>' +
+        '<th style="width:88px;">Số lượng</th>' +
+        '<th style="width:116px;">Đơn giá</th>' +
+        '<th style="width:124px;">Thành tiền</th>' +
+        '<th style="width:122px;">Thao tác</th>' +
       '</tr></thead><tbody>';
 
       if (!invoiceDraftItems.length) {
-        html += '<tr><td colspan="6" style="text-align:center; padding:18px; color:#6b7280;">Khách hàng này chưa có đơn ở Tab 1. Bạn có thể bấm "+ Thêm dòng" để nhập thủ công.</td></tr>';
+        html += '<tr><td colspan="6" style="text-align:center; padding:18px; color:#6b7280;">Khách hàng này chưa có đơn ở Tab 1. Bạn có thể bấm "+ Thêm dòng" hoặc "📂 Mở HĐ đã lưu trên Sheet".</td></tr>';
       } else {
         invoiceDraftItems.forEach(function (it, idx) {
           var q = parseNum(it.qty);
@@ -7547,7 +7611,10 @@
             '<td style="text-align:center;"><input type="text" inputmode="decimal" class="qty-input has-val" value="' + esc(fmtQtyZero(q)) + '" oninput="updateInvoiceDraftCell(' + idx + ', \'qty\', this.value)"></td>' +
             '<td style="text-align:center;"><input type="text" inputmode="numeric" class="price-input" value="' + esc(fmtDotNum(p)) + '" oninput="updateInvoiceDraftCell(' + idx + ', \'price\', this.value)"></td>' +
             '<td style="text-align:right; font-weight:800; color:#14532d; white-space:nowrap;" id="invChkRowMoney_' + idx + '">' + fmtVND(money) + '</td>' +
-            '<td style="text-align:center;"><button type="button" class="btn btn-danger btn-sm" onclick="removeInvoiceDraftRow(' + idx + ')">✕</button></td>' +
+            '<td style="text-align:center; white-space:nowrap;">' +
+              '<button type="button" class="btn btn-soft btn-sm" style="padding:5px 8px; margin-right:4px;" onclick="openInvAdjustQtyModal(' + idx + ')" title="Giảm/Hủy SL do hỏng dập &amp; tự ghi chú">✂️ Hủy</button>' +
+              '<button type="button" class="btn btn-danger btn-sm" style="padding:5px 8px;" onclick="removeInvoiceDraftRow(' + idx + ')" title="Xóa dòng">✕</button>' +
+            '</td>' +
           '</tr>';
         });
       }
@@ -7620,9 +7687,9 @@
           '<tbody>' + rowsHtml + '</tbody>' +
         '</table>' +
         '<div class="inv-footer-grid">' +
-          '<div class="inv-note-box">' +
+          '<div class="inv-note-box" style="' + (note ? 'background:#fffbeb; border-left:3.5px solid #d97706; padding:8px 12px; border-radius:0 8px 8px 0;' : '') + '">' +
             '<div style="font-weight:800; color:#111827; margin-bottom:4px;">Ghi chú:</div>' +
-            '<div style="white-space:pre-line;">' + esc(note) + '</div>' +
+            '<div style="white-space:pre-line; font-weight:700; color:#1f2937;">' + esc(note) + '</div>' +
           '</div>' +
           '<div class="inv-summary-box">' +
             '<div class="inv-sum-row"><span>Tổng</span><span>' + esc(fmtVND(sumMoney)) + '</span></div>' +
@@ -7825,6 +7892,7 @@
         await new Promise(function (resolve) { setTimeout(resolve, 1300); });
         var verify = await checkInvTabOnSheet();
         var st = document.getElementById('invSheetSyncStatus');
+        saveCurrentInvoiceToHistory(true);
         if (verify && verify.exists) {
           var msg = '✓ Đã lưu tab "' + tabName + '" vào file "' + verify.spreadsheetName + '" (trong cụm Đơn giá tháng ' + Number(deliveryYMD.split('-')[1] || 11) + ')!';
           if (st) { st.style.color = '#166534'; st.textContent = msg; }
@@ -7840,6 +7908,146 @@
       }
     };
 
+    function saveCurrentInvoiceToHistory(savedToSheet) {
+      var valid = invoiceDraftItems.filter(function (it) {
+        return String(it.name || '').trim() !== '' && parseNum(it.qty) > 0;
+      });
+      if (!valid.length) return null;
+
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var storeName = getInvoiceStoreDisplayName(storeKey);
+      var deliveryDate = ((document.getElementById('inpInvDeliveryDate') || {}).value || state.meta.deliveryDate || toYMD(new Date())).trim();
+      var tabName = ((document.getElementById('inpInvTabName') || {}).value || formatDateDM(deliveryDate)).trim();
+      var storeAddr = ((document.getElementById('inpInvStoreAddr') || {}).value || '').trim();
+      var adjust = parseMoneyInput((document.getElementById('inpInvAdjust') || {}).value);
+      var note = ((document.getElementById('inpInvNote') || {}).value || '').trim();
+
+      var subTotal = 0;
+      var cleanItems = valid.map(function (it) {
+        var q = parseNum(it.qty);
+        var p = Number(it.price) || 0;
+        subTotal += Math.round(q * p);
+        return { name: String(it.name || '').trim(), qty: q, price: p };
+      });
+      var grandTotal = subTotal + adjust;
+
+      var id = storeKey + '_' + deliveryDate + '_' + tabName;
+      var rec = {
+        id: id,
+        storeKey: storeKey,
+        storeName: storeName,
+        deliveryDate: deliveryDate,
+        tabName: tabName,
+        storeAddr: storeAddr,
+        adjust: adjust,
+        note: note,
+        items: cleanItems,
+        grandTotal: grandTotal,
+        savedToSheet: !!savedToSheet,
+        updatedAt: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) + ' ' + formatDateDM(toYMD(new Date()))
+      };
+
+      if (!Array.isArray(state.invoiceHistory)) state.invoiceHistory = [];
+      var exIdx = state.invoiceHistory.findIndex(function (x) { return x.id === id; });
+      if (exIdx !== -1) {
+        rec.savedToSheet = rec.savedToSheet || !!state.invoiceHistory[exIdx].savedToSheet;
+        state.invoiceHistory.splice(exIdx, 1);
+      }
+      state.invoiceHistory.unshift(rec);
+      if (state.invoiceHistory.length > 60) state.invoiceHistory = state.invoiceHistory.slice(0, 60);
+      saveState();
+      renderIssuedInvoicesPicker(id);
+      return rec;
+    }
+
+    function renderIssuedInvoicesPicker(selectedId) {
+      var sel = document.getElementById('selIssuedInvoices');
+      var badge = document.getElementById('invHistoryCountBadge');
+      var hint = document.getElementById('invIssuedEmptyHint');
+      var list = Array.isArray(state.invoiceHistory) ? state.invoiceHistory : [];
+      if (badge) badge.textContent = String(list.length);
+      if (!sel) return;
+
+      if (!list.length) {
+        sel.innerHTML = '<option value="">-- Chưa có hóa đơn nào đã xuất --</option>';
+        if (hint) hint.style.display = 'block';
+        return;
+      }
+      if (hint) hint.style.display = 'none';
+      var prev = selectedId || sel.value;
+      sel.innerHTML = list.map(function (h) {
+        var tag = h.savedToSheet ? '☁️ ' : '🧾 ';
+        var lbl = tag + h.storeName + ' • ' + formatDateDMY(h.deliveryDate) + ' (Tab ' + (h.tabName || formatDateDM(h.deliveryDate)) + ') • ' + fmtVND(h.grandTotal);
+        return '<option value="' + esc(h.id) + '">' + esc(lbl) + '</option>';
+      }).join('');
+      if (prev && list.some(function (h) { return h.id === prev; })) {
+        sel.value = prev;
+      }
+    }
+
+    function loadIssuedInvoiceRecord(rec) {
+      if (!rec) return false;
+      var stSel = document.getElementById('selInvStore');
+      if (stSel && rec.storeKey) {
+        var hasOpt = Array.from(stSel.options).some(function (o) { return o.value === rec.storeKey; });
+        if (hasOpt) stSel.value = rec.storeKey;
+      }
+      var dInp = document.getElementById('inpInvDeliveryDate');
+      if (dInp && rec.deliveryDate) dInp.value = rec.deliveryDate;
+      var tInp = document.getElementById('inpInvTabName');
+      if (tInp) { tInp.value = rec.tabName || formatDateDM(rec.deliveryDate); invTabNameTouched = true; }
+      var aInp = document.getElementById('inpInvStoreAddr');
+      if (aInp) aInp.value = rec.storeAddr || '';
+      var adjInp = document.getElementById('inpInvAdjust');
+      if (adjInp) adjInp.value = rec.adjust ? fmtDotNum(rec.adjust) : '';
+      var nInp = document.getElementById('inpInvNote');
+      if (nInp) nInp.value = rec.note || '';
+
+      invoiceDraftItems = (rec.items || []).map(function (it) {
+        return { name: it.name, qty: it.qty, price: it.price };
+      });
+      updateInvSheetConfigUI();
+      renderInvoiceCheckTable();
+
+      invoiceConfirmed = true;
+      var card = document.getElementById('invPreviewCard');
+      if (card) card.style.display = 'block';
+      renderInvoicePaper();
+      return true;
+    }
+
+    window.openSelectedIssuedInvoice = function () {
+      var id = (document.getElementById('selIssuedInvoices') || {}).value || '';
+      var rec = (state.invoiceHistory || []).find(function (x) { return x.id === id; });
+      if (!rec) { showToast('Chưa có hóa đơn đã xuất nào được chọn!'); return; }
+      loadIssuedInvoiceRecord(rec);
+      var card = document.getElementById('invPreviewCard');
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast('✓ Đã mở hóa đơn ' + rec.storeName + ' (' + formatDateDMY(rec.deliveryDate) + ')!');
+    };
+
+    window.printSelectedIssuedInvoice = function (mode) {
+      var id = (document.getElementById('selIssuedInvoices') || {}).value || '';
+      var rec = (state.invoiceHistory || []).find(function (x) { return x.id === id; });
+      if (!rec) { showToast('Chưa có hóa đơn đã xuất nào được chọn!'); return; }
+      loadIssuedInvoiceRecord(rec);
+      setTimeout(function () {
+        if (mode === 'img') window.captureCurrentViewImage('tab8');
+        else window.exportCurrentViewPDF('tab8');
+      }, 120);
+    };
+
+    window.deleteSelectedIssuedInvoice = function () {
+      var id = (document.getElementById('selIssuedInvoices') || {}).value || '';
+      var rec = (state.invoiceHistory || []).find(function (x) { return x.id === id; });
+      if (!rec) { showToast('Chưa có hóa đơn nào để xóa!'); return; }
+      if (!confirm('Xóa hóa đơn "' + rec.storeName + ' - ' + formatDateDMY(rec.deliveryDate) + '" khỏi danh sách đã xuất trên máy? (Không xóa trên Google Sheet)')) return;
+      state.invoiceHistory = (state.invoiceHistory || []).filter(function (x) { return x.id !== id; });
+      saveState();
+      renderIssuedInvoicesPicker();
+      showToast('Đã xóa hóa đơn khỏi danh sách cục bộ!');
+    };
+
     window.confirmGenerateInvoice = function () {
       var valid = invoiceDraftItems.filter(function (it) {
         return String(it.name || '').trim() !== '' && parseNum(it.qty) > 0;
@@ -7852,8 +8060,206 @@
       var card = document.getElementById('invPreviewCard');
       if (card) card.style.display = 'block';
       renderInvoicePaper();
+      saveCurrentInvoiceToHistory(false);
       if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      showToast('✓ Đã tạo hóa đơn! Bạn có thể Lưu lên Google Sheet, In PDF hoặc Chụp ảnh.');
+      showToast('✓ Đã tạo & lưu hóa đơn vào danh sách đã xuất! Bạn có thể In PDF, Chụp ảnh hoặc Lưu lên Sheet.');
+    };
+
+    var invAdjEditIdx = -1;
+
+    window.scrollToInvoiceEditorForAdjust = function () {
+      var ed = document.getElementById('invEditCard');
+      if (ed) ed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      showToast('💡 Bấm nút "✂️ Hủy" ở món cần giảm hoặc sửa trực tiếp Số lượng, hóa đơn sẽ tự tính lại!');
+    };
+
+    window.openInvAdjustQtyModal = function (idx) {
+      var it = invoiceDraftItems[idx];
+      if (!it) return;
+      invAdjEditIdx = idx;
+      var curQ = parseNum(it.qty);
+      var pr = Number(it.price) || 0;
+
+      document.getElementById('invAdjItemSummary').innerHTML =
+        '<div><strong>Mặt hàng:</strong> ' + esc(it.name || '(Chưa đặt tên)') + '</div>' +
+        '<div>Số lượng hiện tại: <strong>' + fmtQtyZero(curQ) + ' kg</strong> • Đơn giá: <strong>' + fmtVND(pr) + '</strong></div>' +
+        '<div>Thành tiền hiện tại: <strong style="color:#14532d;">' + fmtVND(Math.round(curQ * pr)) + '</strong></div>';
+
+      var redInp = document.getElementById('inpInvAdjReduce');
+      if (redInp) redInp.value = '';
+      var rsInp = document.getElementById('inpInvAdjReason');
+      if (rsInp && !rsInp.value.trim()) rsInp.value = 'do hỏng dập';
+      var chk = document.getElementById('chkInvAdjAutoNote');
+      if (chk) chk.checked = true;
+
+      window.updateInvAdjustQtyPreview();
+      document.getElementById('invAdjustQtyModal').classList.add('show');
+      setTimeout(function () { if (redInp) redInp.focus(); }, 60);
+    };
+
+    window.closeInvAdjustQtyModal = function () {
+      document.getElementById('invAdjustQtyModal').classList.remove('show');
+      invAdjEditIdx = -1;
+    };
+
+    window.updateInvAdjustQtyPreview = function () {
+      var it = invoiceDraftItems[invAdjEditIdx];
+      var box = document.getElementById('invAdjPreviewBox');
+      if (!it || !box) return;
+      var curQ = parseNum(it.qty);
+      var redQ = parseNum((document.getElementById('inpInvAdjReduce') || {}).value);
+      var reason = ((document.getElementById('inpInvAdjReason') || {}).value || '').trim();
+      var autoNote = !!(document.getElementById('chkInvAdjAutoNote') || {}).checked;
+      var newQ = Math.max(0, Math.round((curQ - redQ) * 100) / 100);
+      var pr = Number(it.price) || 0;
+      var oldMoney = Math.round(curQ * pr);
+      var newMoney = Math.round(newQ * pr);
+      var diffMoney = oldMoney - newMoney;
+
+      if (redQ <= 0) {
+        box.innerHTML = 'Nhập số lượng cần huỷ/giảm để xem số lượng mới và dòng ghi chú tự động.';
+        return;
+      }
+      var noteLine1 = 'đã huỷ ' + fmtQtyZero(redQ) + 'kg ' + (it.name || '') + (reason ? (' ' + reason) : '');
+      var noteLine2 = fmtQtyZero(curQ) + 'kg - ' + fmtQtyZero(redQ) + 'kg = ' + fmtQtyZero(newQ) + ' kg';
+      box.innerHTML =
+        '<div><strong>Số lượng mới:</strong> ' + fmtQtyZero(newQ) + ' kg (giảm <strong>' + fmtVND(diffMoney) + '</strong> → còn <strong>' + fmtVND(newMoney) + '</strong>)</div>' +
+        (autoNote ? ('<div style="margin-top:5px; padding-top:5px; border-top:1px dashed #f59e0b;"><strong>Ghi chú sẽ thêm:</strong><br>' + esc(noteLine1) + '<br>' + esc(noteLine2) + '</div>') : '');
+    };
+
+    window.applyInvAdjustQtyModal = function () {
+      var it = invoiceDraftItems[invAdjEditIdx];
+      if (!it) return;
+      var curQ = parseNum(it.qty);
+      var redQ = parseNum((document.getElementById('inpInvAdjReduce') || {}).value);
+      if (redQ <= 0) {
+        showToast('Vui lòng nhập số lượng huỷ / giảm > 0!');
+        return;
+      }
+      if (redQ > curQ) {
+        showToast('Số lượng huỷ không được lớn hơn số lượng hiện tại (' + fmtQtyZero(curQ) + ' kg)!');
+        return;
+      }
+      var reason = ((document.getElementById('inpInvAdjReason') || {}).value || '').trim();
+      var autoNote = !!(document.getElementById('chkInvAdjAutoNote') || {}).checked;
+      var newQ = Math.max(0, Math.round((curQ - redQ) * 100) / 100);
+
+      it.qty = newQ;
+      if (autoNote) {
+        var noteInp = document.getElementById('inpInvNote');
+        if (noteInp) {
+          var line1 = 'đã huỷ ' + fmtQtyZero(redQ) + 'kg ' + (it.name || '') + (reason ? (' ' + reason) : '');
+          var line2 = fmtQtyZero(curQ) + 'kg - ' + fmtQtyZero(redQ) + 'kg = ' + fmtQtyZero(newQ) + ' kg';
+          var addBlock = line1 + '\n' + line2;
+          var curNote = (noteInp.value || '').trim();
+          noteInp.value = curNote ? (curNote + '\n' + addBlock) : addBlock;
+        }
+      }
+
+      window.closeInvAdjustQtyModal();
+      renderInvoiceCheckTable();
+
+      // Tự động hiển thị & tính lại bản xem trước A4 ngay lập tức
+      invoiceConfirmed = true;
+      var card = document.getElementById('invPreviewCard');
+      if (card) card.style.display = 'block';
+      renderInvoicePaper();
+      saveCurrentInvoiceToHistory(false);
+      showToast('✓ Đã cập nhật SL mới (' + fmtQtyZero(newQ) + ' kg), thêm ghi chú & tính lại hóa đơn!');
+    };
+
+    window.toggleLoadInvoiceFromSheetBox = function () {
+      var box = document.getElementById('invLoadFromSheetBox');
+      if (!box) return;
+      var willShow = box.style.display === 'none';
+      box.style.display = willShow ? 'block' : 'none';
+      if (willShow) {
+        window.refreshInvSheetTabsDropdown(false);
+      }
+    };
+
+    window.refreshInvSheetTabsDropdown = async function (showNotice) {
+      var url = getInvScriptUrl();
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var sheetUrl = getInvTargetSheetUrl(storeKey);
+      var sel = document.getElementById('selInvSheetTabs');
+      if (!url || !sheetUrl) {
+        if (sel) sel.innerHTML = '<option value="">-- Chưa gắn link Apps Script / Sheet --</option>';
+        if (showNotice) showToast('Hãy gắn Link Apps Script Hóa đơn & Link Sheet ở mục phía trên trước!');
+        return;
+      }
+      if (sel) sel.innerHTML = '<option value="">⏳ Đang quét danh sách tab...</option>';
+      var res = await checkInvTabOnSheet();
+      if (res && res.success && Array.isArray(res.allTabs)) {
+        var invTabs = res.allTabs.filter(function (t) {
+          var n = normVN(t);
+          return n.indexOf('tong ket') === -1 && n.indexOf('don gia') === -1 && n.indexOf('danh sach san pham') === -1;
+        });
+        if (!invTabs.length) invTabs = res.allTabs;
+        if (sel) {
+          sel.innerHTML = invTabs.map(function (t) {
+            return '<option value="' + esc(t) + '">' + esc(t) + '</option>';
+          }).join('');
+        }
+        if (showNotice) showToast('✓ Đã quét ' + invTabs.length + ' tab hóa đơn từ Sheet!');
+      } else {
+        if (sel) sel.innerHTML = '<option value="">⚠ Không quét được danh sách tab</option>';
+      }
+    };
+
+    window.loadSelectedInvoiceTabFromSheet = async function (autoPrint) {
+      var url = getInvScriptUrl();
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      var sheetUrl = getInvTargetSheetUrl(storeKey);
+      var tabName = ((document.getElementById('selInvSheetTabs') || {}).value || '').trim();
+      if (!url || !sheetUrl || !tabName) {
+        showToast('Vui lòng chọn tab hóa đơn cần mở!');
+        return;
+      }
+
+      var btn = document.getElementById('btnLoadSelectedInvTab');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang tải...'; }
+      try {
+        var sep = url.indexOf('?') === -1 ? '?' : '&';
+        var fetchUrl = url + sep + 'action=readInvoiceTab&sheetUrl=' + encodeURIComponent(sheetUrl) + '&tabName=' + encodeURIComponent(tabName) + '&token=' + encodeURIComponent(INV_SYNC_TOKEN) + '&t=' + Date.now();
+        var r = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        var data = await r.json();
+        if (!data || !data.success || !data.invoice) {
+          throw new Error((data && data.error) || 'Không đọc được nội dung hóa đơn');
+        }
+        var inv = data.invoice;
+        invoiceDraftItems = Array.isArray(inv.items) ? inv.items : [];
+        if (inv.deliveryDate) {
+          var dInp = document.getElementById('inpInvDeliveryDate');
+          if (dInp) dInp.value = inv.deliveryDate;
+        }
+        var tInp = document.getElementById('inpInvTabName');
+        if (tInp) { tInp.value = tabName; invTabNameTouched = true; }
+        var aInp = document.getElementById('inpInvStoreAddr');
+        if (aInp && inv.storeAddr) aInp.value = inv.storeAddr;
+        var adjInp = document.getElementById('inpInvAdjust');
+        if (adjInp) adjInp.value = inv.adjust ? fmtDotNum(inv.adjust) : '';
+        var nInp = document.getElementById('inpInvNote');
+        if (nInp) nInp.value = inv.note || '';
+
+        renderInvoiceCheckTable();
+        invoiceConfirmed = true;
+        var card = document.getElementById('invPreviewCard');
+        if (card) card.style.display = 'block';
+        renderInvoicePaper();
+        saveCurrentInvoiceToHistory(true);
+        if (autoPrint) {
+          setTimeout(function () { window.exportCurrentViewPDF('tab8'); }, 150);
+        } else {
+          showToast('✓ Đã mở hóa đơn "' + tabName + '" từ Sheet! Bạn có thể In ngay hoặc bấm "✂️ Hủy" để chỉnh SL.');
+        }
+      } catch (err) {
+        console.warn('loadSelectedInvoiceTabFromSheet error:', err);
+        showToast('Không tải được hóa đơn: ' + (err.message || 'Kiểm tra đã cập nhật Code-HoaDon-v2.js chưa'));
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '📥 Tải hóa đơn này'; }
+      }
     };
 
     /* ================= CLOUD SERVER SYNC (GOOGLE SHEETS BACKEND) ================= */
