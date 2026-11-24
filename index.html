@@ -2411,9 +2411,16 @@
             <span id="shipSheetMiniStatus" style="font-size:12px; font-weight:700; color:#b45309;">Chưa gắn link Apps Script ▾</span>
           </summary>
           <div style="margin-top:12px; display:flex; flex-direction:column; gap:10px;">
-            <div class="field">
-              <label for="inpShipSheetUrl">Link Google Sheet Tiền ship hàng tháng hiện tại (Sang tháng 12 chỉ cần dán link mới vào đây)</label>
-              <input type="url" id="inpShipSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+            <div class="meta-grid">
+              <div class="field span-2">
+                <label for="inpShipSheetUrl">Link Google Sheet Tiền ship hàng (Sang tháng/file mới chỉ cần dán link mới vào đây)</label>
+                <input type="url" id="inpShipSheetUrl" placeholder="https://docs.google.com/spreadsheets/d/...">
+              </div>
+              <div class="field">
+                <label for="inpShipTabName">Tên tab tháng (để trống nếu dùng tab theo link)</label>
+                <input type="text" id="inpShipTabName" list="dlShipTabs" placeholder="VD: Tháng 11, Tháng 12">
+                <datalist id="dlShipTabs"></datalist>
+              </div>
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
               <div class="field" style="flex:1; min-width:240px;">
@@ -2651,7 +2658,7 @@
             </div>
             <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:flex-end;">
               <div class="field" style="flex:1; min-width:240px;">
-                <label for="inpInvScriptUrl">Link Web App Apps Script Hóa đơn (Code-HoaDon-v7.js, dùng chung cả 3 file, đuôi /exec)</label>
+                <label for="inpInvScriptUrl">Link Web App Apps Script Hóa đơn (Code-HoaDon-v15.js, dùng chung cả 3 file, đuôi /exec)</label>
                 <input type="url" id="inpInvScriptUrl" placeholder="https://script.google.com/macros/s/.../exec">
               </div>
               <button type="button" class="btn btn-primary btn-sm" onclick="saveInvScriptUrl()">💾 Lưu &amp; Kiểm tra</button>
@@ -2721,6 +2728,18 @@
           <div class="field full inv-single-only">
             <label for="inpInvNote">Ghi chú trên hóa đơn (tự động ghi khi bấm Hủy/Giảm SL, có thể sửa thêm nhiều dòng)</label>
             <textarea id="inpInvNote" rows="2" placeholder="VD: đã huỷ 2kg Ớt chuông đỏ do hỏng dập&#10;7,5kg - 2kg = 5,5 kg" oninput="onInvoiceMetaFieldChange()"></textarea>
+          </div>
+          <div class="field full inv-single-only" style="margin-top:4px; padding:10px 12px; background:#fff7ed; border:1px solid #fed7aa; border-radius:10px;">
+            <div style="font-size:12.5px; font-weight:800; color:#9a3412; margin-bottom:6px;">🥀 Cập nhật tiền Hư hỏng sang file Doanh thu (Trâu vàng / Tâm vàng)</div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <input type="text" id="inpInvDamageForRev" inputmode="numeric" placeholder="0" style="width:170px; font-weight:700; color:#b91c1c;" oninput="onInvDamageInput(this)">
+              <label style="display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; color:#7c2d12; cursor:pointer; margin:0;">
+                <input type="checkbox" id="chkInvSyncDamageToRev">
+                <span>Tự cộng vào cột Hư hỏng file Doanh thu khi bấm "Lưu vào Google Sheet"</span>
+              </label>
+              <button type="button" class="btn btn-soft btn-sm" id="btnPushInvDamageOnly" onclick="pushInvoiceDamageOnlyToRev()" style="margin-left:auto;">🥀 Đẩy Hư hỏng sang Doanh thu ngay</button>
+            </div>
+            <div id="invDamageRevHint" style="margin-top:5px; font-size:11.5px; color:#9a3412;">Khi bấm <strong>Hủy/Giảm SL</strong> trên từng dòng (VD hủy 1,2kg Ớt chuông đỏ), tiền hàng hỏng sẽ tự cộng dồn vào đây.</div>
           </div>
         </div>
 
@@ -3284,6 +3303,7 @@
           trackingSheetUrl: 'https://docs.google.com/spreadsheets/d/1o9_lVq_vPMRNiFtvfSKzVF5-UKbNYFTTFWoa1xrSSyU/edit',
           shipScriptUrl: '',
           shipSheetUrl: 'https://docs.google.com/spreadsheets/d/19Z8Uxe7MTcJ2z-doXkeMiA3vb-9cuJX7AvBDUr8pm08/edit?gid=1699044386#gid=1699044386',
+          shipTabName: '',
           revScriptUrl: '',
           revSheetUrl: 'https://docs.google.com/spreadsheets/d/1_o_7JQLip5s2Wx8YkmeXZHpPVh72N5u9x1SMIXOH3gU/edit?gid=349786834#gid=349786834',
           revTabName: 'Tháng 11',
@@ -6608,6 +6628,10 @@
       return (state && state.settings && state.settings.shipSheetUrl) ? state.settings.shipSheetUrl.trim() : '';
     }
 
+    function getShipTabName() {
+      return (state && state.settings && state.settings.shipTabName) ? state.settings.shipTabName.trim() : '';
+    }
+
     function updateShipMiniStatus(text, isErr) {
       var el = document.getElementById('shipSheetMiniStatus');
       var st = document.getElementById('shipSyncStatus');
@@ -6658,6 +6682,8 @@
       if (urlInp) urlInp.value = getShipScriptUrl();
       var shInp = document.getElementById('inpShipSheetUrl');
       if (shInp) shInp.value = getShipSheetUrl();
+      var tabInp = document.getElementById('inpShipTabName');
+      if (tabInp) tabInp.value = getShipTabName();
       if (!getShipScriptUrl()) {
         var det = document.getElementById('detShipSheetConfig');
         if (det) det.open = true;
@@ -6681,9 +6707,11 @@
     window.saveShipScriptUrl = function () {
       var inp = document.getElementById('inpShipScriptUrl');
       var shInp = document.getElementById('inpShipSheetUrl');
+      var tabInp = document.getElementById('inpShipTabName');
       var url = (inp ? inp.value : '').trim();
       state.settings.shipScriptUrl = url;
       state.settings.shipSheetUrl = (shInp ? shInp.value : '').trim();
+      state.settings.shipTabName = (tabInp ? tabInp.value : '').trim();
       saveState();
       if (url) {
         var det = document.getElementById('detShipSheetConfig');
@@ -6868,7 +6896,8 @@
       try {
         var sep = url.indexOf('?') === -1 ? '?' : '&';
         var shUrl = getShipSheetUrl();
-        var fetchUrl = url + sep + 'action=getShipRows&sheetUrl=' + encodeURIComponent(shUrl) + '&token=' + encodeURIComponent(SHIP_SYNC_TOKEN) + '&t=' + Date.now();
+        var shTab = getShipTabName();
+        var fetchUrl = url + sep + 'action=getShipRows&sheetUrl=' + encodeURIComponent(shUrl) + '&tabName=' + encodeURIComponent(shTab) + '&token=' + encodeURIComponent(SHIP_SYNC_TOKEN) + '&t=' + Date.now();
         var res = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         var data = await res.json();
@@ -6880,8 +6909,14 @@
         shipSheetTotalsCache = data.totals || null;
         renderShipTable();
 
+        if (Array.isArray(data.allTabs)) {
+          var dlShip = document.getElementById('dlShipTabs');
+          if (dlShip) {
+            dlShip.innerHTML = data.allTabs.map(function (t) { return '<option value="' + esc(t) + '"></option>'; }).join('');
+          }
+        }
         var nowStr = new Date().toLocaleTimeString('vi-VN');
-        var ssLabel = data.spreadsheetName ? (data.spreadsheetName + ' • ') : '';
+        var ssLabel = data.spreadsheetName ? (data.spreadsheetName + (data.sheetName ? (' / ' + data.sheetName) : '') + ' • ') : '';
         updateShipMiniStatus('✓ ' + ssLabel + shipSheetRowsCache.length + ' dòng (' + nowStr + ')', false);
         if (showFeedback) showToast('✓ Đã tải bảng Tiền ship hàng từ Google Sheet!');
         return true;
@@ -6931,6 +6966,7 @@
               action: 'addShipRow',
               token: SHIP_SYNC_TOKEN,
               sheetUrl: getShipSheetUrl(),
+              tabName: getShipTabName(),
               pickupDate: pickupDate,
               receiver: receiver,
               customer: customer,
@@ -8213,13 +8249,86 @@
       }
     }
 
+
+    window.onInvDamageInput = function (inp) {
+      var val = Math.max(0, parseMoneyInput(inp ? inp.value : ''));
+      var chk = document.getElementById('chkInvSyncDamageToRev');
+      if (chk && val > 0) chk.checked = true;
+    };
+
+    async function pushInvoiceDamageToRevenueSheet(storeKey, deliveryYMD, damageDelta) {
+      var revUrl = getRevScriptUrl();
+      if (!revUrl) {
+        return { skipped: true, reason: 'Chưa gắn link Apps Script Doanh thu ở Tab 7' };
+      }
+      var custName = storeKey === 'tamVang' ? 'Tâm vàng' : (storeKey === 'trauVang' ? 'Trâu vàng' : '');
+      if (!custName || !damageDelta || damageDelta <= 0) {
+        return { skipped: true, reason: 'Không có tiền hư hỏng cần cộng' };
+      }
+      await fetch(revUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({
+          action: 'addRevenueDamageByOrder',
+          token: REV_SYNC_TOKEN,
+          sheetUrl: getRevSheetUrl(),
+          tabName: getRevTabName(),
+          customer: custName,
+          deliveryDate: deliveryYMD,
+          damageDelta: Math.round(damageDelta)
+        })
+      });
+      setTimeout(function () {
+        if (typeof window.loadRevRowsFromSheet === 'function' && getRevScriptUrl()) {
+          window.loadRevRowsFromSheet(false);
+        }
+      }, 1500);
+      return { sent: true, customer: custName, damageDelta: Math.round(damageDelta) };
+    }
+
+    window.pushInvoiceDamageOnlyToRev = async function () {
+      var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
+      if (storeKey === 'cleverfood') {
+        showToast('Tính năng này dành cho hóa đơn Trâu vàng & Tâm vàng!');
+        return;
+      }
+      var dmgInp = document.getElementById('inpInvDamageForRev');
+      var dmgDelta = Math.max(0, parseMoneyInput(dmgInp ? dmgInp.value : ''));
+      if (!dmgDelta || dmgDelta <= 0) {
+        showToast('Vui lòng nhập số tiền hư hỏng (> 0) hoặc bấm Hủy/Giảm SL trên dòng sản phẩm!');
+        return;
+      }
+      if (!getRevScriptUrl()) {
+        showToast('Hãy gắn Link Apps Script Doanh thu (Code-DoanhThu-v3.js) ở Tab 7 trước!');
+        return;
+      }
+      var deliveryYMD = ((document.getElementById('inpInvDeliveryDate') || {}).value || state.meta.deliveryDate || toYMD(new Date())).trim();
+      var btn = document.getElementById('btnPushInvDamageOnly');
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Đang gửi...'; }
+      try {
+        var res = await pushInvoiceDamageToRevenueSheet(storeKey, deliveryYMD, dmgDelta);
+        if (res && res.sent) {
+          if (dmgInp) dmgInp.value = '';
+          var chk = document.getElementById('chkInvSyncDamageToRev');
+          if (chk) chk.checked = false;
+          showToast('✓ Đã gửi +' + fmtVND(dmgDelta) + ' tiền hư hỏng của ' + res.customer + ' sang file Doanh thu!');
+        }
+      } catch (err) {
+        console.warn('pushInvoiceDamageOnlyToRev error:', err);
+        showToast('Lỗi khi gửi tiền hư hỏng sang Doanh thu!');
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = '🥀 Đẩy Hư hỏng sang Doanh thu ngay'; }
+      }
+    };
+
     window.saveInvoiceToGoogleSheet = async function () {
       var url = getInvScriptUrl();
       var storeKey = (document.getElementById('selInvStore') || {}).value || 'trauVang';
       var sheetUrl = getInvTargetSheetUrl(storeKey);
 
       if (!url) {
-        showToast('Hãy dán Link Web App Apps Script Hóa đơn (Code-HoaDon-v7.js) ở mục Cấu hình phía trên!');
+        showToast('Hãy dán Link Web App Apps Script Hóa đơn (Code-HoaDon-v15.js) ở mục Cấu hình phía trên!');
         var det = document.getElementById('detInvSheetConfig');
         if (det) det.open = true;
         return;
@@ -8318,12 +8427,32 @@
         var verify = await checkInvTabOnSheet();
         var st = document.getElementById('invSheetSyncStatus');
         saveCurrentInvoiceToHistory(true);
+        var dmgExtraMsg = '';
+        if (!isCle) {
+          var dmgChkEl = document.getElementById('chkInvSyncDamageToRev');
+          var dmgInpEl = document.getElementById('inpInvDamageForRev');
+          var dmgDeltaVal = Math.max(0, parseMoneyInput(dmgInpEl ? dmgInpEl.value : ''));
+          if (dmgChkEl && dmgChkEl.checked && dmgDeltaVal > 0) {
+            try {
+              var dmgRes = await pushInvoiceDamageToRevenueSheet(storeKey, deliveryYMD, dmgDeltaVal);
+              if (dmgRes && dmgRes.sent) {
+                dmgExtraMsg = ' + Đã cộng ' + fmtVND(dmgDeltaVal) + ' Hư hỏng vào Doanh thu!';
+                if (dmgInpEl) dmgInpEl.value = '';
+                dmgChkEl.checked = false;
+              } else if (dmgRes && dmgRes.reason) {
+                dmgExtraMsg = ' (Chưa cộng Hư hỏng: ' + dmgRes.reason + ')';
+              }
+            } catch (eDmg) {
+              console.warn('Auto push damage error:', eDmg);
+            }
+          }
+        }
         if (verify && verify.exists) {
-          var msg = '✓ Đã lưu tab "' + tabName + '" vào file "' + verify.spreadsheetName + '" & cập nhật Tổng kết đơn hàng!';
+          var msg = '✓ Đã lưu tab "' + tabName + '" vào file "' + verify.spreadsheetName + '" & cập nhật Tổng kết đơn hàng!' + dmgExtraMsg;
           if (st) { st.style.color = '#166534'; st.textContent = msg; }
           showToast(msg);
         } else {
-          showToast('✓ Đã gửi hóa đơn "' + tabName + '" lên Google Sheet!');
+          showToast('✓ Đã gửi hóa đơn "' + tabName + '" lên Google Sheet!' + dmgExtraMsg);
         }
       } catch (err) {
         console.warn('saveInvoiceToGoogleSheet error:', err);
@@ -8606,7 +8735,19 @@
       var autoNote = !!(document.getElementById('chkInvAdjAutoNote') || {}).checked;
       var newQ = Math.max(0, Math.round((curQ - redQ) * 100) / 100);
 
+      var prAdj = Number(it.price) || 0;
+      var diffMoneyAdj = Math.max(0, Math.round(curQ * prAdj) - Math.round(newQ * prAdj));
       it.qty = newQ;
+
+      if (diffMoneyAdj > 0) {
+        var dmgRevInp = document.getElementById('inpInvDamageForRev');
+        var dmgRevChk = document.getElementById('chkInvSyncDamageToRev');
+        var curDmgVal = dmgRevInp ? parseMoneyInput(dmgRevInp.value) : 0;
+        var nextDmgVal = Math.max(0, curDmgVal) + diffMoneyAdj;
+        if (dmgRevInp) dmgRevInp.value = fmtDotNum(nextDmgVal);
+        if (dmgRevChk) dmgRevChk.checked = true;
+      }
+
       if (autoNote) {
         var noteInp = document.getElementById('inpInvNote');
         if (noteInp) {
@@ -8711,6 +8852,10 @@
           if (adjInp) adjInp.value = inv.adjust ? fmtDotNum(inv.adjust) : '';
           var nInp = document.getElementById('inpInvNote');
           if (nInp) nInp.value = inv.note || '';
+          var dmgInp = document.getElementById('inpInvDamageForRev');
+          if (dmgInp) dmgInp.value = '';
+          var dmgChk = document.getElementById('chkInvSyncDamageToRev');
+          if (dmgChk) dmgChk.checked = false;
         }
 
         renderInvoiceCheckTable();
@@ -8726,7 +8871,7 @@
         }
       } catch (err) {
         console.warn('loadSelectedInvoiceTabFromSheet error:', err);
-        showToast('Không tải được hóa đơn: ' + (err.message || 'Kiểm tra đã cập nhật Code-HoaDon-v7.js chưa'));
+        showToast('Không tải được hóa đơn: ' + (err.message || 'Kiểm tra đã cập nhật Code-HoaDon-v15.js chưa'));
       } finally {
         if (btn) { btn.disabled = false; btn.textContent = '📥 Tải để xem / sửa'; }
       }
