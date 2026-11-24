@@ -1826,7 +1826,7 @@
     <div class="login-card">
       <img class="login-logo" src="./maison-legume-dalat-logo.png?v=56" alt="Maison Légume Dalat" onerror="handleHeaderLogoError(this)">
       <div class="login-title">Maison Légume Dalat</div>
-      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v56</strong></div>
+      <div class="login-sub">Phần mềm quản lý bán hàng nội bộ • <strong>v58</strong></div>
       <form class="login-form" onsubmit="handleLoginSubmit(event)">
         <div class="field">
           <label for="loginUser">Tên tài khoản</label>
@@ -1957,7 +1957,7 @@
           </div>
           <div class="toolbar-group">
             <button type="button" class="btn btn-outline btn-sm" onclick="fillSampleData()">✨ Điền số liệu mẫu</button>
-            <button type="button" class="btn btn-danger btn-sm" onclick="clearTodayQuantities()">🗑️ Xóa số lượng ngày mới</button>
+            <button type="button" class="btn btn-danger btn-sm" onclick="openClearOrdersModal()">🗑️ Xóa / Giữ đơn ngày mới</button>
             <button type="button" class="btn btn-primary btn-sm" onclick="addNewProductPrompt()">+ Thêm sản phẩm</button>
           </div>
         </div>
@@ -2936,6 +2936,34 @@
         <button type="button" id="btnSaveRevDamageModal" class="btn btn-dark" style="flex:1;" onclick="saveRevDamageModal()">💾 Lưu hư hỏng</button>
         <button type="button" class="btn btn-outline" onclick="clearRevDamageModalInput()">Xóa về 0</button>
         <button type="button" class="btn btn-outline" onclick="closeRevDamageModal()">Hủy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CHỌN ĐƠN CẦN XÓA / GIỮ LẠI (TAB 1) -->
+  <div id="clearOrdersModal" class="modal-backdrop no-print" onclick="if(event.target===this) closeClearOrdersModal()">
+    <div class="modal-box" style="text-align:left; max-width:460px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <div class="modal-title" style="margin-bottom:0;">🗑️ Chọn đơn cần xóa / giữ lại</div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeClearOrdersModal()">✕</button>
+      </div>
+      <div style="font-size:12.5px; color:#4b5563; margin-bottom:10px; line-height:1.5;">
+        Tick vào cửa hàng muốn <strong>XÓA</strong> số lượng cho ngày mới. Cửa hàng <strong>không tick</strong> sẽ được <strong>GIỮ NGUYÊN</strong>.
+      </div>
+      <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+        <button type="button" class="btn btn-soft btn-sm" onclick="quickSelectClearStores('except_hqv')">✨ Xóa hết trừ HQV</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="quickSelectClearStores('all')">Chọn xóa tất cả</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="quickSelectClearStores('none')">Bỏ chọn hết</button>
+      </div>
+      <div id="clearOrdersList" style="display:flex; flex-direction:column; gap:7px; max-height:48vh; overflow-y:auto; margin-bottom:12px;"></div>
+      <label style="display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; color:#374151; margin-bottom:12px; cursor:pointer;">
+        <input type="checkbox" id="chkClearBoxesToo" checked>
+        Xóa luôn Số thùng của các cửa hàng được chọn
+      </label>
+      <div id="clearOrdersSummary" style="font-size:12px; font-weight:700; color:#b91c1c; background:#fef2f2; border:1px solid #fecaca; border-radius:8px; padding:8px 10px; margin-bottom:12px;"></div>
+      <div style="display:flex; gap:8px;">
+        <button type="button" class="btn btn-danger" style="flex:1;" onclick="confirmClearSelectedOrders()">🗑️ Xóa các đơn đã chọn</button>
+        <button type="button" class="btn btn-outline" onclick="closeClearOrdersModal()">Hủy</button>
       </div>
     </div>
   </div>
@@ -3933,14 +3961,127 @@
       showToast('Đã điền số liệu mẫu!');
     };
 
-    window.clearTodayQuantities = function () {
-      if (!confirm('Xóa toàn bộ số lượng và số thùng của đơn hiện tại?')) return;
-      state.quantities = {};
-      state.boxes = {};
+    function updateClearOrdersSummary() {
+      var listEl = document.getElementById('clearOrdersList');
+      var sumEl = document.getElementById('clearOrdersSummary');
+      if (!listEl || !sumEl) return;
+      var cbs = listEl.querySelectorAll('input[type="checkbox"][data-clear-key]');
+      var toDel = [], toKeep = [];
+      cbs.forEach(function (cb) {
+        var lbl = cb.getAttribute('data-clear-label') || cb.getAttribute('data-clear-key');
+        if (cb.checked) toDel.push(lbl);
+        else toKeep.push(lbl);
+      });
+      if (!toDel.length) {
+        sumEl.style.background = '#f3f4f6';
+        sumEl.style.borderColor = '#d1d5db';
+        sumEl.style.color = '#4b5563';
+        sumEl.innerHTML = 'Chưa chọn đơn nào để xóa (tất cả đều được giữ lại).';
+      } else {
+        sumEl.style.background = '#fef2f2';
+        sumEl.style.borderColor = '#fecaca';
+        sumEl.style.color = '#991b1b';
+        sumEl.innerHTML =
+          '<div>🗑️ <strong>Sẽ xóa (' + toDel.length + '):</strong> ' + esc(toDel.join(', ')) + '</div>' +
+          (toKeep.length ? ('<div style="color:#166534; margin-top:3px;">✅ <strong>Giữ lại (' + toKeep.length + '):</strong> ' + esc(toKeep.join(', ')) + '</div>') : '');
+      }
+    }
+
+    window.openClearOrdersModal = function () {
+      var stores = getAllStoreKeys();
+      var listEl = document.getElementById('clearOrdersList');
+      if (!listEl) return;
+
+      listEl.innerHTML = stores.map(function (s) {
+        var totQ = getStoreTotalQty(s.key);
+        var totB = getStoreBoxes(s.key);
+        var isHQV = (s.key === 'cle_HQV' || normVN(s.short) === 'hqv');
+        var checkedByDefault = !isHQV;
+        var badgeText = (totQ > 0 || totB > 0)
+          ? (fmtQtyZero(totQ) + ' kg' + (totB > 0 ? (' • ' + fmtQtyZero(totB) + ' thùng') : ''))
+          : 'Đang trống (0)';
+        return '<label style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding:9px 11px; border:1.5px solid ' + (checkedByDefault ? '#fca5a5' : '#86efac') + '; background:' + (checkedByDefault ? '#fff5f5' : '#f0fdf4') + '; border-radius:10px; cursor:pointer;" data-clear-row="' + esc(s.key) + '">' +
+          '<span style="display:flex; align-items:center; gap:8px; font-weight:700; font-size:13.5px; color:#111827;">' +
+            '<input type="checkbox" data-clear-key="' + esc(s.key) + '" data-clear-label="' + esc(s.label) + '" ' + (checkedByDefault ? 'checked' : '') + ' onchange="onClearStoreCheckboxChange(this)">' +
+            '<span>' + esc(s.label) + '</span>' +
+          '</span>' +
+          '<span style="font-size:12px; font-weight:700; color:' + (isHQV ? '#15803d' : '#6b7280') + '; white-space:nowrap;">' + esc(badgeText) + '</span>' +
+        '</label>';
+      }).join('');
+
+      var chkBox = document.getElementById('chkClearBoxesToo');
+      if (chkBox) chkBox.checked = true;
+      updateClearOrdersSummary();
+      document.getElementById('clearOrdersModal').classList.add('show');
+    };
+
+    window.onClearStoreCheckboxChange = function (cb) {
+      var lbl = cb.closest('label');
+      if (lbl) {
+        lbl.style.borderColor = cb.checked ? '#fca5a5' : '#86efac';
+        lbl.style.background = cb.checked ? '#fff5f5' : '#f0fdf4';
+      }
+      updateClearOrdersSummary();
+    };
+
+    window.quickSelectClearStores = function (mode) {
+      var cbs = document.querySelectorAll('#clearOrdersList input[type="checkbox"][data-clear-key]');
+      cbs.forEach(function (cb) {
+        var key = cb.getAttribute('data-clear-key') || '';
+        if (mode === 'all') cb.checked = true;
+        else if (mode === 'none') cb.checked = false;
+        else if (mode === 'except_hqv') cb.checked = (key !== 'cle_HQV');
+        var lbl = cb.closest('label');
+        if (lbl) {
+          lbl.style.borderColor = cb.checked ? '#fca5a5' : '#86efac';
+          lbl.style.background = cb.checked ? '#fff5f5' : '#f0fdf4';
+        }
+      });
+      updateClearOrdersSummary();
+    };
+
+    window.closeClearOrdersModal = function () {
+      document.getElementById('clearOrdersModal').classList.remove('show');
+    };
+
+    window.confirmClearSelectedOrders = function () {
+      var cbs = document.querySelectorAll('#clearOrdersList input[type="checkbox"][data-clear-key]:checked');
+      var selectedKeys = [];
+      var selectedLabels = [];
+      cbs.forEach(function (cb) {
+        selectedKeys.push(cb.getAttribute('data-clear-key'));
+        selectedLabels.push(cb.getAttribute('data-clear-label'));
+      });
+      if (!selectedKeys.length) {
+        showToast('Bạn chưa chọn đơn nào để xóa!');
+        return;
+      }
+
+      var clearBoxes = !!(document.getElementById('chkClearBoxesToo') || {}).checked;
+      var hasDirect = false, hasCle = false;
+
+      selectedKeys.forEach(function (k) {
+        if (k.indexOf('cle_') === 0) hasCle = true;
+        else hasDirect = true;
+        Object.keys(state.quantities).forEach(function (pid) {
+          if (state.quantities[pid]) delete state.quantities[pid][k];
+        });
+        if (clearBoxes) delete state.boxes[k];
+      });
+
       saveState();
+      window.closeClearOrdersModal();
       renderTab1();
-      scheduleOrderSheetSync('all');
-      showToast('Đã xóa sạch số lượng cho ngày mới!');
+      if (activeTab === 'tab3') renderTab3();
+      if (activeTab === 'tab4') renderTab4();
+
+      var syncTarget = (hasDirect && hasCle) ? 'all' : (hasCle ? 'cle' : 'direct');
+      scheduleOrderSheetSync(syncTarget);
+      showToast('✓ Đã xóa ' + selectedKeys.length + ' đơn (' + selectedLabels.join(', ') + ')!');
+    };
+
+    window.clearTodayQuantities = function () {
+      window.openClearOrdersModal();
     };
 
     window.addNewProductPrompt = function () {
